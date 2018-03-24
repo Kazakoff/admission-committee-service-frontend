@@ -1,7 +1,7 @@
-<form>
+<form #myForm="ngForm">
   <div class="container-fluid">
     <label for="doctype">Документ</label>
-    <select class="form-control" id="doctype" [(ngModel)]="personal.documentTypeId" name="documentTypeId">
+    <select class="form-control" id="doctype" [(ngModel)]="personal.documentTypeId" name="documentTypeId" ngDefaultControl  #personaldocumentOrgan>
       <option *ngFor="let data of doctype" [ngValue]="data.id">{{data.name}}</option>
     </select><br>
   </div>
@@ -10,48 +10,50 @@
     <div class="row">
       <div class="col-sm">
     <label for="docseria">Серия документа</label>
-    <select class="form-control" id="docseria" [(ngModel)]="personal.documentSeriaId" name="documentSeriaId">
-      <option *ngFor="let data of docseria" [ngValue]="data.id">{{data.name}}</option>
+    <select class="form-control" id="docseria" [(ngModel)]="personal.documentSeriaId" name="documentSeriaId" ngDefaultControl>
+      <option *ngFor="let data of docseria" [ngValue]="data.id" >{{data.name}}</option>
     </select>
       </div>
       <div class="col-sm">
-    <label for="docnumber">Номер</label>
-    <input type="number" class="form-control" placeholder="" id="docnumber" [(ngModel)]="personal.documentNumber" name="documentNumber">
+    <label for="documentNumber">Номер</label>
+    <input type="text" class="form-control" placeholder="" id="documentNumber" [(ngModel)]="personal.documentNumber" name="documentNumber" required pattern="[0-9]{10}">
       </div>
       <div class="col-sm">
     <label for="docdate">Выдан когда</label>
-    <input type="date" class="form-control" placeholder="" id="docdate" [(ngModel)]="personal.documentDate" name="documentDate"><br>
+    <input type="text" class="form-control" placeholder="" id="docdate" [(ngModel)]="personal.documentDate" name="documentDate"
+           required pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])"><br>
       </div>
     </div>
   </div>
 
     <div class="container-fluid">
       <label for="issued">Кем выдан</label>
-      <input type="text" class="form-control" id="issued" placeholder="Кем выдан" [(ngModel)]="personal.documentOrgan" name="documentOrgan"><br>
+      <input type="text" class="form-control" id="issued" placeholder="Кем выдан" [(ngModel)]="personal.documentOrgan" name="documentOrgan" required><br>
     </div> <br><br>
 
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm">
     <label for="name">Имя</label>
-    <input type="text" class="form-control" placeholder="Имя" id="name" [(ngModel)]="personal.firstName" name="firstName">
+    <input type="text" class="form-control" placeholder="Имя" id="name" [(ngModel)]="personal.firstName" name="firstName" required>
       </div>
       <div class="col-sm">
     <label for="surname">Фамилия</label>
-    <input type="text" class="form-control" placeholder="Фамилия" id="surname" [(ngModel)]="personal.lastName" name="lastName">
+    <input type="text" class="form-control" placeholder="Фамилия" id="surname" [(ngModel)]="personal.lastName" name="lastName" required>
       </div>
       <div class="col-sm">
     <label for="lastname">Отчество</label>
-    <input type="text" class="form-control" placeholder="Отчество" id="lastname" [(ngModel)]="personal.middleName" name="middleName">
+    <input type="text" class="form-control" placeholder="Отчество" id="lastname" [(ngModel)]="personal.middleName" name="middleName" required>
       </div>
     </div>
   </div> <br><br>
 
   <div class="container-fluid">
     <label for="birthdate"> Дата рождения </label>
-    <input type="date" class="form-control" placeholder="Дата рождения" id="birthdate" [(ngModel)]="personal.birthDate" name="birthDate"><br>
+    <input type="text" class="form-control" placeholder="Дата рождения" id="birthdate" [(ngModel)]="personal.birthDate" name="birthDate"
+           required pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])"><br>
     <label for="birthplace">Место рождения</label>
-    <input type="text" class="form-control" placeholder="Место рождения" id="birthplace" [(ngModel)]="personal.birthPlace" name="birthPlace"><br>
+    <input type="text" class="form-control" placeholder="Место рождения" id="birthplace" [(ngModel)]="personal.birthPlace" name="birthPlace" required><br>
   </div>
 
   <div class="container-fluid">
@@ -63,7 +65,7 @@
 
   <div class="container-fluid">
     <label for="identification">Идентификационный номер</label>
-    <input type="number" class="form-control" placeholder="Идентификационный номер" id="identification" [(ngModel)]="personal.identificationNumber" name="identificationNumber"><br>
+    <input type="text" class="form-control" placeholder="Идентификационный номер" id="identification" [(ngModel)]="personal.identificationNumber" name="identificationNumber" required><br>
   </div> <br><br>
 
   <div class="container-fluid">
@@ -76,6 +78,6 @@
     </div>
   </div>
 
-  <div class="container-fluid"><button class="btn btn-primary" (click)="submit(personal)">Submit</button></div>
+  <div class="container-fluid"><input type="button" (click)="submit(personal)" [disabled]="myForm.invalid" [routerLink]="['/address']" class="btn btn-success" value="Отправить" /></div>
 
 </form>
