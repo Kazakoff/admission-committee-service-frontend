@@ -4,8 +4,7 @@ import {HttpService} from './personal.service';
 import {Docseria} from './docseria';
 import {Doctype} from './doctype';
 import {Nationality} from './nationality';
-import {timeout} from 'q';
-import { DatePipe } from '@angular/common';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'personal',

@@ -1,39 +1,39 @@
-<form>
+<form #myForm="ngForm">
   <div class="container-fluid">
-    <label for="index">Индекс</label>
-    <input type="text" class="form-control" id="index" placeholder="Индекс"><br>
-    <label for="point">Пункт</label>
-    <input type="text" class="form-control" id="point" placeholder="Пункт"><br>
-    <label for="area">Район</label>
-    <input type="text" class="form-control" id="area" placeholder="Район"><br>
+    <label for="postcode">Индекс</label>
+    <input type="text" class="form-control" id="postcode" placeholder="Индекс" [(ngModel)]="address.postcode" name="postcode" required><br>
     <label for="region">Область</label>
-    <input type="text" class="form-control" id="region" placeholder="Область"><br>
+    <input type="text" class="form-control" id="region" placeholder="Область" [(ngModel)]="address.region" name="region" required><br>
+    <label for="district">Район</label>
+    <input type="text" class="form-control" id="district" placeholder="Район" [(ngModel)]="address.district" name="district" required><br>
+    <label for="city">Город</label>
+    <input type="text" class="form-control" id="city" placeholder="Город" [(ngModel)]="address.city" name="city" required><br>
     <label for="street">Улица</label>
-    <input type="text" class="form-control" id="street" placeholder="Улица"><br>
+    <input type="text" class="form-control" id="street" placeholder="Улица" [(ngModel)]="address.street" name="street" required><br>
   </div>
 
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm">
         <label for="home">Дом</label>
-        <input type="text" class="form-control" id="home" placeholder="Дом">
+        <input type="text" class="form-control" id="home" placeholder="Дом" [(ngModel)]="address.home" name="home" required>
       </div>
       <div class="col-sm">
-        <label for="corp">Корпус</label>
-        <input type="text" class="form-control" id="corp" placeholder="Корпус">
+        <label for="building">Корпус</label>
+        <input type="text" class="form-control" id="building" placeholder="Корпус" [(ngModel)]="address.building" name="building" required>
       </div>
       <div class="col-sm">
-        <label for="flat">Квартира</label>
-        <input type="text" class="form-control" id="flat" placeholder="Квартира"><br>
+        <label for="appartment">Квартира</label>
+        <input type="text" class="form-control" id="appartment" placeholder="Квартира" [(ngModel)]="address.appartment" name="appartment" required><br>
       </div>
     </div>
   </div>
 
   <div class="container-fluid">
-    <label for="homephone">Телефон</label>
-    <input type="text" class="form-control" id="homephone" placeholder="Телефон">
+    <label for="phone">Телефон</label>
+    <input type="text" class="form-control" id="phone" placeholder="Телефон" [(ngModel)]="address.phone" name="phone" required>
   </div> <br>
 
-  <div class="container-fluid"><button type="submit" class="btn btn-primary">Submit</button></div>
+  <div class="container-fluid"><input type="button" (click)="submit(address)" [disabled]="myForm.invalid" [routerLink]="['/study']" class="btn btn-success" value="Отправить" /></div>
 
 </form>
