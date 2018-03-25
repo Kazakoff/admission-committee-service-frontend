@@ -1,19 +1,19 @@
-<form>
+<form #myForm="ngForm">
 
   <div class="container-fluid">
     <div class="row">
       <label> &nbsp; Отец:</label>
       <div class="col-sm">
-        <label for="initialsfath">Фамилия, имя, отчество</label>
-        <input type="text" class="form-control" id="initialsfath" placeholder="Фамилия, имя, отчество отца">
+        <label for="fatherFIO">Фамилия, имя, отчество</label>
+        <input type="text" class="form-control" id="fatherFIO" placeholder="Фамилия, имя, отчество отца" [(ngModel)]="additional.fatherFIO" name="fatherFIO" required>
       </div>
       <div class="col-sm">
-        <label for="phonefath">Телефон</label>
-        <input type="text" class="form-control" id="phonefath" placeholder="Телефон отца">
+        <label for="fatherPhone">Телефон</label>
+        <input type="text" class="form-control" id="fatherPhone" placeholder="Телефон отца" [(ngModel)]="additional.fatherPhone" name="fatherPhone" required pattern="\+[0-9]{12}">
       </div>
       <div class="col-sm">
-        <label for="jobfath">Место работы, должность</label>
-        <input type="text" class="form-control" id="jobfath" placeholder="Место работы, должность отца"><br>
+        <label for="fatherWork">Место работы, должность</label>
+        <input type="text" class="form-control" id="fatherWork" placeholder="Место работы, должность отца" [(ngModel)]="additional.fatherWork" name="fatherWork" required><br>
       </div>
     </div>
   </div>
@@ -22,16 +22,16 @@
     <div class="row">
       <label> &nbsp; Мать:</label>
       <div class="col-sm">
-        <label for="initialsmam">Фамилия, имя, отчество</label>
-        <input type="text" class="form-control" id="initialsmam" placeholder="Фамилия, имя, отчество матери">
+        <label for="motherFIO">Фамилия, имя, отчество</label>
+        <input type="text" class="form-control" id="motherFIO" placeholder="Фамилия, имя, отчество матери" [(ngModel)]="additional.motherFIO" name="motherFIO" required>
       </div>
       <div class="col-sm">
-        <label for="phonemam">Телефон</label>
-        <input type="text" class="form-control" id="phonemam" placeholder="Телефон матери">
+        <label for="motherPhone">Телефон</label>
+        <input type="text" class="form-control" id="motherPhone" placeholder="Телефон матери" [(ngModel)]="additional.motherPhone" name="motherPhone" required pattern="\+[0-9]{12}">
       </div>
       <div class="col-sm">
-        <label for="jobmam">Место работы, должность</label>
-        <input type="text" class="form-control" id="jobmam" placeholder="Место работы, должность матери"><br>
+        <label for="motherWork">Место работы, должность</label>
+        <input type="text" class="form-control" id="motherWork" placeholder="Место работы, должность матери" [(ngModel)]="additional.motherWork" name="motherWork" required><br>
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@
     <div class="row">
     <label> &nbsp; Кроме меня на содержании родителей находятся &nbsp;</label>
     <div class="col-xs-2">
-    <input type="number" class="form-control" id="count" placeholder=""></div>
+    <input type="number" class="form-control" id="minorCount" placeholder="Дети на содержании" [(ngModel)]="additional.childCount" name="minorCount" required pattern="[0-2]?[0-5]?[0-6]?"></div>
     <label>&nbsp;детей в возрасте до 18 лет</label>
     </div>
   </div> <br>
@@ -50,23 +50,28 @@
   </div>
 
   <div class="container-fluid">
-    <label for="jobplace">Место работы, должность</label>
-    <input type="text" class="form-control" id="jobplace" placeholder="Место работы, должность"><br>
+    <label for="workPlace">Место работы, должность</label>
+    <input type="text" class="form-control" id="workPlace" placeholder="Место работы, должность" [(ngModel)]="additional.workPlace" name="workPlace" required><br>
   </div>
 
   <div class="container-fluid">
     <div class="row">
       <label for="experience"> &nbsp; Общий рабочий стаж, лет &nbsp;</label>
       <div class="col-xs-2">
-      <input type="text" class="form-control" id="experience" placeholder="Общий рабочий стаж"><br>
+      <input type="number" class="form-control" id="experience" placeholder="Общий рабочий стаж" [(ngModel)]="additional.experience" name="experience" required pattern="[0-2]?[0-5]?[0-6]?"><br>
       </div>
       <div class="col-sm">
-        &nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="nowstudy" value="option2">
-        <label class="form-check-label" for="nowstudy">Учусь в вузе, перепоступаю</label>
+        &nbsp;&nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="reAdmission" value="option2" #reAdmission [checked]="additional.reAdmission" (change)="additional.reAdmission = !additional.reAdmission" name="reAdmission">
+        <label class="form-check-label" for="reAdmission">Учусь в вузе, перепоступаю</label>
       </div>
     </div>
   </div>
 
-  <div class="container-fluid"><button type="submit" class="btn btn-primary">Submit</button></div>
+<div class="container-fluid">
+  <label for="note">Примечание</label>
+  <textarea class="form-control" rows="5" id="note" [(ngModel)]="additional.note" name="note" required></textarea>
+</div><br>
+
+  <div class="container-fluid"><input type="button" (click)="submit(additional)" [disabled]="myForm.invalid" [routerLink]="['/']" class="btn btn-success" value="Далее" /></div>
 
 </form>

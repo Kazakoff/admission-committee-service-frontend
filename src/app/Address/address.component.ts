@@ -45,6 +45,15 @@ export class AddressComponent implements OnInit {
       localStorage.setItem('address', JSON.stringify(this.addressObject));
     });
     this.addressEdited = JSON.parse(localStorage.getItem('address'));
+    this.address.postCode = this.addressEdited['postCode'];
+    this.address.region = this.addressEdited['region'];
+    this.address.district = this.addressEdited['district'];
+    this.address.city = this.addressEdited['city'];
+    this.address.street = this.addressEdited['street'];
+    this.address.home = this.addressEdited['home'];
+    this.address.building = this.addressEdited['building'];
+    this.address.appartment = this.addressEdited['appartment'];
+    this.address.phone = this.addressEdited['phone'];
 
     this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
   }

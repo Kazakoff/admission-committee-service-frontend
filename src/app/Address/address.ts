@@ -1,6 +1,6 @@
 export class Address {
 
-postcode: string;
+postCode: string;
 region: string;
 district: string;
 city: string;

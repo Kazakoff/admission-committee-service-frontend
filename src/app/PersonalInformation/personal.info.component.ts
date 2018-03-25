@@ -10,13 +10,17 @@ import {DatePipe} from '@angular/common';
   selector: 'personal',
   templateUrl: './personal.info.component.html',
   styles: [`
-        input.ng-touched.ng-invalid {border:solid red 2px;}
-        input.ng-touched.ng-valid {border:solid green 2px;}
-    `],
+    input.ng-touched.ng-invalid {
+      border: solid red 2px;
+    }
+
+    input.ng-touched.ng-valid {
+      border: solid green 2px;
+    }
+  `],
   providers: [HttpService, DatePipe]
 })
 export class PersonalInfoComponent implements OnInit {
-  @ViewChild('personaldocumentOrgan') el: ElementRef;
 
   personal: Personal = new Personal();
   personalObject: Personal[] = [];
@@ -28,19 +32,8 @@ export class PersonalInfoComponent implements OnInit {
   docseria: Docseria[] = [];
   nationality: Nationality[] = [];
   personalEdited: Personal;
-  documenttypeEdited: Doctype;
-  documentseriaEdited: Docseria;
-  documentnumberEdited: string;
-  documentdateEdited: Date;
-  docorganEdited: string;
-  firstnameEdited: string;
-  lastnameEdited: string;
-  middlenameEdited: string;
-  birthdateEdited: Date;
-  birthplaceEdited: string;
-  nationalityEdited: Nationality;
-  identificationnumberEdited: string;
-  condition = true;
+  selectedDoctype: Doctype;
+  selectedDoctype = this.personal.documentTypeId;
 
   constructor(private httpService: HttpService, public datepipe: DatePipe) {
   }
@@ -59,7 +52,9 @@ export class PersonalInfoComponent implements OnInit {
   /*TODO
 Загрузить в ngOnInit весь объект и заполнить инпуты полями
    */
-
+  compareFn(c1: Doctype, c2: Doctype): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
 
   ngOnInit() {
     this.httpService.getAbitur().subscribe(data => {
@@ -68,30 +63,19 @@ export class PersonalInfoComponent implements OnInit {
     });
 
     this.personalEdited = JSON.parse(localStorage.getItem('personal'));
-    this.docorganEdited = this.personalEdited['documentOrgan'];
-    this.personal.documentOrgan = this.docorganEdited;
-    this.documenttypeEdited = this.personalEdited['documentType'];
-    this.personal.documentTypeId = this.documenttypeEdited;
-    this.documentnumberEdited = this.personalEdited['documentNumber'];
-    this.personal.documentNumber = this.documentnumberEdited;
-    //this.el.nativeElement.target = this.personal.documentTypeId.name;
-    this.documentdateEdited = <Date>this.datepipe.transform(this.personalEdited['documentDate'], 'yyyy-MM-dd');
-    //const documentdate = new Date(this.personalEdited['documentDate']);
-    //this.documentdateEdited = <Date>documentdate.toISOString().split('T')[0];
-    this.personal.documentDate = this.documentdateEdited;
-    this.firstnameEdited = this.personalEdited['firstName'];
-    this.personal.firstName = this.firstnameEdited;
-    this.lastnameEdited = this.personalEdited['lastName'];
-    this.personal.lastName = this.lastnameEdited;
-    this.middlenameEdited = this.personalEdited['middleName'];
-    this.personal.middleName = this.middlenameEdited;
-    const birthdate = new Date(this.personalEdited['birthDate']);
-    this.birthdateEdited = <Date>birthdate.toISOString().split('T')[0];
-    this.personal.birthDate = this.birthdateEdited;
-    this.birthplaceEdited = this.personalEdited['birthPlace'];
-    this.personal.birthPlace = this.birthplaceEdited;
-    this.identificationnumberEdited = this.personalEdited['identificationNumber'];
-    this.personal.identificationNumber = this.identificationnumberEdited;
+    this.personal.documentTypeId = this.personalEdited['documentType'];
+    this.personal.documentSeriaId = this.personalEdited['documentSeria'];
+    this.personal.documentNumber = this.personalEdited['documentNumber'];
+    this.personal.documentDate = <Date>this.datepipe.transform(this.personalEdited['documentDate'], 'yyyy-MM-dd');
+    this.personal.documentOrgan = this.personalEdited['documentOrgan'];
+    this.personal.firstName = this.personalEdited['firstName'];
+    this.personal.lastName = this.personalEdited['lastName'];
+    this.personal.middleName = this.personalEdited['middleName'];
+    this.personal.birthDate = <Date>this.datepipe.transform(this.personalEdited['birthDate'], 'yyyy-MM-dd');
+    this.personal.birthPlace = this.personalEdited['birthPlace'];
+    this.personal.nationalityId = this.personalEdited['nationality'];
+    this.personal.identificationNumber = this.personalEdited['identificationNumber'];
+    this.personal.sex = this.personalEdited['sex'];
 
     this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
     this.httpService.getDocSeria().subscribe(data => this.docseria = data['content']);

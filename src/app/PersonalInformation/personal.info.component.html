@@ -1,8 +1,9 @@
 <form #myForm="ngForm">
   <div class="container-fluid">
     <label for="doctype">Документ</label>
-    <select class="form-control" id="doctype" [(ngModel)]="personal.documentTypeId" name="documentTypeId" ngDefaultControl  #personaldocumentOrgan>
-      <option *ngFor="let data of doctype" [ngValue]="data.id">{{data.name}}</option>
+    <select class="form-control" id="doctype" [(ngModel)]="personal.documentTypeId" [ngModelOptions]="{standalone: true}" selname="documentTypeId" ngDefaultControl  #personaldocumentOrgan >
+      <option [ngValue]="null" disabled>Choose your document type</option>
+      <option *ngFor="let data of doctype; let i = index" [ngValue]="data.id" [selected]="i">{{data.name}}</option>
     </select><br>
   </div>
 
@@ -78,6 +79,6 @@
     </div>
   </div>
 
-  <div class="container-fluid"><input type="button" (click)="submit(personal)" [disabled]="myForm.invalid" [routerLink]="['/address']" class="btn btn-success" value="Отправить" /></div>
+  <div class="container-fluid"><input type="button" (click)="submit(personal)" [disabled]="myForm.invalid" [routerLink]="['/address']" class="btn btn-success" value="Далее" /></div>
 
 </form>

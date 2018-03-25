@@ -1,7 +1,7 @@
 <form #myForm="ngForm">
   <div class="container-fluid">
     <label for="postcode">Индекс</label>
-    <input type="text" class="form-control" id="postcode" placeholder="Индекс" [(ngModel)]="address.postcode" name="postcode" required><br>
+    <input type="text" class="form-control" id="postcode" placeholder="Индекс" [(ngModel)]="address.postCode" name="postcode" required><br>
     <label for="region">Область</label>
     <input type="text" class="form-control" id="region" placeholder="Область" [(ngModel)]="address.region" name="region" required><br>
     <label for="district">Район</label>
@@ -31,9 +31,9 @@
 
   <div class="container-fluid">
     <label for="phone">Телефон</label>
-    <input type="text" class="form-control" id="phone" placeholder="Телефон" [(ngModel)]="address.phone" name="phone" required>
+    <input type="text" class="form-control" id="phone" placeholder="Телефон" [(ngModel)]="address.phone" name="phone" required pattern="\+[0-9]{12}">
   </div> <br>
 
-  <div class="container-fluid"><input type="button" (click)="submit(address)" [disabled]="myForm.invalid" [routerLink]="['/study']" class="btn btn-success" value="Отправить" /></div>
+  <div class="container-fluid"><input type="button" (click)="submit(address)" [disabled]="myForm.invalid" [routerLink]="['/study']" class="btn btn-success" value="Далее" /></div>
 
 </form>

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Address} from './address';
+import {Additional} from './additional';
 
 @Injectable()
 export class HttpService {
@@ -19,22 +19,23 @@ export class HttpService {
     return myHeaders;
   }
 
-  postData(address: Address) {
+  postData(additional: Additional) {
 
     const body = {
-      postCode: address.postCode,
-      region: address.region,
-      district: address.district,
-      city: address.city,
-      street: address.street,
-      home: address.home,
-      building: address.building,
-      appartment: address.appartment,
-      phone: address.phone,
-
+      fatherFIO: additional.fatherFIO,
+      fatherWork: additional.fatherWork,
+      fatherPhone: additional.fatherPhone,
+      motherFIO: additional.motherFIO,
+      motherWork: additional.motherWork,
+      motherPhone: additional.motherPhone,
+      childCount: additional.childCount,
+      workPlace: additional.workPlace,
+      experience: additional.experience,
+      reAdmission: additional.reAdmission,
+      note: additional.note
     };
 
-    return this.http.post('http://localhost:8005/abiturient/address/' + this.userid, body, {
+    return this.http.post('http://localhost:8005/abiturient/addinfo/' + this.userid, body, {
       headers: this.addHeaders(),
       withCredentials: true
     });

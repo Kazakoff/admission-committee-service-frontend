@@ -1,61 +1,67 @@
-<form>
+<form #myForm="ngForm">
 
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm">
-        <label for="year">Год окончания</label>
-        <input type="number" class="form-control" id="year" placeholder="Год окончания">
+        <label for="endYear">Год окончания</label>
+        <input type="number" class="form-control" id="endYear" placeholder="Год окончания" [(ngModel)]="education.endYear" name="endYear" required>
       </div>
       <div class="col-sm">
-        <label for="level">Уровень</label>
-        <input type="text" class="form-control" id="level" placeholder="Уровень"><br>
+        <label for="educationLevel">Уровень</label>
+        <select class="form-control" id="educationLevel" [(ngModel)]="education.educationLevelId" name="educationLevel" ngDefaultControl>
+          <option [ngValue]="null" disabled>Choose your level</option>
+          <option *ngFor="let data of educationLevel; let i = index" [ngValue]="data.id">{{data.name}}</option>
+        </select><br>
       </div>
     </div>
   </div>
 
   <div class="container-fluid">
-    <label for="uoname">Название УО</label>
-    <input type="text" class="form-control" id="uoname" placeholder="Название УО"><br>
+    <label for="uoName">Название УО</label>
+    <input type="text" class="form-control" id="uoName" placeholder="Название УО" [(ngModel)]="education.uoName" name="uoName" required><br>
   </div>
 
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm">
-        <label for="type">Тип УО</label>
-        <select class="form-control" id="type">
-          <option>ПТУ</option>
-          <option>Универ</option>
-        </select>
+        <label for="educationType">Тип УО</label>
+        <select class="form-control" id="educationType" [(ngModel)]="education.educationTypeId" name="educationType" ngDefaultControl>
+          <option [ngValue]="null" disabled>Choose your uo type</option>
+          <option *ngFor="let data of educationType; let i = index" [ngValue]="data.id">{{data.name}}</option>
+        </select><br>
       </div>
       <div class="col-sm">
-        <label for="village">Населённый пункт</label>
-        <input type="text" class="form-control" id="village" placeholder="Населённый пункт"><br>
+        <label for="establishmentCity">Населённый пункт</label>
+        <select class="form-control" id="establishmentCity" [(ngModel)]="education.establishmentCityId" name="establishmentCity" ngDefaultControl>
+          <option [ngValue]="null" disabled>Choose your uo type</option>
+          <option *ngFor="let data of establishmentCity; let i = index" [ngValue]="data.id">{{data.name}}</option>
+        </select><br>
       </div>
     </div>
   </div>
 
   <div class="container-fluid">
     <label for="language">Изучаемый иностранный язык</label>
-    <select class="form-control" id="language">
-      <option>Английский</option>
-      <option>Туркменский</option>
-    </select>
+    <select class="form-control" id="language" [(ngModel)]="education.languageId" name="language" ngDefaultControl>
+      <option [ngValue]="null" disabled>Choose your uo type</option>
+      <option *ngFor="let data of language; let i = index" [ngValue]="data.id">{{data.name}}</option>
+    </select><br>
   </div><br>
 
   <div class="container">
     <div class="row">
       <div class="col-sm">
-    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-    <label class="form-check-label" for="inlineCheckbox1">Медаль</label>
+    <input class="form-check-input" type="checkbox" id="goldMedalist" value="option1" [checked]="education.goldMedalist" (change)="education.goldMedalist = !education.goldMedalist">
+    <label class="form-check-label" for="goldMedalist">Медаль</label>
       </div>
       <div class="col-sm">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-        <label class="form-check-label" for="inlineCheckbox2">Диплом с отличием</label>
+        <input class="form-check-input" type="checkbox" id="honours" value="option2" [checked]="education.honours" (change)="education.honours = !education.honours">
+        <label class="form-check-label" for="honours">Диплом с отличием</label>
       </div>
     </div>
   </div>
 
-  <div class="container-fluid"><button type="submit" class="btn btn-primary">Submit</button></div>
+  <div class="container-fluid"><input type="button" (click)="submit(education)" [disabled]="myForm.invalid" [routerLink]="['/additional']" class="btn btn-success" value="Отправить" /></div>
 
 </form>
 
