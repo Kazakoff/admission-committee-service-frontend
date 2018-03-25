@@ -33,7 +33,7 @@ export class HttpService {
       notCitizen: education.notCitizen
     };
 
-    return this.http.post('http://localhost:8005/abiturient/education/' + this.userid, body, {
+    return this.http.put('http://localhost:8005/abiturient/education/' + this.userid, body, {
       headers: this.addHeaders(),
       withCredentials: true
     });

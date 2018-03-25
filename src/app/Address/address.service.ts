@@ -34,7 +34,7 @@ export class HttpService {
 
     };
 
-    return this.http.post('http://localhost:8005/abiturient/address/' + this.userid, body, {
+    return this.http.put('http://localhost:8005/abiturient/address/' + this.userid, body, {
       headers: this.addHeaders(),
       withCredentials: true
     });

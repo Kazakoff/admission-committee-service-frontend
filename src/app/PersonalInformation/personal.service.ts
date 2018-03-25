@@ -37,7 +37,7 @@ personalObject: Personal[] = [];
       sex: personal.sex
     };
 
-    return this.http.post('http://localhost:8005/abiturient/profile/' + this.userid, body, {
+    return this.http.put('http://localhost:8005/abiturient/profile/' + this.userid, body, {
       headers: this.addHeaders(),
       withCredentials: true
     });
