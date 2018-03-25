@@ -34,6 +34,9 @@
     <input type="text" class="form-control" id="phone" placeholder="Телефон" [(ngModel)]="address.phone" name="phone" required pattern="\+[0-9]{12}">
   </div> <br>
 
-  <div class="container-fluid"><input type="button" (click)="submit(address)" [disabled]="myForm.invalid" [routerLink]="['/study']" class="btn btn-success" value="Далее" /></div>
+  <div class="container-fluid">
+    <input type="button" [routerLink]="['/personal']" class="btn btn-danger" value="Назад" />
+    <input type="button" (click)="submit(address)" [disabled]="myForm.invalid" [routerLink]="['/study']" class="btn btn-success" value="Далее" />
+  </div>
 
 </form>

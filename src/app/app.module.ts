@@ -10,6 +10,7 @@ import {StudyComponent} from './Study/study.component';
 import {AuthComponent} from './Authorization/auth.component';
 import {AdditionalComponent} from './Additional/additional.component';
 import {FormsModule} from '@angular/forms';
+import {DatePipe} from '@angular/common';
 
 const appRoutes: Routes = [
   {path: 'personal', component: PersonalInfoComponent},
@@ -35,7 +36,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -8,7 +8,7 @@
       </div>
       <div class="col-sm">
         <label for="educationLevel">Уровень</label>
-        <select class="form-control" id="educationLevel" [(ngModel)]="education.educationLevelId" name="educationLevel" ngDefaultControl>
+        <select class="form-control" id="educationLevel" [(ngModel)]="education.educationLevelId.id" name="educationLevel" ngDefaultControl>
           <option [ngValue]="null" disabled>Choose your level</option>
           <option *ngFor="let data of educationLevel; let i = index" [ngValue]="data.id">{{data.name}}</option>
         </select><br>
@@ -25,14 +25,14 @@
     <div class="row">
       <div class="col-sm">
         <label for="educationType">Тип УО</label>
-        <select class="form-control" id="educationType" [(ngModel)]="education.educationTypeId" name="educationType" ngDefaultControl>
+        <select class="form-control" id="educationType" [(ngModel)]="education.educationTypeId.id" name="educationType" ngDefaultControl>
           <option [ngValue]="null" disabled>Choose your uo type</option>
           <option *ngFor="let data of educationType; let i = index" [ngValue]="data.id">{{data.name}}</option>
         </select><br>
       </div>
       <div class="col-sm">
         <label for="establishmentCity">Населённый пункт</label>
-        <select class="form-control" id="establishmentCity" [(ngModel)]="education.establishmentCityId" name="establishmentCity" ngDefaultControl>
+        <select class="form-control" id="establishmentCity" [(ngModel)]="education.establishmentCityId.id" name="establishmentCity" ngDefaultControl>
           <option [ngValue]="null" disabled>Choose your uo type</option>
           <option *ngFor="let data of establishmentCity; let i = index" [ngValue]="data.id">{{data.name}}</option>
         </select><br>
@@ -42,7 +42,7 @@
 
   <div class="container-fluid">
     <label for="language">Изучаемый иностранный язык</label>
-    <select class="form-control" id="language" [(ngModel)]="education.languageId" name="language" ngDefaultControl>
+    <select class="form-control" id="language" [(ngModel)]="education.languageId.id" name="language" ngDefaultControl>
       <option [ngValue]="null" disabled>Choose your uo type</option>
       <option *ngFor="let data of language; let i = index" [ngValue]="data.id">{{data.name}}</option>
     </select><br>
@@ -61,7 +61,10 @@
     </div>
   </div>
 
-  <div class="container-fluid"><input type="button" (click)="submit(education)" [disabled]="myForm.invalid" [routerLink]="['/additional']" class="btn btn-success" value="Отправить" /></div>
+  <div class="container-fluid">
+    <input type="button" [routerLink]="['/address']" class="btn btn-danger" value="Назад" />
+    <input type="button" (click)="submit(education)" [disabled]="myForm.invalid" [routerLink]="['/additional']" class="btn btn-success" value="Отправить" />
+  </div>
 
 </form>
 

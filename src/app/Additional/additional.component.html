@@ -72,6 +72,9 @@
   <textarea class="form-control" rows="5" id="note" [(ngModel)]="additional.note" name="note" required></textarea>
 </div><br>
 
-  <div class="container-fluid"><input type="button" (click)="submit(additional)" [disabled]="myForm.invalid" [routerLink]="['/']" class="btn btn-success" value="Далее" /></div>
+  <div class="container-fluid">
+    <input type="button" [routerLink]="['/study']" class="btn btn-danger" value="Назад" />
+    <input type="button" (click)="submit(additional)" [disabled]="myForm.invalid" [routerLink]="['/']" class="btn btn-success" value="Далее" />
+  </div>
 
 </form>

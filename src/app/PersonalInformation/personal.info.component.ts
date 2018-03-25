@@ -24,7 +24,6 @@ export class PersonalInfoComponent implements OnInit {
 
   personal: Personal = new Personal();
   personalObject: Personal[] = [];
-  sex = true;
 
   receivedPersonal: Personal; // полученный пользователь
   done = false;
@@ -32,8 +31,6 @@ export class PersonalInfoComponent implements OnInit {
   docseria: Docseria[] = [];
   nationality: Nationality[] = [];
   personalEdited: Personal;
-  selectedDoctype: Doctype;
-  selectedDoctype = this.personal.documentTypeId;
 
   constructor(private httpService: HttpService, public datepipe: DatePipe) {
   }
@@ -52,15 +49,10 @@ export class PersonalInfoComponent implements OnInit {
   /*TODO
 Загрузить в ngOnInit весь объект и заполнить инпуты полями
    */
-  compareFn(c1: Doctype, c2: Doctype): boolean {
-    return c1 && c2 ? c1.id === c2.id : c1 === c2;
-  }
 
   ngOnInit() {
-    this.httpService.getAbitur().subscribe(data => {
-      this.personalObject = data['profileInfo'];
-      localStorage.setItem('personal', JSON.stringify(this.personalObject));
-    });
+    this.httpService.getAbitur();
+    this.personalObject = this.httpService.personalObject;
 
     this.personalEdited = JSON.parse(localStorage.getItem('personal'));
     this.personal.documentTypeId = this.personalEdited['documentType'];
@@ -77,7 +69,6 @@ export class PersonalInfoComponent implements OnInit {
     this.personal.identificationNumber = this.personalEdited['identificationNumber'];
     this.personal.sex = this.personalEdited['sex'];
 
-    this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
     this.httpService.getDocSeria().subscribe(data => this.docseria = data['content']);
     this.httpService.getDocType().subscribe(data => this.doctype = data['content']);
     this.httpService.getNationality().subscribe(data => this.nationality = data['content']);

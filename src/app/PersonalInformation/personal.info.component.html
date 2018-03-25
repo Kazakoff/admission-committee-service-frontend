@@ -1,9 +1,9 @@
 <form #myForm="ngForm">
   <div class="container-fluid">
     <label for="doctype">Документ</label>
-    <select class="form-control" id="doctype" [(ngModel)]="personal.documentTypeId" [ngModelOptions]="{standalone: true}" selname="documentTypeId" ngDefaultControl  #personaldocumentOrgan >
+    <select class="form-control" id="doctype" [(ngModel)]="personal.documentTypeId.id" [ngModelOptions]="{standalone: true}" name="documentTypeId" ngDefaultControl  #personaldocumentOrgan >
       <option [ngValue]="null" disabled>Choose your document type</option>
-      <option *ngFor="let data of doctype; let i = index" [ngValue]="data.id" [selected]="i">{{data.name}}</option>
+      <option *ngFor="let data of doctype; let i = index" [ngValue]="data.id">{{data.name}}</option>
     </select><br>
   </div>
 
@@ -11,7 +11,7 @@
     <div class="row">
       <div class="col-sm">
     <label for="docseria">Серия документа</label>
-    <select class="form-control" id="docseria" [(ngModel)]="personal.documentSeriaId" name="documentSeriaId" ngDefaultControl>
+    <select class="form-control" id="docseria" [(ngModel)]="personal.documentSeriaId.id" name="documentSeriaId" ngDefaultControl>
       <option *ngFor="let data of docseria" [ngValue]="data.id" >{{data.name}}</option>
     </select>
       </div>
@@ -59,7 +59,7 @@
 
   <div class="container-fluid">
     <label for="nationality">Гражданство</label>
-    <select class="form-control" id="nationality" [(ngModel)]="personal.nationalityId" name="nationalityId">
+    <select class="form-control" id="nationality" [(ngModel)]="personal.nationalityId.id" name="nationalityId">
       <option *ngFor="let data of nationality" [ngValue]="data.id">{{data.name}}</option>
     </select>
   </div> <br><br>
@@ -79,6 +79,9 @@
     </div>
   </div>
 
-  <div class="container-fluid"><input type="button" (click)="submit(personal)" [disabled]="myForm.invalid" [routerLink]="['/address']" class="btn btn-success" value="Далее" /></div>
+  <div class="container-fluid">
+    <input type="button" [routerLink]="['/']" class="btn btn-danger" value="Назад" />
+    <input type="button" (click)="submit(personal)" [disabled]="myForm.invalid" [routerLink]="['/address']" class="btn btn-success" value="Далее" />
+  </div>
 
 </form>

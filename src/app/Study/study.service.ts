@@ -23,11 +23,11 @@ export class HttpService {
   postData(education: Education) {
     const body = {
       uoName: education.uoName,
-      educationTypeId: education.educationTypeId,
+      educationTypeId: education.educationTypeId.id,
       endYear: education.endYear,
-      educationLevelId: education.educationLevelId,
-      establishmentCityId: education.establishmentCityId,
-      languageId: education.languageId,
+      educationLevelId: education.educationLevelId.id,
+      establishmentCityId: education.establishmentCityId.id,
+      languageId: education.languageId.id,
       goldMedalist: education.goldMedalist,
       honours: education.honours,
       notCitizen: education.notCitizen

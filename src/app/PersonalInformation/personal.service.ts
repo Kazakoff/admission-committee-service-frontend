@@ -5,10 +5,9 @@ import {PersonalInfoComponent} from './personal.info.component';
 
 @Injectable()
 export class HttpService {
-
   constructor(private http: HttpClient) {
   }
-
+personalObject: Personal[] = [];
   userid: number;
   public token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyTmFtZSIsImV4cCI6NjE1MTc5OTg4MDAsInVzZXJJZCI6MSwicm9sZXMiOiJST0xFX0FETUlOIn0.' +
     's2SxLDDSkjjkZ2Jx_cbeh17DuSx4dDogOQmQncRILik';
@@ -23,8 +22,8 @@ export class HttpService {
   postData(personal: Personal) {
 
     const body = {
-      documentTypeId: personal.documentTypeId,
-      documentSeriaId: personal.documentSeriaId,
+      documentTypeId: personal.documentTypeId.id,
+      documentSeriaId: personal.documentSeriaId.id,
       documentNumber: personal.documentNumber,
       documentDate: personal.documentDate,
       documentOrgan: personal.documentOrgan,
@@ -33,7 +32,7 @@ export class HttpService {
       middleName: personal.middleName,
       birthDate: personal.birthDate,
       birthPlace: personal.birthPlace,
-      nationalityId: personal.nationalityId,
+      nationalityId: personal.nationalityId.id,
       identificationNumber: personal.identificationNumber,
       sex: personal.sex
     };
@@ -45,7 +44,11 @@ export class HttpService {
   }
 
   getAbitur() {
-    return this.http.get('http://localhost:8005/abiturient', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get('http://localhost:8005/abiturient', {headers: this.addHeaders(), withCredentials: true}).subscribe(data => {
+      this.personalObject = data['profileInfo'];
+      localStorage.setItem('personal', JSON.stringify(this.personalObject));
+      this.userid = data['id'];
+    });
   }
 
   getDocSeria() {
