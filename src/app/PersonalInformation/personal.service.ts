@@ -3,14 +3,12 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Personal} from './personal';
 import {PersonalInfoComponent} from './personal.info.component';
 import {Observable} from 'rxjs/Observable';
-import {map} from 'rxjs/operators';
 
 @Injectable()
 export class HttpService {
   constructor(private http: HttpClient) {
   }
-
-  personalObject: Personal[] = [];
+personalObject: Personal[] = [];
   userid: number;
   public token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyTmFtZSIsImV4cCI6NjE1MTc5OTg4MDAsInVzZXJJZCI6MSwicm9sZXMiOiJST0xFX0FETUlOIn0.' +
     's2SxLDDSkjjkZ2Jx_cbeh17DuSx4dDogOQmQncRILik';
@@ -47,13 +45,9 @@ export class HttpService {
   }
 
   getAbitur(): Observable<Personal[]> {
-    return this.http.get('http://localhost:8005/abiturient', {headers: this.addHeaders(), withCredentials: true}).subscribe(data => {
-      this.personalObject = data['profileInfo'];
-      localStorage.setItem('personal', JSON.stringify(this.personalObject));
-      this.userid = data['id'];
-    });
-  }
+    return this.http.get('http://localhost:8005/abiturient', {headers: this.addHeaders(), withCredentials: true});
 
+  }
   getDocSeria() {
     return this.http.get('http://localhost:8005/docseria/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
   }

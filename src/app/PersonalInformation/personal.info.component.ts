@@ -46,12 +46,18 @@ export class PersonalInfoComponent implements OnInit {
       );
   }
 
+
   /*TODO
 Загрузить в ngOnInit весь объект и заполнить инпуты полями
    */
 
   ngOnInit() {
-    this.httpService.getAbitur();
+
+    this.httpService.getAbitur().subscribe(data => {
+      this.personalObject = data['profileInfo'];
+      localStorage.setItem('personal', JSON.stringify(this.personalObject));
+      this.httpService.userid = data['id'];
+    });
     this.personalObject = this.httpService.personalObject;
 
     this.personalEdited = JSON.parse(localStorage.getItem('personal'));
