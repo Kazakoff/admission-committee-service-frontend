@@ -44,7 +44,7 @@ personalObject: Personal[] = [];
     });
   }
 
-  getAbitur(): Observable<Personal[]> {
+  getAbitur() {
     return this.http.get('http://localhost:8005/abiturient', {headers: this.addHeaders(), withCredentials: true});
 
   }

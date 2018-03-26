@@ -39,27 +39,34 @@ export class AdditionalComponent implements OnInit {
       );
   }
 
+  /* TODO Запрашивать данные каждый раз при посте, либо пушить в бд и одновременно при удачном пуше пушить в какой-то массив*/
+
   ngOnInit() {
 
     this.httpService.getAbitur().subscribe(data => {
       this.additionalObject = data['additionalInfo'];
       localStorage.setItem('additional', JSON.stringify(this.additionalObject));
     });
-    this.additionalEdited = JSON.parse(localStorage.getItem('additional'));
-
-    this.additional.fatherFIO = this.additionalEdited['fatherFIO'];
-    this.additional.fatherWork = this.additionalEdited['fatherWork'];
-    this.additional.fatherPhone = this.additionalEdited['fatherPhone'];
-    this.additional.motherFIO = this.additionalEdited['motherFIO'];
-    this.additional.motherWork = this.additionalEdited['motherWork'];
-    this.additional.motherPhone = this.additionalEdited['motherPhone'];
-    this.additional.childCount = this.additionalEdited['childCount'];
-    this.additional.workPlace = this.additionalEdited['workPlace'];
-    this.additional.experience = this.additionalEdited['experience'];
-    this.additional.reAdmission = this.additionalEdited['reAdmission'];
-    this.additional.note = this.additionalEdited['note'];
 
     this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
+
+    this.additionalEdited = JSON.parse(localStorage.getItem('additional'));
+    if (this.additionalEdited == null) {
+      console.log('set inputs');
+    } else {
+      this.additional.fatherFIO = this.additionalEdited['fatherFIO'];
+      this.additional.fatherWork = this.additionalEdited['fatherWork'];
+      this.additional.fatherPhone = this.additionalEdited['fatherPhone'];
+      this.additional.motherFIO = this.additionalEdited['motherFIO'];
+      this.additional.motherWork = this.additionalEdited['motherWork'];
+      this.additional.motherPhone = this.additionalEdited['motherPhone'];
+      this.additional.childCount = this.additionalEdited['childCount'];
+      this.additional.workPlace = this.additionalEdited['workPlace'];
+      this.additional.experience = this.additionalEdited['experience'];
+      this.additional.reAdmission = this.additionalEdited['reAdmission'];
+      this.additional.note = this.additionalEdited['note'];
+    }
+
   }
 
 }
