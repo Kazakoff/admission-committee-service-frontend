@@ -2,12 +2,11 @@
   <div class="container-fluid">
     <label for="postcode">Индекс</label>
     <input type="text" class="form-control" id="postcode" placeholder="Индекс" [(ngModel)]="address.postCode" name="postcode" required><br>
-    <label for="region">Область</label>
-    <input type="text" class="form-control" id="region" placeholder="Область" [(ngModel)]="address.region" name="region" required><br>
-    <label for="district">Район</label>
-    <input type="text" class="form-control" id="district" placeholder="Район" [(ngModel)]="address.district" name="district" required><br>
-    <label for="city">Город</label>
-    <input type="text" class="form-control" id="city" placeholder="Город" [(ngModel)]="address.city" name="city" required><br>
+    <label for="cityId">Город</label>
+    <select class="form-control" id="cityId" [(ngModel)]="address.cityId.id" [ngModelOptions]="{standalone: true}" name="cityId" ngDefaultControl>
+      <option [ngValue]="null" disabled>Choose your document type</option>
+      <option *ngFor="let data of city; let i = index" [ngValue]="data.id">{{data.name}}</option>
+    </select><br>
     <label for="street">Улица</label>
     <input type="text" class="form-control" id="street" placeholder="Улица" [(ngModel)]="address.street" name="street" required><br>
   </div>

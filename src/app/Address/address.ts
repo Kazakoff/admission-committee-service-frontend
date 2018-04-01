@@ -1,9 +1,9 @@
+import {City} from './city';
+
 export class Address {
 
 postCode: string;
-region: string;
-district: string;
-city: string;
+cityId: City;
 street: string;
 home: string;
 building: string;

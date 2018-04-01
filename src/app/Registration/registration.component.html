@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-offset-3 col-md-6">
+      <form class="form-horizontal">
+        <span class="heading">Registration</span>
+        <select class="form-control" id="role" [(ngModel)]="registration.roleId.id" name="role" ngDefaultControl>
+          <option *ngFor="let data of roles" [ngValue]="data.id" >{{data.name}}</option>
+        </select><br>
+        <div class="form-group">
+          <input type="email" class="form-control" id="email" placeholder="E-mail" [(ngModel)]="registration.email" name="email">
+          <i class="fa fa-user"></i>
+        </div>
+        <div class="form-group help">
+          <input type="password" class="form-control" id="inputPassword" placeholder="Password" [(ngModel)]="registration.password" name="password">
+          <i class="fa fa-lock"></i>
+          <a href="#" class="fa fa-question-circle"></a>
+        </div>
+        <div class="form-group">
+          <button (click)="submit(registration)" [routerLink]="['/']" class="btn btn-default">Enter</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

@@ -10,8 +10,7 @@ export class HttpService {
   }
 
   userid: number;
-  public token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyTmFtZSIsImV4cCI6NjE1MTc5OTg4MDAsInVzZXJJZCI6MSwicm9sZXMiOiJST0xFX0FETUlOIn0.' +
-    's2SxLDDSkjjkZ2Jx_cbeh17DuSx4dDogOQmQncRILik';
+  public token = JSON.parse(localStorage.getItem('token'));
 
   addHeaders() {
     const myHeaders = new HttpHeaders()
@@ -22,15 +21,12 @@ export class HttpService {
 
   postData(education: Education) {
     const body = {
-      uoName: education.uoName,
-      educationTypeId: education.educationTypeId.id,
+      educationInstitutionId: education.educationInstitutionId.id,
       endYear: education.endYear,
       educationLevelId: education.educationLevelId.id,
-      establishmentCityId: education.establishmentCityId.id,
       languageId: education.languageId.id,
       goldMedalist: education.goldMedalist,
       honours: education.honours,
-      notCitizen: education.notCitizen
     };
 
     return this.http.put('http://localhost:8005/abiturient/education/' + this.userid, body, {
@@ -43,16 +39,12 @@ export class HttpService {
     return this.http.get('http://localhost:8005/abiturient', {headers: this.addHeaders(), withCredentials: true});
   }
 
-  getEdType() {
-    return this.http.get('http://localhost:8005/edtype/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+  getEducationInstitution() {
+    return this.http.get('http://localhost:8005/edinst/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
   }
 
   getEdLevel() {
     return this.http.get('http://localhost:8005/edlevel/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
-  }
-
-  getEstablishmentCity() {
-    return this.http.get('http://localhost:8005/estcity/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
   }
 
   getLanguage() {

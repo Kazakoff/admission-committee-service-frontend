@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Address} from './address';
 import {HttpService} from './address.service';
-import {Personal} from '../PersonalInformation/personal';
+import {City} from './city';
 
 @Component({
   selector: 'address',
@@ -24,6 +24,9 @@ export class AddressComponent implements OnInit {
   addressObject: Address[] = [];
   addressEdited: Address;
   receivedAddress: Address;
+  city: City[] = [{
+    id: 1, name: ''
+  }];
 
   constructor(private httpService: HttpService) {
   }
@@ -40,6 +43,8 @@ export class AddressComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.address.cityId = this.city[0];
+
     this.httpService.getAbitur().subscribe(data => {
       this.addressObject = data['addressInfo'];
       localStorage.setItem('address', JSON.stringify(this.addressObject));
@@ -49,9 +54,7 @@ export class AddressComponent implements OnInit {
       console.log('set inputs');
     } else {
       this.address.postCode = this.addressEdited['postCode'];
-      this.address.region = this.addressEdited['region'];
-      this.address.district = this.addressEdited['district'];
-      this.address.city = this.addressEdited['city'];
+      this.address.cityId = this.addressEdited['city'];
       this.address.street = this.addressEdited['street'];
       this.address.home = this.addressEdited['home'];
       this.address.building = this.addressEdited['building'];
@@ -59,6 +62,7 @@ export class AddressComponent implements OnInit {
       this.address.phone = this.addressEdited['phone'];
     }
     this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
+    this.httpService.getCity().subscribe(data => this.city = data['content']);
   }
 
 }

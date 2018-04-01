@@ -9,8 +9,7 @@ export class HttpService {
   }
 
   userid: number;
-  public token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyTmFtZSIsImV4cCI6NjE1MTc5OTg4MDAsInVzZXJJZCI6MSwicm9sZXMiOiJST0xFX0FETUlOIn0.' +
-    's2SxLDDSkjjkZ2Jx_cbeh17DuSx4dDogOQmQncRILik';
+  public token = JSON.parse(localStorage.getItem('token'));
 
   addHeaders() {
     const myHeaders = new HttpHeaders()
@@ -23,9 +22,7 @@ export class HttpService {
 
     const body = {
       postCode: address.postCode,
-      region: address.region,
-      district: address.district,
-      city: address.city,
+      cityId: address.cityId.id,
       street: address.street,
       home: address.home,
       building: address.building,
@@ -38,6 +35,10 @@ export class HttpService {
       headers: this.addHeaders(),
       withCredentials: true
     });
+  }
+
+  getCity() {
+    return this.http.get('http://localhost:8005/city/contains?fragment=&size=1000', {headers: this.addHeaders(), withCredentials: true});
   }
 
   getAbitur() {

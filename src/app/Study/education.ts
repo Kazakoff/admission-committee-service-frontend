@@ -1,18 +1,14 @@
-import {EducationType} from './educationType';
 import {EducationLevel} from './educationLevel';
-import {EstablishmentCity} from './establishmentCity';
 import {Language} from './language';
+import {EducationInstitution} from './educationInstitution';
 
 export class Education {
 
-  uoName: string;
-  educationTypeId: EducationType;
+  educationInstitutionId: EducationInstitution;
   endYear: number;
   educationLevelId: EducationLevel;
-  establishmentCityId: EstablishmentCity;
   languageId: Language;
   goldMedalist: boolean;
   honours: boolean;
-  notCitizen = false;
 
 }

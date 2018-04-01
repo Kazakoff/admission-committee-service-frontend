@@ -17,27 +17,11 @@
   </div>
 
   <div class="container-fluid">
-    <label for="uoName">Название УО</label>
-    <input type="text" class="form-control" id="uoName" placeholder="Название УО" [(ngModel)]="education.uoName" name="uoName" required><br>
-  </div>
-
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm">
-        <label for="educationType">Тип УО</label>
-        <select class="form-control" id="educationType" [(ngModel)]="education.educationTypeId.id" name="educationType" ngDefaultControl>
-          <option [ngValue]="null" disabled>Choose your uo type</option>
-          <option *ngFor="let data of educationType; let i = index" [ngValue]="data.id">{{data.name}}</option>
-        </select><br>
-      </div>
-      <div class="col-sm">
-        <label for="establishmentCity">Населённый пункт</label>
-        <select class="form-control" id="establishmentCity" [(ngModel)]="education.establishmentCityId.id" name="establishmentCity" ngDefaultControl>
-          <option [ngValue]="null" disabled>Choose your uo type</option>
-          <option *ngFor="let data of establishmentCity; let i = index" [ngValue]="data.id">{{data.name}}</option>
-        </select><br>
-      </div>
-    </div>
+    <label for="educationInstitution">Название УО</label>
+    <select class="form-control" id="educationInstitution" [(ngModel)]="education.educationInstitutionId.id" name="educationInstitution" ngDefaultControl>
+      <option [ngValue]="null" disabled>Choose your institution</option>
+      <option *ngFor="let data of educationInstitution; let i = index" [ngValue]="data.id">{{data.name}}</option>
+    </select><br>
   </div>
 
   <div class="container-fluid">

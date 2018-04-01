@@ -1,7 +1,7 @@
 <form #myForm="ngForm">
   <div class="container-fluid">
     <label for="doctype">Документ</label>
-    <select class="form-control" id="doctype" [(ngModel)]="personal.documentTypeId.id" [ngModelOptions]="{standalone: true}" name="documentTypeId" ngDefaultControl  #personaldocumentOrgan >
+    <select class="form-control" id="doctype" [(ngModel)]="personal.documentTypeId.id" [ngModelOptions]="{standalone: true}" name="documentTypeId" ngDefaultControl  #personaldocumentOrgan>
       <option [ngValue]="null" disabled>Choose your document type</option>
       <option *ngFor="let data of doctype; let i = index" [ngValue]="data.id">{{data.name}}</option>
     </select><br>

@@ -8,15 +8,18 @@ import {PersonalInfoComponent} from './PersonalInformation/personal.info.compone
 import {AddressComponent} from './Address/address.component';
 import {StudyComponent} from './Study/study.component';
 import {AuthComponent} from './Authorization/auth.component';
+import {RegistrationComponent} from './Registration/registration.component';
 import {AdditionalComponent} from './Additional/additional.component';
 import {FormsModule} from '@angular/forms';
 import {DatePipe} from '@angular/common';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
 const appRoutes: Routes = [
   {path: 'personal', component: PersonalInfoComponent},
   {path: 'address', component: AddressComponent},
   {path: 'study', component: StudyComponent},
   {path: 'auth', component: AuthComponent},
+  {path: 'reg', component: RegistrationComponent},
   {path: 'additional', component: AdditionalComponent},
   {path: '**', redirectTo: '/'}
 ];
@@ -28,13 +31,15 @@ const appRoutes: Routes = [
     AddressComponent,
     StudyComponent,
     AuthComponent,
-    AdditionalComponent
+    AdditionalComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
-    HttpClientModule
+    HttpClientModule,
+    InfiniteScrollModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

@@ -12,6 +12,8 @@
         <a class="nav-item nav-link" routerLink="/study" routerLinkActive="active">Образование</a>
         <a class="nav-item nav-link" routerLink="/additional" routerLinkActive="active">Дополнительная информация</a>
         <a class="nav-item nav-link" routerLink="/auth" routerLinkActive="active">Авторизация(тест)</a>
+        <a class="nav-item nav-link" routerLink="/reg" routerLinkActive="active">Регистрация(тест)</a>
+        <div *ngIf="token"><button (click)="logOut()">LogOut</button></div>
       </div>
     </div>
   </nav>

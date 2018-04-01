@@ -20,11 +20,12 @@ import {DatePipe} from '@angular/common';
   `],
   providers: [HttpService, DatePipe]
 })
+
 export class PersonalInfoComponent implements OnInit {
 
   personal: Personal = new Personal();
   personalObject: Personal[] = [];
-
+error: any;
   receivedPersonal: Personal; // полученный пользователь
   done = false;
   doctype: Doctype[] = [{
