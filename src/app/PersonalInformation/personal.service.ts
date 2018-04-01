@@ -8,7 +8,6 @@ import {Observable} from 'rxjs/Observable';
 export class HttpService {
   constructor(private http: HttpClient) {
   }
-personalObject: Personal[] = [];
   userid: number;
   public token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyTmFtZSIsImV4cCI6NjE1MTc5OTg4MDAsInVzZXJJZCI6MSwicm9sZXMiOiJST0xFX0FETUlOIn0.' +
     's2SxLDDSkjjkZ2Jx_cbeh17DuSx4dDogOQmQncRILik';

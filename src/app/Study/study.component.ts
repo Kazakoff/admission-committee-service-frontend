@@ -29,16 +29,16 @@ export class StudyComponent implements OnInit {
   educationEdited: Education;
 
   educationType: EducationType[] = [{
-    id: 1, name: 'zaglushka'
+    id: 1, name: ''
   }];
   educationLevel: EducationLevel[] = [{
-    id: 1, name: 'zaglushka'
+    id: 1, name: ''
   }];
   establishmentCity: EstablishmentCity[] = [{
-    id: 1, name: 'zaglushka'
+    id: 1, name: ''
   }];
   language: Language[] = [{
-    id: 1, name: 'zaglushka'
+    id: 1, name: ''
   }];
 
   constructor(private httpService: HttpService) {
@@ -53,6 +53,7 @@ export class StudyComponent implements OnInit {
         },
         error => console.log(error)
       );
+
   }
 
   ngOnInit() {
@@ -63,9 +64,8 @@ export class StudyComponent implements OnInit {
 
     this.httpService.getEdLevel().subscribe(data => {
       this.educationLevel = data['content'];
-      console.log('picun' + this.education.educationLevelId.id);
     });
-    console.log('chlen' + this.education.educationLevelId);
+
     this.httpService.getAbitur().subscribe(data => {
       this.educationObject = data['educationInfo'];
       localStorage.setItem('education', JSON.stringify(this.educationObject));

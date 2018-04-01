@@ -28,13 +28,13 @@ export class PersonalInfoComponent implements OnInit {
   receivedPersonal: Personal; // полученный пользователь
   done = false;
   doctype: Doctype[] = [{
-    id: 1, name: 'zaglushka'
+    id: 1, name: ''
   }];
   docseria: Docseria[] = [{
-    id: 1, name: 'zaglushka'
+    id: 1, name: ''
   }];
   nationality: Nationality[] = [{
-    id: 1, name: 'zaglushka'
+    id: 1, name: ''
   }];
   personalEdited: Personal;
 
@@ -52,28 +52,7 @@ export class PersonalInfoComponent implements OnInit {
       );
   }
 
-
-  /*TODO
-Загрузить в ngOnInit весь объект и заполнить инпуты полями
-   */
-
-  ngOnInit() {
-
-    this.personal.documentTypeId = this.doctype[0];
-    this.personal.documentSeriaId = this.docseria[0];
-    this.personal.nationalityId = this.nationality[0];
-
-    this.httpService.getDocSeria().subscribe(data => this.docseria = data['content']);
-    this.httpService.getDocType().subscribe(data => this.doctype = data['content']);
-    this.httpService.getNationality().subscribe(data => this.nationality = data['content']);
-
-    this.httpService.getAbitur().subscribe(data => {
-      this.personalObject = data['profileInfo'];
-      localStorage.setItem('personal', JSON.stringify(this.personalObject));
-      this.httpService.userid = data['id'];
-    });
-    this.personalObject = this.httpService.personalObject;
-
+  setPersonal() {
     this.personalEdited = JSON.parse(localStorage.getItem('personal'));
     if (this.personalEdited == null) {
       console.log('Set inputs');
@@ -92,6 +71,27 @@ export class PersonalInfoComponent implements OnInit {
       this.personal.identificationNumber = this.personalEdited['identificationNumber'];
       this.personal.sex = this.personalEdited['sex'];
     }
+    localStorage.removeItem('personal');
+  }
+
+  ngOnInit() {
+
+    this.personal.documentTypeId = this.doctype[0];
+    this.personal.documentSeriaId = this.docseria[0];
+    this.personal.nationalityId = this.nationality[0];
+
+    this.httpService.getDocSeria().subscribe(data => this.docseria = data['content']);
+    this.httpService.getDocType().subscribe(data => this.doctype = data['content']);
+    this.httpService.getNationality().subscribe(data => this.nationality = data['content']);
+
+    this.httpService.getAbitur().subscribe(data => {
+      this.personalObject = data['profileInfo'];
+      localStorage.setItem('personal', JSON.stringify(this.personalObject));
+      this.httpService.userid = data['id'];
+    });
+
+    this.setPersonal();
+
 
   }
 }
