@@ -1,4 +1,4 @@
-<form #myForm="ngForm">
+<form #myForm="ngForm" [hidden]="!token">
   <div class="container-fluid">
     <label for="doctype">Документ</label>
     <select class="form-control" id="doctype" [(ngModel)]="personal.documentTypeId.id" [ngModelOptions]="{standalone: true}" name="documentTypeId" ngDefaultControl  #personaldocumentOrgan>
@@ -85,3 +85,8 @@
   </div>
 
 </form>
+
+<div class="alert alert-danger" role="alert" [hidden]="token">
+  <strong>Forbidden! Insufficient access rights! </strong>Please <a href="/auth" class="alert-link">authorize</a> or
+  <a href="/reg" class="alert-link">register</a> first! Then try come in again.
+</div>

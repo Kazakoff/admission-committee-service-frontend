@@ -1,11 +1,13 @@
-<form #myForm="ngForm">
+<form #myForm="ngForm" [hidden]="!token">
   <div class="container-fluid">
     <label for="postcode">Индекс</label>
     <input type="text" class="form-control" id="postcode" placeholder="Индекс" [(ngModel)]="address.postCode" name="postcode" required><br>
     <label for="cityId">Город</label>
     <select class="form-control" id="cityId" [(ngModel)]="address.cityId.id" [ngModelOptions]="{standalone: true}" name="cityId" ngDefaultControl>
       <option [ngValue]="null" disabled>Choose your document type</option>
+
       <option *ngFor="let data of city; let i = index" [ngValue]="data.id">{{data.name}}</option>
+
     </select><br>
     <label for="street">Улица</label>
     <input type="text" class="form-control" id="street" placeholder="Улица" [(ngModel)]="address.street" name="street" required><br>
@@ -38,4 +40,22 @@
     <input type="button" (click)="submit(address)" [disabled]="myForm.invalid" [routerLink]="['/study']" class="btn btn-success" value="Далее" />
   </div>
 
+  <div class="search-results"
+       data-infinite-scroll
+       [infiniteScrollDistance]="scrollDistance"
+       [infiniteScrollUpDistance]="scrollUpDistance"
+       [infiniteScrollThrottle]="throttle"
+       (scrolled)="onScrollDown()">
+    <p *ngFor="let i of posts">
+      {{ i }}
+    </p>
+  </div>
+
 </form>
+
+<div class="alert alert-danger" role="alert" [hidden]="token">
+  <strong>Forbidden! Insufficient access rights! </strong>Please <a href="/auth" class="alert-link">authorize</a> or
+  <a href="/reg" class="alert-link">register</a> first! Then try come in again.
+</div>
+
+

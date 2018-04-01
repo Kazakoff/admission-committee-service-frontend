@@ -25,8 +25,9 @@ export class PersonalInfoComponent implements OnInit {
 
   personal: Personal = new Personal();
   personalObject: Personal[] = [];
-error: any;
-  receivedPersonal: Personal; // полученный пользователь
+  error: any;
+  token = JSON.parse(localStorage.getItem('token'));
+  receivedPersonal: Personal;
   done = false;
   doctype: Doctype[] = [{
     id: 1, name: ''

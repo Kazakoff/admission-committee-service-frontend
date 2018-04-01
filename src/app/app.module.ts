@@ -13,6 +13,7 @@ import {AdditionalComponent} from './Additional/additional.component';
 import {FormsModule} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 const appRoutes: Routes = [
   {path: 'personal', component: PersonalInfoComponent},
@@ -46,3 +47,4 @@ const appRoutes: Routes = [
 })
 export class AppModule {
 }
+

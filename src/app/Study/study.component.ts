@@ -21,6 +21,7 @@ import {EducationInstitution} from './educationInstitution';
 })
 export class StudyComponent implements OnInit {
 
+  token = JSON.parse(localStorage.getItem('token'));
   education: Education = new Education();
   educationObject: Education[] = [];
   done = false;

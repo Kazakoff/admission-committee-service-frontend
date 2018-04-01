@@ -11,10 +11,14 @@
         <a class="nav-item nav-link" routerLink="/address" routerLinkActive="active">Адрес</a>
         <a class="nav-item nav-link" routerLink="/study" routerLinkActive="active">Образование</a>
         <a class="nav-item nav-link" routerLink="/additional" routerLinkActive="active">Дополнительная информация</a>
+        <div *ngIf="!token">
         <a class="nav-item nav-link" routerLink="/auth" routerLinkActive="active">Авторизация(тест)</a>
+        </div>
         <a class="nav-item nav-link" routerLink="/reg" routerLinkActive="active">Регистрация(тест)</a>
-        <div *ngIf="token"><button (click)="logOut()">LogOut</button></div>
       </div>
+      <form class="form-inline my-2 my-lg-0">
+        <div *ngIf="token"><button class="btn btn-outline-danger my-2 my-sm-0" (click)="logOut()">LogOut</button></div>
+      </form>
     </div>
   </nav>
   <router-outlet></router-outlet>

@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {HttpService} from './auth.service';
 import {Auth} from './auth';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {timeout} from 'rxjs/operators';
+import 'rxjs/add/operator/delay';
+import 'rxjs/add/operator/timeout';
 
 @Component({
   selector: 'auth',
@@ -13,8 +17,9 @@ export class AuthComponent implements OnInit {
   constructor(private http: HttpClient) {
   }
 auth: Auth = new Auth();
-error: any;
+error: number;
 token: any;
+
   addHeaders() {
     const myHeaders = new HttpHeaders()
       .set('Authorization', 'Basic ' + btoa(this.auth.email + ':' + this.auth.password))
@@ -28,11 +33,10 @@ token: any;
         (data) => {
           this.token = data['token'];
           localStorage.setItem('token', JSON.stringify(this.token));
+          location.replace('/');
         },
-        error => { setTimeout(function () { this.error = error.status;
-        }, 0); }
+        error => { this.error = error; }
       );
-    setTimeout(function() { console.log(this.error); }, 1000);
   }
 
   ngOnInit() {

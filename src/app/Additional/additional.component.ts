@@ -19,6 +19,7 @@ import {Additional} from './additional';
 
 export class AdditionalComponent implements OnInit {
 
+  token = JSON.parse(localStorage.getItem('token'));
   additional: Additional = new Additional();
   additionalEdited: Additional;
   additionalObject: Additional[] = [];

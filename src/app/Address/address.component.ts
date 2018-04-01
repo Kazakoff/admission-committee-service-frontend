@@ -19,6 +19,7 @@ import {City} from './city';
 })
 export class AddressComponent implements OnInit {
 
+  token = JSON.parse(localStorage.getItem('token'));
   done = false;
   address: Address = new Address();
   addressObject: Address[] = [];
@@ -27,10 +28,27 @@ export class AddressComponent implements OnInit {
   city: City[] = [{
     id: 1, name: ''
   }];
+  throttle = 50;
+  scrollDistance = 2;
+  scrollUpDistance = 2;
+  posts: City[];
+  originalPosts: string[];
+  post: City[];
 
   constructor(private httpService: HttpService) {
   }
 
+onScrollDown() {
+  if (this.posts.length < this.originalPosts.length) {
+    const len = this.posts.length;
+
+    for (let i = len; i <= len + 20; i++) {
+      this.posts.push(this.originalPosts[i]);
+    }
+  }
+}
+  //https://sroze.github.io/ngInfiniteScroll/demo_async.html
+  //https://www.djamware.com/post/59b0ac0c80aca768e4d2b139/an-example-of-ionic-3-infinite-scroll-or-load-more
   submit(address: Address) {
     this.httpService.postData(address)
       .subscribe(
@@ -63,6 +81,10 @@ export class AddressComponent implements OnInit {
     }
     this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
     this.httpService.getCity().subscribe(data => this.city = data['content']);
+    this.httpService.getCity().subscribe((response) => {
+      this.originalPosts = response['content'];
+      this.posts = response['content'].slice(0, 20);
+    });
   }
 
 }
