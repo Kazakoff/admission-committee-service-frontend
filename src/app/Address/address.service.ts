@@ -38,7 +38,7 @@ export class HttpService {
   }
 
   getCity() {
-    return this.http.get('http://localhost:8005/city/contains?fragment=&size=400', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get('http://localhost:8005/city/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
   }
 
   getAbitur() {

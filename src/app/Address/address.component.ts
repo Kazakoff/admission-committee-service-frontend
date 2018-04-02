@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {Address} from './address';
 import {HttpService} from './address.service';
 import {City} from './city';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {debounceTime} from 'rxjs/operators';
 
 @Component({
   selector: 'address',
@@ -15,9 +17,12 @@ import {City} from './city';
     }
   `],
   templateUrl: './address.component.html',
-  providers: [HttpService]
+  providers: [HttpService, HttpClient]
 })
 export class AddressComponent implements OnInit {
+
+  @ViewChild('scr')
+  nameScroll: ElementRef;
 
   token = JSON.parse(localStorage.getItem('token'));
   done = false;
@@ -28,27 +33,41 @@ export class AddressComponent implements OnInit {
   city: City[] = [{
     id: 1, name: ''
   }];
-  throttle = 50;
-  scrollDistance = 2;
-  scrollUpDistance = 2;
-  posts: City[];
-  originalPosts: string[];
-  post: City[];
+  posts: City[] = [];
+  page = 0;
+  isScrolling = false;
 
-  constructor(private httpService: HttpService) {
+  constructor(private httpService: HttpService, private httpClient: HttpClient) {
+
   }
 
-onScrollDown() {
-  if (this.posts.length < this.originalPosts.length) {
-    const len = this.posts.length;
-
-    for (let i = len; i <= len + 20; i++) {
-      this.posts.push(this.originalPosts[i]);
-    }
+  addHeaders() {
+    const myHeaders = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + this.token)
+      .set('Content-Type', 'application/json');
+    return myHeaders;
   }
-}
-  //https://sroze.github.io/ngInfiniteScroll/demo_async.html
-  //https://www.djamware.com/post/59b0ac0c80aca768e4d2b139/an-example-of-ionic-3-infinite-scroll-or-load-more
+
+  getCity() {
+    return this.httpClient.get('http://localhost:8005/city/contains?fragment=&size=20&page=' + this.page,
+      {headers: this.addHeaders(), withCredentials: true});
+  }
+
+onSelectScroll() {
+  if (this.isScrolling) {
+    return;
+  }
+  this.page++;
+  this.isScrolling = true;
+  this.getCity().subscribe((response) => {
+    const cities = response['content'];
+    cities.forEach((item) => {
+      this.posts.push(item);
+    });
+    this.isScrolling = false;
+  });
+  }
+
   submit(address: Address) {
     this.httpService.postData(address)
       .subscribe(
@@ -61,6 +80,7 @@ onScrollDown() {
   }
 
   ngOnInit() {
+
     this.address.cityId = this.city[0];
 
     this.httpService.getAbitur().subscribe(data => {
@@ -81,10 +101,10 @@ onScrollDown() {
     }
     this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
     this.httpService.getCity().subscribe(data => this.city = data['content']);
-    this.httpService.getCity().subscribe((response) => {
-      this.originalPosts = response['content'];
-      this.posts = response['content'].slice(0, 20);
-    });
+    this.getCity().subscribe((response) => {
+      this.posts = response['content'];
+      });
+    console.log(this.posts);
   }
 
 }
