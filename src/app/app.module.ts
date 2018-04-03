@@ -15,6 +15,7 @@ import {DatePipe} from '@angular/common';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxSelectModule } from 'ngx-select-ex';
 
 const appRoutes: Routes = [
   {path: 'personal', component: PersonalInfoComponent},
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     InfiniteScrollModule,
-    NgSelectModule
+    NgSelectModule,
+    NgxSelectModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

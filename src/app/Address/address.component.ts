@@ -4,6 +4,7 @@ import {HttpService} from './address.service';
 import {City} from './city';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {debounceTime} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'address',
@@ -35,9 +36,8 @@ export class AddressComponent implements OnInit {
   }];
   posts: City[] = [];
   page = 0;
-  isScrolling = false;
 
-  constructor(private httpService: HttpService, private httpClient: HttpClient) {
+  constructor(private httpService: HttpService, private httpClient: HttpClient, private router: Router) {
 
   }
 
@@ -49,23 +49,19 @@ export class AddressComponent implements OnInit {
   }
 
   getCity() {
-    return this.httpClient.get('http://localhost:8005/city/contains?fragment=&size=20&page=' + this.page,
+    return this.httpClient.get('http://localhost:8005/city/contains?fragment=&size=40&page=' + this.page,
       {headers: this.addHeaders(), withCredentials: true});
   }
 
-onSelectScroll() {
-  if (this.isScrolling) {
-    return;
+  bigCityLife(value) {
+      return this.httpClient.get('http://localhost:8005/city/contains?fragment=' + value + '&size=40',
+        {headers: this.addHeaders(), withCredentials: true});
   }
-  this.page++;
-  this.isScrolling = true;
-  this.getCity().subscribe((response) => {
-    const cities = response['content'];
-    cities.forEach((item) => {
-      this.posts.push(item);
+
+  onInputChange(value) {
+    this.bigCityLife(value).subscribe((response) => {
+      this.posts = response['content'];
     });
-    this.isScrolling = false;
-  });
   }
 
   submit(address: Address) {
@@ -80,7 +76,6 @@ onSelectScroll() {
   }
 
   ngOnInit() {
-
     this.address.cityId = this.city[0];
 
     this.httpService.getAbitur().subscribe(data => {
@@ -93,6 +88,7 @@ onSelectScroll() {
     } else {
       this.address.postCode = this.addressEdited['postCode'];
       this.address.cityId = this.addressEdited['city'];
+      this.posts.push(this.address.cityId);
       this.address.street = this.addressEdited['street'];
       this.address.home = this.addressEdited['home'];
       this.address.building = this.addressEdited['building'];
@@ -102,7 +98,7 @@ onSelectScroll() {
     this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
     this.httpService.getCity().subscribe(data => this.city = data['content']);
     this.getCity().subscribe((response) => {
-      this.posts = response['content'];
+      const hi = response['content'];
       });
     console.log(this.posts);
   }
