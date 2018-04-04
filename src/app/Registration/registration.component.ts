@@ -10,17 +10,18 @@ import {HttpService} from './registration.service';
   providers: [HttpService]
 })
 export class RegistrationComponent implements OnInit {
+  error: number;
   constructor(private httpService: HttpService) {
   }
   registration: Registration = new Registration();
-  roles: Role[] = [{id: 3, name: ''}];
+  roles: any = [{id: 3, name: ''}];
 
   submit(registration: Registration) {
     this.httpService.postData(registration)
       .subscribe(
-        (data: Registration) => {
+        (data: Registration) => { location.replace('/');
         },
-        error => console.log(error)
+        error => { this.error = error; }
       );
   }
 

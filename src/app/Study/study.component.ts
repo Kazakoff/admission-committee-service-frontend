@@ -4,6 +4,7 @@ import {EducationLevel} from './educationLevel';
 import {Language} from './language';
 import {HttpService} from './study.service';
 import {EducationInstitution} from './educationInstitution';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'study',
@@ -34,11 +35,33 @@ export class StudyComponent implements OnInit {
   language: Language[] = [{
     id: 1, name: ''
   }];
-  educationInstitution: EducationInstitution[] = [{
-    id: 1, name: ''
-  }]
+  educationInstitutions: EducationInstitution[] = [{id: 1, name: ''}];
+  page = 0;
 
-  constructor(private httpService: HttpService) {
+  constructor(private httpService: HttpService, private httpClient: HttpClient) {
+  }
+
+  addHeaders() {
+    const myHeaders = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + this.token)
+      .set('Content-Type', 'application/json');
+    return myHeaders;
+  }
+
+  getCity() {
+    return this.httpClient.get('http://localhost:8005/edinst/contains?fragment=&size=40&page=' + this.page,
+      {headers: this.addHeaders(), withCredentials: true});
+  }
+
+  getEducationInstituteFragment(value) {
+    return this.httpClient.get('http://localhost:8005/edinst/contains?fragment=' + value + '&size=40',
+      {headers: this.addHeaders(), withCredentials: true});
+  }
+
+  onInputChange(value) {
+    this.getEducationInstituteFragment(value).subscribe((response) => {
+      this.educationInstitutions = response['content'];
+    });
   }
 
   submit(education: Education) {
@@ -55,7 +78,7 @@ export class StudyComponent implements OnInit {
 
   ngOnInit() {
     this.education.educationLevelId = this.educationLevel[0];
-    this.education.educationInstitutionId = this.educationInstitution[0];
+    this.education.educationInstitutionId = this.educationInstitutions[0];
     this.education.languageId = this.language[0];
 
     this.httpService.getAbitur().subscribe(data => {
@@ -68,6 +91,7 @@ export class StudyComponent implements OnInit {
       console.log('Set inputs');
     } else {
       this.education.educationInstitutionId = this.educationEdited['educationInstitution'];
+      this.educationInstitutions.push(this.education.educationInstitutionId);
       this.education.endYear = this.educationEdited['endYear'];
       this.education.educationLevelId = this.educationEdited['educationLevel'];
       this.education.languageId = this.educationEdited['language'];
@@ -76,7 +100,6 @@ export class StudyComponent implements OnInit {
     }
 
     this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
-    this.httpService.getEducationInstitution().subscribe(data => this.educationInstitution = data['content']);
     this.httpService.getEdLevel().subscribe(data => this.educationLevel = data['content']);
     this.httpService.getLanguage().subscribe(data => this.language = data['content']);
   }

@@ -3,8 +3,6 @@ import {Address} from './address';
 import {HttpService} from './address.service';
 import {City} from './city';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {debounceTime} from 'rxjs/operators';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'address',
@@ -22,22 +20,16 @@ import {Router} from '@angular/router';
 })
 export class AddressComponent implements OnInit {
 
-  @ViewChild('scr')
-  nameScroll: ElementRef;
-
   token = JSON.parse(localStorage.getItem('token'));
   done = false;
   address: Address = new Address();
   addressObject: Address[] = [];
   addressEdited: Address;
   receivedAddress: Address;
-  city: City[] = [{
-    id: 1, name: ''
-  }];
-  posts: City[] = [];
+  cities: City[] = [{id: 1, name: ''}];
   page = 0;
 
-  constructor(private httpService: HttpService, private httpClient: HttpClient, private router: Router) {
+  constructor(private httpService: HttpService, private httpClient: HttpClient) {
 
   }
 
@@ -53,14 +45,14 @@ export class AddressComponent implements OnInit {
       {headers: this.addHeaders(), withCredentials: true});
   }
 
-  bigCityLife(value) {
+  getCityFragment(value) {
       return this.httpClient.get('http://localhost:8005/city/contains?fragment=' + value + '&size=40',
         {headers: this.addHeaders(), withCredentials: true});
   }
 
   onInputChange(value) {
-    this.bigCityLife(value).subscribe((response) => {
-      this.posts = response['content'];
+    this.getCityFragment(value).subscribe((response) => {
+      this.cities = response['content'];
     });
   }
 
@@ -76,8 +68,7 @@ export class AddressComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.address.cityId = this.city[0];
-
+    this.address.cityId = this.cities[0];
     this.httpService.getAbitur().subscribe(data => {
       this.addressObject = data['addressInfo'];
       localStorage.setItem('address', JSON.stringify(this.addressObject));
@@ -88,7 +79,7 @@ export class AddressComponent implements OnInit {
     } else {
       this.address.postCode = this.addressEdited['postCode'];
       this.address.cityId = this.addressEdited['city'];
-      this.posts.push(this.address.cityId);
+      this.cities.push(this.address.cityId);
       this.address.street = this.addressEdited['street'];
       this.address.home = this.addressEdited['home'];
       this.address.building = this.addressEdited['building'];
@@ -96,11 +87,11 @@ export class AddressComponent implements OnInit {
       this.address.phone = this.addressEdited['phone'];
     }
     this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
-    this.httpService.getCity().subscribe(data => this.city = data['content']);
     this.getCity().subscribe((response) => {
       const hi = response['content'];
+      this.cities.push(hi);
       });
-    console.log(this.posts);
+    console.log(this.cities);
   }
 
 }

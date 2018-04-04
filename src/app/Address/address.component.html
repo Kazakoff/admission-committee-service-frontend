@@ -3,7 +3,7 @@
     <label for="postcode">Индекс</label>
     <input type="text" class="form-control" id="postcode" placeholder="Индекс" [(ngModel)]="address.postCode" name="postcode" required><br>
     <label>Город</label>
-    <ngx-select [items]="posts" optionValueField="id" optionTextField="name" [(ngModel)]="address.cityId.id"
+    <ngx-select [items]="cities" optionValueField="id" optionTextField="name" [(ngModel)]="address.cityId.id"
                 name="cityId" (typed)="onInputChange($event)" [allowClear]="true">
     </ngx-select>
     <small id="emailHelp" class="form-text text-muted"> Enter your city in the field above and choose it!</small>
@@ -28,7 +28,6 @@
       </div>
     </div>
   </div>
-
   <div class="container-fluid">
     <label for="phone">Телефон</label>
     <input type="text" class="form-control" id="phone" placeholder="Телефон" [(ngModel)]="address.phone" name="phone" required pattern="\+[0-9]{12}">

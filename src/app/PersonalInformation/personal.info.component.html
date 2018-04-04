@@ -67,21 +67,11 @@
   <div class="container-fluid">
     <label for="identification">Идентификационный номер</label>
     <input type="text" class="form-control" placeholder="Идентификационный номер" id="identification" [(ngModel)]="personal.identificationNumber" name="identificationNumber" required><br>
-  </div> <br><br>
-
-  <div class="container-fluid">
-    <label>Пол</label>
-    <div class="radio">
-      <label><input type="radio" name="sexm">Мужской</label>
-    </div>
-    <div class="radio">
-      <label><input type="radio" name="sexw">Женский</label>
-    </div>
   </div>
 
   <div class="container-fluid">
-    <input type="button" [routerLink]="['/']" class="btn btn-danger" value="Назад" />
-    <input type="button" (click)="submit(personal)" [disabled]="myForm.invalid" [routerLink]="['/address']" class="btn btn-success" value="Далее" />
+    <input type="button" [routerLink]="['/']" class="btn btn-danger btn-lg" value="Назад" />
+    <input type="button" (click)="submit(personal)" [disabled]="myForm.invalid" [routerLink]="['/address']" class="btn btn-success btn-lg" value="Далее" />
   </div>
 
 </form>

@@ -7,12 +7,12 @@ export class Personal {
   documentTypeId: Doctype;
   documentSeriaId: Docseria;
   documentNumber: string;
-  documentDate: Date;
+  documentDate: string;
   documentOrgan: string;
   firstName: string;
   lastName: string;
   middleName: string;
-  birthDate: Date;
+  birthDate: string;
   birthPlace: string;
   nationalityId: Nationality;
   identificationNumber: string;

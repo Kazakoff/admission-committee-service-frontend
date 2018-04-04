@@ -5,6 +5,7 @@ import {Docseria} from './docseria';
 import {Doctype} from './doctype';
 import {Nationality} from './nationality';
 import {DatePipe} from '@angular/common';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'personal',
@@ -40,7 +41,7 @@ export class PersonalInfoComponent implements OnInit {
   }];
   personalEdited: Personal;
 
-  constructor(private httpService: HttpService, public datepipe: DatePipe) {
+  constructor(private httpService: HttpService, public datepipe: DatePipe, private router: Router) {
   }
 
   submit(personal: Personal) {
@@ -77,6 +78,17 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+    };
+
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd) {
+        this.router.navigated = false;
+        window.scrollTo(0, 0);
+      }
+    });
 
     this.personal.documentTypeId = this.doctype[0];
     this.personal.documentSeriaId = this.docseria[0];
