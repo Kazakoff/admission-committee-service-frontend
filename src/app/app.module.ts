@@ -16,6 +16,8 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxSelectModule } from 'ngx-select-ex';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
   {path: 'personal', component: PersonalInfoComponent},
@@ -44,7 +46,9 @@ const appRoutes: Routes = [
     HttpClientModule,
     InfiniteScrollModule,
     NgSelectModule,
-    NgxSelectModule
+    NgxSelectModule,
+    SimpleNotificationsModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
