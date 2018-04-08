@@ -31,18 +31,18 @@ export class HttpService {
 
     };
 
-    return this.http.put('http://localhost:8005/abiturient/address/' + this.userid, body, {
+    return this.http.put('http://86.57.182.101:8005/abiturient/address/' + this.userid, body, {
       headers: this.addHeaders(),
       withCredentials: true
     });
   }
 
   getCity() {
-    return this.http.get('http://localhost:8005/city/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get('http://86.57.182.101:8005/city/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
   }
 
   getAbitur() {
-    return this.http.get('http://localhost:8005/abiturient', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get('http://86.57.182.101:8005/abiturient', {headers: this.addHeaders(), withCredentials: true});
   }
 
 }

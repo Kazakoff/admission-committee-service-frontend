@@ -28,7 +28,7 @@ token: any;
   }
 
   submit() {
-    this.http.get('http://localhost:5000/api/token/generate', {headers: this.addHeaders(), withCredentials: true})
+    this.http.get('http://86.57.182.101:5000/api/token/generate', {headers: this.addHeaders(), withCredentials: true})
       .subscribe(
         (data) => {
           this.token = data['token'];

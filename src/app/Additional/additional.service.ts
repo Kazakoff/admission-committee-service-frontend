@@ -34,14 +34,14 @@ export class HttpService {
       note: additional.note
     };
 
-    return this.http.put('http://localhost:8005/abiturient/addinfo/' + this.userid, body, {
+    return this.http.put('http://86.57.182.101:8005/abiturient/addinfo/' + this.userid, body, {
       headers: this.addHeaders(),
       withCredentials: true
     });
   }
 
   getAbitur() {
-    return this.http.get('http://localhost:8005/abiturient', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get('http://86.57.182.101:8005/abiturient', {headers: this.addHeaders(), withCredentials: true});
   }
 
 }

@@ -35,7 +35,6 @@ export class RegistrationComponent implements OnInit {
       pauseOnHover: true,
       clickToClose: true
     });
-    console.log('hi');
   }
 
   submit(registration: Registration) {
@@ -46,7 +45,7 @@ export class RegistrationComponent implements OnInit {
         error => { this.recoverError = error; this.error = error;  }
       );
     setTimeout(() => { if (this.recoverError === undefined) {
-      this.successEvent(); } else { this.errorEvent(); this.recoverError = undefined; } }, 1000);
+      this.successEvent(); } else { this.errorEvent(); this.recoverError = undefined; } }, 2500);
   }
 
   ngOnInit() {

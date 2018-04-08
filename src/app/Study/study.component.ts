@@ -49,12 +49,12 @@ export class StudyComponent implements OnInit {
   }
 
   getCity() {
-    return this.httpClient.get('http://localhost:8005/edinst/contains?fragment=&size=40&page=' + this.page,
+    return this.httpClient.get('http://86.57.182.101:8005/edinst/contains?fragment=&size=40&page=' + this.page,
       {headers: this.addHeaders(), withCredentials: true});
   }
 
   getEducationInstituteFragment(value) {
-    return this.httpClient.get('http://localhost:8005/edinst/contains?fragment=' + value + '&size=40',
+    return this.httpClient.get('http://86.57.182.101:8005/edinst/contains?fragment=' + value + '&size=40',
       {headers: this.addHeaders(), withCredentials: true});
   }
 

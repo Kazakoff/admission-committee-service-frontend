@@ -29,26 +29,26 @@ export class HttpService {
       honours: education.honours,
     };
 
-    return this.http.put('http://localhost:8005/abiturient/education/' + this.userid, body, {
+    return this.http.put('http://86.57.182.101:8005/abiturient/education/' + this.userid, body, {
       headers: this.addHeaders(),
       withCredentials: true
     });
   }
 
   getAbitur() {
-    return this.http.get('http://localhost:8005/abiturient', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get('http://86.57.182.101:8005/abiturient', {headers: this.addHeaders(), withCredentials: true});
   }
 
   getEducationInstitution() {
-    return this.http.get('http://localhost:8005/edinst/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get('http://86.57.182.101:8005/edinst/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
   }
 
   getEdLevel() {
-    return this.http.get('http://localhost:8005/edlevel/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get('http://86.57.182.101:8005/edlevel/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
   }
 
   getLanguage() {
-    return this.http.get('http://localhost:8005/language/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get('http://86.57.182.101:8005/language/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
   }
 
 }

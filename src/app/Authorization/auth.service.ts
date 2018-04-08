@@ -16,7 +16,7 @@ auth: Auth = new Auth();
   }
 
   getAuthorize() {
-    return this.http.get('http://localhost:5000/api/token/generate', {headers: this.addHeaders()});
+    return this.http.get('http://86.57.182.101:5000/api/token/generate', {headers: this.addHeaders()});
   }
 
 }

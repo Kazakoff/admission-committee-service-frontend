@@ -22,14 +22,14 @@ export class HttpService {
       password: registration.password
     };
 
-    return this.http.post('http://localhost:5000/account', body, {
+    return this.http.post('http://86.57.182.101:5000/account', body, {
       headers: this.addHeaders(),
       withCredentials: true
     });
   }
 
   getRoles() {
-    return this.http.get('http://localhost:5000/role', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get('http://86.57.182.101:5000/role', {headers: this.addHeaders(), withCredentials: true});
   }
 
 }
