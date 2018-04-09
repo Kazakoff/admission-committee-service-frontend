@@ -5,6 +5,7 @@ import {Language} from './language';
 import {HttpService} from './study.service';
 import {EducationInstitution} from './educationInstitution';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'study',
@@ -28,7 +29,7 @@ export class StudyComponent implements OnInit {
   done = false;
   receivedEducation: Education;
   educationEdited: Education;
-
+  error: any;
   educationLevel: EducationLevel[] = [{
     id: 1, name: ''
   }];
@@ -38,7 +39,25 @@ export class StudyComponent implements OnInit {
   educationInstitutions: EducationInstitution[] = [{id: 1, name: ''}];
   page = 0;
 
-  constructor(private httpService: HttpService, private httpClient: HttpClient) {
+  constructor(private httpService: HttpService, private httpClient: HttpClient, private _service: NotificationsService) {
+  }
+
+  successEvent() {
+    this._service.success('Form submitted successfully!', 'Click to undo...', {
+      timeOut: 4000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true,
+    });
+  }
+
+  errorEvent() {
+    this._service.error('Unexpected error!', 'Click to undo...', {
+      timeOut: 4000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true,
+    });
   }
 
   addHeaders() {
@@ -70,8 +89,10 @@ export class StudyComponent implements OnInit {
         (data: Education) => {
           this.receivedEducation = data;
           this.done = true;
+          this.error = undefined;
+          this.successEvent();
         },
-        error => console.log(error)
+        error => { this.error = error; this.errorEvent(); }
       );
 
   }
@@ -83,22 +104,18 @@ export class StudyComponent implements OnInit {
 
     this.httpService.getAbitur().subscribe(data => {
       this.educationObject = data['educationInfo'];
-      localStorage.setItem('education', JSON.stringify(this.educationObject));
+      if (this.educationObject == null) {
+        console.log('Set inputs');
+      } else {
+        this.education.educationInstitutionId = this.educationObject['educationInstitution'];
+        this.educationInstitutions.push(this.education.educationInstitutionId);
+        this.education.endYear = this.educationObject['endYear'];
+        this.education.educationLevelId = this.educationObject['educationLevel'];
+        this.education.languageId = this.educationObject['language'];
+        this.education.goldMedalist = this.educationObject['goldMedalist'];
+        this.education.honours = this.educationObject['honours'];
+      }
     });
-
-    this.educationEdited = JSON.parse(localStorage.getItem('education'));
-    if (this.educationEdited == null) {
-      console.log('Set inputs');
-    } else {
-      this.education.educationInstitutionId = this.educationEdited['educationInstitution'];
-      this.educationInstitutions.push(this.education.educationInstitutionId);
-      this.education.endYear = this.educationEdited['endYear'];
-      this.education.educationLevelId = this.educationEdited['educationLevel'];
-      this.education.languageId = this.educationEdited['language'];
-      this.education.goldMedalist = this.educationEdited['goldMedalist'];
-      this.education.honours = this.educationEdited['honours'];
-    }
-
     this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
     this.httpService.getEdLevel().subscribe(data => this.educationLevel = data['content']);
     this.httpService.getLanguage().subscribe(data => this.language = data['content']);

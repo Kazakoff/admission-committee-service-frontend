@@ -10,7 +10,7 @@ import {StudyComponent} from './Study/study.component';
 import {AuthComponent} from './Authorization/auth.component';
 import {RegistrationComponent} from './Registration/registration.component';
 import {AdditionalComponent} from './Additional/additional.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
@@ -48,7 +48,8 @@ const appRoutes: Routes = [
     NgSelectModule,
     NgxSelectModule,
     SimpleNotificationsModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

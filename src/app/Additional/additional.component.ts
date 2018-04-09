@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {HttpService} from './additional.service';
 import {Additional} from './additional';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'additional',
@@ -25,8 +26,9 @@ export class AdditionalComponent implements OnInit {
   additionalObject: Additional[] = [];
   receivedAdditional: Additional;
   done = false;
+  error: any;
 
-  constructor(private httpService: HttpService) {
+  constructor(private httpService: HttpService, private _service: NotificationsService) {
   }
 
   submit(additional: Additional) {
@@ -35,39 +37,52 @@ export class AdditionalComponent implements OnInit {
         (data: Additional) => {
           this.receivedAdditional = data;
           this.done = true;
+          this.error = undefined;
+          this.successEvent();
         },
-        error => console.log(error)
+        error => { this.error = error; this.errorEvent(); }
       );
   }
 
-  /* TODO Запрашивать данные каждый раз при посте, либо пушить в бд и одновременно при удачном пуше пушить в какой-то массив*/
+  successEvent() {
+    this._service.success('Form submitted successfully!', 'Click to undo...', {
+      timeOut: 4000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  errorEvent() {
+    this._service.error('Unexpected error!', 'Click to undo...', {
+      timeOut: 4000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true,
+    });
+  }
 
   ngOnInit() {
 
     this.httpService.getAbitur().subscribe(data => {
       this.additionalObject = data['additionalInfo'];
-      localStorage.setItem('additional', JSON.stringify(this.additionalObject));
+      if (this.additionalObject == null) {
+        console.log('set inputs');
+      } else {
+        this.additional.fatherFIO = this.additionalObject['fatherFIO'];
+        this.additional.fatherWork = this.additionalObject['fatherWork'];
+        this.additional.fatherPhone = this.additionalObject['fatherPhone'];
+        this.additional.motherFIO = this.additionalObject['motherFIO'];
+        this.additional.motherWork = this.additionalObject['motherWork'];
+        this.additional.motherPhone = this.additionalObject['motherPhone'];
+        this.additional.childCount = this.additionalObject['childCount'];
+        this.additional.workPlace = this.additionalObject['workPlace'];
+        this.additional.experience = this.additionalObject['experience'];
+        this.additional.reAdmission = this.additionalObject['reAdmission'];
+        this.additional.note = this.additionalObject['note'];
+      }
     });
-
     this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
-
-    this.additionalEdited = JSON.parse(localStorage.getItem('additional'));
-    if (this.additionalEdited == null) {
-      console.log('set inputs');
-    } else {
-      this.additional.fatherFIO = this.additionalEdited['fatherFIO'];
-      this.additional.fatherWork = this.additionalEdited['fatherWork'];
-      this.additional.fatherPhone = this.additionalEdited['fatherPhone'];
-      this.additional.motherFIO = this.additionalEdited['motherFIO'];
-      this.additional.motherWork = this.additionalEdited['motherWork'];
-      this.additional.motherPhone = this.additionalEdited['motherPhone'];
-      this.additional.childCount = this.additionalEdited['childCount'];
-      this.additional.workPlace = this.additionalEdited['workPlace'];
-      this.additional.experience = this.additionalEdited['experience'];
-      this.additional.reAdmission = this.additionalEdited['reAdmission'];
-      this.additional.note = this.additionalEdited['note'];
-    }
-
   }
 
 }

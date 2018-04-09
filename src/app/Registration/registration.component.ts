@@ -40,12 +40,10 @@ export class RegistrationComponent implements OnInit {
   submit(registration: Registration) {
     this.httpService.postData(registration)
       .subscribe(
-        (data: Registration) => { this.error = undefined;
+        (data: Registration) => { this.error = undefined; this.successEvent();
         },
-        error => { this.recoverError = error; this.error = error;  }
+        error => { this.error = error; this.errorEvent(); }
       );
-    setTimeout(() => { if (this.recoverError === undefined) {
-      this.successEvent(); } else { this.errorEvent(); this.recoverError = undefined; } }, 2500);
   }
 
   ngOnInit() {

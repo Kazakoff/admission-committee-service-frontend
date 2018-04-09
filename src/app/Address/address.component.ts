@@ -3,6 +3,9 @@ import {Address} from './address';
 import {HttpService} from './address.service';
 import {City} from './city';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import 'rxjs/add/operator/debounceTime';
+import {debounceTime} from 'rxjs/operator/debounceTime';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'address',
@@ -24,12 +27,12 @@ export class AddressComponent implements OnInit {
   done = false;
   address: Address = new Address();
   addressObject: Address[] = [];
-  addressEdited: Address;
   receivedAddress: Address;
   cities: City[] = [{id: 1, name: ''}];
   page = 0;
+  error: any;
 
-  constructor(private httpService: HttpService, private httpClient: HttpClient) {
+  constructor(private httpService: HttpService, private httpClient: HttpClient, private _service: NotificationsService) {
 
   }
 
@@ -38,6 +41,24 @@ export class AddressComponent implements OnInit {
       .set('Authorization', 'Bearer ' + this.token)
       .set('Content-Type', 'application/json');
     return myHeaders;
+  }
+
+  successEvent() {
+    this._service.success('Form submitted successfully!', 'Click to undo...', {
+      timeOut: 4000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  errorEvent() {
+    this._service.error('Unexpected error!', 'Click to undo...', {
+      timeOut: 4000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true,
+    });
   }
 
   getCity() {
@@ -62,8 +83,10 @@ export class AddressComponent implements OnInit {
         (data: Address) => {
           this.receivedAddress = data;
           this.done = true;
+          this.error = undefined;
+          this.successEvent();
         },
-        error => console.log(error)
+        error => { this.error = error; this.errorEvent(); }
       );
   }
 
@@ -71,21 +94,19 @@ export class AddressComponent implements OnInit {
     this.address.cityId = this.cities[0];
     this.httpService.getAbitur().subscribe(data => {
       this.addressObject = data['addressInfo'];
-      localStorage.setItem('address', JSON.stringify(this.addressObject));
+      if (this.addressObject == null) {
+        console.log('set inputs');
+      } else {
+        this.address.postCode = this.addressObject['postCode'];
+        this.address.cityId = this.addressObject['city'];
+        this.cities.push(this.address.cityId);
+        this.address.street = this.addressObject['street'];
+        this.address.home = this.addressObject['home'];
+        this.address.building = this.addressObject['building'];
+        this.address.appartment = this.addressObject['appartment'];
+        this.address.phone = this.addressObject['phone'];
+      }
     });
-    this.addressEdited = JSON.parse(localStorage.getItem('address'));
-    if (this.addressEdited == null) {
-      console.log('set inputs');
-    } else {
-      this.address.postCode = this.addressEdited['postCode'];
-      this.address.cityId = this.addressEdited['city'];
-      this.cities.push(this.address.cityId);
-      this.address.street = this.addressEdited['street'];
-      this.address.home = this.addressEdited['home'];
-      this.address.building = this.addressEdited['building'];
-      this.address.appartment = this.addressEdited['appartment'];
-      this.address.phone = this.addressEdited['phone'];
-    }
     this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
     this.getCity().subscribe((response) => {
       const hi = response['content'];

@@ -1,11 +1,11 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Personal} from './personal';
 import {HttpService} from './personal.service';
 import {Docseria} from './docseria';
 import {Doctype} from './doctype';
 import {Nationality} from './nationality';
 import {DatePipe} from '@angular/common';
-import {NavigationEnd, Router} from '@angular/router';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'personal',
@@ -41,7 +41,25 @@ export class PersonalInfoComponent implements OnInit {
   }];
   personalEdited: Personal;
 
-  constructor(private httpService: HttpService, public datepipe: DatePipe, private router: Router) {
+  constructor(private httpService: HttpService, public datepipe: DatePipe, private _service: NotificationsService) {
+  }
+
+  successEvent() {
+    this._service.success('Form submitted successfully!', 'Click to undo...', {
+      timeOut: 4000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  errorEvent() {
+    this._service.error('Unexpected error!', 'Click to undo...', {
+      timeOut: 4000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true,
+    });
   }
 
   submit(personal: Personal) {
@@ -50,45 +68,14 @@ export class PersonalInfoComponent implements OnInit {
         (data: Personal) => {
           this.receivedPersonal = data;
           this.done = true;
+          this.error = undefined;
+          this.successEvent();
         },
-        error => console.log(error)
+        error => { this.error = error; this.errorEvent(); }
       );
   }
 
-  setPersonal() {
-    this.personalEdited = JSON.parse(localStorage.getItem('personal'));
-    if (this.personalEdited == null) {
-      console.log('Set inputs');
-    } else {
-      this.personal.documentTypeId = this.personalEdited['documentType'];
-      this.personal.documentSeriaId = this.personalEdited['documentSeria'];
-      this.personal.documentNumber = this.personalEdited['documentNumber'];
-      this.personal.documentDate = this.datepipe.transform(this.personalEdited['documentDate'], 'yyyy-MM-dd');
-      this.personal.documentOrgan = this.personalEdited['documentOrgan'];
-      this.personal.firstName = this.personalEdited['firstName'];
-      this.personal.lastName = this.personalEdited['lastName'];
-      this.personal.middleName = this.personalEdited['middleName'];
-      this.personal.birthDate = this.datepipe.transform(this.personalEdited['birthDate'], 'yyyy-MM-dd');
-      this.personal.birthPlace = this.personalEdited['birthPlace'];
-      this.personal.nationalityId = this.personalEdited['nationality'];
-      this.personal.identificationNumber = this.personalEdited['identificationNumber'];
-      this.personal.sex = this.personalEdited['sex'];
-    }
-    localStorage.removeItem('personal');
-  }
-
   ngOnInit() {
-
-    this.router.routeReuseStrategy.shouldReuseRoute = function() {
-      return false;
-    };
-
-    this.router.events.subscribe((evt) => {
-      if (evt instanceof NavigationEnd) {
-        this.router.navigated = false;
-        window.scrollTo(0, 0);
-      }
-    });
 
     this.personal.documentTypeId = this.doctype[0];
     this.personal.documentSeriaId = this.docseria[0];
@@ -100,12 +87,25 @@ export class PersonalInfoComponent implements OnInit {
 
     this.httpService.getAbitur().subscribe(data => {
       this.personalObject = data['profileInfo'];
-      localStorage.setItem('personal', JSON.stringify(this.personalObject));
+      if (this.personalObject == null) {
+        console.log('Set inputs');
+      } else {
+        this.personal.documentTypeId = this.personalObject['documentType'];
+        this.personal.documentSeriaId = this.personalObject['documentSeria'];
+        this.personal.documentNumber = this.personalObject['documentNumber'];
+        this.personal.documentDate = this.datepipe.transform(this.personalObject['documentDate'], 'yyyy-MM-dd');
+        this.personal.documentOrgan = this.personalObject['documentOrgan'];
+        this.personal.firstName = this.personalObject['firstName'];
+        this.personal.lastName = this.personalObject['lastName'];
+        this.personal.middleName = this.personalObject['middleName'];
+        this.personal.birthDate = this.datepipe.transform(this.personalObject['birthDate'], 'yyyy-MM-dd');
+        this.personal.birthPlace = this.personalObject['birthPlace'];
+        this.personal.nationalityId = this.personalObject['nationality'];
+        this.personal.identificationNumber = this.personalObject['identificationNumber'];
+        this.personal.sex = this.personalObject['sex'];
+      }
       this.httpService.userid = data['id'];
     });
-
-    this.setPersonal();
-
 
   }
 }
