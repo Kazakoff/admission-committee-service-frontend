@@ -18,6 +18,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxSelectModule } from 'ngx-select-ex';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {CertificatesComponent} from './Certificates/certificates.component';
+import {ModalComponent} from './Modal/modal.component';
+import {MyFilterPipe} from './Certificates/MyFilterPipe';
 
 const appRoutes: Routes = [
   {path: 'personal', component: PersonalInfoComponent},
@@ -26,6 +29,7 @@ const appRoutes: Routes = [
   {path: 'auth', component: AuthComponent},
   {path: 'reg', component: RegistrationComponent},
   {path: 'additional', component: AdditionalComponent},
+  {path: 'cer', component: CertificatesComponent},
   {path: '**', redirectTo: '/'}
 ];
 
@@ -37,7 +41,10 @@ const appRoutes: Routes = [
     StudyComponent,
     AuthComponent,
     AdditionalComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    CertificatesComponent,
+    ModalComponent,
+    MyFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -52,7 +59,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule
   ],
   providers: [DatePipe],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }

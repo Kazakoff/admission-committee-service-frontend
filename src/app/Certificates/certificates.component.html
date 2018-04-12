@@ -1,0 +1,137 @@
+<table class="table table-striped">
+  <thead class="thead-dark">
+  <tr>
+    <th>Тип документа</th>
+    <th>Предмет</th>
+    <th>Серия</th>
+    <th>Номер</th>
+    <th>Учреждение образования</th>
+    <th>Оценки</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let certificates of competitionInfo.documents">
+    <td *ngFor="let data of edDocTypes | myfilter:certificates.educationDocumentTypeId">{{data.name}}</td>
+    <td *ngFor="let data of subjects | myfilter:certificates.subjectId">{{data.name}}</td>
+    <td>{{certificates.seria}}</td>
+    <td>{{certificates.number}}</td>
+    <td>{{certificates.nameUO}}</td>
+    <td>i've</td>
+  </tr>
+  </tbody>
+</table>
+<div class="row" style="margin-bottom: 2%; margin-left: 2%">
+  <button class="btn btn-primary" (click)="AddModal.show()">Добавить</button>
+</div>
+<br><br>
+<table class="table table-striped">
+  <thead class="thead-dark">
+  <tr>
+    <th>Название</th>
+    <th>Код</th>
+    <th>Без экзаменов</th>
+    <th>Без конкурса</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>hello</td>
+    <td>it's</td>
+    <td>me</td>
+    <td>i've</td>
+  </tr>
+  </tbody>
+</table>
+<div class="row" style="margin-bottom: 2%; margin-left: 2%">
+  <button class="btn btn-primary" (click)="PrivillegeModal.show()">Добавить</button>
+</div>
+
+<app-modal #AddModal>
+  <div class="app-modal-header">
+    <h3>Новый документ</h3>
+  </div>
+  <div class="app-modal-body">
+    <form #addForm="ngForm" name="AddForm">
+      <label>Тип документа</label>
+      <select class="form-control" [(ngModel)]="certificate.educationDocumentTypeId" name="educationDocumentTypeId" #educationDocumentTypeId>
+        <option *ngFor="let data of edDocTypes" [ngValue]="data.id">{{data.name}}</option>
+      </select>
+      <label>Предмет</label>
+      <select class="form-control" [(ngModel)]="certificate.subjectId" name="subjectId" #subjectId>
+        <option *ngFor="let data of subjects" [ngValue]="data.id">{{data.name}}</option>
+      </select>
+      <label>Серия документа</label>
+      <input [(ngModel)]="certificate.seria" name="seria" class="form-control" #seria/>
+      <label>Номер документа</label>
+      <input [(ngModel)]="certificate.number" name="number" class="form-control" #number/>
+      <label>Учреждение образования</label>
+      <input [(ngModel)]="certificate.nameUO" name="nameUO" class="form-control" #nameUO/><br>
+      <label>Оценки</label>
+      <table class="table table-striped table-sm" style="text-align: center;">
+        <thead class="thead-dark">
+        <tr>
+          <th>1</th>
+          <th>2</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><input/></td>
+          <td><input/></td>
+        </tr>
+        <tr class="thead-dark">
+          <th>3</th>
+          <th>4</th>
+        </tr>
+        <tr>
+          <td><input/></td>
+          <td><input/></td>
+        </tr>
+        <tr class="thead-dark">
+          <th>5</th>
+          <th>6</th>
+        </tr>
+        <tr>
+          <td><input/></td>
+          <td><input/></td>
+        </tr>
+        <tr class="thead-dark">
+          <th>7</th>
+          <th>8</th>
+        </tr>
+        <tr>
+          <td><input/></td>
+          <td><input/></td>
+        </tr>
+        <tr class="thead-dark">
+          <th>9</th>
+          <th>10</th>
+        </tr>
+        <tr>
+          <td><input/></td>
+          <td><input/></td>
+        </tr>
+        </tbody>
+      </table>
+    </form>
+    <button class="btn btn-success" (click)="push()">Push</button>
+    <button class="btn btn-danger special-button" style="margin-top: 2%" (click)="AddModal.hide()">Cancel</button>
+  </div>
+</app-modal>
+
+<app-modal #PrivillegeModal>
+  <div class="app-modal-header">
+    <h3>Новый документ</h3>
+  </div>
+  <div class="app-modal-body">
+    <form>
+      <label>Льгота</label>
+      <select class="form-control">
+        <option *ngFor="let data of privilleges" [ngValue]="data.id">{{data.name}}</option>
+      </select>
+    </form>
+    <button class="btn btn-danger special-button" style="margin-top: 2%" (click)="PrivillegeModal.hide()">Cancel</button>
+  </div>
+</app-modal>
+
+<button type="button" class="btn btn-primary btn-lg">Отправить</button>
