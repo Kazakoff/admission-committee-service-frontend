@@ -1,0 +1,76 @@
+
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Modal</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="_bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form #addForm="ngForm" name="AddForm">
+    <label>Тип документа</label>
+    <select class="form-control" [(ngModel)]="certificate.educationDocumentTypeId" name="educationDocumentTypeId" #educationDocumentTypeId>
+      <option *ngFor="let data of edDocTypes" [ngValue]="data.id">{{data.name}}</option>
+    </select>
+    <label>Предмет</label>
+    <select class="form-control" [(ngModel)]="certificate.subjectId" name="subjectId" #subjectId>
+      <option *ngFor="let data of subjects" [ngValue]="data.id">{{data.name}}</option>
+    </select>
+    <label>Серия документа</label>
+    <input [(ngModel)]="certificate.seria" name="seria" class="form-control" #seria/>
+    <label>Номер документа</label>
+    <input [(ngModel)]="certificate.number" name="number" class="form-control" #number/>
+    <label>Учреждение образования</label>
+    <input [(ngModel)]="certificate.nameUO" name="nameUO" class="form-control" #nameUO/><br>
+    <label>Оценки</label>
+    <table class="table table-striped table-sm" style="text-align: center;">
+      <thead class="thead-dark">
+      <tr>
+        <th>1</th>
+        <th>2</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><input/></td>
+        <td><input/></td>
+      </tr>
+      <tr class="thead-dark">
+        <th>3</th>
+        <th>4</th>
+      </tr>
+      <tr>
+        <td><input/></td>
+        <td><input/></td>
+      </tr>
+      <tr class="thead-dark">
+        <th>5</th>
+        <th>6</th>
+      </tr>
+      <tr>
+        <td><input/></td>
+        <td><input/></td>
+      </tr>
+      <tr class="thead-dark">
+        <th>7</th>
+        <th>8</th>
+      </tr>
+      <tr>
+        <td><input/></td>
+        <td><input/></td>
+      </tr>
+      <tr class="thead-dark">
+        <th>9</th>
+        <th>10</th>
+      </tr>
+      <tr>
+        <td><input/></td>
+        <td><input/></td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+  <button class="btn btn-success" (click)="push()">Push</button>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="_bsModalRef.hide()">Close</button>
+</div>

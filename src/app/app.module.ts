@@ -18,9 +18,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxSelectModule } from 'ngx-select-ex';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {CertificatesComponent} from './Certificates/certificates.component';
+import {CertificatesComponent, ModalContentComponent} from './Certificates/certificates.component';
 import {ModalComponent} from './Modal/modal.component';
 import {MyFilterPipe} from './Certificates/MyFilterPipe';
+import { ModalModule } from 'ngx-bootstrap';
 
 const appRoutes: Routes = [
   {path: 'personal', component: PersonalInfoComponent},
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
     RegistrationComponent,
     CertificatesComponent,
     ModalComponent,
-    MyFilterPipe
+    MyFilterPipe,
+    ModalContentComponent
   ],
   imports: [
     BrowserModule,
@@ -56,10 +58,12 @@ const appRoutes: Routes = [
     NgxSelectModule,
     SimpleNotificationsModule.forRoot(),
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule.forRoot()
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
+  entryComponents: [ModalContentComponent]
 })
 export class AppModule {
 }

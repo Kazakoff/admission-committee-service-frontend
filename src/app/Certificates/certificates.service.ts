@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {CompetitionInfo} from './competitionInfo';
 
 @Injectable()
 export class HttpService {

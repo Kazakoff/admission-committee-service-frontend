@@ -24,6 +24,7 @@
     "@ng-select/ng-select": "^0.34.3",
     "angular2-notifications": "^0.9.8",
     "core-js": "^2.4.1",
+    "ngx-bootstrap": "^2.0.3",
     "ngx-infinite-scroll": "^0.8.3",
     "ngx-select-ex": "^3.5.2",
     "pretty-checkbox": "^3.0.3",
