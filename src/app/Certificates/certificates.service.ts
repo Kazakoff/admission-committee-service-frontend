@@ -18,6 +18,24 @@ export class HttpService {
     return myHeaders;
   }
 
+  postData(competitionInfo: CompetitionInfo) {
+
+    const body = {
+      documents: competitionInfo.documents,
+      privilleges: competitionInfo.privilleges,
+    };
+
+    return this.http.put('http://86.57.182.101:8005/abiturient/competition/' + this.userid, body, {
+      headers: this.addHeaders(),
+      withCredentials: true
+    });
+  }
+
+  getAbitur() {
+    return this.http.get('http://86.57.182.101:8005/abiturient', {headers: this.addHeaders(), withCredentials: true});
+
+  }
+
   getEdDocType() {
     return this.http.get('http://86.57.182.101:8005/eddoctype/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
   }

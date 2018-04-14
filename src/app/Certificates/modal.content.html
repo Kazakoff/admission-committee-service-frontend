@@ -1,4 +1,3 @@
-
 <div class="modal-header">
   <h4 class="modal-title pull-left">Modal</h4>
   <button type="button" class="close pull-right" aria-label="Close" (click)="_bsModalRef.hide()">
@@ -22,49 +21,49 @@
     <label>Учреждение образования</label>
     <input [(ngModel)]="certificate.nameUO" name="nameUO" class="form-control" #nameUO/><br>
     <label>Оценки</label>
-    <table class="table table-striped table-sm" style="text-align: center;">
+    <table class="table table-striped">
       <thead class="thead-dark">
       <tr>
-        <th>1</th>
-        <th>2</th>
+        <th>Количество единиц</th>
+        <th>Количество двоек</th>
       </tr>
       </thead>
       <tbody>
       <tr>
-        <td><input/></td>
-        <td><input/></td>
+        <td><input class="form-control" #one/></td>
+        <td><input class="form-control" #two/></td>
       </tr>
       <tr class="thead-dark">
-        <th>3</th>
-        <th>4</th>
+        <th>Количество троек</th>
+        <th>Количество четвёрок</th>
       </tr>
       <tr>
-        <td><input/></td>
-        <td><input/></td>
+        <td><input class="form-control" #three/></td>
+        <td><input class="form-control" #four/></td>
       </tr>
       <tr class="thead-dark">
-        <th>5</th>
-        <th>6</th>
+        <th>Количество пятёрок</th>
+        <th>Количество шестёрок</th>
       </tr>
       <tr>
-        <td><input/></td>
-        <td><input/></td>
+        <td><input class="form-control" #five/></td>
+        <td><input class="form-control" #six/></td>
       </tr>
       <tr class="thead-dark">
-        <th>7</th>
-        <th>8</th>
+        <th>Количество семёрок</th>
+        <th>Количество восьмёрок</th>
       </tr>
       <tr>
-        <td><input/></td>
-        <td><input/></td>
+        <td><input class="form-control" #seven/></td>
+        <td><input class="form-control" #eight/></td>
       </tr>
       <tr class="thead-dark">
-        <th>9</th>
-        <th>10</th>
+        <th>Количество девяток</th>
+        <th>Количество десяток</th>
       </tr>
       <tr>
-        <td><input/></td>
-        <td><input/></td>
+        <td><input class="form-control" #nine/></td>
+        <td><input class="form-control" #ten/></td>
       </tr>
       </tbody>
     </table>

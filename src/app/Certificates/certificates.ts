@@ -1,5 +1,4 @@
 import {Eddoctype} from './eddoctype';
-import {Privillege} from './privillege';
 import {Subject} from './subject';
 
 export class Certificates {
