@@ -1,6 +1,7 @@
-<table class="table table-striped ">
+<table class="table table-striped" [hidden]="!token">
   <thead class="thead-dark">
   <tr>
+    <th></th>
     <th>Тип документа</th>
     <th>Предмет</th>
     <th>Серия</th>
@@ -11,6 +12,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let certificates of competitionInfo.documents">
+    <td><button class="btn btn-danger" (click)="removeDocument($event)">Удалить</button></td>
     <td *ngFor="let data of edDocTypes | myfilter:certificates.educationDocumentTypeId">{{data.name}}</td>
     <td *ngFor="let data of subjects | myfilter:certificates.subjectId">{{data.name}}</td>
     <td>{{certificates.seria}}</td>
@@ -21,13 +23,14 @@
   </tbody>
 </table>
 
-<div class="container-fluid">
+<div class="container-fluid" [hidden]="!token">
   <button type="button" class="btn btn-success" (click)="openModalWithComponent()">Добавить документ</button>
 </div>
-<br><br>
-<table class="table table-striped">
+<br [hidden]="!token"><br [hidden]="!token">
+<table class="table table-striped" [hidden]="!token">
   <thead class="thead-dark">
   <tr>
+    <th></th>
     <th>Название</th>
     <th>Код</th>
     <th>Без экзаменов</th>
@@ -36,6 +39,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let allPrivilleges of competitionInfo.privilleges">
+    <td><button class="btn btn-danger" (click)="removePrivillege($event)">Удалить</button></td>
     <td *ngFor="let data of privilleges | myfilter:allPrivilleges">{{data.name}}</td>
     <td *ngFor="let data of privilleges | myfilter:allPrivilleges">{{data.cipher}}</td>
     <td *ngFor="let data of privilleges | myfilter:allPrivilleges">{{data.withoutExam}}</td>
@@ -43,9 +47,13 @@
   </tr>
   </tbody>
 </table>
-<div class="container-fluid">
+<div class="container-fluid" [hidden]="!token">
   <button type="button" class="btn btn-success" (click)="openPrivillegeModal()">Добавить документ</button>
-</div><br>
-<div class="container-fluid">
+</div><br [hidden]="!token">
+<div class="container-fluid" [hidden]="!token">
   <input type="button" (click)="submit(competitionInfo)" [routerLink]="['/']" class="btn btn-success btn-lg" value="Далее" />
+</div>
+<div class="alert alert-danger" role="alert" [hidden]="token">
+  <strong>Forbidden! Insufficient access rights! </strong>Please <a href="/auth" class="alert-link">authorize</a> or
+  <a href="/reg" class="alert-link">register</a> first! Then try come in again.
 </div>

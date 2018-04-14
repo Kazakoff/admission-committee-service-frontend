@@ -29,6 +29,7 @@ export class CertificatesComponent implements OnInit {
   competitionDoc: Certificates[];
   competitionId: number[];
   closeBtnName: string;
+
   constructor(protected httpService: HttpService, private _modalService: BsModalService) {}
 
   openModalWithComponent() {
@@ -63,6 +64,38 @@ export class CertificatesComponent implements OnInit {
       );
   }
 
+  convertDocumentObject(inputDocumentObject) {
+    const certificate = new Certificates();
+    certificate.educationDocumentTypeId = inputDocumentObject.educationDocumentType.id;
+    if (inputDocumentObject.subject === null) {
+      certificate.subjectId = null;
+    } else {
+    certificate.subjectId = inputDocumentObject.subject.id; }
+    certificate.seria = inputDocumentObject.seria;
+    certificate.nameUO = inputDocumentObject.nameUO;
+    certificate.number = inputDocumentObject.number;
+    certificate.marks = inputDocumentObject.marks;
+    return certificate;
+  }
+
+  removeDocument(event) {
+    this.competitionInfo.documents.forEach((item, i, array) => {
+      if (i === event.target.parentElement.parentElement.rowIndex - 1) {
+      array.splice(i, 1);
+      }
+    });
+    console.log(this.competitionInfo);
+  }
+
+  removePrivillege(event) {
+    this.competitionInfo.privilleges.forEach((item, i, array) => {
+      if (i === event.target.parentElement.parentElement.rowIndex - 1) {
+        array.splice(i, 1);
+      }
+    });
+    console.log(this.competitionInfo);
+  }
+
   ngOnInit() {
     this.httpService.getAbitur().subscribe(data => {
       this.httpService.userid = data['id'];
@@ -73,8 +106,8 @@ export class CertificatesComponent implements OnInit {
       } else {
         this.competitionObject['privilleges'].forEach((item, i) => {
           this.competitionInfo.privilleges.push(item.id); });
-        this.competitionDoc.forEach((items, j) => {
-          this.competitionInfo.documents.push(items);
+        this.competitionObject['documents'].forEach((items, j) => {
+          this.competitionInfo.documents.push(this.convertDocumentObject(items));
         });
       }
       console.log(this.competitionInfo);
@@ -129,11 +162,18 @@ export class ModalContentComponent implements OnInit {
   @ViewChild('ten')
   tenMark: ElementRef;
 
+  @ViewChild('subjectId')
+  subjectId: ElementRef;
+
+  @ViewChild('educationDocumentTypeId')
+  educationDocumentTypeId: ElementRef;
+
   constructor(protected httpService: HttpService, public _bsModalRef: BsModalRef) { }
 
   push() {
     this.certificate.marks = [];
     this.certificate.marks.push(Number(this.oneMark.nativeElement.value));
+    if (this.educationDocumentTypeId.nativeElement.selectedIndex !== 4) {
     this.certificate.marks.push(Number(this.twoMark.nativeElement.value));
     this.certificate.marks.push(Number(this.threeMark.nativeElement.value));
     this.certificate.marks.push(Number(this.fourMark.nativeElement.value));
@@ -142,7 +182,10 @@ export class ModalContentComponent implements OnInit {
     this.certificate.marks.push(Number(this.sevenMark.nativeElement.value));
     this.certificate.marks.push(Number(this.eightMark.nativeElement.value));
     this.certificate.marks.push(Number(this.nineMark.nativeElement.value));
-    this.certificate.marks.push(Number(this.tenMark.nativeElement.value));
+    this.certificate.marks.push(Number(this.tenMark.nativeElement.value)); }
+    if (this.subjectId.nativeElement.selectedIndex === -1) {
+      this.certificate.subjectId = null;
+    }
     this.saved.emit(this.certificate);
   }
 
