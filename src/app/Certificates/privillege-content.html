@@ -5,12 +5,12 @@
   </button>
 </div>
 <div class="modal-body">
-<form #addForm="ngForm" name="PrivillegeAddForm">
-  <label>Тип документа</label>
-  <select class="form-control" [(ngModel)]="privillege.id" name="privillege">
-    <option *ngFor="let data of privilleges" [ngValue]="data.id">{{data.name}}</option>
-  </select>
-</form>
+  <form #addForm="ngForm" name="PrivillegeAddForm">
+    <label>Тип документа</label>
+    <select class="form-control" [(ngModel)]="privillege.id" name="privillege">
+      <option *ngFor="let data of privilleges" [ngValue]="data.id">{{data.name}}</option>
+    </select>
+  </form>
 </div>
 <div class="modal-footer">
   <button class="btn btn-success" (click)="push()">Push</button>

@@ -9,9 +9,11 @@ export class MyFilterPipe implements PipeTransform {
     if (!items) {
       return items;
     }
+
     if (!filter) {
       return items.filter(item => item.id === -1);
     }
+
     return items.filter(item => item.id === filter);
   }
 }

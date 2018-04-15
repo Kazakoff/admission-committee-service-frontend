@@ -26,48 +26,48 @@
     <label [hidden]="educationDocumentTypeId.selectedIndex !== 4">Оценка</label>
     <table class="table table-striped">
       <thead class="thead-dark">
-      <tr>
-        <th [hidden]="educationDocumentTypeId.selectedIndex === 4">Количество единиц</th>
-        <th [hidden]="educationDocumentTypeId.selectedIndex === 4">Количество двоек</th>
-      </tr>
+        <tr>
+          <th [hidden]="educationDocumentTypeId.selectedIndex === 4">Количество единиц</th>
+          <th [hidden]="educationDocumentTypeId.selectedIndex === 4">Количество двоек</th>
+        </tr>
       </thead>
       <tbody>
-      <tr>
-        <td><input class="form-control" #one/></td>
-        <td><input class="form-control" #two [hidden]="educationDocumentTypeId.selectedIndex === 4"/></td>
-      </tr>
-      <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 4">
-        <th>Количество троек</th>
-        <th>Количество четвёрок</th>
-      </tr>
-      <tr [hidden]="educationDocumentTypeId.selectedIndex === 4">
-        <td><input class="form-control" #three/></td>
-        <td><input class="form-control" #four/></td>
-      </tr>
-      <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 4">
-        <th>Количество пятёрок</th>
-        <th>Количество шестёрок</th>
-      </tr>
-      <tr [hidden]="educationDocumentTypeId.selectedIndex === 4">
-        <td><input class="form-control" #five/></td>
-        <td><input class="form-control" #six/></td>
-      </tr>
-      <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 4">
-        <th>Количество семёрок</th>
-        <th>Количество восьмёрок</th>
-      </tr>
-      <tr [hidden]="educationDocumentTypeId.selectedIndex === 4">
-        <td><input class="form-control" #seven/></td>
-        <td><input class="form-control" #eight/></td>
-      </tr>
-      <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 4">
-        <th>Количество девяток</th>
-        <th>Количество десяток</th>
-      </tr>
-      <tr [hidden]="educationDocumentTypeId.selectedIndex === 4">
-        <td><input class="form-control" #nine/></td>
-        <td><input class="form-control" #ten/></td>
-      </tr>
+        <tr>
+          <td><input class="form-control" #one/></td>
+          <td><input class="form-control" #two [hidden]="educationDocumentTypeId.selectedIndex === 4"/></td>
+        </tr>
+        <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 4">
+          <th>Количество троек</th>
+          <th>Количество четвёрок</th>
+        </tr>
+        <tr [hidden]="educationDocumentTypeId.selectedIndex === 4">
+          <td><input class="form-control" #three/></td>
+          <td><input class="form-control" #four/></td>
+        </tr>
+        <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 4">
+          <th>Количество пятёрок</th>
+          <th>Количество шестёрок</th>
+        </tr>
+        <tr [hidden]="educationDocumentTypeId.selectedIndex === 4">
+          <td><input class="form-control" #five/></td>
+          <td><input class="form-control" #six/></td>
+        </tr>
+        <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 4">
+          <th>Количество семёрок</th>
+          <th>Количество восьмёрок</th>
+        </tr>
+        <tr [hidden]="educationDocumentTypeId.selectedIndex === 4">
+          <td><input class="form-control" #seven/></td>
+          <td><input class="form-control" #eight/></td>
+        </tr>
+        <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 4">
+          <th>Количество девяток</th>
+          <th>Количество десяток</th>
+        </tr>
+        <tr [hidden]="educationDocumentTypeId.selectedIndex === 4">
+          <td><input class="form-control" #nine/></td>
+          <td><input class="form-control" #ten/></td>
+        </tr>
       </tbody>
     </table>
   </form>

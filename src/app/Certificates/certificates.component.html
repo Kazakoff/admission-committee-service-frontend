@@ -1,56 +1,55 @@
 <table class="table table-striped" [hidden]="!token">
   <thead class="thead-dark">
-  <tr>
-    <th></th>
-    <th>Тип документа</th>
-    <th>Предмет</th>
-    <th>Серия</th>
-    <th>Номер</th>
-    <th>Учреждение образования</th>
-    <th>Оценки</th>
-  </tr>
+    <tr>
+      <th></th>
+      <th>Тип документа</th>
+      <th>Предмет</th>
+      <th>Серия</th>
+      <th>Номер</th>
+      <th>Учреждение образования</th>
+      <th>Оценки</th>
+    </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let certificates of competitionInfo.documents">
-    <td><button class="btn btn-danger" (click)="removeDocument($event)">Удалить</button></td>
-    <td *ngFor="let data of edDocTypes | myfilter:certificates.educationDocumentTypeId">{{data.name}}</td>
-    <div *ngIf="certificates.subjectId; then thenBlock else elseBlock"></div>
-    <ng-template #thenBlock>
-      <td *ngFor="let data of subjects | myfilter:certificates.subjectId">{{data.name}}</td>
-    </ng-template>
-    <ng-template #elseBlock>
-      <td></td>
-    </ng-template>
-    <td>{{certificates.seria}}</td>
-    <td>{{certificates.number}}</td>
-    <td>{{certificates.nameUO}}</td>
-    <td>{{certificates.marks}}</td>
-  </tr>
+    <tr *ngFor="let certificates of competitionInfo.documents">
+      <td><button class="btn btn-danger" (click)="removeDocument($event)">Удалить</button></td>
+      <td *ngFor="let data of edDocTypes | myfilter:certificates.educationDocumentTypeId">{{data.name}}</td>
+      <div *ngIf="certificates.subjectId; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock>
+        <td *ngFor="let data of subjects | myfilter:certificates.subjectId">{{data.name}}</td>
+      </ng-template>
+      <ng-template #elseBlock>
+        <td></td>
+      </ng-template>
+      <td>{{certificates.seria}}</td>
+      <td>{{certificates.number}}</td>
+      <td>{{certificates.nameUO}}</td>
+      <td>{{certificates.marks}}</td>
+    </tr>
   </tbody>
 </table>
-
 <div class="container-fluid" [hidden]="!token">
   <button type="button" class="btn btn-success" (click)="openModalWithComponent()">Добавить документ</button>
 </div>
 <br [hidden]="!token"><br [hidden]="!token">
 <table class="table table-striped" [hidden]="!token">
   <thead class="thead-dark">
-  <tr>
-    <th></th>
-    <th>Название</th>
-    <th>Код</th>
-    <th>Без экзаменов</th>
-    <th>Без конкурса</th>
-  </tr>
+    <tr>
+      <th></th>
+      <th>Название</th>
+      <th>Код</th>
+      <th>Без экзаменов</th>
+      <th>Без конкурса</th>
+    </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let allPrivilleges of competitionInfo.privilleges">
-    <td><button class="btn btn-danger" (click)="removePrivillege($event)">Удалить</button></td>
-    <td *ngFor="let data of privilleges | myfilter:allPrivilleges">{{data.name}}</td>
-    <td *ngFor="let data of privilleges | myfilter:allPrivilleges">{{data.cipher}}</td>
-    <td *ngFor="let data of privilleges | myfilter:allPrivilleges">{{data.withoutExam}}</td>
-    <td *ngFor="let data of privilleges | myfilter:allPrivilleges">{{data.withoutCompetition}}</td>
-  </tr>
+    <tr *ngFor="let allPrivilleges of competitionInfo.privilleges">
+      <td><button class="btn btn-danger" (click)="removePrivillege($event)">Удалить</button></td>
+      <td *ngFor="let data of privilleges | myfilter:allPrivilleges">{{data.name}}</td>
+      <td *ngFor="let data of privilleges | myfilter:allPrivilleges">{{data.cipher}}</td>
+      <td *ngFor="let data of privilleges | myfilter:allPrivilleges">{{data.withoutExam}}</td>
+      <td *ngFor="let data of privilleges | myfilter:allPrivilleges">{{data.withoutCompetition}}</td>
+    </tr>
   </tbody>
 </table>
 <div class="container-fluid" [hidden]="!token">

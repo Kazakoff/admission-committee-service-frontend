@@ -19,7 +19,6 @@ export { Observable } from 'rxjs/Observable';
 export class CertificatesComponent implements OnInit {
   _bsModalRef: BsModalRef;
   token = JSON.parse(localStorage.getItem('token'));
-  done = false;
   competitionInfo: CompetitionInfo = new CompetitionInfo();
   competitionObject: CompetitionInfo[] = [];
   edDocTypes: Eddoctype[] = [];
@@ -27,8 +26,6 @@ export class CertificatesComponent implements OnInit {
   privilleges: Privillege[] = [{id: 1, name: '', cipher: '', withoutExam: false, withoutCompetition: false}];
   error: any;
   competitionDoc: Certificates[];
-  competitionId: number[];
-  closeBtnName: string;
 
   constructor(protected httpService: HttpService, private _modalService: BsModalService) {}
 
@@ -126,7 +123,6 @@ export class CertificatesComponent implements OnInit {
 
 export class ModalContentComponent implements OnInit {
   token = JSON.parse(localStorage.getItem('token'));
-
   certificate: Certificates = new Certificates();
   saved: EventEmitter<any> = new EventEmitter();
   edDocTypes: Eddoctype[] = [];
@@ -173,6 +169,7 @@ export class ModalContentComponent implements OnInit {
   push() {
     this.certificate.marks = [];
     this.certificate.marks.push(Number(this.oneMark.nativeElement.value));
+
     if (this.educationDocumentTypeId.nativeElement.selectedIndex !== 4) {
     this.certificate.marks.push(Number(this.twoMark.nativeElement.value));
     this.certificate.marks.push(Number(this.threeMark.nativeElement.value));
@@ -183,9 +180,11 @@ export class ModalContentComponent implements OnInit {
     this.certificate.marks.push(Number(this.eightMark.nativeElement.value));
     this.certificate.marks.push(Number(this.nineMark.nativeElement.value));
     this.certificate.marks.push(Number(this.tenMark.nativeElement.value)); }
+
     if (this.subjectId.nativeElement.selectedIndex === -1) {
       this.certificate.subjectId = null;
     }
+
     this.saved.emit(this.certificate);
   }
 

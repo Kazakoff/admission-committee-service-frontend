@@ -12,6 +12,7 @@ export class AppComponent {
 
   title = 'app';
   token = JSON.parse(localStorage.getItem('token'));
+
   logOut() {
     localStorage.removeItem('token');
     location.replace('/');
