@@ -1,2 +1,5 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import '~pretty-checkbox/dist/pretty-checkbox.css';
+body {
+  background: url(images/background.jpg);
+}
