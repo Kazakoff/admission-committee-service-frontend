@@ -23,6 +23,29 @@
       </form>
     </div>
   </nav>
+  <div *ngIf="router.url === '/'">
+    <header>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h1 class="mt-5">Welcome to Vitebsk State Technological Univercity admission committee!</h1>
+            <p class="lead">Here you can apply for admission to our university and fill in the necessary data!</p>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
   <router-outlet></router-outlet>
   <simple-notifications></simple-notifications>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <ul class="list-unstyled">
+            <li>Vitebsk, Belarus. 2018. All rights reserved.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
 </div>
