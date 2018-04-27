@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Personal} from './personal';
-import {PersonalInfoComponent} from './personal.info.component';
-import {Observable} from 'rxjs/Observable';
+import { PUT_ABITURIENT_PROFILE, GET_ABITURIENT, GET_DOC_SERIA_PROFILE, GET_DOC_TYPE_PROFILE, GET_NATIONALITY_PROFILE } from '../URLS';
+
 
 @Injectable()
 export class HttpService {
@@ -36,25 +36,25 @@ export class HttpService {
       sex: personal.sex
     };
 
-    return this.http.put('http://86.57.182.101:8005/abiturient/profile/' + this.userid, body, {
+    return this.http.put(PUT_ABITURIENT_PROFILE + this.userid, body, {
       headers: this.addHeaders(),
       withCredentials: true
     });
   }
 
   getAbitur() {
-    return this.http.get('http://86.57.182.101:8005/abiturient', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get(GET_ABITURIENT, {headers: this.addHeaders(), withCredentials: true});
 
   }
   getDocSeria() {
-    return this.http.get('http://86.57.182.101:8005/docseria/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get(GET_DOC_SERIA_PROFILE, {headers: this.addHeaders(), withCredentials: true});
   }
 
   getDocType() {
-    return this.http.get('http://86.57.182.101:8005/doctype/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get(GET_DOC_TYPE_PROFILE, {headers: this.addHeaders(), withCredentials: true});
   }
 
   getNationality() {
-    return this.http.get('http://86.57.182.101:8005/nationality/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get(GET_NATIONALITY_PROFILE, {headers: this.addHeaders(), withCredentials: true});
   }
 }

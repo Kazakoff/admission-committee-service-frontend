@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Education} from './education';
-
+import {GET_ABITURIENT, PUT_ABITURIENT_EDUCATION, GET_EDUCATIONAL_INSTITUTE_FRAGMENT_EDUCATION,
+  GET_EDUCATIONAL_LEVEL_EDUCATION, GET_LANGUAGE_EDUCATION} from '../URLS';
 
 @Injectable()
 export class HttpService {
@@ -29,26 +30,27 @@ export class HttpService {
       honours: education.honours,
     };
 
-    return this.http.put('http://86.57.182.101:8005/abiturient/education/' + this.userid, body, {
+    return this.http.put(PUT_ABITURIENT_EDUCATION + this.userid, body, {
       headers: this.addHeaders(),
       withCredentials: true
     });
   }
 
   getAbitur() {
-    return this.http.get('http://86.57.182.101:8005/abiturient', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get(GET_ABITURIENT, {headers: this.addHeaders(), withCredentials: true});
   }
 
-  getEducationInstitution() {
-    return this.http.get('http://86.57.182.101:8005/edinst/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+  getEducationInstituteFragment(value) {
+    return this.http.get(GET_EDUCATIONAL_INSTITUTE_FRAGMENT_EDUCATION + value + '&size=40',
+      {headers: this.addHeaders(), withCredentials: true});
   }
 
   getEdLevel() {
-    return this.http.get('http://86.57.182.101:8005/edlevel/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get(GET_EDUCATIONAL_LEVEL_EDUCATION, {headers: this.addHeaders(), withCredentials: true});
   }
 
   getLanguage() {
-    return this.http.get('http://86.57.182.101:8005/language/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get(GET_LANGUAGE_EDUCATION, {headers: this.addHeaders(), withCredentials: true});
   }
 
 }

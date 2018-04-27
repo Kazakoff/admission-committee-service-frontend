@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {CompetitionInfo} from './competitionInfo';
+import {GET_ABITURIENT, PUT_ABITURIENT_COMPETITION, GET_EDUCATIONAL_DOCUMENT_TYPE_COMPETITION, GET_SUBJECT_COMPETITION} from '../URLS';
 
 @Injectable()
 export class HttpService {
@@ -22,29 +23,25 @@ export class HttpService {
 
     const body = {
       documents: competitionInfo.documents,
-      privilleges: competitionInfo.privilleges,
     };
 
-    return this.http.put('http://86.57.182.101:8005/abiturient/competition/' + this.userid, body, {
+    return this.http.put(PUT_ABITURIENT_COMPETITION + this.userid, body, {
       headers: this.addHeaders(),
       withCredentials: true
     });
   }
 
   getAbitur() {
-    return this.http.get('http://86.57.182.101:8005/abiturient', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get(GET_ABITURIENT, {headers: this.addHeaders(), withCredentials: true});
 
   }
 
   getEdDocType() {
-    return this.http.get('http://86.57.182.101:8005/eddoctype/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get(GET_EDUCATIONAL_DOCUMENT_TYPE_COMPETITION, {headers: this.addHeaders(), withCredentials: true});
   }
 
   getSubject() {
-    return this.http.get('http://86.57.182.101:8005/subject/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get(GET_SUBJECT_COMPETITION, {headers: this.addHeaders(), withCredentials: true});
   }
 
-  getPrivilleges() {
-    return this.http.get('http://86.57.182.101:8005/privillege/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
-  }
 }

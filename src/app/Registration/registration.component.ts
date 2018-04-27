@@ -1,9 +1,7 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {Role} from './role';
+import {Component, OnInit} from '@angular/core';
 import {Registration} from './registration';
 import {HttpService} from './registration.service';
 import { NotificationsService } from 'angular2-notifications';
-import {timeout} from 'rxjs/operators';
 
 @Component({
   selector: 'reg',

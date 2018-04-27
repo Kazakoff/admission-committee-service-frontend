@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Address} from './address';
+import {GET_ABITURIENT, PUT_ABITURIENT_ADDRESS, GET_CITY_FRAGMENT_ADDRESS} from '../URLS';
 
 @Injectable()
 export class HttpService {
@@ -31,18 +32,19 @@ export class HttpService {
 
     };
 
-    return this.http.put('http://86.57.182.101:8005/abiturient/address/' + this.userid, body, {
+    return this.http.put(PUT_ABITURIENT_ADDRESS + this.userid, body, {
       headers: this.addHeaders(),
       withCredentials: true
     });
   }
 
-  getCity() {
-    return this.http.get('http://86.57.182.101:8005/city/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+  getCityFragment(value) {
+    return this.http.get(GET_CITY_FRAGMENT_ADDRESS + value + '&size=40',
+      {headers: this.addHeaders(), withCredentials: true});
   }
 
   getAbitur() {
-    return this.http.get('http://86.57.182.101:8005/abiturient', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get(GET_ABITURIENT, {headers: this.addHeaders(), withCredentials: true});
   }
 
 }

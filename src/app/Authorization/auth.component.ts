@@ -1,18 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpService} from './auth.service';
 import {Auth} from './auth';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-import {timeout} from 'rxjs/operators';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/timeout';
 import {NotificationsService} from 'angular2-notifications';
+import {GENERATE_TOKEN} from '../URLS';
 
 @Component({
   selector: 'auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css'],
-  providers: [HttpService]
 })
 export class AuthComponent implements OnInit {
   constructor(private http: HttpClient, private _service: NotificationsService) {
@@ -47,7 +44,7 @@ token: any;
   }
 
   submit() {
-    this.http.get('http://86.57.182.101:5000/api/token/generate', {headers: this.addHeaders(), withCredentials: true})
+    this.http.get(GENERATE_TOKEN, {headers: this.addHeaders(), withCredentials: true})
       .subscribe(
         (data) => {
           this.token = data['token'];

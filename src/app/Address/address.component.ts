@@ -61,18 +61,8 @@ export class AddressComponent implements OnInit {
     });
   }
 
-  getCity() {
-    return this.httpClient.get('http://86.57.182.101:8005/city/contains?fragment=&size=40&page=' + this.page,
-      {headers: this.addHeaders(), withCredentials: true});
-  }
-
-  getCityFragment(value) {
-      return this.httpClient.get('http://86.57.182.101:8005/city/contains?fragment=' + value + '&size=40',
-        {headers: this.addHeaders(), withCredentials: true});
-  }
-
   onInputChange(value) {
-    this.getCityFragment(value).subscribe((response) => {
+    this.httpService.getCityFragment(value).subscribe((response) => {
       this.cities = response['content'];
     });
   }
@@ -108,10 +98,6 @@ export class AddressComponent implements OnInit {
       }
     });
     this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
-    this.getCity().subscribe((response) => {
-      const hi = response['content'];
-      this.cities.push(hi);
-      });
     console.log(this.cities);
   }
 

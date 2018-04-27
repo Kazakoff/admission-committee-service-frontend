@@ -3,7 +3,6 @@ import {CompetitionInfo} from './competitionInfo';
 import {Eddoctype} from './eddoctype';
 import {Subject} from './subject';
 import {HttpService} from './certificates.service';
-import {Privillege} from './privillege';
 import {Certificates} from './certificates';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -23,7 +22,6 @@ export class CertificatesComponent implements OnInit {
   competitionObject: CompetitionInfo[] = [];
   edDocTypes: Eddoctype[] = [];
   subjects: Subject[] = [];
-  privilleges: Privillege[] = [{id: 1, name: '', cipher: '', withoutExam: false, withoutCompetition: false}];
   error: any;
   competitionDoc: Certificates[];
 
@@ -34,19 +32,8 @@ export class CertificatesComponent implements OnInit {
     this._bsModalRef.content.saved.take(1).subscribe(this.addNewDocument.bind(this));
   }
 
-  openPrivillegeModal() {
-    this._bsModalRef = this._modalService.show(PrivillegeModalComponent);
-    this._bsModalRef.content.payloadPrivillege.take(1).subscribe(this.addNewPrivillege.bind(this));
-  }
-
   addNewDocument(someData) {
     this.competitionInfo.documents.push(someData);
-    console.log(this.competitionInfo);
-    this._bsModalRef.hide();
-  }
-
-  addNewPrivillege(someData) {
-    this.competitionInfo.privilleges.push(someData);
     console.log(this.competitionInfo);
     this._bsModalRef.hide();
   }
@@ -84,15 +71,6 @@ export class CertificatesComponent implements OnInit {
     console.log(this.competitionInfo);
   }
 
-  removePrivillege(event) {
-    this.competitionInfo.privilleges.forEach((item, i, array) => {
-      if (i === event.target.parentElement.parentElement.rowIndex - 1) {
-        array.splice(i, 1);
-      }
-    });
-    console.log(this.competitionInfo);
-  }
-
   ngOnInit() {
     this.httpService.getAbitur().subscribe(data => {
       this.httpService.userid = data['id'];
@@ -101,8 +79,6 @@ export class CertificatesComponent implements OnInit {
       if (this.competitionObject == null) {
         console.log('Set inputs');
       } else {
-        this.competitionObject['privilleges'].forEach((item, i) => {
-          this.competitionInfo.privilleges.push(item.id); });
         this.competitionObject['documents'].forEach((items, j) => {
           this.competitionInfo.documents.push(this.convertDocumentObject(items));
         });
@@ -111,7 +87,6 @@ export class CertificatesComponent implements OnInit {
     });
     this.httpService.getEdDocType().subscribe(data => this.edDocTypes = data['content']);
     this.httpService.getSubject().subscribe(data => this.subjects = data['content']);
-    this.httpService.getPrivilleges().subscribe(data => this.privilleges = data['content']);
 }
 }
 
@@ -195,25 +170,3 @@ export class ModalContentComponent implements OnInit {
 
 }
 
-@Component({
-  selector: 'modal-privillege-content',
-  templateUrl: './privillege-content.html',
-  providers: [HttpService]
-})
-
-export class PrivillegeModalComponent implements OnInit {
-  payloadPrivillege: EventEmitter<any> = new EventEmitter();
-  token = JSON.parse(localStorage.getItem('token'));
-  privillege: Privillege = new Privillege();
-  privilleges: Privillege[] = [];
-
-  constructor(protected httpService: HttpService, public _bsModalRef: BsModalRef) { }
-
-  push() {
-    this.payloadPrivillege.emit(this.privillege.id);
-  }
-
-  ngOnInit() {
-    this.httpService.getPrivilleges().subscribe(data => this.privilleges = data['content']);
-  }
-}

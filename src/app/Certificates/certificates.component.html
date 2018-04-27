@@ -32,29 +32,6 @@
   <button type="button" class="btn btn-success" (click)="openModalWithComponent()">Добавить документ</button>
 </div>
 <br [hidden]="!token"><br [hidden]="!token">
-<table class="table table-striped" [hidden]="!token">
-  <thead class="thead-dark">
-    <tr>
-      <th></th>
-      <th>Название</th>
-      <th>Код</th>
-      <th>Без экзаменов</th>
-      <th>Без конкурса</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let allPrivilleges of competitionInfo.privilleges">
-      <td><button class="btn btn-danger" (click)="removePrivillege($event)">Удалить</button></td>
-      <td *ngFor="let data of privilleges | myfilter:allPrivilleges">{{data.name}}</td>
-      <td *ngFor="let data of privilleges | myfilter:allPrivilleges">{{data.cipher}}</td>
-      <td *ngFor="let data of privilleges | myfilter:allPrivilleges">{{data.withoutExam}}</td>
-      <td *ngFor="let data of privilleges | myfilter:allPrivilleges">{{data.withoutCompetition}}</td>
-    </tr>
-  </tbody>
-</table>
-<div class="container-fluid" [hidden]="!token">
-  <button type="button" class="btn btn-success" (click)="openPrivillegeModal()">Добавить документ</button>
-</div><br [hidden]="!token">
 <div class="container-fluid" [hidden]="!token">
   <input type="button" (click)="submit(competitionInfo)" [routerLink]="['/']" class="btn btn-success btn-lg" value="Далее" />
 </div>

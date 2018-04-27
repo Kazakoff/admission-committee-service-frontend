@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Additional} from './additional';
+import {GET_ABITURIENT, PUT_ABITURIENT_ADDITONAL_INFORMATION} from '../URLS';
 
 @Injectable()
 export class HttpService {
@@ -34,14 +35,14 @@ export class HttpService {
       note: additional.note
     };
 
-    return this.http.put('http://86.57.182.101:8005/abiturient/addinfo/' + this.userid, body, {
+    return this.http.put(PUT_ABITURIENT_ADDITONAL_INFORMATION + this.userid, body, {
       headers: this.addHeaders(),
       withCredentials: true
     });
   }
 
   getAbitur() {
-    return this.http.get('http://86.57.182.101:8005/abiturient', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get(GET_ABITURIENT, {headers: this.addHeaders(), withCredentials: true});
   }
 
 }

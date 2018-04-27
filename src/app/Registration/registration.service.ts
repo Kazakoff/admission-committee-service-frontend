@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Registration} from './registration';
+import {POST_REGISTRATION_ACCOUNT, GET_REGISTRATION_ROLE} from '../URLS';
 
 @Injectable()
 export class HttpService {
@@ -22,14 +23,14 @@ export class HttpService {
       password: registration.password
     };
 
-    return this.http.post('http://86.57.182.101:5000/account', body, {
+    return this.http.post(POST_REGISTRATION_ACCOUNT, body, {
       headers: this.addHeaders(),
       withCredentials: true
     });
   }
 
   getRoles() {
-    return this.http.get('http://86.57.182.101:5000/role', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get(GET_REGISTRATION_ROLE, {headers: this.addHeaders(), withCredentials: true});
   }
 
 }
