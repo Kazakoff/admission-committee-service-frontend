@@ -22,6 +22,7 @@ export class CertificatesComponent implements OnInit {
   competitionObject: CompetitionInfo[] = [];
   edDocTypes: Eddoctype[] = [];
   subjects: Subject[] = [];
+  scales: string[] = [{name: '10-бальная', id: 'TEN_POINT'}, {name: '5-бальная', id: 'FIVE_POINT'}];
   error: any;
   competitionDoc: Certificates[];
 
@@ -55,6 +56,7 @@ export class CertificatesComponent implements OnInit {
       certificate.subjectId = null;
     } else {
     certificate.subjectId = inputDocumentObject.subject.id; }
+    certificate.scale = inputDocumentObject.scale;
     certificate.seria = inputDocumentObject.seria;
     certificate.nameUO = inputDocumentObject.nameUO;
     certificate.number = inputDocumentObject.number;
@@ -102,6 +104,7 @@ export class ModalContentComponent implements OnInit {
   saved: EventEmitter<any> = new EventEmitter();
   edDocTypes: Eddoctype[] = [];
   subjects: Subject[] = [];
+  scales: string[] = [{name: '10-бальная', id: 'TEN_POINT'}, {name: '5-бальная', id: 'FIVE_POINT'}];
 
   @ViewChild('one')
   oneMark: ElementRef;

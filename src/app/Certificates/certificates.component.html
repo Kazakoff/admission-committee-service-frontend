@@ -4,6 +4,7 @@
       <th></th>
       <th>Тип документа</th>
       <th>Предмет</th>
+      <th>Шкала оценок</th>
       <th>Серия</th>
       <th>Номер</th>
       <th>Учреждение образования</th>
@@ -19,6 +20,13 @@
         <td *ngFor="let data of subjects | myfilter:certificates.subjectId">{{data.name}}</td>
       </ng-template>
       <ng-template #elseBlock>
+        <td></td>
+      </ng-template>
+      <div *ngIf="certificates.scale; then thenBlockScale else elseBlockScale"></div>
+      <ng-template #thenBlockScale>
+        <td *ngFor="let data of scales | myfilter:certificates.scale">{{data.name}}</td>
+      </ng-template>
+      <ng-template #elseBlockScale>
         <td></td>
       </ng-template>
       <td>{{certificates.seria}}</td>

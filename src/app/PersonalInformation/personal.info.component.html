@@ -11,13 +11,12 @@
     <div class="row">
       <div class="col-sm">
     <label for="docseria">Серия документа</label>
-    <select class="form-control" id="docseria" [(ngModel)]="personal.documentSeriaId.id" name="documentSeriaId" ngDefaultControl>
-      <option *ngFor="let data of docseria" [ngValue]="data.id" >{{data.name}}</option>
-    </select>
+    <input class="form-control" id="docseria" [(ngModel)]="personal.documentSeria" name="documentSeria" ngDefaultControl required maxlength="10"/>
+        <small id="emailHelp" class="form-text text-danger"> Вводите серию латиницей!</small><br>
       </div>
       <div class="col-sm">
     <label for="documentNumber">Номер</label>
-    <input type="text" class="form-control" placeholder="" id="documentNumber" [(ngModel)]="personal.documentNumber" name="documentNumber" required>
+    <input type="text" class="form-control" placeholder="" id="documentNumber" [(ngModel)]="personal.documentNumber" name="documentNumber" required maxlength="50">
       </div>
       <div class="col-sm">
     <label for="docdate">Выдан когда</label>
@@ -29,7 +28,7 @@
 
     <div class="container-fluid">
       <label for="issued">Кем выдан</label>
-      <input type="text" class="form-control" id="issued" placeholder="Кем выдан" [(ngModel)]="personal.documentOrgan" name="documentOrgan" required><br>
+      <input type="text" class="form-control" id="issued" placeholder="Кем выдан" [(ngModel)]="personal.documentOrgan" name="documentOrgan"><br>
     </div> <br><br>
 
   <div class="container-fluid">
@@ -44,7 +43,7 @@
       </div>
       <div class="col-sm">
     <label for="lastname">Отчество</label>
-    <input type="text" class="form-control" placeholder="Отчество" id="lastname" [(ngModel)]="personal.middleName" name="middleName" required>
+    <input type="text" class="form-control" placeholder="Отчество" id="lastname" [(ngModel)]="personal.middleName" name="middleName">
       </div>
     </div>
   </div> <br><br>
@@ -66,7 +65,7 @@
 
   <div class="container-fluid">
     <label for="identification">Идентификационный номер</label>
-    <input type="text" class="form-control" placeholder="Идентификационный номер" id="identification" [(ngModel)]="personal.identificationNumber" name="identificationNumber" required><br>
+    <input type="text" class="form-control" placeholder="Идентификационный номер" id="identification" [(ngModel)]="personal.identificationNumber" name="identificationNumber" maxlength="20"><br>
   </div>
 
   <div class="container-fluid">

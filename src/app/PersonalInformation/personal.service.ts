@@ -22,7 +22,7 @@ export class HttpService {
 
     const body = {
       documentTypeId: personal.documentTypeId.id,
-      documentSeriaId: personal.documentSeriaId.id,
+      documentSeria: personal.documentSeria,
       documentNumber: personal.documentNumber,
       documentDate: personal.documentDate,
       documentOrgan: personal.documentOrgan,

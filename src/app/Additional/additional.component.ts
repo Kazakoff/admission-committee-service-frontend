@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpService} from './additional.service';
 import {Additional} from './additional';
 import {NotificationsService} from 'angular2-notifications';
@@ -22,7 +22,6 @@ export class AdditionalComponent implements OnInit {
 
   token = JSON.parse(localStorage.getItem('token'));
   additional: Additional = new Additional();
-  additionalEdited: Additional;
   additionalObject: Additional[] = [];
   receivedAdditional: Additional;
   done = false;
@@ -79,7 +78,6 @@ export class AdditionalComponent implements OnInit {
         this.additional.workPlace = this.additionalObject['workPlace'];
         this.additional.experience = this.additionalObject['experience'];
         this.additional.reAdmission = this.additionalObject['reAdmission'];
-        this.additional.note = this.additionalObject['note'];
       }
     });
     this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);

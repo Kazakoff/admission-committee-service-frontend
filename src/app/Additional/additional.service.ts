@@ -32,7 +32,6 @@ export class HttpService {
       workPlace: additional.workPlace,
       experience: additional.experience,
       reAdmission: additional.reAdmission,
-      note: additional.note
     };
 
     return this.http.put(PUT_ABITURIENT_ADDITONAL_INFORMATION + this.userid, body, {

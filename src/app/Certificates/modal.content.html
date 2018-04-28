@@ -16,6 +16,10 @@
      || educationDocumentTypeId.selectedIndex === 1 || educationDocumentTypeId.selectedIndex === 2 || educationDocumentTypeId.selectedIndex === 3">
       <option *ngFor="let data of subjects" [ngValue]="data.id">{{data.name}}</option>
     </select>
+    <label>Шкала документа</label>
+    <select class="form-control" [(ngModel)]="certificate.scale" name="scale" #scale>
+      <option *ngFor="let data of scales" [ngValue]="data.id">{{data.name}}</option>
+    </select>
     <label [hidden]="educationDocumentTypeId.selectedIndex === 4">Серия документа</label>
     <input [(ngModel)]="certificate.seria" name="seria" class="form-control" #seria [hidden]="educationDocumentTypeId.selectedIndex === 4"/>
     <label [hidden]="educationDocumentTypeId.selectedIndex === 4">Номер документа</label>

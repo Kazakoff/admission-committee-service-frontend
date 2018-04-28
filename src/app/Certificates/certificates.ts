@@ -9,6 +9,7 @@ export class Certificates {
   documentId: number;
   subjectId: Subject;
   educationDocumentTypeId: Eddoctype;
+  scale: string;
   seria: string;
   number: number;
   nameUO: string;

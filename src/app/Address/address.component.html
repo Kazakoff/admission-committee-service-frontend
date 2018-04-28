@@ -1,12 +1,31 @@
 <form #myForm="ngForm" [hidden]="!token">
   <div class="container-fluid">
     <label for="postcode">Индекс</label>
-    <input type="text" class="form-control" id="postcode" placeholder="Индекс" [(ngModel)]="address.postCode" name="postcode" required><br>
+    <input type="text" class="form-control" id="postcode" placeholder="Индекс" [(ngModel)]="address.postCode" name="postcode" required maxlength="50"><br>
     <label>Город</label>
     <ngx-select [items]="cities" optionValueField="id" optionTextField="name" [(ngModel)]="address.cityId.id"
                 name="cityId" (typed)="onInputChange($event)" [allowClear]="true">
     </ngx-select>
-    <small id="emailHelp" class="form-text text-muted"> Enter your city in the field above and choose it!</small>
+    <small id="emailHelp" class="form-text text-muted"> Enter your city in the field above and choose it!</small><br>
+    <button class="btn btn-primary" (click)="showAddCity()" style="margin-bottom: 10px">Добавить город</button><br>
+      <div class="container-fluid" #addCityLabel>
+        <label for="region">Область</label>
+        <select class="form-control col-4" id="region" #region (change)="getDistrict()">
+          <option *ngFor="let data of regions">{{data.name}}</option>
+        </select>
+        <label for="district">Район</label>
+        <select class="form-control col-3" id="district" name="district" #districtCity>
+          <option *ngFor="let data of district" [ngValue]="data.id">{{data.name}}</option>
+        </select>
+        <label for="type">Тип населённого пункта</label>
+        <select class="form-control col-1" id="type" #typeCity>
+            <option *ngFor="let data of cityTypes">{{data}}</option>
+        </select>
+        <label for="cityName">Название населённого пункта</label>
+        <input id="cityName" class="form-control col-3" #nameCity/>
+        <button class="btn btn-warning" (click)="saveNewCity(newCity)" style="margin-top: 30px">Сохранить город</button>
+        <strong id="cityHelp" class="form-text text-danger"> Пожалуйста, убедитесь, что вы ввели все данные верно! </strong>
+      </div>
     <br>
     <label for="street">Улица</label>
     <input type="text" class="form-control" id="street" placeholder="Улица" [(ngModel)]="address.street" name="street" required><br>
@@ -20,17 +39,17 @@
       </div>
       <div class="col-sm">
         <label for="building">Корпус</label>
-        <input type="text" class="form-control" id="building" placeholder="Корпус" [(ngModel)]="address.building" name="building" required>
+        <input type="text" class="form-control" id="building" placeholder="Корпус" [(ngModel)]="address.building" name="building">
       </div>
       <div class="col-sm">
         <label for="appartment">Квартира</label>
-        <input type="text" class="form-control" id="appartment" placeholder="Квартира" [(ngModel)]="address.appartment" name="appartment" required><br>
+        <input type="text" class="form-control" id="appartment" placeholder="Квартира" [(ngModel)]="address.appartment" name="appartment"><br>
       </div>
     </div>
   </div>
   <div class="container-fluid">
     <label for="phone">Телефон</label>
-    <input type="text" class="form-control" id="phone" placeholder="Телефон" [(ngModel)]="address.phone" name="phone" required pattern="\+[0-9]{12}">
+    <input type="text" class="form-control" id="phone" placeholder="Телефон" [(ngModel)]="address.phone" name="phone" required>
   </div> <br>
 
   <div class="container-fluid">

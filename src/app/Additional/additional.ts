@@ -10,6 +10,5 @@ export class Additional {
   workPlace: string;
   experience: number;
   reAdmission: boolean;
-  note: string;
 
 }

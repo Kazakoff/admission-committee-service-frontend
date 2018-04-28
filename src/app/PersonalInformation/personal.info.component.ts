@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Personal} from './personal';
 import {HttpService} from './personal.service';
-import {Docseria} from './docseria';
 import {Doctype} from './doctype';
 import {Nationality} from './nationality';
 import {DatePipe} from '@angular/common';
@@ -31,9 +30,6 @@ export class PersonalInfoComponent implements OnInit {
   receivedPersonal: Personal;
   done = false;
   doctype: Doctype[] = [{
-    id: 1, name: ''
-  }];
-  docseria: Docseria[] = [{
     id: 1, name: ''
   }];
   nationality: Nationality[] = [{
@@ -75,12 +71,9 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.personal.documentTypeId = this.doctype[0];
-    this.personal.documentSeriaId = this.docseria[0];
     this.personal.nationalityId = this.nationality[0];
 
-    this.httpService.getDocSeria().subscribe(data => this.docseria = data['content']);
     this.httpService.getDocType().subscribe(data => this.doctype = data['content']);
     this.httpService.getNationality().subscribe(data => this.nationality = data['content']);
 
@@ -90,7 +83,7 @@ export class PersonalInfoComponent implements OnInit {
         console.log('Set inputs');
       } else {
         this.personal.documentTypeId = this.personalObject['documentType'];
-        this.personal.documentSeriaId = this.personalObject['documentSeria'];
+        this.personal.documentSeria = this.personalObject['documentSeria'];
         this.personal.documentNumber = this.personalObject['documentNumber'];
         this.personal.documentDate = this.datepipe.transform(this.personalObject['documentDate'], 'yyyy-MM-dd');
         this.personal.documentOrgan = this.personalObject['documentOrgan'];

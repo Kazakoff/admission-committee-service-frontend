@@ -6,6 +6,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import 'rxjs/add/operator/debounceTime';
 import {debounceTime} from 'rxjs/operator/debounceTime';
 import {NotificationsService} from 'angular2-notifications';
+import {Region} from './region';
+import {District} from './district';
+import {NewCity} from './newCity';
 
 @Component({
   selector: 'address',
@@ -29,10 +32,31 @@ export class AddressComponent implements OnInit {
   addressObject: Address[] = [];
   receivedAddress: Address;
   cities: City[] = [{id: 1, name: ''}];
+  regions: Region[] = [];
+  district: District[] = [];
+  cityTypes: string[] = ['г. ', 'д. ', 'гп. ', 'с. ', 'аг. ', 'п. ', 'х. '];
+  newCity: NewCity = new NewCity();
   page = 0;
   error: any;
+  errorCity: any;
 
-  constructor(private httpService: HttpService, private httpClient: HttpClient, private _service: NotificationsService) {
+  @ViewChild('addCityLabel')
+  addCityLabel: ElementRef;
+
+  @ViewChild('region')
+  region: ElementRef;
+
+  @ViewChild('typeCity')
+  typeCity: ElementRef;
+
+  @ViewChild('nameCity')
+  nameCity: ElementRef;
+
+  @ViewChild('districtCity')
+  districtCity: ElementRef;
+
+  constructor(private httpService: HttpService, private httpClient: HttpClient, private _service: NotificationsService,
+              private http: HttpClient) {
 
   }
 
@@ -80,7 +104,32 @@ export class AddressComponent implements OnInit {
       );
   }
 
+  showAddCity() {
+    this.addCityLabel.nativeElement.hidden = false;
+  }
+
+  getDistrict() {
+    const name = this.region.nativeElement.options[this.region.nativeElement.selectedIndex].text;
+    let id;
+    this.regions.forEach((item) => { if (item.name === name) { id = item.id; }});
+    this.http.get('http://86.57.182.101:8005/district/region/' + id, {headers: this.addHeaders(), withCredentials: true})
+      .subscribe(data => this.district = data['content']);
+  }
+
+  saveNewCity(newCity: NewCity) {
+    newCity.name = this.typeCity.nativeElement.options[this.typeCity.nativeElement.selectedIndex].text + ' ' +
+      this.nameCity.nativeElement.value;
+    const name = this.districtCity.nativeElement.options[this.districtCity.nativeElement.selectedIndex].text;
+    let id;
+    this.district.forEach((item) => { if (item.name === name) { id = item.id; }});
+    newCity.districtId = id;
+    this.httpService.saveNewCity(newCity)
+      .subscribe(() => {}, error => { this.errorCity = error; console.log(this.errorCity); });
+    this.addCityLabel.nativeElement.hidden = true;
+  }
+
   ngOnInit() {
+    this.addCityLabel.nativeElement.hidden = true;
     this.address.cityId = this.cities[0];
     this.httpService.getAbitur().subscribe(data => {
       this.addressObject = data['addressInfo'];
@@ -98,6 +147,8 @@ export class AddressComponent implements OnInit {
       }
     });
     this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
+    this.httpService.getRegion().subscribe(data => this.regions = data['content']);
+
     console.log(this.cities);
   }
 

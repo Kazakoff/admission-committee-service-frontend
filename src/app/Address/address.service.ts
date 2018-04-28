@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Address} from './address';
 import {GET_ABITURIENT, PUT_ABITURIENT_ADDRESS, GET_CITY_FRAGMENT_ADDRESS} from '../URLS';
+import {NewCity} from './newCity';
 
 @Injectable()
 export class HttpService {
@@ -41,6 +42,22 @@ export class HttpService {
   getCityFragment(value) {
     return this.http.get(GET_CITY_FRAGMENT_ADDRESS + value + '&size=40',
       {headers: this.addHeaders(), withCredentials: true});
+  }
+
+  getRegion() {
+    return this.http.get('http://86.57.182.101:8005/region/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+  }
+
+  saveNewCity(newCity: NewCity) {
+    const body = {
+      name: newCity.name,
+      districtId: newCity.districtId,
+    };
+
+    return this.http.post('http://86.57.182.101:8005/city', body, {
+      headers: this.addHeaders(),
+      withCredentials: true
+    });
   }
 
   getAbitur() {

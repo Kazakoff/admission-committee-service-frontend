@@ -5,7 +5,7 @@ import {Nationality} from './nationality';
 export class Personal {
 
   documentTypeId: Doctype;
-  documentSeriaId: Docseria;
+  documentSeria: Docseria;
   documentNumber: string;
   documentDate: string;
   documentOrgan: string;
