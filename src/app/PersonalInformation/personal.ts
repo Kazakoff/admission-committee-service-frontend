@@ -1,11 +1,10 @@
-import {Docseria} from './docseria';
 import {Doctype} from './doctype';
 import {Nationality} from './nationality';
 
 export class Personal {
 
   documentTypeId: Doctype;
-  documentSeria: Docseria;
+  documentSeria: string;
   documentNumber: string;
   documentDate: string;
   documentOrgan: string;
