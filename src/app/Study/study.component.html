@@ -17,11 +17,11 @@
   </div>
 
   <div class="container-fluid">
-    <label>Название УО</label>
+    <label>Наименование учебного заведения</label>
     <ngx-select [items]="educationInstitutions" optionValueField="id" optionTextField="name" [(ngModel)]="education.educationInstitutionId.id"
                 name="educationInstitutionId" (typed)="onInputChange($event)" [allowClear]="true">
     </ngx-select>
-    <small id="help" class="form-text text-muted"> Enter your education institution in the field above and choose it!</small><br>
+    <small id="help" class="form-text text-muted"> Введите название учебного заведения в поле выше и выберите его!</small><br>
   </div>
 
   <div class="container-fluid">
@@ -57,7 +57,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div><br>
 
   <div class="container-fluid">
     <input type="button" [routerLink]="['/address']" class="btn btn-danger btn-lg" value="Назад" />

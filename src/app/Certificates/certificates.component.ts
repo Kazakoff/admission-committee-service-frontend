@@ -7,6 +7,7 @@ import {Certificates} from './certificates';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import 'rxjs/add/operator/take';
+import {Faculty} from './faculty';
 export { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -25,12 +26,57 @@ export class CertificatesComponent implements OnInit {
   scales: object[] = [{name: '10-бальная', id: 'TEN_POINT'}, {name: '5-бальная', id: 'FIVE_POINT'}];
   error: any;
   competitionDoc: Certificates[];
+  educationTimes: any[] = [{name: 'Полный срок получения образования', id: 'FULL_TIME'},
+    {name: 'Сокращенный срок получения образования', id: 'REDUCED_TIME'}];
+  educationForms: any[] = [{name: 'Дневная форма получения образования', id: 'FULL_TIME_FORM'},
+    {name: 'Заочная форма получения образования', id: 'PART_TIME_FORM'}];
+  faculties: Faculty[] = [];
+  specialities: any[] = [];
+  specialitiesGroups: any[] = [];
+
+  @ViewChild('educationTime')
+  educationTime: ElementRef;
+
+  @ViewChild('educationForm')
+  educationForm: ElementRef;
+
+  @ViewChild('facultyId')
+  facultyId: ElementRef;
+
+  @ViewChild('speciality')
+  speciality: ElementRef;
 
   constructor(protected httpService: HttpService, private _modalService: BsModalService) {}
 
   openModalWithComponent() {
     this._bsModalRef = this._modalService.show(ModalContentComponent);
     this._bsModalRef.content.saved.take(1).subscribe(this.addNewDocument.bind(this));
+  }
+
+  getSpecialities() {
+    const educationTimeName = this.educationTime.nativeElement.options[this.educationTime.nativeElement.selectedIndex].text;
+    let educationTimeId;
+    this.educationTimes.forEach((item) => { if (item.name === educationTimeName) { educationTimeId = item.id; }});
+    const educationFormName = this.educationForm.nativeElement.options[this.educationForm.nativeElement.selectedIndex].text;
+    let educationFormId;
+    this.educationForms.forEach((item) => { if (item.name === educationFormName) { educationFormId = item.id; }});
+    const facultyIdName = this.facultyId.nativeElement.options[this.facultyId.nativeElement.selectedIndex].text;
+    let facultyIdId;
+    this.faculties.forEach((item) => { if (item.name === facultyIdName) { facultyIdId = item.id; }});
+
+    this.httpService.getSpeciality<any>(educationTimeId, educationFormId, facultyIdId).subscribe(data => this.specialities = data);
+  }
+
+  addSpeciality() {
+    const specialityName = this.speciality.nativeElement.options[this.speciality.nativeElement.selectedIndex].text;
+    const speciality = {name: '', group: ''};
+    this.specialities.forEach((item) => {
+      if (item.name === specialityName) {
+        speciality.name = item.name; speciality.group = item.group.name; this.competitionInfo.specialities.push(item.id);
+      }
+    });
+    this.specialitiesGroups.push(speciality);
+    console.log(this.specialitiesGroups);
   }
 
   addNewDocument(someData) {
@@ -73,23 +119,41 @@ export class CertificatesComponent implements OnInit {
     console.log(this.competitionInfo);
   }
 
+  removeSpeciality(event) {
+    this.competitionInfo.specialities.forEach((item, i, array) => {
+      if (i === event.target.parentElement.parentElement.rowIndex - 1) {
+        array.splice(i, 1);
+      }
+    });
+    this.specialitiesGroups.forEach((item, i, array) => {
+      if (i === event.target.parentElement.parentElement.rowIndex - 1) {
+        array.splice(i, 1);
+      }
+    });
+    console.log(this.competitionInfo);
+  }
+
   ngOnInit() {
     this.httpService.getAbitur().subscribe(data => {
       this.httpService.userid = data['id'];
       this.competitionObject = data['competitionInfo'];
       this.competitionDoc = this.competitionObject['documents'];
       if (this.competitionObject == null) {
-        console.log('Set inputs');
       } else {
         this.competitionObject['documents'].forEach((items, j) => {
           this.competitionInfo.documents.push(this.convertDocumentObject(items));
+        });
+        this.competitionObject['specialities'].forEach((item, i) => {
+          this.competitionInfo.specialities.push(item.id);
+          this.specialitiesGroups.push({name: item.name, group: item.group.name});
         });
       }
       console.log(this.competitionInfo);
     });
     this.httpService.getEdDocType().subscribe(data => this.edDocTypes = data['content']);
     this.httpService.getSubject().subscribe(data => this.subjects = data['content']);
-}
+    this.httpService.getFaculties().subscribe(data => this.faculties = data['content']);
+  }
 }
 
 @Component({

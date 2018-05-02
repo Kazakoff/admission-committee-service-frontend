@@ -44,7 +44,7 @@ export class AdditionalComponent implements OnInit {
   }
 
   successEvent() {
-    this._service.success('Form submitted successfully!', 'Click to undo...', {
+    this._service.success('Форма отправлена успешно!', 'Нажмите чтобы скрыть...', {
       timeOut: 4000,
       showProgressBar: true,
       pauseOnHover: true,
@@ -53,7 +53,7 @@ export class AdditionalComponent implements OnInit {
   }
 
   errorEvent() {
-    this._service.error('Unexpected error!', 'Click to undo...', {
+    this._service.error('Неожиданная ошибка', 'Нажмите чтобы скрыть...', {
       timeOut: 4000,
       showProgressBar: true,
       pauseOnHover: true,

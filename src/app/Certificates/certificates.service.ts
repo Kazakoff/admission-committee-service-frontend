@@ -23,6 +23,7 @@ export class HttpService {
 
     const body = {
       documents: competitionInfo.documents,
+      specialities: competitionInfo.specialities,
     };
 
     return this.http.put(PUT_ABITURIENT_COMPETITION + this.userid, body, {
@@ -35,6 +36,19 @@ export class HttpService {
     return this.http.get(GET_ABITURIENT, {headers: this.addHeaders(), withCredentials: true});
 
   }
+
+  getSpeciality(educationTime, educationForm, facultyId) {
+    const body = {
+      educationTime: educationTime,
+      educationForm: educationForm,
+      facultyId: facultyId,
+    };
+    return this.http.post('http://86.57.182.101:8005/speciality', body, {headers: this.addHeaders(), withCredentials: true});
+  }
+
+  getFaculties() {
+    return this.http.get('http://86.57.182.101:8005/faculty/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+}
 
   getEdDocType() {
     return this.http.get(GET_EDUCATIONAL_DOCUMENT_TYPE_COMPETITION, {headers: this.addHeaders(), withCredentials: true});

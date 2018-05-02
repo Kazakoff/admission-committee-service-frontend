@@ -26,7 +26,7 @@ token: any;
   }
 
   successEvent() {
-    this._service.success('Welcome to admission-committee!', 'Click to undo...', {
+    this._service.success('Добро пожаловать в приёмную комиссию', 'Нажмите чтобы скрыть...', {
       timeOut: 4000,
       showProgressBar: true,
       pauseOnHover: true,
@@ -35,7 +35,7 @@ token: any;
   }
 
   errorEvent() {
-    this._service.error('Authorization error!', 'Click to undo...', {
+    this._service.error('Ошибка авторизации!', 'Нажмите чтобы скрыть...', {
       timeOut: 4000,
       showProgressBar: true,
       pauseOnHover: true,

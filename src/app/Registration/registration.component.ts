@@ -18,7 +18,8 @@ export class RegistrationComponent implements OnInit {
   roles: any = [{id: 3, name: ''}];
 
   successEvent() {
-    this._service.info('Registration nearly finish! Now check your e-mail and activate account!', 'Click to undo...', {
+    this._service.info('Регистрация практически завершена! Сейчас проверьте свой e-mail и подтвердите регистрацию!',
+      'Нажмите чтобы скрыть...', {
       timeOut: 4000,
       showProgressBar: true,
       pauseOnHover: true,
@@ -27,7 +28,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   errorEvent() {
-    this._service.error('Registration error! Please, try again!', 'Click to undo...', {
+    this._service.error('Ошибка регистрации! Пожалуйста, попробуйте ещё раз!', 'Нажмите чтобы скрыть...', {
       timeOut: 4000,
       showProgressBar: true,
       pauseOnHover: true,

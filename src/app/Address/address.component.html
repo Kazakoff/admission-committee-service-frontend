@@ -6,7 +6,7 @@
     <ngx-select [items]="cities" optionValueField="id" optionTextField="name" [(ngModel)]="address.cityId.id"
                 name="cityId" (typed)="onInputChange($event)" [allowClear]="true">
     </ngx-select>
-    <small id="emailHelp" class="form-text text-muted"> Enter your city in the field above and choose it!</small><br>
+    <small id="emailHelp" class="form-text text-muted"> Введите ваш город в поле выше и выберите его!</small><br>
     <button class="btn btn-primary" (click)="showAddCity()" style="margin-bottom: 10px">Добавить город</button><br>
       <div class="container-fluid" #addCityLabel>
         <label for="region">Область</label>

@@ -1,3 +1,34 @@
+<div class="container-fluid">
+<select class="form-control" name="educationTime" (change)="getSpecialities()" #educationTime>
+  <option *ngFor="let data of educationTimes" [ngValue]="data.id" [selected]="data.id === 1">{{data.name}}</option>
+</select><br>
+<select class="form-control" name="educationForm" (change)="getSpecialities()" #educationForm>
+  <option *ngFor="let data of educationForms" [ngValue]="data.id" [selected]="data.id === 1">{{data.name}}</option>
+</select><br>
+<select class="form-control" name="facultyId" (change)="getSpecialities()" #facultyId>
+  <option *ngFor="let data of faculties" [ngValue]="data.id">{{data.name}}</option>
+</select><br>
+<select class="form-control" name="specialities" #speciality>
+    <option *ngFor="let data of specialities" [ngValue]="data.id">{{data.name}}</option>
+</select><br>
+<button type="button" class="btn btn-success" (click)="addSpeciality()">Добавить специальность</button>
+</div><br>
+<table class="table table-striped" [hidden]="!token">
+  <thead class="thead-dark">
+  <tr>
+    <th></th>
+    <th>Название специальности</th>
+    <th>Группа специальности</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let specialitiesGroup of specialitiesGroups">
+    <td><button class="btn btn-danger" (click)="removeSpeciality($event)">Удалить</button></td>
+    <td>{{specialitiesGroup.name}}</td>
+    <td>{{specialitiesGroup.group}}</td>
+  </tr>
+  </tbody>
+</table>
 <table class="table table-striped" [hidden]="!token">
   <thead class="thead-dark">
     <tr>

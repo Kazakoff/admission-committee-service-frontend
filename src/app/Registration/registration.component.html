@@ -1,22 +1,22 @@
 <br><br><br>
 <div class="container col-md-3">
-  <h1>Registration</h1><br>
+  <h1>Регистрация</h1><br>
   <div class="contact-form">
     <form #myForm="ngForm">
       <div class="col-xs-6 wow animated slideInLeft" data-wow-delay=".5s">
         <select id="role" [(ngModel)]="registration.roleId.id" name="role" ngDefaultControl>
           <option *ngFor="let data of roles" [ngValue]="data.id">{{data.name}}</option>
         </select>
-        <small id="emailHelp" class="form-text text-muted"> Enter your e-mail for registration!</small>
+        <small id="emailHelp" class="form-text text-muted"> Введите ваш e-mail для регистрации!</small>
         <input type="email" id="email" placeholder="E-mail" [(ngModel)]="registration.email" name="email" required class="form" />
-        <small id="passwordHelp" class="form-text text-muted"> Enter your password for registration!</small>
+        <small id="passwordHelp" class="form-text text-muted"> Введите ваш пароль для регистрации!</small>
         <input type="password" id="inputPassword" placeholder="Password" [(ngModel)]="registration.password" name="password" required class="form" />
       </div>
       <div class="relative fullwidth col-xs-12">
-        <button (click)="submit(registration)" [disabled]="myForm.invalid" id="submit" name="submit" class="form-btn semibold">Register</button>
+        <button (click)="submit(registration)" [disabled]="myForm.invalid" id="submit" name="submit" class="form-btn semibold">Зарегистрироваться</button>
       </div><br>
       <div class="alert alert-danger" [hidden]="error === undefined">
-        Registration error! You did something wrong, try again!
+        Ошибка регистрации, вы сделали что-то неправильно, попробуйте ещё раз!
       </div>
     </form>
   </div>
