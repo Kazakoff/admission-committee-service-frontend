@@ -53,7 +53,7 @@ export class CertificatesComponent implements OnInit {
     this._bsModalRef.content.saved.take(1).subscribe(this.addNewDocument.bind(this));
   }
 
-  getSpecialities() {
+  getSpecialities(t, q, e) {
     const educationTimeName = this.educationTime.nativeElement.options[this.educationTime.nativeElement.selectedIndex].text;
     let educationTimeId;
     this.educationTimes.forEach((item) => { if (item.name === educationTimeName) { educationTimeId = item.id; }});
@@ -64,7 +64,7 @@ export class CertificatesComponent implements OnInit {
     let facultyIdId;
     this.faculties.forEach((item) => { if (item.name === facultyIdName) { facultyIdId = item.id; }});
 
-    this.httpService.getSpeciality<any>(educationTimeId, educationFormId, facultyIdId).subscribe(data => this.specialities = data);
+    this.httpService.getSpeciality(educationTimeId, educationFormId, facultyIdId).subscribe(data => this.specialities = <any[]>data);
   }
 
   addSpeciality() {
