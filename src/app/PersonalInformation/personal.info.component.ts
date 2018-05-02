@@ -35,6 +35,7 @@ export class PersonalInfoComponent implements OnInit {
   nationality: Nationality[] = [{
     id: 1, name: ''
   }];
+  mytime: Date = new Date();
 
   constructor(private httpService: HttpService, public datepipe: DatePipe, private _service: NotificationsService) {
   }
