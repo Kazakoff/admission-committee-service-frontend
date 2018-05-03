@@ -28,7 +28,7 @@
     <td>{{specialitiesGroup.group}}</td>
   </tr>
   </tbody>
-</table>
+</table><br>
 <table class="table table-striped" [hidden]="!token">
   <thead class="thead-dark">
     <tr>
@@ -63,7 +63,18 @@
       <td>{{certificates.seria}}</td>
       <td>{{certificates.number}}</td>
       <td>{{certificates.nameUO}}</td>
-      <td>{{certificates.marks}}</td>
+      <td>{{certificates.marks[1]||certificates.marks[2]||certificates.marks[3]||certificates.marks[4]||certificates.marks[5]||certificates.marks[6]
+        ||certificates.marks[7]||certificates.marks[8]||certificates.marks[9] ?
+        'Единиц: ' + certificates.marks[0] + ' ' +
+        'Двоек: ' + certificates.marks[1] + ' ' +
+        'Троек: ' + certificates.marks[2] + ' ' +
+        'Четверок: ' + certificates.marks[3] + ' ' +
+        'Пятерок: ' + certificates.marks[4] + ' ' +
+        'Шестерок: ' + certificates.marks[5] + ' ' +
+        'Семерок: ' + certificates.marks[6] + ' ' +
+        'Восьмерок: ' + certificates.marks[7] + ' ' +
+        'Девяток: ' + certificates.marks[8] + ' ' +
+        'Десяток: ' + certificates.marks[9] : certificates.marks[0]}}</td>
     </tr>
   </tbody>
 </table>

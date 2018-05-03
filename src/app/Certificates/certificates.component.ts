@@ -158,6 +158,15 @@ export class CertificatesComponent implements OnInit {
 
 @Component({
   selector: 'modal-content',
+  styles: [`
+    input.ng-touched.ng-invalid {
+      border: solid red 2px;
+    }
+
+    input.ng-touched.ng-valid {
+      border: solid green 2px;
+    }
+  `],
   templateUrl: './modal.content.html',
   providers: [HttpService]
 })
@@ -212,7 +221,7 @@ export class ModalContentComponent implements OnInit {
     this.certificate.marks = [];
     this.certificate.marks.push(Number(this.oneMark.nativeElement.value));
 
-    if (this.educationDocumentTypeId.nativeElement.selectedIndex !== 4) {
+    if (this.educationDocumentTypeId.nativeElement.selectedIndex !== 5) {
     this.certificate.marks.push(Number(this.twoMark.nativeElement.value));
     this.certificate.marks.push(Number(this.threeMark.nativeElement.value));
     this.certificate.marks.push(Number(this.fourMark.nativeElement.value));

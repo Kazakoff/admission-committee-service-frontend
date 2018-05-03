@@ -11,72 +11,74 @@
       <option *ngFor="let data of edDocTypes" [ngValue]="data.id">{{data.name}}</option>
     </select>
     <label [hidden]="educationDocumentTypeId.selectedIndex === 0
-     || educationDocumentTypeId.selectedIndex === 1 || educationDocumentTypeId.selectedIndex === 2 || educationDocumentTypeId.selectedIndex === 3">Предмет</label>
+      || educationDocumentTypeId.selectedIndex === 1 || educationDocumentTypeId.selectedIndex === 2 || educationDocumentTypeId.selectedIndex === 3
+      || educationDocumentTypeId.selectedIndex === 4">Предмет</label>
     <select class="form-control" [(ngModel)]="certificate.subjectId" name="subjectId" #subjectId [hidden]="educationDocumentTypeId.selectedIndex === 0
-     || educationDocumentTypeId.selectedIndex === 1 || educationDocumentTypeId.selectedIndex === 2 || educationDocumentTypeId.selectedIndex === 3">
+      || educationDocumentTypeId.selectedIndex === 1 || educationDocumentTypeId.selectedIndex === 2 || educationDocumentTypeId.selectedIndex === 3
+      || educationDocumentTypeId.selectedIndex === 4">
       <option *ngFor="let data of subjects" [ngValue]="data.id">{{data.name}}</option>
     </select>
-    <label>Шкала документа</label>
-    <select class="form-control" [(ngModel)]="certificate.scale" name="scale" #scale>
+    <label [hidden]="educationDocumentTypeId.selectedIndex === 5">Шкала документа</label>
+    <select class="form-control" [(ngModel)]="certificate.scale" name="scale" [hidden]="educationDocumentTypeId.selectedIndex === 5" #scale>
       <option *ngFor="let data of scales" [ngValue]="data.id">{{data.name}}</option>
     </select>
-    <label [hidden]="educationDocumentTypeId.selectedIndex === 4">Серия документа</label>
-    <input [(ngModel)]="certificate.seria" name="seria" class="form-control" #seria [hidden]="educationDocumentTypeId.selectedIndex === 4"/>
-    <label [hidden]="educationDocumentTypeId.selectedIndex === 4">Номер документа</label>
-    <input [(ngModel)]="certificate.number" name="number" class="form-control" #number [hidden]="educationDocumentTypeId.selectedIndex === 4"/>
-    <label [hidden]="educationDocumentTypeId.selectedIndex === 4">Учреждение образования</label>
-    <input [(ngModel)]="certificate.nameUO" name="nameUO" class="form-control" #nameUO [hidden]="educationDocumentTypeId.selectedIndex === 4"/><br>
-    <label [hidden]="educationDocumentTypeId.selectedIndex === 4">Оценки</label>
-    <label [hidden]="educationDocumentTypeId.selectedIndex !== 4">Оценка</label>
-    <table class="table table-striped">
+    <label>Серия документа</label>
+    <input [(ngModel)]="certificate.seria" name="seria" class="form-control" required #seria/>
+    <label>Номер документа</label>
+    <input [(ngModel)]="certificate.number" name="number" class="form-control" required #number/>
+    <label [hidden]="educationDocumentTypeId.selectedIndex === 5">Учреждение образования</label>
+    <input [(ngModel)]="certificate.nameUO" name="nameUO" class="form-control" #nameUO [hidden]="educationDocumentTypeId.selectedIndex === 5"/><br>
+    <label [hidden]="educationDocumentTypeId.selectedIndex === 5">Оценки</label>
+    <label [hidden]="educationDocumentTypeId.selectedIndex !== 5">Оценка</label>
+    <table class="table table-striped text-center">
       <thead class="thead-dark">
         <tr>
-          <th [hidden]="educationDocumentTypeId.selectedIndex === 4">Количество единиц</th>
-          <th [hidden]="educationDocumentTypeId.selectedIndex === 4">Количество двоек</th>
+          <th [hidden]="educationDocumentTypeId.selectedIndex === 5">Количество единиц</th>
+          <th [hidden]="educationDocumentTypeId.selectedIndex === 5">Количество двоек</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><input class="form-control" #one/></td>
-          <td><input class="form-control" #two [hidden]="educationDocumentTypeId.selectedIndex === 4"/></td>
+          <td><input class="form-control col-2" style="margin: 0 auto" required #one/></td>
+          <td><input class="form-control col-2" style="margin: 0 auto" #two [hidden]="educationDocumentTypeId.selectedIndex === 5"/></td>
         </tr>
-        <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 4">
+        <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 5">
           <th>Количество троек</th>
           <th>Количество четвёрок</th>
         </tr>
-        <tr [hidden]="educationDocumentTypeId.selectedIndex === 4">
-          <td><input class="form-control" #three/></td>
-          <td><input class="form-control" #four/></td>
+        <tr [hidden]="educationDocumentTypeId.selectedIndex === 5">
+          <td><input class="form-control col-2" style="margin: 0 auto" required #three/></td>
+          <td><input class="form-control col-2" style="margin: 0 auto" required #four/></td>
         </tr>
-        <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 4">
+        <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 5">
           <th>Количество пятёрок</th>
           <th>Количество шестёрок</th>
         </tr>
-        <tr [hidden]="educationDocumentTypeId.selectedIndex === 4">
-          <td><input class="form-control" #five/></td>
-          <td><input class="form-control" #six/></td>
+        <tr [hidden]="educationDocumentTypeId.selectedIndex === 5">
+          <td><input class="form-control col-2" style="margin: 0 auto" #five/></td>
+          <td><input class="form-control col-2" style="margin: 0 auto" #six/></td>
         </tr>
-        <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 4">
+        <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 5">
           <th>Количество семёрок</th>
           <th>Количество восьмёрок</th>
         </tr>
-        <tr [hidden]="educationDocumentTypeId.selectedIndex === 4">
-          <td><input class="form-control" #seven/></td>
-          <td><input class="form-control" #eight/></td>
+        <tr [hidden]="educationDocumentTypeId.selectedIndex === 5">
+          <td><input class="form-control col-2" style="margin: 0 auto" #seven/></td>
+          <td><input class="form-control col-2" style="margin: 0 auto" #eight/></td>
         </tr>
-        <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 4">
+        <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 5">
           <th>Количество девяток</th>
           <th>Количество десяток</th>
         </tr>
-        <tr [hidden]="educationDocumentTypeId.selectedIndex === 4">
-          <td><input class="form-control" #nine/></td>
-          <td><input class="form-control" #ten/></td>
+        <tr [hidden]="educationDocumentTypeId.selectedIndex === 5">
+          <td><input class="form-control col-2" style="margin: 0 auto" #nine/></td>
+          <td><input class="form-control col-2" style="margin: 0 auto" #ten/></td>
         </tr>
       </tbody>
     </table>
   </form>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-success" (click)="push()">Push</button>
+  <input type="button" class="btn btn-success" (click)="push()" [disabled]="addForm.invalid" value="Push" />
   <button type="button" class="btn btn-default" (click)="_bsModalRef.hide()">Close</button>
 </div>
