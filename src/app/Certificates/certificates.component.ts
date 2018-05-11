@@ -8,6 +8,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import 'rxjs/add/operator/take';
 import {Faculty} from './faculty';
+import {NotificationsService} from 'angular2-notifications';
 export { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -68,15 +69,19 @@ export class CertificatesComponent implements OnInit {
   }
 
   addSpeciality() {
-    const specialityName = this.speciality.nativeElement.options[this.speciality.nativeElement.selectedIndex].text;
-    const speciality = {name: '', group: ''};
-    this.specialities.forEach((item) => {
-      if (item.name === specialityName) {
-        speciality.name = item.name; speciality.group = item.group.name; this.competitionInfo.specialities.push(item.id);
-      }
-    });
-    this.specialitiesGroups.push(speciality);
-    console.log(this.specialitiesGroups);
+    if (this.speciality.nativeElement.selectedIndex !== -1) {
+      const specialityName = this.speciality.nativeElement.options[this.speciality.nativeElement.selectedIndex].text;
+      const speciality = {name: '', group: ''};
+      this.specialities.forEach((item) => {
+        if (item.name === specialityName) {
+          speciality.name = item.name;
+          speciality.group = item.group.name;
+          this.competitionInfo.specialities.push(item.id);
+        }
+      });
+      this.specialitiesGroups.push(speciality);
+      console.log(this.specialitiesGroups);
+    }
   }
 
   addNewDocument(someData) {
@@ -178,6 +183,9 @@ export class ModalContentComponent implements OnInit {
   edDocTypes: Eddoctype[] = [];
   subjects: Subject[] = [];
   scales: object[] = [{name: '10-бальная', id: 'TEN_POINT'}, {name: '5-бальная', id: 'FIVE_POINT'}];
+  scaleError: boolean;
+  educationDocumentError: boolean;
+  subjectError: boolean;
 
   @ViewChild('one')
   oneMark: ElementRef;
@@ -215,9 +223,56 @@ export class ModalContentComponent implements OnInit {
   @ViewChild('educationDocumentTypeId')
   educationDocumentTypeId: ElementRef;
 
-  constructor(protected httpService: HttpService, public _bsModalRef: BsModalRef) { }
+  @ViewChild('scale')
+  scale: ElementRef;
+
+  @ViewChild('pushButton')
+  pushButton: ElementRef;
+
+  constructor(protected httpService: HttpService, public _bsModalRef: BsModalRef, private _service: NotificationsService) { }
+
+  oneEducationChange() {
+    if (this.educationDocumentTypeId.nativeElement.selectedIndex === 5) {
+      this.scale.nativeElement.selectedIndex = -1;
+      this.oneMark.nativeElement.value = 0;
+      this.twoMark.nativeElement.value = 0;
+      this.threeMark.nativeElement.value = 0;
+      this.fourMark.nativeElement.value = 0;
+      this.fiveMark.nativeElement.value = 0;
+      this.sixMark.nativeElement.value = 0;
+      this.sevenMark.nativeElement.value = 0;
+      this.eightMark.nativeElement.value = 0;
+      this.nineMark.nativeElement.value = 0;
+      this.tenMark.nativeElement.value = 0;
+      this.certificate.scale = null;
+    }
+
+    if (this.educationDocumentTypeId.nativeElement.selectedIndex !== 5) {
+      this.subjectId.nativeElement.selectedIndex = -1;
+      this.certificate.subjectId = null;
+    }
+  }
+
+  successEvent() {
+    this._service.success('Документ добавлен успешно!', '', {
+      timeOut: 4000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  errorEvent() {
+    this._service.error('Неожиданная ошибка!', '', {
+      timeOut: 4000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true,
+    });
+  }
 
   push() {
+
     this.certificate.marks = [];
     this.certificate.marks.push(Number(this.oneMark.nativeElement.value));
 
@@ -236,13 +291,31 @@ export class ModalContentComponent implements OnInit {
       this.certificate.subjectId = null;
     }
 
-    this.saved.emit(this.certificate);
-  }
+    if (this.educationDocumentTypeId.nativeElement.selectedIndex === -1) {
+      this.certificate.educationDocumentTypeId = null;
+    }
+
+    if (this.educationDocumentTypeId.nativeElement.selectedIndex !== 5 && this.scale.nativeElement.selectedIndex === -1) {
+      this.scaleError = true;
+      this.errorEvent();
+    } else if (this.educationDocumentTypeId.nativeElement.selectedIndex === -1) {
+      this.educationDocumentError = true;
+      this.errorEvent();
+    } else if (this.educationDocumentTypeId.nativeElement.selectedIndex === 5 && this.subjectId.nativeElement.selectedIndex === -1) {
+      this.subjectError = true;
+      this.errorEvent();
+    } else {
+        this.saved.emit(this.certificate);
+        this.successEvent();
+      }
+    }
 
   ngOnInit() {
+    this.subjectError = false;
+    this.scaleError = false;
+    this.educationDocumentError = false;
     this.httpService.getEdDocType().subscribe(data => this.edDocTypes = data['content']);
     this.httpService.getSubject().subscribe(data => this.subjects = data['content']);
   }
 
 }
-

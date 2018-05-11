@@ -19,7 +19,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {CertificatesComponent, ModalContentComponent} from './Certificates/certificates.component';
 import {MyFilterPipe} from './Certificates/MyFilterPipe';
-import {ModalModule} from 'ngx-bootstrap';
+import {ModalModule, PopoverModule, TooltipModule} from 'ngx-bootstrap';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 const appRoutes: Routes = [
@@ -59,7 +59,9 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    DatepickerModule.forRoot()
+    DatepickerModule.forRoot(),
+    TooltipModule.forRoot(),
+    PopoverModule.forRoot()
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

@@ -7,7 +7,7 @@
 <div class="modal-body">
   <form #addForm="ngForm" name="AddForm">
     <label>Тип документа</label><label style="color: red">&nbsp;*</label>
-    <select class="form-control" [(ngModel)]="certificate.educationDocumentTypeId" name="educationDocumentTypeId" #educationDocumentTypeId>
+    <select class="form-control" (change)="oneEducationChange()" [(ngModel)]="certificate.educationDocumentTypeId" name="educationDocumentTypeId" #educationDocumentTypeId required>
       <option *ngFor="let data of edDocTypes" [ngValue]="data.id">{{data.name}}</option>
     </select>
     <label [hidden]="educationDocumentTypeId.selectedIndex === 0
@@ -39,46 +39,55 @@
       </thead>
       <tbody>
         <tr>
-          <td><input class="form-control col-3" style="margin: 0 auto" required #one/></td>
-          <td><input class="form-control col-3" style="margin: 0 auto" #two [hidden]="educationDocumentTypeId.selectedIndex === 5"/></td>
+          <td><input class="form-control col-3" style="margin: 0 auto" #one value="0"/></td>
+          <td><input class="form-control col-3" style="margin: 0 auto" #two [hidden]="educationDocumentTypeId.selectedIndex === 5" value="0"/></td>
         </tr>
         <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 5">
           <th>Количество троек</th>
           <th>Количество четвёрок</th>
         </tr>
         <tr [hidden]="educationDocumentTypeId.selectedIndex === 5">
-          <td><input class="form-control col-3" style="margin: 0 auto" required #three/></td>
-          <td><input class="form-control col-3" style="margin: 0 auto" required #four/></td>
+          <td><input class="form-control col-3" style="margin: 0 auto" #three value="0"/></td>
+          <td><input class="form-control col-3" style="margin: 0 auto"#four value="0"/></td>
         </tr>
         <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 5">
           <th>Количество пятёрок</th>
           <th>Количество шестёрок</th>
         </tr>
         <tr [hidden]="educationDocumentTypeId.selectedIndex === 5">
-          <td><input class="form-control col-3" style="margin: 0 auto" #five/></td>
-          <td><input class="form-control col-3" style="margin: 0 auto" #six/></td>
+          <td><input class="form-control col-3" style="margin: 0 auto" #five value="0"/></td>
+          <td><input class="form-control col-3" style="margin: 0 auto" #six value="0"/></td>
         </tr>
         <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 5">
           <th>Количество семёрок</th>
           <th>Количество восьмёрок</th>
         </tr>
         <tr [hidden]="educationDocumentTypeId.selectedIndex === 5">
-          <td><input class="form-control col-3" style="margin: 0 auto" #seven/></td>
-          <td><input class="form-control col-3" style="margin: 0 auto" #eight/></td>
+          <td><input class="form-control col-3" style="margin: 0 auto" #seven value="0"/></td>
+          <td><input class="form-control col-3" style="margin: 0 auto" #eight value="0"/></td>
         </tr>
         <tr class="thead-dark" [hidden]="educationDocumentTypeId.selectedIndex === 5">
           <th>Количество девяток</th>
           <th>Количество десяток</th>
         </tr>
         <tr [hidden]="educationDocumentTypeId.selectedIndex === 5">
-          <td><input class="form-control col-3" style="margin: 0 auto" #nine/></td>
-          <td><input class="form-control col-3" style="margin: 0 auto" #ten/></td>
+          <td><input class="form-control col-3" style="margin: 0 auto" #nine value="0"/></td>
+          <td><input class="form-control col-3" style="margin: 0 auto" #ten value="0"/></td>
         </tr>
       </tbody>
     </table>
   </form>
 </div>
 <div class="modal-footer">
-  <input type="button" class="btn btn-success" (click)="push()" [disabled]="addForm.invalid" value="Добавить" />
+  <input type="button" class="btn btn-success" (click)="push()" [disabled]="addForm.invalid" value="Добавить" #pushButton/>
   <button type="button" class="btn btn-default" (click)="_bsModalRef.hide()">Закрыть</button>
+</div>
+<div class="alert alert-danger" role="alert" style="margin: 0 20px 20px" [hidden]="!scaleError">
+  Ошибка! Отсутствие шкалы документа допустимо только для сертификата!
+</div>
+<div class="alert alert-danger" role="alert" style="margin: 0 20px 20px" [hidden]="!educationDocumentError">
+  Ошибка! Отсутствие типа документа недопустимо!
+</div>
+<div class="alert alert-danger" role="alert" style="margin: 0 20px 20px" [hidden]="!subjectError">
+  Ошибка! Отсутствие предмета сертификата недопустимо!
 </div>
