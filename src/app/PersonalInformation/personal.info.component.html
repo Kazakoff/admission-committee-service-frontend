@@ -1,6 +1,6 @@
 <form #myForm="ngForm" [hidden]="!token">
   <div class="container-fluid">
-    <label for="doctype">Документ</label>
+    <label for="doctype">Тип документа </label><label style="color: red">&nbsp;*</label>
     <select class="form-control" id="doctype" [(ngModel)]="personal.documentTypeId.id" [ngModelOptions]="{standalone: true}" name="documentTypeId" ngDefaultControl  #personaldocumentOrgan>
       <option [ngValue]="null" disabled>Choose your document type</option>
       <option *ngFor="let data of doctype; let i = index" [ngValue]="data.id">{{data.name}}</option>
@@ -10,12 +10,12 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm">
-    <label for="docseria">Серия документа</label>
+    <label for="docseria">Серия документа</label><label style="color: red">&nbsp;*</label>
     <input class="form-control" id="docseria" [(ngModel)]="personal.documentSeria" name="documentSeria" ngDefaultControl required maxlength="10"/>
         <small id="emailHelp" class="form-text text-danger"> Вводите серию латиницей!</small><br>
       </div>
       <div class="col-sm">
-    <label for="documentNumber">Номер</label>
+    <label for="documentNumber">Номер</label><label style="color: red">&nbsp;*</label>
     <input type="text" class="form-control" placeholder="" id="documentNumber" [(ngModel)]="personal.documentNumber" name="documentNumber" required maxlength="50">
       </div>
       <div class="col-sm">
@@ -34,11 +34,11 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm">
-    <label for="name">Имя</label>
+    <label for="name">Имя</label><label style="color: red">&nbsp;*</label>
     <input type="text" class="form-control" placeholder="Имя" id="name" [(ngModel)]="personal.firstName" name="firstName" required>
       </div>
       <div class="col-sm">
-    <label for="surname">Фамилия</label>
+    <label for="surname">Фамилия</label><label style="color: red">&nbsp;*</label>
     <input type="text" class="form-control" placeholder="Фамилия" id="surname" [(ngModel)]="personal.lastName" name="lastName" required>
       </div>
       <div class="col-sm">
@@ -52,7 +52,7 @@
     <label for="birthdate"> Дата рождения </label>
     <input type="text" class="form-control"
            bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" placeholder="Дата рождения" id="birthdate" [(ngModel)]="personal.birthDate" name="birthDate"><br>
-    <label for="birthplace">Место рождения</label>
+    <label for="birthplace">Место рождения</label><label style="color: red">&nbsp;*</label>
     <input type="text" class="form-control" placeholder="Место рождения" id="birthplace" [(ngModel)]="personal.birthPlace" name="birthPlace" required><br>
   </div>
 

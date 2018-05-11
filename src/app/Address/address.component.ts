@@ -31,7 +31,7 @@ export class AddressComponent implements OnInit {
   address: Address = new Address();
   addressObject: Address[] = [];
   receivedAddress: Address;
-  cities: City[] = [{id: 1, name: ''}];
+  cities: any[] = [{id: 1, name: ''}];
   regions: Region[] = [];
   district: District[] = [];
   cityTypes: string[] = ['г. ', 'д. ', 'гп. ', 'с. ', 'аг. ', 'п. ', 'х. '];
@@ -54,6 +54,12 @@ export class AddressComponent implements OnInit {
 
   @ViewChild('districtCity')
   districtCity: ElementRef;
+
+  @ViewChild('citySelect')
+  citySelect: ElementRef;
+
+  @ViewChild('showCityAddButton')
+  showCityAddButton: ElementRef;
 
   constructor(private httpService: HttpService, private httpClient: HttpClient, private _service: NotificationsService,
               private http: HttpClient) {
@@ -105,7 +111,14 @@ export class AddressComponent implements OnInit {
   }
 
   showAddCity() {
-    this.addCityLabel.nativeElement.hidden = false;
+    if (this.addCityLabel.nativeElement.hidden === true) {
+      this.addCityLabel.nativeElement.hidden = false;
+      this.showCityAddButton.nativeElement.innerHTML = 'Скрыть добавление населённого пункта';
+      this.getDistrict();
+    } else {
+      this.addCityLabel.nativeElement.hidden = true;
+      this.showCityAddButton.nativeElement.innerHTML = 'Добавить населённый пункт';
+    }
   }
 
   getDistrict() {
@@ -117,18 +130,25 @@ export class AddressComponent implements OnInit {
   }
 
   saveNewCity(newCity: NewCity) {
+    this.address.cityId = {};
     newCity.name = this.typeCity.nativeElement.options[this.typeCity.nativeElement.selectedIndex].text + ' ' +
       this.nameCity.nativeElement.value;
     const name = this.districtCity.nativeElement.options[this.districtCity.nativeElement.selectedIndex].text;
     let id;
     this.district.forEach((item) => { if (item.name === name) { id = item.id; }});
     newCity.districtId = id;
+
     this.httpService.saveNewCity(newCity)
-      .subscribe(() => {}, error => { this.errorCity = error; console.log(this.errorCity); });
+      .subscribe((city) => {
+      this.cities = [];
+      this.cities.push(city);
+      this.address.cityId = this.cities[0];
+      }, error => { this.errorCity = error; console.log(this.errorCity); });
     this.addCityLabel.nativeElement.hidden = true;
   }
 
   ngOnInit() {
+    console.log(this.cities);
     this.addCityLabel.nativeElement.hidden = true;
     this.address.cityId = this.cities[0];
     this.httpService.getAbitur().subscribe(data => {

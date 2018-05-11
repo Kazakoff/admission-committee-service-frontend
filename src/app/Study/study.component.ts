@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Education} from './education';
 import {EducationLevel} from './educationLevel';
 import {Language} from './language';
@@ -6,6 +6,9 @@ import {HttpService} from './study.service';
 import {EducationInstitution} from './educationInstitution';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {NotificationsService} from 'angular2-notifications';
+import {EdType} from './edType';
+import {EstCity} from './estCity';
+import {NewEducationInstitution} from './newEducationInstitution';
 
 @Component({
   selector: 'study',
@@ -36,8 +39,27 @@ export class StudyComponent implements OnInit {
   language: Language[] = [{
     id: 1, name: ''
   }];
-  educationInstitutions: EducationInstitution[] = [{id: 1, name: ''}];
+  edTypes: EdType[] = [{id: 1, name: ''}];
+  estCities: EstCity[] = [{id: 1, name: ''}];
+  educationInstitutions: any[] = [{id: 1, name: ''}];
   page = 0;
+  newEducationInstitution: NewEducationInstitution = new NewEducationInstitution();
+  errorInstitution: any;
+
+  @ViewChild('addEducationalInstitution')
+  addEducationalInstitution: ElementRef;
+
+  @ViewChild('educationalInstituteType')
+  educationalInstituteType: ElementRef;
+
+  @ViewChild('estCity')
+  estCity: ElementRef;
+
+  @ViewChild('estName')
+  estName: ElementRef;
+
+  @ViewChild('addEdInstButton')
+  addEdInstButton: ElementRef;
 
   constructor(private httpService: HttpService, private httpClient: HttpClient, private _service: NotificationsService) {
   }
@@ -87,10 +109,33 @@ export class StudyComponent implements OnInit {
 
   }
 
+  showAddEducationInstitution() {
+    if (this.addEducationalInstitution.nativeElement.hidden === true) {
+      this.addEducationalInstitution.nativeElement.hidden = false;
+      this.addEdInstButton.nativeElement.innerHTML = 'Скрыть добавление учреждения образования';
+    } else {
+      this.addEdInstButton.nativeElement.innerHTML = 'Добавить учреждение образования';
+      this.addEducationalInstitution.nativeElement.hidden = true;
+    }
+  }
+
+  saveNewEducationInstitution(newEducationInstitution: NewEducationInstitution) {
+    this.education.educationInstitutionId = {};
+    this.httpService.saveNewEducationInstitute(newEducationInstitution).subscribe((inst) => {
+      this.educationInstitutions = [];
+      this.educationInstitutions.push(inst);
+      this.education.educationInstitutionId = this.educationInstitutions[0];
+    }, error => { this.errorInstitution = error; console.log(this.errorInstitution); });
+    this.addEducationalInstitution.nativeElement.hidden = true;
+  }
+
   ngOnInit() {
+    this.addEducationalInstitution.nativeElement.hidden = true;
     this.education.educationLevelId = this.educationLevel[0];
     this.education.educationInstitutionId = this.educationInstitutions[0];
     this.education.languageId = this.language[0];
+    this.newEducationInstitution.typeId = this.edTypes[0];
+    this.newEducationInstitution.estCityId = this.estCities[0];
 
     this.httpService.getAbitur().subscribe(data => {
       this.educationObject = data['educationInfo'];
@@ -109,6 +154,8 @@ export class StudyComponent implements OnInit {
     this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
     this.httpService.getEdLevel().subscribe(data => this.educationLevel = data['content']);
     this.httpService.getLanguage().subscribe(data => this.language = data['content']);
+    this.httpService.getEdType().subscribe(data => this.edTypes = data['content']);
+    this.httpService.getEstCity().subscribe(data => this.estCities = data['content']);
   }
 
 }

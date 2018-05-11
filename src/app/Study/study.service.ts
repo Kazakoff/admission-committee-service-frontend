@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Education} from './education';
 import {GET_ABITURIENT, PUT_ABITURIENT_EDUCATION, GET_EDUCATIONAL_INSTITUTE_FRAGMENT_EDUCATION,
   GET_EDUCATIONAL_LEVEL_EDUCATION, GET_LANGUAGE_EDUCATION} from '../URLS';
+import {NewEducationInstitution} from './newEducationInstitution';
 
 @Injectable()
 export class HttpService {
@@ -51,6 +52,27 @@ export class HttpService {
 
   getLanguage() {
     return this.http.get(GET_LANGUAGE_EDUCATION, {headers: this.addHeaders(), withCredentials: true});
+  }
+
+  getEdType() {
+    return this.http.get('http://86.57.182.101:8005/edtype/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+  }
+
+  getEstCity() {
+    return this.http.get('http://86.57.182.101:8005/estcity/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+  }
+
+  saveNewEducationInstitute(newEducationInstitution: NewEducationInstitution) {
+    const body = {
+      name: newEducationInstitution.name,
+      typeId: newEducationInstitution.typeId.id,
+      estCityId: newEducationInstitution.estCityId.id,
+    };
+
+    return this.http.post('http://86.57.182.101:8005/edinst', body, {
+      headers: this.addHeaders(),
+      withCredentials: true
+    });
   }
 
 }

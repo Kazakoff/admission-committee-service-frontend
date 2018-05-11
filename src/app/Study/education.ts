@@ -1,10 +1,9 @@
 import {EducationLevel} from './educationLevel';
 import {Language} from './language';
-import {EducationInstitution} from './educationInstitution';
 
 export class Education {
 
-  educationInstitutionId: EducationInstitution;
+  educationInstitutionId: any;
   endYear: number;
   educationLevelId: EducationLevel;
   languageId: Language;

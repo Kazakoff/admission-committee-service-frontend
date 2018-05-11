@@ -3,11 +3,12 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm">
-        <label for="endYear">Год окончания</label>
-        <input type="number" class="form-control" id="endYear" placeholder="Год окончания" [(ngModel)]="education.endYear" name="endYear" required>
+        <label for="endYear">Год окончания обучения</label><label style="color: red">&nbsp;*</label>
+        <input type="number" class="form-control" id="endYear" placeholder="Год окончания" [(ngModel)]="education.endYear"
+          name="endYear" pattern="^(194[5-9]|19[5-9]\d|200\d|201[0-8])$" required>
       </div>
       <div class="col-sm">
-        <label for="educationLevel">Уровень</label>
+        <label for="educationLevel">Уровень образования</label><label style="color: red">&nbsp;*</label>
         <select class="form-control" id="educationLevel" [(ngModel)]="education.educationLevelId.id" name="educationLevel" ngDefaultControl>
           <option [ngValue]="null" disabled>Choose your level</option>
           <option *ngFor="let data of educationLevel; let i = index" [ngValue]="data.id">{{data.name}}</option>
@@ -17,15 +18,30 @@
   </div>
 
   <div class="container-fluid">
-    <label>Наименование учебного заведения</label>
+    <label>Наименование учебного заведения</label><label style="color: red">&nbsp;*</label>
     <ngx-select [items]="educationInstitutions" optionValueField="id" optionTextField="name" [(ngModel)]="education.educationInstitutionId.id"
                 name="educationInstitutionId" (typed)="onInputChange($event)" [allowClear]="true">
     </ngx-select>
     <small id="help" class="form-text text-muted"> Введите название учебного заведения в поле выше и выберите его!</small><br>
+    <button class="btn btn-primary" (click)="showAddEducationInstitution()" style="margin-bottom: 10px" #addEdInstButton>Добавить учреждение образования</button>
+    <div class="container-fluid" #addEducationalInstitution>
+      <label for="type">Выберите тип учреждения образования</label>
+      <select class="form-control col-4" id="type" #educationalInstituteType [(ngModel)]="newEducationInstitution.typeId.id" name="type">
+        <option *ngFor="let data of edTypes" [ngValue]="data.id">{{data.name}}</option>
+      </select><br>
+      <label for="estCity">Выберите город, в котором находится ваше учреждение образования</label>
+      <select class="form-control col-4" id="estCity" #estCity [(ngModel)]="newEducationInstitution.estCityId.id" name="estCity">
+        <option *ngFor="let data of estCities" [ngValue]="data.id">{{data.name}}</option>
+      </select><br>
+      <label for="estName">Название учреждения образования</label>
+      <input class="form-control" id="estName" #estName [(ngModel)]="newEducationInstitution.name" name="estName" />
+      <button class="btn btn-warning" (click)="saveNewEducationInstitution(newEducationInstitution)" style="margin-top: 30px">Сохранить учреждение образования</button>
+      <strong id="institutionHelp" class="form-text text-danger"> Пожалуйста, убедитесь, что вы ввели все данные верно! </strong><br>
+    </div>
   </div>
 
   <div class="container-fluid">
-    <label for="language">Изучаемый иностранный язык</label>
+    <label for="language">Изучаемый иностранный язык</label><label style="color: red">&nbsp;*</label>
     <select class="form-control" id="language" [(ngModel)]="education.languageId.id" name="language" ngDefaultControl>
       <option [ngValue]="null" disabled>Choose your uo type</option>
       <option *ngFor="let data of language; let i = index" [ngValue]="data.id">{{data.name}}</option>

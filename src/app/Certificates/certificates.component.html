@@ -1,14 +1,18 @@
-<div class="container-fluid">
-<select class="form-control" name="educationTime" (change)="getSpecialities()" #educationTime>
+<div class="container-fluid" [hidden]="!token">
+  <label for="educationTime">Выберите срок получения образования</label>
+<select class="form-control" name="educationTime" id="educationTime" (change)="getSpecialities()" #educationTime>
   <option *ngFor="let data of educationTimes" [ngValue]="data.id" [selected]="data.id === 1">{{data.name}}</option>
 </select><br>
-<select class="form-control" name="educationForm" (change)="getSpecialities()" #educationForm>
+  <label for="educationForm">Выберите форму получения образования</label>
+<select class="form-control" name="educationForm" id="educationForm" (change)="getSpecialities()" #educationForm>
   <option *ngFor="let data of educationForms" [ngValue]="data.id" [selected]="data.id === 1">{{data.name}}</option>
 </select><br>
-<select class="form-control" name="facultyId" (change)="getSpecialities()" #facultyId>
+  <label for="facultyId">Выберите факультет</label>
+<select class="form-control" name="facultyId" id="facultyId" (change)="getSpecialities()" #facultyId>
   <option *ngFor="let data of faculties" [ngValue]="data.id">{{data.name}}</option>
 </select><br>
-<select class="form-control" name="specialities" #speciality>
+  <label for="specialities">Выберите специальность</label>
+<select class="form-control" name="specialities" id="specialities" #speciality>
     <option *ngFor="let data of specialities" [ngValue]="data.id">{{data.name}}</option>
 </select><br>
 <button type="button" class="btn btn-success" (click)="addSpeciality()">Добавить специальность</button>
