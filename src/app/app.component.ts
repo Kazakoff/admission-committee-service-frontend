@@ -29,8 +29,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get(GET_ABITURIENT, {headers: this.addHeaders(), withCredentials: true}).subscribe(data => {
-      this.approve = data['profileApproved'];
-    });
+    if (this.token) {
+      this.http.get(GET_ABITURIENT, {headers: this.addHeaders(), withCredentials: true}).subscribe(data => {
+        this.approve = data['profileApproved'];
+      });
+    }
   }
 }

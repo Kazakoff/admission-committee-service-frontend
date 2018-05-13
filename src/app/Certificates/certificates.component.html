@@ -33,6 +33,9 @@
   </tr>
   </tbody>
 </table><br>
+<div class="alert alert-danger" role="alert" style="margin: 0 20px 20px" [hidden]="specialitiesEquals">
+  Нельзя добавлять специальности из разных групп специальности!
+</div>
 <table class="table table-striped" [hidden]="!token">
   <thead class="thead-dark">
     <tr>
@@ -93,7 +96,7 @@
 </div>
 <br [hidden]="!token"><br [hidden]="!token">
 <div class="container-fluid" [hidden]="!token">
-  <input type="button" (click)="submit(competitionInfo)" [routerLink]="['/']" class="btn btn-success btn-lg" value="Далее" />
+  <input type="button" (click)="submit(competitionInfo)" [routerLink]="['/']" [disabled]="!specialitiesEquals" class="btn btn-success btn-lg" value="Далее" />
 </div>
 <div class="alert alert-danger" role="alert" [hidden]="token">
   <strong>Запрещено! Недостаточно прав доступа! </strong>Пожалуйста <a href="/auth" class="alert-link">авторизируйтесь</a> или

@@ -34,6 +34,7 @@ export class CertificatesComponent implements OnInit {
   faculties: Faculty[] = [];
   specialities: any[] = [];
   specialitiesGroups: any[] = [];
+  specialitiesEquals: boolean;
 
   @ViewChild('educationTime')
   educationTime: ElementRef;
@@ -47,11 +48,29 @@ export class CertificatesComponent implements OnInit {
   @ViewChild('speciality')
   speciality: ElementRef;
 
-  constructor(protected httpService: HttpService, private _modalService: BsModalService) {}
+  constructor(protected httpService: HttpService, private _modalService: BsModalService, private _service: NotificationsService) {}
 
   openModalWithComponent() {
     this._bsModalRef = this._modalService.show(ModalContentComponent);
     this._bsModalRef.content.saved.take(1).subscribe(this.addNewDocument.bind(this));
+  }
+
+  successEvent() {
+    this._service.success('Форма отправлена успешно!', '', {
+      timeOut: 4000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  errorEvent() {
+    this._service.error('Нельзя добавлять специальности из разных групп специальности!', '', {
+      timeOut: 4000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true,
+    });
   }
 
   getSpecialities() {
@@ -80,7 +99,10 @@ export class CertificatesComponent implements OnInit {
         }
       });
       this.specialitiesGroups.push(speciality);
-      console.log(this.specialitiesGroups);
+      this.specialitiesEquals = this.specialitiesGroups.every((v, i, arr) => v.group === arr[0].group) === true;
+      if (this.specialitiesEquals === false) {
+        this.errorEvent();
+      }
     }
   }
 
@@ -95,6 +117,7 @@ export class CertificatesComponent implements OnInit {
       .subscribe(
         (data: CompetitionInfo) => {
           this.error = undefined;
+          this.successEvent();
         },
         error => { this.error = error; }
       );
@@ -136,9 +159,11 @@ export class CertificatesComponent implements OnInit {
       }
     });
     console.log(this.competitionInfo);
+    this.specialitiesEquals = this.specialitiesGroups.every((v, i, arr) => v.group === arr[0].group) === true;
   }
 
   ngOnInit() {
+    this.specialitiesEquals = true;
     this.httpService.getAbitur().subscribe(data => {
       this.httpService.userid = data['id'];
       this.competitionObject = data['competitionInfo'];
