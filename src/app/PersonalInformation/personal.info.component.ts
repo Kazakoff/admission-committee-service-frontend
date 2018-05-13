@@ -36,6 +36,8 @@ export class PersonalInfoComponent implements OnInit {
     id: 1, name: ''
   }];
   mytime: Date = new Date();
+  rightNow: Date = new Date();
+  minDate: Date = new Date(1930, 0, 1);
 
   constructor(private httpService: HttpService, public datepipe: DatePipe, private _service: NotificationsService) {
   }
@@ -72,6 +74,7 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.rightNow);
     this.personal.documentTypeId = this.doctype[0];
     this.personal.nationalityId = this.nationality[0];
 

@@ -20,8 +20,14 @@
       </div>
       <div class="col-sm">
     <label for="docdate">Выдан когда</label>
-    <input type="text" class="form-control"
-           bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" placeholder="" id="docdate" [(ngModel)]="personal.documentDate" name="documentDate"><br>
+    <input type="text"
+           class="form-control"
+           bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+           placeholder="" id="docdate"
+           [(ngModel)]="personal.documentDate"
+           name="documentDate"
+           [minDate]="minDate"
+           [maxDate]="rightNow"><br>
       </div>
     </div>
   </div>
@@ -50,8 +56,15 @@
 
   <div class="container-fluid">
     <label for="birthdate"> Дата рождения </label>
-    <input type="text" class="form-control"
-           bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" placeholder="Дата рождения" id="birthdate" [(ngModel)]="personal.birthDate" name="birthDate"><br>
+    <input type="text"
+           class="form-control"
+           bsDatepicker
+           [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+           placeholder="Дата рождения" id="birthdate"
+           [(ngModel)]="personal.birthDate"
+           name="birthDate"
+           [minDate]="minDate"
+           [maxDate]="rightNow"><br>
     <label for="birthplace">Место рождения</label><label style="color: red">&nbsp;*</label>
     <input type="text" class="form-control" placeholder="Место рождения" id="birthplace" [(ngModel)]="personal.birthPlace" name="birthPlace" required><br>
   </div>

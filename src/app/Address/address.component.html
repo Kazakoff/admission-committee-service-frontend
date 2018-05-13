@@ -9,20 +9,30 @@
     <small id="emailHelp" class="form-text text-muted"> Введите населённый пункт в поле выше и выберите его</small><br>
     <button class="btn btn-primary" (click)="showAddCity()" style="margin-bottom: 10px" #showCityAddButton>Добавить населённый пункт</button><br>
       <div class="container-fluid" #addCityLabel>
-        <label for="region">Область</label>
-        <select class="form-control col-4" id="region" #region (change)="getDistrict()">
-          <option *ngFor="let data of regions">{{data.name}}</option>
-        </select>
-        <label for="district">Район</label>
-        <select class="form-control col-3" id="district" name="district" #districtCity>
-          <option *ngFor="let data of district" [ngValue]="data.id">{{data.name}}</option>
-        </select>
-        <label for="type">Тип населённого пункта</label>
-        <select class="form-control col-1" id="type" #typeCity>
-            <option *ngFor="let data of cityTypes">{{data}}</option>
-        </select>
-        <label for="cityName">Название населённого пункта</label>
-        <input id="cityName" class="form-control col-3" #nameCity/>
+        <div class="row">
+          <div class="col-sm">
+            <label for="region">Область</label>
+            <select class="form-control" id="region" #region (change)="getDistrict()">
+              <option *ngFor="let data of regions">{{data.name}}</option>
+            </select>
+          </div>
+          <div class="col-sm">
+            <label for="district">Район</label>
+            <select class="form-control" id="district" name="district" #districtCity>
+              <option *ngFor="let data of district" [ngValue]="data.id">{{data.name}}</option>
+            </select>
+          </div>
+          <div class="col-sm">
+            <label for="type">Тип населённого пункта</label>
+            <select class="form-control" id="type" #typeCity>
+                <option *ngFor="let data of cityTypes">{{data}}</option>
+            </select>
+          </div>
+          <div class="col-sm">
+            <label for="cityName">Название населённого пункта</label>
+            <input id="cityName" class="form-control" #nameCity/>
+          </div>
+        </div>
         <button class="btn btn-warning" (click)="saveNewCity(newCity)" style="margin-top: 30px">Сохранить город</button>
         <strong id="cityHelp" class="form-text text-danger"> Пожалуйста, убедитесь, что вы ввели все данные верно! </strong>
       </div>

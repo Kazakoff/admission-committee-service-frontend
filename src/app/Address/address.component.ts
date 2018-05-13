@@ -114,7 +114,9 @@ export class AddressComponent implements OnInit {
     if (this.addCityLabel.nativeElement.hidden === true) {
       this.addCityLabel.nativeElement.hidden = false;
       this.showCityAddButton.nativeElement.innerHTML = 'Скрыть добавление населённого пункта';
-      this.getDistrict();
+      if (this.region.nativeElement.options[this.region.nativeElement.selectedIndex] > -1) {
+        this.getDistrict();
+      } else { this.getDistrictInitialize(); }
     } else {
       this.addCityLabel.nativeElement.hidden = true;
       this.showCityAddButton.nativeElement.innerHTML = 'Добавить населённый пункт';
@@ -126,6 +128,11 @@ export class AddressComponent implements OnInit {
     let id;
     this.regions.forEach((item) => { if (item.name === name) { id = item.id; }});
     this.http.get('http://86.57.182.101:8005/district/region/' + id, {headers: this.addHeaders(), withCredentials: true})
+      .subscribe(data => this.district = data['content']);
+  }
+
+  getDistrictInitialize() {
+    this.http.get('http://86.57.182.101:8005/district/region/1', {headers: this.addHeaders(), withCredentials: true})
       .subscribe(data => this.district = data['content']);
   }
 

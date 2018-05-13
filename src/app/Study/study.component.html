@@ -25,16 +25,24 @@
     <small id="help" class="form-text text-muted"> Введите название учебного заведения в поле выше и выберите его!</small><br>
     <button class="btn btn-primary" (click)="showAddEducationInstitution()" style="margin-bottom: 10px" #addEdInstButton>Добавить учреждение образования</button>
     <div class="container-fluid" #addEducationalInstitution>
-      <label for="type">Выберите тип учреждения образования</label>
-      <select class="form-control col-4" id="type" #educationalInstituteType [(ngModel)]="newEducationInstitution.typeId.id" name="type">
-        <option *ngFor="let data of edTypes" [ngValue]="data.id">{{data.name}}</option>
-      </select><br>
-      <label for="estCity">Выберите город, в котором находится ваше учреждение образования</label>
-      <select class="form-control col-4" id="estCity" #estCity [(ngModel)]="newEducationInstitution.estCityId.id" name="estCity">
-        <option *ngFor="let data of estCities" [ngValue]="data.id">{{data.name}}</option>
-      </select><br>
-      <label for="estName">Название учреждения образования</label>
-      <input class="form-control" id="estName" #estName [(ngModel)]="newEducationInstitution.name" name="estName" />
+      <div class="row">
+        <div class="col-sm">
+          <label for="type">Выберите тип учреждения образования</label>
+          <select class="form-control" id="type" #educationalInstituteType [(ngModel)]="newEducationInstitution.typeId.id" name="type">
+            <option *ngFor="let data of edTypes" [ngValue]="data.id">{{data.name}}</option>
+          </select><br>
+        </div>
+        <div class="col-sm">
+          <label for="estCity">Выберите город, в котором находится ваше учреждение образования</label>
+          <select class="form-control" id="estCity" #estCity [(ngModel)]="newEducationInstitution.estCityId.id" name="estCity">
+            <option *ngFor="let data of estCities" [ngValue]="data.id">{{data.name}}</option>
+          </select><br>
+        </div>
+        <div class="col-sm">
+          <label for="estName">Название учреждения образования</label>
+          <input class="form-control" id="estName" #estName [(ngModel)]="newEducationInstitution.name" name="estName" />
+        </div>
+      </div>
       <button class="btn btn-warning" (click)="saveNewEducationInstitution(newEducationInstitution)" style="margin-top: 30px">Сохранить учреждение образования</button>
       <strong id="institutionHelp" class="form-text text-danger"> Пожалуйста, убедитесь, что вы ввели все данные верно! </strong><br>
     </div>
