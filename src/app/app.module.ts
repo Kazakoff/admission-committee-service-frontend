@@ -61,7 +61,6 @@ const appRoutes: Routes = [
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),
     TooltipModule.forRoot(),
-    PopoverModule.forRoot()
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
@@ -69,4 +68,3 @@ const appRoutes: Routes = [
 })
 export class AppModule {
 }
-

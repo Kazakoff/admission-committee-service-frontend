@@ -96,7 +96,9 @@
 </div>
 <br [hidden]="!token"><br [hidden]="!token">
 <div class="container-fluid" [hidden]="!token">
-  <input type="button" (click)="submit(competitionInfo)" [routerLink]="['/']" [disabled]="!specialitiesEquals" class="btn btn-success btn-lg" value="Далее" />
+  <input type="button" [routerLink]="['/additional']" class="btn btn-danger btn-lg" value="Назад" />
+  <input type="button" (click)="submit(competitionInfo)" [routerLink]="['/']" [disabled]="!specialitiesEquals" class="btn btn-success btn-lg" value="Далее"
+         tooltip="Пожалуйста, перед отправкой формы тщательно проверьте все введённые Вами данные." />
 </div>
 <div class="alert alert-danger" role="alert" [hidden]="token">
   <strong>Запрещено! Недостаточно прав доступа! </strong>Пожалуйста <a href="/auth" class="alert-link">авторизируйтесь</a> или

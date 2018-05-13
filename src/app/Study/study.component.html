@@ -85,7 +85,8 @@
 
   <div class="container-fluid">
     <input type="button" [routerLink]="['/address']" class="btn btn-danger btn-lg" value="Назад" />
-    <input type="button" (click)="submit(education)" [disabled]="myForm.invalid" [routerLink]="['/additional']" class="btn btn-success btn-lg" value="Отправить" />
+    <input type="button" (click)="submit(education)" [disabled]="myForm.invalid" [routerLink]="['/additional']" class="btn btn-success btn-lg" value="Отправить"
+           tooltip="Пожалуйста, перед отправкой формы тщательно проверьте все введённые Вами данные."/>
   </div>
 
 </form>

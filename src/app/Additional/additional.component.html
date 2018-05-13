@@ -76,7 +76,8 @@
 
   <div class="container-fluid">
     <input type="button" [routerLink]="['/study']" class="btn btn-danger btn-lg" value="Назад" />
-    <input type="button" (click)="submit(additional)" [disabled]="myForm.invalid" [routerLink]="['/cer']" class="btn btn-success btn-lg" value="Далее" />
+    <input type="button" (click)="submit(additional)" [disabled]="myForm.invalid" [routerLink]="['/cer']" class="btn btn-success btn-lg" value="Далее"
+           tooltip="Пожалуйста, перед отправкой формы тщательно проверьте все введённые Вами данные."/>
   </div>
 
 </form>
