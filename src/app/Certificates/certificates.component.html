@@ -1,4 +1,4 @@
-<div class="container-fluid" [hidden]="!token">
+<div class="container-fluid" [hidden]="!token || tokenInvalid === true">
   <label for="educationTime">Выберите срок получения образования</label>
 <select class="form-control" name="educationTime" id="educationTime" (change)="getSpecialities()" #educationTime>
   <option *ngFor="let data of educationTimes" [ngValue]="data.id" [selected]="data.id === 1">{{data.name}}</option>
@@ -16,8 +16,8 @@
     <option *ngFor="let data of specialities" [ngValue]="data.id">{{data.name}}</option>
 </select><br>
 <button type="button" class="btn btn-success" (click)="addSpeciality()">Добавить специальность</button>
-</div><br>
-<table class="table table-striped" [hidden]="!token">
+</div><br [hidden]="!token || tokenInvalid === true">
+<table class="table table-striped" [hidden]="!token || tokenInvalid === true">
   <thead class="thead-dark">
   <tr>
     <th></th>
@@ -36,7 +36,7 @@
 <div class="alert alert-danger" role="alert" style="margin: 0 20px 20px" [hidden]="specialitiesEquals">
   Нельзя добавлять специальности из разных групп специальности!
 </div>
-<table class="table table-striped" [hidden]="!token">
+<table class="table table-striped" [hidden]="!token || tokenInvalid === true">
   <thead class="thead-dark">
     <tr>
       <th></th>
@@ -91,16 +91,21 @@
     </tr>
   </tbody>
 </table>
-<div class="container-fluid" [hidden]="!token">
+<div class="container-fluid" [hidden]="!token || tokenInvalid === true">
   <button type="button" class="btn btn-success" (click)="openModalWithComponent()">Добавить документ</button>
 </div>
-<br [hidden]="!token"><br [hidden]="!token">
-<div class="container-fluid" [hidden]="!token">
+<br [hidden]="!token || tokenInvalid === true"><br [hidden]="!token || tokenInvalid === true">
+<div class="container-fluid" [hidden]="!token || tokenInvalid === true">
   <input type="button" [routerLink]="['/additional']" class="btn btn-danger btn-lg" value="Назад" />
   <input type="button" (click)="submit(competitionInfo)" [routerLink]="['/']" [disabled]="!specialitiesEquals" class="btn btn-success btn-lg" value="Далее"
          tooltip="Пожалуйста, перед отправкой формы тщательно проверьте все введённые Вами данные." />
 </div>
+
 <div class="alert alert-danger" role="alert" [hidden]="token">
   <strong>Запрещено! Недостаточно прав доступа! </strong>Пожалуйста <a href="/auth" class="alert-link">авторизируйтесь</a> или
   <a href="/reg" class="alert-link">загеристрируйтесь</a> сперва! Потом попробуйте ещё раз.
+</div>
+
+<div class="alert alert-danger" role="alert" *ngIf="tokenInvalid === true">
+  <strong>Ваш токен истёк! </strong>Пожалуйста <a href="/auth" class="alert-link">авторизируйтесь</a> сперва! Потом попробуйте ещё раз.
 </div>

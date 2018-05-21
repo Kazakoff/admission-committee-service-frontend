@@ -38,6 +38,7 @@ export class PersonalInfoComponent implements OnInit {
   mytime: Date = new Date();
   rightNow: Date = new Date();
   minDate: Date = new Date(1930, 0, 1);
+  tokenInvalid: boolean;
 
   constructor(private httpService: HttpService, public datepipe: DatePipe, private _service: NotificationsService) {
   }
@@ -74,7 +75,6 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.rightNow);
     this.personal.documentTypeId = this.doctype[0];
     this.personal.nationalityId = this.nationality[0];
 
@@ -101,6 +101,11 @@ export class PersonalInfoComponent implements OnInit {
         this.personal.sex = this.personalObject['sex'];
       }
       this.httpService.userid = data['id'];
+      this.tokenInvalid = false;
+    }, (error) => {
+      if (error.status === 401) {
+        this.tokenInvalid = true;
+      }
     });
 
   }

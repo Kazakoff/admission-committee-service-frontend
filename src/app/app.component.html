@@ -14,9 +14,11 @@
         <a class="nav-item nav-link" routerLink="/additional" routerLinkActive="active">Дополнительная информация</a>
         <a class="nav-item nav-link" routerLink="/cer" routerLinkActive="active">Документы</a>
         <div *ngIf="!token">
-        <a class="nav-item nav-link" routerLink="/auth" routerLinkActive="active">Авторизация</a>
+          <a class="nav-item nav-link" routerLink="/auth" routerLinkActive="active">Авторизация</a>
         </div>
-        <a class="nav-item nav-link" routerLink="/reg" routerLinkActive="active">Регистрация</a>
+        <div *ngIf="!token">
+          <a class="nav-item nav-link" routerLink="/reg" routerLinkActive="active">Регистрация</a>
+        </div>
       </div>
       <form class="form-inline my-2 my-lg-0">
         <div *ngIf="token"><button class="btn btn-outline-danger my-2 my-sm-0" (click)="logOut()">LogOut</button></div>

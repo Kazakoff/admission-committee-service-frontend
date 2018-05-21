@@ -1,4 +1,4 @@
-<form #myForm="ngForm" [hidden]="!token">
+<form #myForm="ngForm" [hidden]="!token || tokenInvalid === true">
   <div class="container-fluid">
     <label for="doctype">Тип документа </label><label style="color: red">&nbsp;*</label>
     <select class="form-control" id="doctype" [(ngModel)]="personal.documentTypeId.id" [ngModelOptions]="{standalone: true}" name="documentTypeId" ngDefaultControl  #personaldocumentOrgan>
@@ -27,7 +27,8 @@
            [(ngModel)]="personal.documentDate"
            name="documentDate"
            [minDate]="minDate"
-           [maxDate]="rightNow"><br>
+           [maxDate]="rightNow"
+           required><br>
       </div>
     </div>
   </div>
@@ -64,7 +65,8 @@
            [(ngModel)]="personal.birthDate"
            name="birthDate"
            [minDate]="minDate"
-           [maxDate]="rightNow"><br>
+           [maxDate]="rightNow"
+           required><br>
     <label for="birthplace">Место рождения</label><label style="color: red">&nbsp;*</label>
     <input type="text" class="form-control" placeholder="Место рождения" id="birthplace" [(ngModel)]="personal.birthPlace" name="birthPlace" required><br>
   </div>
@@ -93,3 +95,8 @@
   <strong>Запрещено! Недостаточно прав доступа! </strong>Пожалуйста <a href="/auth" class="alert-link">авторизируйтесь</a> или
   <a href="/reg" class="alert-link">загеристрируйтесь</a> сперва! Потом попробуйте ещё раз.
 </div>
+
+<div class="alert alert-danger" role="alert" *ngIf="tokenInvalid === true">
+  <strong>Ваш токен истёк! </strong>Пожалуйста <a href="/auth" class="alert-link">авторизируйтесь</a> сперва! Потом попробуйте ещё раз.
+</div>
+

@@ -35,6 +35,7 @@ export class CertificatesComponent implements OnInit {
   specialities: any[] = [];
   specialitiesGroups: any[] = [];
   specialitiesEquals: boolean;
+  tokenInvalid: boolean;
 
   @ViewChild('educationTime')
   educationTime: ElementRef;
@@ -73,6 +74,15 @@ export class CertificatesComponent implements OnInit {
     });
   }
 
+  SpecialititesSameEvent() {
+    this._service.error('Нельзя добавлять несколько одинаковых специальностей!', '', {
+      timeOut: 4000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true,
+    });
+  }
+
   getSpecialities() {
     const educationTimeName = this.educationTime.nativeElement.options[this.educationTime.nativeElement.selectedIndex].text;
     let educationTimeId;
@@ -95,10 +105,12 @@ export class CertificatesComponent implements OnInit {
         if (item.name === specialityName) {
           speciality.name = item.name;
           speciality.group = item.group.name;
-          this.competitionInfo.specialities.push(item.id);
+          if (!this.competitionInfo.specialities.includes(item.id)) {
+            this.competitionInfo.specialities.push(item.id);
+            this.specialitiesGroups.push(speciality);
+          }
         }
       });
-      this.specialitiesGroups.push(speciality);
       this.specialitiesEquals = this.specialitiesGroups.every((v, i, arr) => v.group === arr[0].group) === true;
       if (this.specialitiesEquals === false) {
         this.errorEvent();
@@ -166,6 +178,7 @@ export class CertificatesComponent implements OnInit {
     this.specialitiesEquals = true;
     this.httpService.getAbitur().subscribe(data => {
       this.httpService.userid = data['id'];
+      this.tokenInvalid = false;
       this.competitionObject = data['competitionInfo'];
       this.competitionDoc = this.competitionObject['documents'];
       if (this.competitionObject == null) {
@@ -179,6 +192,10 @@ export class CertificatesComponent implements OnInit {
         });
       }
       console.log(this.competitionInfo);
+    }, (error) => {
+      if (error.status === 401) {
+        this.tokenInvalid = true;
+      }
     });
     this.httpService.getEdDocType().subscribe(data => this.edDocTypes = data['content']);
     this.httpService.getSubject().subscribe(data => this.subjects = data['content']);

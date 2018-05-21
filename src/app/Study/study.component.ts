@@ -45,6 +45,7 @@ export class StudyComponent implements OnInit {
   page = 0;
   newEducationInstitution: NewEducationInstitution = new NewEducationInstitution();
   errorInstitution: any;
+  tokenInvalid: boolean;
 
   @ViewChild('addEducationalInstitution')
   addEducationalInstitution: ElementRef;
@@ -138,6 +139,8 @@ export class StudyComponent implements OnInit {
     this.newEducationInstitution.estCityId = this.estCities[0];
 
     this.httpService.getAbitur().subscribe(data => {
+      this.httpService.userid = data['id'];
+      this.tokenInvalid = false;
       this.educationObject = data['educationInfo'];
       if (this.educationObject == null) {
         console.log('Set inputs');
@@ -150,8 +153,11 @@ export class StudyComponent implements OnInit {
         this.education.goldMedalist = this.educationObject['goldMedalist'];
         this.education.honours = this.educationObject['honours'];
       }
+    }, (error) => {
+      if (error.status === 401) {
+        this.tokenInvalid = true;
+      }
     });
-    this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
     this.httpService.getEdLevel().subscribe(data => this.educationLevel = data['content']);
     this.httpService.getLanguage().subscribe(data => this.language = data['content']);
     this.httpService.getEdType().subscribe(data => this.edTypes = data['content']);

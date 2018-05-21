@@ -26,6 +26,7 @@ export class AdditionalComponent implements OnInit {
   receivedAdditional: Additional;
   done = false;
   error: any;
+  tokenInvalid: boolean;
 
   constructor(private httpService: HttpService, private _service: NotificationsService) {
   }
@@ -64,6 +65,8 @@ export class AdditionalComponent implements OnInit {
   ngOnInit() {
 
     this.httpService.getAbitur().subscribe(data => {
+      this.httpService.userid = data['id'];
+      this.tokenInvalid = false;
       this.additionalObject = data['additionalInfo'];
       if (this.additionalObject == null) {
         console.log('set inputs');
@@ -79,8 +82,11 @@ export class AdditionalComponent implements OnInit {
         this.additional.experience = this.additionalObject['experience'];
         this.additional.reAdmission = this.additionalObject['reAdmission'];
       }
+    }, (error) => {
+      if (error.status === 401) {
+        this.tokenInvalid = true;
+      }
     });
-    this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
   }
 
 }

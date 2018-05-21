@@ -39,6 +39,7 @@ export class AddressComponent implements OnInit {
   page = 0;
   error: any;
   errorCity: any;
+  tokenInvalid: boolean;
 
   @ViewChild('addCityLabel')
   addCityLabel: ElementRef;
@@ -155,10 +156,12 @@ export class AddressComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.cities);
+    this.tokenInvalid = false;
     this.addCityLabel.nativeElement.hidden = true;
     this.address.cityId = this.cities[0];
     this.httpService.getAbitur().subscribe(data => {
+      this.httpService.userid = data['id'];
+      this.tokenInvalid = false;
       this.addressObject = data['addressInfo'];
       if (this.addressObject == null) {
         console.log('set inputs');
@@ -172,11 +175,12 @@ export class AddressComponent implements OnInit {
         this.address.appartment = this.addressObject['appartment'];
         this.address.phone = this.addressObject['phone'];
       }
+    }, (error) => {
+      if (error.status === 401) {
+        this.tokenInvalid = true;
+      }
     });
-    this.httpService.getAbitur().subscribe(data => this.httpService.userid = data['id']);
     this.httpService.getRegion().subscribe(data => this.regions = data['content']);
-
-    console.log(this.cities);
   }
 
 }

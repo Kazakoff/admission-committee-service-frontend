@@ -16,7 +16,7 @@
         <button (click)="submit(registration)" [disabled]="myForm.invalid" id="submit" name="submit" class="form-btn semibold">Зарегистрироваться</button>
       </div><br>
       <div class="alert alert-danger" [hidden]="error === undefined">
-        Ошибка регистрации, вы сделали что-то неправильно, попробуйте ещё раз!
+        Ошибка регистрации, скорее всего, Вы пытаетесь использовать уже занятый e-mail, попробуйте ещё раз!
       </div>
     </form>
   </div>
