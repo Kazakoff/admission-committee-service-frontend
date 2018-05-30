@@ -1,14 +1,13 @@
-import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Address} from './address';
 import {HttpService} from './address.service';
-import {City} from './city';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import 'rxjs/add/operator/debounceTime';
-import {debounceTime} from 'rxjs/operator/debounceTime';
 import {NotificationsService} from 'angular2-notifications';
 import {Region} from './region';
 import {District} from './district';
 import {NewCity} from './newCity';
+import {GET_REGION} from '../URLS';
 
 @Component({
   selector: 'address',
@@ -128,12 +127,12 @@ export class AddressComponent implements OnInit {
     const name = this.region.nativeElement.options[this.region.nativeElement.selectedIndex].text;
     let id;
     this.regions.forEach((item) => { if (item.name === name) { id = item.id; }});
-    this.http.get('http://86.57.182.101:8005/district/region/' + id, {headers: this.addHeaders(), withCredentials: true})
+    this.http.get(GET_REGION + id, {headers: this.addHeaders(), withCredentials: true})
       .subscribe(data => this.district = data['content']);
   }
 
   getDistrictInitialize() {
-    this.http.get('http://86.57.182.101:8005/district/region/1', {headers: this.addHeaders(), withCredentials: true})
+    this.http.get(`${GET_REGION}1`, {headers: this.addHeaders(), withCredentials: true})
       .subscribe(data => this.district = data['content']);
   }
 
@@ -153,6 +152,7 @@ export class AddressComponent implements OnInit {
       this.address.cityId = this.cities[0];
       }, error => { this.errorCity = error; console.log(this.errorCity); });
     this.addCityLabel.nativeElement.hidden = true;
+    this.showCityAddButton.nativeElement.innerHTML = 'Добавить населённый пункт';
   }
 
   ngOnInit() {

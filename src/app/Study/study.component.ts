@@ -3,7 +3,6 @@ import {Education} from './education';
 import {EducationLevel} from './educationLevel';
 import {Language} from './language';
 import {HttpService} from './study.service';
-import {EducationInstitution} from './educationInstitution';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {NotificationsService} from 'angular2-notifications';
 import {EdType} from './edType';
@@ -128,6 +127,7 @@ export class StudyComponent implements OnInit {
       this.education.educationInstitutionId = this.educationInstitutions[0];
     }, error => { this.errorInstitution = error; console.log(this.errorInstitution); });
     this.addEducationalInstitution.nativeElement.hidden = true;
+    this.addEdInstButton.nativeElement.innerHTML = 'Добавить учреждение образования';
   }
 
   ngOnInit() {

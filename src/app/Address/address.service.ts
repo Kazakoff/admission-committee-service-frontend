@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Address} from './address';
-import {GET_ABITURIENT, PUT_ABITURIENT_ADDRESS, GET_CITY_FRAGMENT_ADDRESS} from '../URLS';
+import {GET_ABITURIENT, PUT_ABITURIENT_ADDRESS, GET_CITY_FRAGMENT_ADDRESS, POST_CITY, GET_REGION_FRAGMENT} from '../URLS';
 import {NewCity} from './newCity';
 
 @Injectable()
@@ -45,7 +45,7 @@ export class HttpService {
   }
 
   getRegion() {
-    return this.http.get('http://86.57.182.101:8005/region/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get(GET_REGION_FRAGMENT, {headers: this.addHeaders(), withCredentials: true});
   }
 
   saveNewCity(newCity: NewCity) {
@@ -54,7 +54,7 @@ export class HttpService {
       districtId: newCity.districtId,
     };
 
-    return this.http.post('http://86.57.182.101:8005/city', body, {
+    return this.http.post(POST_CITY, body, {
       headers: this.addHeaders(),
       withCredentials: true
     });

@@ -1,7 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {CompetitionInfo} from './competitionInfo';
-import {GET_ABITURIENT, PUT_ABITURIENT_COMPETITION, GET_EDUCATIONAL_DOCUMENT_TYPE_COMPETITION, GET_SUBJECT_COMPETITION} from '../URLS';
+import {
+  GET_ABITURIENT, PUT_ABITURIENT_COMPETITION, GET_EDUCATIONAL_DOCUMENT_TYPE_COMPETITION, GET_SUBJECT_COMPETITION,
+  GET_SPECIALITY, GET_FACULTIES
+} from '../URLS';
 
 @Injectable()
 export class HttpService {
@@ -34,7 +37,6 @@ export class HttpService {
 
   getAbitur() {
     return this.http.get(GET_ABITURIENT, {headers: this.addHeaders(), withCredentials: true});
-
   }
 
   getSpeciality(educationTime, educationForm, facultyId) {
@@ -43,11 +45,11 @@ export class HttpService {
       educationForm: educationForm,
       facultyId: facultyId,
     };
-    return this.http.post('http://86.57.182.101:8005/speciality', body, {headers: this.addHeaders(), withCredentials: true});
+    return this.http.post(GET_SPECIALITY, body, {headers: this.addHeaders(), withCredentials: true});
   }
 
   getFaculties() {
-    return this.http.get('http://86.57.182.101:8005/faculty/contains?fragment=', {headers: this.addHeaders(), withCredentials: true});
+    return this.http.get(GET_FACULTIES, {headers: this.addHeaders(), withCredentials: true});
 }
 
   getEdDocType() {
