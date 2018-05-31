@@ -26,8 +26,8 @@ const GET_SUBJECT_COMPETITION = 'http://abitpriv.vstu.by:8080/api/adm-service/su
 const GET_SPECIALITY = 'http://abitpriv.vstu.by:8080/api/adm-service/speciality';
 const GET_FACULTIES = 'http://abitpriv.vstu.by:8080/api/adm-service/faculty/contains?fragment=';
 
-const POST_REGISTRATION_ACCOUNT = 'http://http://abitpriv.vstu.by:8080/api/uaa/account';
-const GET_REGISTRATION_ROLE = 'http://http://abitpriv.vstu.by:8080/api/uaa/role';
+const POST_REGISTRATION_ACCOUNT = 'http://abitpriv.vstu.by:8080/api/uaa/account';
+const GET_REGISTRATION_ROLE = 'http://abitpriv.vstu.by:8080/api/uaa/role';
 
 const GENERATE_TOKEN = 'http://abitpriv.vstu.by:8080/api/uaa/api/token/generate';
 
