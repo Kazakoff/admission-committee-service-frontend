@@ -95,9 +95,12 @@
   <button type="button" class="btn btn-success" (click)="openModalWithComponent()">Добавить документ</button>
 </div>
 <br [hidden]="!token || tokenInvalid === true"><br [hidden]="!token || tokenInvalid === true">
+<div class="alert alert-danger" role="alert" [hidden]="isAnySpeciality">
+  Пожалуйста, добавьте хотя бы одну желаемую специальность!
+</div>
 <div class="container-fluid" [hidden]="!token || tokenInvalid === true">
   <input type="button" [routerLink]="['/additional']" class="btn btn-danger btn-lg" value="Назад" />
-  <input type="button" (click)="submit(competitionInfo)" [routerLink]="['/']" [disabled]="!specialitiesEquals" class="btn btn-success btn-lg" value="Далее"
+  <input type="button" (click)="submit(competitionInfo)" [disabled]="!specialitiesEquals || !isAnySpeciality" class="btn btn-success btn-lg" value="Далее"
          tooltip="Пожалуйста, перед отправкой формы тщательно проверьте все введённые Вами данные." />
 </div>
 

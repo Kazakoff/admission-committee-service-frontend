@@ -137,22 +137,23 @@ export class AddressComponent implements OnInit {
   }
 
   saveNewCity(newCity: NewCity) {
-    this.address.cityId = {};
-    newCity.name = this.typeCity.nativeElement.options[this.typeCity.nativeElement.selectedIndex].text + ' ' +
-      this.nameCity.nativeElement.value;
-    const name = this.districtCity.nativeElement.options[this.districtCity.nativeElement.selectedIndex].text;
-    let id;
-    this.district.forEach((item) => { if (item.name === name) { id = item.id; }});
-    newCity.districtId = id;
-
-    this.httpService.saveNewCity(newCity)
-      .subscribe((city) => {
-      this.cities = [];
-      this.cities.push(city);
-      this.address.cityId = this.cities[0];
-      }, error => { this.errorCity = error; console.log(this.errorCity); });
-    this.addCityLabel.nativeElement.hidden = true;
-    this.showCityAddButton.nativeElement.innerHTML = 'Добавить населённый пункт';
+    if (this.nameCity.nativeElement.value.length > 0) {
+      this.address.cityId = {};
+      newCity.name = this.typeCity.nativeElement.options[this.typeCity.nativeElement.selectedIndex].text + ' ' +
+        this.nameCity.nativeElement.value;
+      const name = this.districtCity.nativeElement.options[this.districtCity.nativeElement.selectedIndex].text;
+      let id;
+      this.district.forEach((item) => { if (item.name === name) { id = item.id; }});
+      newCity.districtId = id;
+      this.httpService.saveNewCity(newCity)
+        .subscribe((city) => {
+        this.cities = [];
+        this.cities.push(city);
+        this.address.cityId = this.cities[0];
+        }, error => { this.errorCity = error; console.log(this.errorCity); });
+      this.addCityLabel.nativeElement.hidden = true;
+      this.showCityAddButton.nativeElement.innerHTML = 'Добавить населённый пункт';
+    }
   }
 
   ngOnInit() {

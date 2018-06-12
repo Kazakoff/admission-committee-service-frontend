@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Education} from './education';
 import {
   GET_ABITURIENT, PUT_ABITURIENT_EDUCATION, GET_EDUCATIONAL_INSTITUTE_FRAGMENT_EDUCATION,
-  GET_EDUCATIONAL_LEVEL_EDUCATION, GET_LANGUAGE_EDUCATION, GET_ED_TYPE, GET_EST_CITY
+  GET_EDUCATIONAL_LEVEL_EDUCATION, GET_LANGUAGE_EDUCATION, GET_ED_TYPE, GET_EST_CITY, POST_NEW_EDUCATION_INSITUTE
 } from '../URLS';
 import {NewEducationInstitution} from './newEducationInstitution';
 
@@ -71,7 +71,7 @@ export class HttpService {
       estCityId: newEducationInstitution.estCityId.id,
     };
 
-    return this.http.post('http://abitpriv.vstu.by:8080/api/adm-service/edinst', body, {
+    return this.http.post(POST_NEW_EDUCATION_INSITUTE, body, {
       headers: this.addHeaders(),
       withCredentials: true
     });

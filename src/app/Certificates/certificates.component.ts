@@ -9,6 +9,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import 'rxjs/add/operator/take';
 import {Faculty} from './faculty';
 import {NotificationsService} from 'angular2-notifications';
+import {Router} from '@angular/router';
 export { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -36,6 +37,7 @@ export class CertificatesComponent implements OnInit {
   specialitiesGroups: any[] = [];
   specialitiesEquals: boolean;
   tokenInvalid: boolean;
+  isAnySpeciality: boolean;
 
   @ViewChild('educationTime')
   educationTime: ElementRef;
@@ -49,7 +51,7 @@ export class CertificatesComponent implements OnInit {
   @ViewChild('speciality')
   speciality: ElementRef;
 
-  constructor(protected httpService: HttpService, private _modalService: BsModalService, private _service: NotificationsService) {}
+  constructor(protected httpService: HttpService, private _modalService: BsModalService, private _service: NotificationsService, private router: Router) {}
 
   openModalWithComponent() {
     this._bsModalRef = this._modalService.show(ModalContentComponent);
@@ -115,6 +117,7 @@ export class CertificatesComponent implements OnInit {
       if (this.specialitiesEquals === false) {
         this.errorEvent();
       }
+      this.isAnySpeciality = true;
     }
   }
 
@@ -125,14 +128,20 @@ export class CertificatesComponent implements OnInit {
   }
 
   submit(competitionInfo: CompetitionInfo) {
-    this.httpService.postData(competitionInfo)
-      .subscribe(
-        (data: CompetitionInfo) => {
-          this.error = undefined;
-          this.successEvent();
-        },
-        error => { this.error = error; }
-      );
+    if (competitionInfo.specialities.length > 0 ) {
+      this.httpService.postData(competitionInfo)
+        .subscribe(
+          (data: CompetitionInfo) => {
+            this.error = undefined;
+            this.successEvent();
+          },
+          error => { this.error = error; }
+        );
+      this.isAnySpeciality = true;
+      this.router.navigate(['/']);
+    } else {
+      this.isAnySpeciality = false;
+    }
   }
 
   convertDocumentObject(inputDocumentObject) {
@@ -175,6 +184,7 @@ export class CertificatesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isAnySpeciality = true;
     this.specialitiesEquals = true;
     this.httpService.getAbitur().subscribe(data => {
       this.httpService.userid = data['id'];
