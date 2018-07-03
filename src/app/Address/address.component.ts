@@ -94,6 +94,7 @@ export class AddressComponent implements OnInit {
   onInputChange(value) {
     this.httpService.getCityFragment(value).subscribe((response) => {
       this.cities = response['content'];
+      this.cities.map((city) => { city.name = `${city.name}, район: ${city.district.name}, область: ${city.district.region.name}`; });
     });
   }
 

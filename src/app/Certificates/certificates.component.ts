@@ -68,7 +68,7 @@ export class CertificatesComponent implements OnInit {
   }
 
   errorEvent() {
-    this._service.error('Нельзя добавлять специальности из разных групп специальности!', '', {
+    this._service.error('Нельзя добавлять специальности из разных групп специальности либо более одной специальности с группой "Без группы"!', '', {
       timeOut: 4000,
       showProgressBar: true,
       pauseOnHover: true,
@@ -107,7 +107,8 @@ export class CertificatesComponent implements OnInit {
         if (item.name === specialityName) {
           speciality.name = item.name;
           speciality.group = item.group.name;
-          if (!this.competitionInfo.specialities.includes(item.id)) {
+          console.log(this.specialitiesGroups);
+          if (!this.competitionInfo.specialities.includes(item.id) && !this.specialitiesGroups.some((v) => v.group === 'Без группы')) {
             this.competitionInfo.specialities.push(item.id);
             this.specialitiesGroups.push(speciality);
           }
@@ -165,7 +166,6 @@ export class CertificatesComponent implements OnInit {
       array.splice(i, 1);
       }
     });
-    console.log(this.competitionInfo);
   }
 
   removeSpeciality(event) {
@@ -179,7 +179,6 @@ export class CertificatesComponent implements OnInit {
         array.splice(i, 1);
       }
     });
-    console.log(this.competitionInfo);
     this.specialitiesEquals = this.specialitiesGroups.every((v, i, arr) => v.group === arr[0].group) === true;
   }
 
@@ -201,7 +200,6 @@ export class CertificatesComponent implements OnInit {
           this.specialitiesGroups.push({name: item.name, group: item.group.name});
         });
       }
-      console.log(this.competitionInfo);
     }, (error) => {
       if (error.status === 401) {
         this.tokenInvalid = true;
@@ -210,6 +208,7 @@ export class CertificatesComponent implements OnInit {
     this.httpService.getEdDocType().subscribe(data => this.edDocTypes = data['content']);
     this.httpService.getSubject().subscribe(data => this.subjects = data['content']);
     this.httpService.getFaculties().subscribe(data => this.faculties = data['content']);
+    setTimeout(() => this.getSpecialities(), 1000);
   }
 }
 
