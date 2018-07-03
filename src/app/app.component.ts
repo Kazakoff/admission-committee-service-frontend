@@ -11,7 +11,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class AppComponent implements OnInit {
   approve: boolean;
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(public router: Router, private http: HttpClient) {}
 
   title = 'app';
   token = JSON.parse(localStorage.getItem('token'));
