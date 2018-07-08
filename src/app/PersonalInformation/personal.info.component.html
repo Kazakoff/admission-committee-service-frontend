@@ -1,4 +1,4 @@
-<form #myForm="ngForm" [hidden]="!token || tokenInvalid === true">
+<form #myForm="ngForm" [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isDocLoading || isNationalitiesLoading">
   <div class="container-fluid">
     <label for="doctype">Тип документа </label><label style="color: red">&nbsp;*</label>
     <select class="form-control" id="doctype" [(ngModel)]="personal.documentTypeId.id" [ngModelOptions]="{standalone: true}" name="documentTypeId" ngDefaultControl  #personaldocumentOrgan>

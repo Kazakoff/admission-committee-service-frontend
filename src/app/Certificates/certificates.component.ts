@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {CompetitionInfo} from './competitionInfo';
 import {Eddoctype} from './eddoctype';
 import {Subject} from './subject';
@@ -6,7 +6,7 @@ import {HttpService} from './certificates.service';
 import {Certificates} from './certificates';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import 'rxjs/add/operator/take';
+
 import {Faculty} from './faculty';
 import {NotificationsService} from 'angular2-notifications';
 import {Router} from '@angular/router';
@@ -38,6 +38,10 @@ export class CertificatesComponent implements OnInit {
   specialitiesEquals: boolean;
   tokenInvalid: boolean;
   isAnySpeciality: boolean;
+  isAbiturientLoading: boolean;
+  isEdDocTypeLoading: boolean;
+  isSubjectLoading: boolean;
+  isFacultiesLoading: boolean;
 
   @ViewChild('educationTime')
   educationTime: ElementRef;
@@ -54,8 +58,8 @@ export class CertificatesComponent implements OnInit {
   constructor(protected httpService: HttpService, private _modalService: BsModalService, private _service: NotificationsService, private router: Router) {}
 
   openModalWithComponent() {
-    this._bsModalRef = this._modalService.show(ModalContentComponent);
-    this._bsModalRef.content.saved.take(1).subscribe(this.addNewDocument.bind(this));
+    const initialState = this.competitionInfo;
+    this._bsModalRef = this._modalService.show(ModalContentComponent, Object.assign({}, { initialState }));
   }
 
   successEvent() {
@@ -182,9 +186,8 @@ export class CertificatesComponent implements OnInit {
     this.specialitiesEquals = this.specialitiesGroups.every((v, i, arr) => v.group === arr[0].group) === true;
   }
 
-  ngOnInit() {
-    this.isAnySpeciality = true;
-    this.specialitiesEquals = true;
+  loadAbiturient() {
+    this.isAbiturientLoading = true;
     this.httpService.getAbitur().subscribe(data => {
       this.httpService.userid = data['id'];
       this.tokenInvalid = false;
@@ -200,14 +203,50 @@ export class CertificatesComponent implements OnInit {
           this.specialitiesGroups.push({name: item.name, group: item.group.name});
         });
       }
+      this.isAbiturientLoading = false;
     }, (error) => {
       if (error.status === 401) {
         this.tokenInvalid = true;
       }
+      this.isAbiturientLoading = false;
     });
-    this.httpService.getEdDocType().subscribe(data => this.edDocTypes = data['content']);
-    this.httpService.getSubject().subscribe(data => this.subjects = data['content']);
-    this.httpService.getFaculties().subscribe(data => this.faculties = data['content']);
+  }
+
+  loadEdDocType() {
+    this.isEdDocTypeLoading = true;
+    this.httpService.getEdDocType().subscribe(data => {
+      this.edDocTypes = data['content'];
+      this.isEdDocTypeLoading = false;
+    }, () => this.isEdDocTypeLoading = false);
+  }
+
+  loadSubject() {
+    this.isSubjectLoading = true;
+    this.httpService.getSubject().subscribe(data => {
+      this.subjects = data['content'];
+      this.isSubjectLoading = false;
+    }, () => this.isSubjectLoading = false);
+  }
+
+  loadFaculties() {
+    this.isFacultiesLoading = true;
+    this.httpService.getFaculties().subscribe(data => {
+      this.faculties = data['content'];
+      this.isFacultiesLoading = false;
+    }, () => this.isFacultiesLoading = false);
+  }
+
+  ngOnInit() {
+    this.isAbiturientLoading = false;
+    this.isEdDocTypeLoading = false;
+    this.isSubjectLoading = false;
+    this.isFacultiesLoading = false;
+    this.isAnySpeciality = true;
+    this.specialitiesEquals = true;
+    this.loadAbiturient();
+    this.loadEdDocType();
+    this.loadSubject();
+    this.loadFaculties();
     setTimeout(() => this.getSpecialities(), 1000);
   }
 }
@@ -230,13 +269,14 @@ export class CertificatesComponent implements OnInit {
 export class ModalContentComponent implements OnInit {
   token = JSON.parse(localStorage.getItem('token'));
   certificate: Certificates = new Certificates();
-  saved: EventEmitter<any> = new EventEmitter();
   edDocTypes: Eddoctype[] = [];
   subjects: Subject[] = [];
   scales: object[] = [{name: '10-бальная', id: 'TEN_POINT'}, {name: '5-бальная', id: 'FIVE_POINT'}];
   scaleError: boolean;
   educationDocumentError: boolean;
   subjectError: boolean;
+
+  @Input() documents = [];
 
   @ViewChild('one')
   oneMark: ElementRef;
@@ -323,7 +363,6 @@ export class ModalContentComponent implements OnInit {
   }
 
   push() {
-
     this.certificate.marks = [];
     this.certificate.marks.push(Number(this.oneMark.nativeElement.value));
 
@@ -356,7 +395,8 @@ export class ModalContentComponent implements OnInit {
       this.subjectError = true;
       this.errorEvent();
     } else {
-        this.saved.emit(this.certificate);
+        this.documents.push(this.certificate);
+        this._bsModalRef.hide();
         this.successEvent();
       }
     }

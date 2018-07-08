@@ -2,7 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Address} from './address';
 import {HttpService} from './address.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import 'rxjs/add/operator/debounceTime';
+
 import {NotificationsService} from 'angular2-notifications';
 import {Region} from './region';
 import {District} from './district';
@@ -39,6 +39,9 @@ export class AddressComponent implements OnInit {
   error: any;
   errorCity: any;
   tokenInvalid: boolean;
+  isAbiturientLoading: boolean;
+  isRegionLoading: boolean;
+  isSubmitLoading: boolean;
 
   @ViewChild('addCityLabel')
   addCityLabel: ElementRef;
@@ -99,6 +102,7 @@ export class AddressComponent implements OnInit {
   }
 
   submit(address: Address) {
+    this.isSubmitLoading = true;
     this.httpService.postData(address)
       .subscribe(
         (data: Address) => {
@@ -106,8 +110,12 @@ export class AddressComponent implements OnInit {
           this.done = true;
           this.error = undefined;
           this.successEvent();
+          this.isSubmitLoading = false;
         },
-        error => { this.error = error; this.errorEvent(); }
+        error => {
+          this.error = error; this.errorEvent();
+          this.isSubmitLoading = false;
+        }
       );
   }
 
@@ -157,10 +165,8 @@ export class AddressComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    this.tokenInvalid = false;
-    this.addCityLabel.nativeElement.hidden = true;
-    this.address.cityId = this.cities[0];
+  loadAbiturient() {
+    this.isAbiturientLoading = true;
     this.httpService.getAbitur().subscribe(data => {
       this.httpService.userid = data['id'];
       this.tokenInvalid = false;
@@ -177,12 +183,33 @@ export class AddressComponent implements OnInit {
         this.address.appartment = this.addressObject['appartment'];
         this.address.phone = this.addressObject['phone'];
       }
+      this.isAbiturientLoading = false;
     }, (error) => {
       if (error.status === 401) {
         this.tokenInvalid = true;
       }
+      this.isAbiturientLoading = false;
     });
-    this.httpService.getRegion().subscribe(data => this.regions = data['content']);
+  }
+
+  loadRegion() {
+    this.isRegionLoading = true;
+    this.httpService.getRegion().subscribe(data => {
+      this.regions = data['content'];
+      this.isRegionLoading = false;
+    }, () => this.isRegionLoading = false);
+  }
+
+  ngOnInit() {
+    this.isAbiturientLoading = false;
+    this.isRegionLoading = false;
+    this.tokenInvalid = false;
+    this.isSubmitLoading = false;
+    this.addCityLabel.nativeElement.hidden = true;
+    this.address.cityId = this.cities[0];
+
+    this.loadAbiturient();
+    this.loadRegion();
   }
 
 }

@@ -21,6 +21,8 @@ import {CertificatesComponent, ModalContentComponent} from './Certificates/certi
 import {MyFilterPipe} from './Certificates/MyFilterPipe';
 import {ModalModule, PopoverModule, TooltipModule} from 'ngx-bootstrap';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import {NgProgressModule} from '@ngx-progressbar/core';
+import {NgProgressHttpModule} from '@ngx-progressbar/http';
 
 const appRoutes: Routes = [
   {path: 'personal', component: PersonalInfoComponent},
@@ -61,6 +63,11 @@ const appRoutes: Routes = [
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),
     TooltipModule.forRoot(),
+    NgProgressModule.forRoot({
+      thick: true,
+      meteor: true
+    }),
+    NgProgressHttpModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

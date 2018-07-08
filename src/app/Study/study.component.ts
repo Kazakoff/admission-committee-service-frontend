@@ -45,6 +45,12 @@ export class StudyComponent implements OnInit {
   newEducationInstitution: NewEducationInstitution = new NewEducationInstitution();
   errorInstitution: any;
   tokenInvalid: boolean;
+  isAbiturientLoading: boolean;
+  isEdLevelLoading: boolean;
+  isLanguageLoading: boolean;
+  isSubmitLoading: boolean;
+  isEdTypeLoading: boolean;
+  isEstCityLoading: boolean;
 
   @ViewChild('addEducationalInstitution')
   addEducationalInstitution: ElementRef;
@@ -96,6 +102,7 @@ export class StudyComponent implements OnInit {
   }
 
   submit(education: Education) {
+    this.isSubmitLoading = true;
     this.httpService.postData(education)
       .subscribe(
         (data: Education) => {
@@ -103,8 +110,12 @@ export class StudyComponent implements OnInit {
           this.done = true;
           this.error = undefined;
           this.successEvent();
+          this.isSubmitLoading = false;
         },
-        error => { this.error = error; this.errorEvent(); }
+        error => {
+          this.error = error; this.errorEvent();
+          this.isSubmitLoading = false;
+        }
       );
 
   }
@@ -130,14 +141,8 @@ export class StudyComponent implements OnInit {
     this.addEdInstButton.nativeElement.innerHTML = 'Добавить учреждение образования';
   }
 
-  ngOnInit() {
-    this.addEducationalInstitution.nativeElement.hidden = true;
-    this.education.educationLevelId = this.educationLevel[0];
-    this.education.educationInstitutionId = this.educationInstitutions[0];
-    this.education.languageId = this.language[0];
-    this.newEducationInstitution.typeId = this.edTypes[0];
-    this.newEducationInstitution.estCityId = this.estCities[0];
-
+  loadAbiturient() {
+    this.isAbiturientLoading = true;
     this.httpService.getAbitur().subscribe(data => {
       this.httpService.userid = data['id'];
       this.tokenInvalid = false;
@@ -153,15 +158,66 @@ export class StudyComponent implements OnInit {
         this.education.goldMedalist = this.educationObject['goldMedalist'];
         this.education.honours = this.educationObject['honours'];
       }
+      this.isAbiturientLoading = false;
     }, (error) => {
       if (error.status === 401) {
         this.tokenInvalid = true;
+        this.isAbiturientLoading = false;
       }
     });
-    this.httpService.getEdLevel().subscribe(data => this.educationLevel = data['content']);
-    this.httpService.getLanguage().subscribe(data => this.language = data['content']);
-    this.httpService.getEdType().subscribe(data => this.edTypes = data['content']);
-    this.httpService.getEstCity().subscribe(data => this.estCities = data['content']);
+  }
+
+  loadLanguage() {
+    this.isLanguageLoading = true;
+    this.httpService.getLanguage().subscribe(data => {
+      this.language = data['content'];
+      this.isLanguageLoading = false;
+    }, () => this.isLanguageLoading = false);
+  }
+
+  loadEdLevel() {
+    this.isEdLevelLoading = true;
+    this.httpService.getEdLevel().subscribe(data => {
+      this.educationLevel = data['content'];
+      this.isEdLevelLoading = false;
+    }, () => this.isEdLevelLoading = false);
+  }
+
+  loadEdType() {
+    this.isEdTypeLoading = true;
+    this.httpService.getEdType().subscribe(data => {
+      this.edTypes = data['content'];
+      this.isEdTypeLoading = false;
+    }, () => this.isEdTypeLoading = false);
+  }
+
+  loadEstCity() {
+    this.isEstCityLoading = true;
+    this.httpService.getEstCity().subscribe(data => {
+      this.estCities = data['content'];
+      this.isEstCityLoading = false;
+    }, () => this.isEstCityLoading = false);
+  }
+
+  ngOnInit() {
+    this.isAbiturientLoading = false;
+    this.isLanguageLoading = false;
+    this.isEdLevelLoading = false;
+    this.isEdTypeLoading = false;
+    this.isEstCityLoading = false;
+    this.isSubmitLoading = false;
+    this.addEducationalInstitution.nativeElement.hidden = true;
+    this.education.educationLevelId = this.educationLevel[0];
+    this.education.educationInstitutionId = this.educationInstitutions[0];
+    this.education.languageId = this.language[0];
+    this.newEducationInstitution.typeId = this.edTypes[0];
+    this.newEducationInstitution.estCityId = this.estCities[0];
+
+   this.loadAbiturient();
+   this.loadLanguage();
+   this.loadEdLevel();
+   this.loadEdType();
+   this.loadEstCity();
   }
 
 }

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Auth} from './auth';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import 'rxjs/add/operator/delay';
-import 'rxjs/add/operator/timeout';
+
+
 import {NotificationsService} from 'angular2-notifications';
 import {GENERATE_TOKEN} from '../URLS';
 

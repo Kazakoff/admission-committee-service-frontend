@@ -27,6 +27,8 @@ export class AdditionalComponent implements OnInit {
   done = false;
   error: any;
   tokenInvalid: boolean;
+  isAbiturientLoading: boolean;
+  isSubmitLoading: boolean;
 
   constructor(private httpService: HttpService, private _service: NotificationsService) {
   }
@@ -39,8 +41,12 @@ export class AdditionalComponent implements OnInit {
           this.done = true;
           this.error = undefined;
           this.successEvent();
+          this.isSubmitLoading = false;
         },
-        error => { this.error = error; this.errorEvent(); }
+        error => {
+          this.error = error; this.errorEvent();
+          this.isSubmitLoading = false;
+        }
       );
   }
 
@@ -62,8 +68,8 @@ export class AdditionalComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-
+  loadAbiturient() {
+    this.isAbiturientLoading = true;
     this.httpService.getAbitur().subscribe(data => {
       this.httpService.userid = data['id'];
       this.tokenInvalid = false;
@@ -82,11 +88,18 @@ export class AdditionalComponent implements OnInit {
         this.additional.experience = this.additionalObject['experience'];
         this.additional.reAdmission = this.additionalObject['reAdmission'];
       }
+      this.isAbiturientLoading = false;
     }, (error) => {
       if (error.status === 401) {
         this.tokenInvalid = true;
       }
+      this.isAbiturientLoading = false;
     });
+  }
+  ngOnInit() {
+    this.isAbiturientLoading = false;
+    this.isSubmitLoading = false;
+    this.loadAbiturient();
   }
 
 }

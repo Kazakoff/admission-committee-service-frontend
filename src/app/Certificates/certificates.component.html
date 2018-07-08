@@ -1,4 +1,4 @@
-<div class="container-fluid" [hidden]="!token || tokenInvalid === true">
+<div class="container-fluid" [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isEdDocTypeLoading || isSubjectLoading || isFacultiesLoading">
   <label for="educationTime">Выберите срок получения образования</label>
 <select class="form-control" name="educationTime" id="educationTime" (change)="getSpecialities()" #educationTime>
   <option *ngFor="let data of educationTimes" [ngValue]="data.id" [selected]="data.id === 1">{{data.name}}</option>
@@ -16,8 +16,8 @@
     <option *ngFor="let data of specialities" [ngValue]="data.id">{{data.name}}</option>
 </select><br>
 <button type="button" class="btn btn-success" (click)="addSpeciality()">Добавить специальность</button>
-</div><br [hidden]="!token || tokenInvalid === true">
-<table class="table table-striped" [hidden]="!token || tokenInvalid === true">
+</div><br [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isEdDocTypeLoading || isSubjectLoading || isFacultiesLoading">
+<table class="table table-striped" [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isEdDocTypeLoading || isSubjectLoading || isFacultiesLoading">
   <thead class="thead-dark">
   <tr>
     <th></th>
@@ -36,7 +36,7 @@
 <div class="alert alert-danger" role="alert" style="margin: 0 20px 20px" [hidden]="specialitiesEquals">
   Нельзя добавлять специальности из разных групп специальности либо более одной специальности с группой "Без группы"!
 </div>
-<table class="table table-striped" [hidden]="!token || tokenInvalid === true">
+<table class="table table-striped" [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isEdDocTypeLoading || isSubjectLoading || isFacultiesLoading">
   <thead class="thead-dark">
     <tr>
       <th></th>
@@ -91,14 +91,14 @@
     </tr>
   </tbody>
 </table>
-<div class="container-fluid" [hidden]="!token || tokenInvalid === true">
+<div class="container-fluid" [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isEdDocTypeLoading || isSubjectLoading || isFacultiesLoading">
   <button type="button" class="btn btn-success" (click)="openModalWithComponent()">Добавить документ</button>
 </div>
-<br [hidden]="!token || tokenInvalid === true"><br [hidden]="!token || tokenInvalid === true">
+<br [hidden]="!token || tokenInvalid === true"><br [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isEdDocTypeLoading || isSubjectLoading || isFacultiesLoading">
 <div class="alert alert-danger" role="alert" [hidden]="isAnySpeciality">
   Пожалуйста, добавьте хотя бы одну желаемую специальность!
 </div>
-<div class="container-fluid" [hidden]="!token || tokenInvalid === true">
+<div class="container-fluid" [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isEdDocTypeLoading || isSubjectLoading || isFacultiesLoading">
   <input type="button" [routerLink]="['/additional']" class="btn btn-danger btn-lg" value="Назад" />
   <input type="button" (click)="submit(competitionInfo)" [disabled]="!specialitiesEquals || !isAnySpeciality" class="btn btn-success btn-lg" value="Далее"
          tooltip="Пожалуйста, перед отправкой формы тщательно проверьте все введённые Вами данные." />

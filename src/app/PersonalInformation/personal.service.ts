@@ -44,10 +44,6 @@ export class HttpService {
 
   getAbitur() {
     return this.http.get(GET_ABITURIENT, {headers: this.addHeaders(), withCredentials: true});
-
-  }
-  getDocSeria() {
-    return this.http.get(GET_DOC_SERIA_PROFILE, {headers: this.addHeaders(), withCredentials: true});
   }
 
   getDocType() {

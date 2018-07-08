@@ -39,6 +39,10 @@ export class PersonalInfoComponent implements OnInit {
   rightNow: Date = new Date();
   minDate: Date = new Date(1930, 0, 1);
   tokenInvalid: boolean;
+  isAbiturientLoading: boolean;
+  isDocLoading: boolean;
+  isNationalitiesLoading: boolean;
+  isSubmitLoading: boolean;
 
   constructor(private httpService: HttpService, public datepipe: DatePipe, private _service: NotificationsService) {
   }
@@ -62,6 +66,7 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   submit(personal: Personal) {
+    this.isSubmitLoading = true;
     this.httpService.postData(personal)
       .subscribe(
         (data: Personal) => {
@@ -69,19 +74,36 @@ export class PersonalInfoComponent implements OnInit {
           this.done = true;
           this.error = undefined;
           this.successEvent();
+          this.isSubmitLoading = false;
         },
-        error => { this.error = error; this.errorEvent(); }
+        error => {
+          this.error = error;
+          this.errorEvent();
+          this.isSubmitLoading = false;
+        }
       );
   }
 
-  ngOnInit() {
-    this.personal.documentTypeId = this.doctype[0];
-    this.personal.nationalityId = this.nationality[0];
+  loadDocTypes() {
+    this.isDocLoading = true;
+    this.httpService.getDocType().subscribe(data => {
+      this.doctype = data['content'];
+      this.isDocLoading = false;
+    }, () => this.isDocLoading = false);
+  }
 
-    this.httpService.getDocType().subscribe(data => this.doctype = data['content']);
-    this.httpService.getNationality().subscribe(data => this.nationality = data['content']);
+  loadNatonalities() {
+    this.isNationalitiesLoading = true;
+    this.httpService.getNationality().subscribe(data => {
+      this.nationality = data['content'];
+      this.isNationalitiesLoading = false;
+    }, () => this.isNationalitiesLoading = false);
+  }
 
+  loadAbiturient() {
+    this.isAbiturientLoading = true;
     this.httpService.getAbitur().subscribe(data => {
+      console.log(this.isAbiturientLoading);
       this.personalObject = data['profileInfo'];
       if (this.personalObject == null) {
         console.log('Set inputs');
@@ -102,11 +124,25 @@ export class PersonalInfoComponent implements OnInit {
       }
       this.httpService.userid = data['id'];
       this.tokenInvalid = false;
+      this.isAbiturientLoading = false;
     }, (error) => {
       if (error.status === 401) {
         this.tokenInvalid = true;
       }
+      this.isAbiturientLoading = false;
     });
+  }
 
+  ngOnInit() {
+    this.isAbiturientLoading = false;
+    this.isDocLoading = false;
+    this.isNationalitiesLoading = false;
+    this.isSubmitLoading = false;
+    this.personal.documentTypeId = this.doctype[0];
+    this.personal.nationalityId = this.nationality[0];
+
+    this.loadAbiturient();
+    this.loadDocTypes();
+    this.loadNatonalities();
   }
 }

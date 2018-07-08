@@ -1,4 +1,4 @@
-<form #myForm="ngForm" [hidden]="!token || tokenInvalid === true">
+<form #myForm="ngForm" [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isRegionLoading">
   <div class="container-fluid">
     <label for="postcode">Почтовый индекс</label><label style="color: red">&nbsp;*</label>
     <input type="text" class="form-control" id="postcode" placeholder="Индекс" [(ngModel)]="address.postCode" name="postcode" required maxlength="50"><br>
