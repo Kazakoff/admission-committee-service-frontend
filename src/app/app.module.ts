@@ -23,6 +23,7 @@ import {ModalModule, PopoverModule, TooltipModule} from 'ngx-bootstrap';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {NgProgressModule} from '@ngx-progressbar/core';
 import {NgProgressHttpModule} from '@ngx-progressbar/http';
+import {StatisticsComponent} from './Statistics/statistics.component';
 
 const appRoutes: Routes = [
   {path: 'personal', component: PersonalInfoComponent},
@@ -32,6 +33,7 @@ const appRoutes: Routes = [
   {path: 'reg', component: RegistrationComponent},
   {path: 'additional', component: AdditionalComponent},
   {path: 'cer', component: CertificatesComponent},
+  {path: 'statistics', component: StatisticsComponent},
   {path: '**', redirectTo: '/'}
 ];
 
@@ -47,6 +49,7 @@ const appRoutes: Routes = [
     CertificatesComponent,
     MyFilterPipe,
     ModalContentComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,

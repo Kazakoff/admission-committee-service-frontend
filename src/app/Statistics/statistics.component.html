@@ -1,0 +1,22 @@
+<table class="table table-striped table-bordered" [hidden]="!token">
+  <thead class="thead-dark">
+  <tr>
+    <th>Наименование специальности</th>
+    <th>Форма обучения</th>
+    <th>Срок обучения</th>
+    <th>Количество заявок, поданных через кабинет</th>
+    <th>План бюджет</th>
+    <th>План внебюджет</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let stat of statistics">
+    <td>{{stat.speciality}}</td>
+    <td>{{stat.educationForm}}</td>
+    <td>{{stat.educationTime}}</td>
+    <td>{{stat.countAbiturients}}</td>
+    <td>{{stat.planFree}}</td>
+    <td>{{stat.planFree}}</td>
+  </tr>
+  </tbody>
+</table>
