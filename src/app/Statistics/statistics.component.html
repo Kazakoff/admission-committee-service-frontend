@@ -1,10 +1,25 @@
+<br><ul class="list-group container">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Количество заявок с выбранной специальностью
+    <span class="badge badge-success badge-pill">{{countWithSpeciality}}</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Количество заявок без выбранной специальности
+    <span class="badge badge-danger badge-pill">{{countWithoutSpeciality}}</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Количество подтверждённых заявок
+    <span class="badge badge-primary badge-pill">{{summaryCountApproved}}</span>
+  </li>
+</ul><br>
 <table class="table table-striped table-bordered" [hidden]="!token">
   <thead class="thead-dark">
   <tr>
-    <th>Наименование специальности</th>
-    <th>Форма обучения</th>
-    <th>Срок обучения</th>
+    <th><i class="fa fa-fw fa-sort fa-lg" (click)="sortBySpeciality()" tooltip="Отсортировать"></i> Наименование специальности</th>
+    <th><i class="fa fa-fw fa-sort fa-lg" (click)="sortByEducationForm()" tooltip="Отсортировать"></i> Форма обучения</th>
+    <th><i class="fa fa-fw fa-sort fa-lg" (click)="sortByEducationTime()" tooltip="Отсортировать"></i> Срок обучения</th>
     <th>Количество заявок, поданных через кабинет</th>
+    <th>Количество подтверждённых заявок</th>
     <th>План бюджет</th>
     <th>План внебюджет</th>
   </tr>
@@ -15,6 +30,7 @@
     <td>{{stat.educationForm}}</td>
     <td>{{stat.educationTime}}</td>
     <td>{{stat.countAbiturients}}</td>
+    <td>{{stat.countApproved}}</td>
     <td>{{stat.planFree}}</td>
     <td>{{stat.planPay}}</td>
   </tr>

@@ -24,6 +24,7 @@ import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {NgProgressModule} from '@ngx-progressbar/core';
 import {NgProgressHttpModule} from '@ngx-progressbar/http';
 import {StatisticsComponent} from './Statistics/statistics.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 const appRoutes: Routes = [
   {path: 'personal', component: PersonalInfoComponent},
@@ -70,7 +71,8 @@ const appRoutes: Routes = [
       thick: true,
       meteor: true
     }),
-    NgProgressHttpModule
+    NgProgressHttpModule,
+    AngularFontAwesomeModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
