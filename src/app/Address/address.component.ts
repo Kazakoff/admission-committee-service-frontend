@@ -178,7 +178,7 @@ export class AddressComponent implements OnInit {
         this.address.cityId = this.addressObject['city'];
         this.cities.push(this.address.cityId);
         this.address.street = this.addressObject['street'];
-        this.address.home = this.addressObject['home'];
+        this.address.house = this.addressObject['house'];
         this.address.building = this.addressObject['building'];
         this.address.appartment = this.addressObject['appartment'];
         this.address.phone = this.addressObject['phone'];

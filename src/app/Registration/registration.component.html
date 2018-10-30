@@ -4,9 +4,6 @@
   <div class="contact-form">
     <form #myForm="ngForm">
       <div class="col-xs-6 wow animated slideInLeft" data-wow-delay=".5s">
-        <select id="role" [(ngModel)]="registration.roleId.id" name="role" ngDefaultControl>
-          <option *ngFor="let data of roles" [ngValue]="data.id">{{data.name}}</option>
-        </select>
         <small id="emailHelp" class="form-text text-muted"> Введите ваш e-mail для регистрации!</small>
         <input type="email" id="email" placeholder="E-mail" [(ngModel)]="registration.email" name="email" required class="form" />
         <small id="passwordHelp" class="form-text text-muted"> Введите ваш пароль для регистрации!</small>

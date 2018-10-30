@@ -2,7 +2,7 @@ import {Role} from './role';
 
 export class Registration {
 
-  roleId: Role
+  roleId: Role;
   email: string;
   password: string;
 

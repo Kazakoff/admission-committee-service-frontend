@@ -46,7 +46,9 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.registration.roleId = this.roles[0];
-    this.httpService.getRoles().subscribe(data => this.roles = data);
+    this.httpService.getRoles().subscribe(data => {
+      this.roles = data;
+      this.registration.roleId = this.roles.find(role => role.name === 'Абитуриент');
+    });
   }
 }

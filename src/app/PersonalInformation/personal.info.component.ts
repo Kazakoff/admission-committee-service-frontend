@@ -17,6 +17,10 @@ import {NotificationsService} from 'angular2-notifications';
     input.ng-touched.ng-valid {
       border: solid green 2px;
     }
+    
+    label.active {
+      box-shadow: 0 0 0 0.2rem rgba(0,123,255,.5);
+    }
   `],
   providers: [HttpService, DatePipe]
 })
@@ -103,7 +107,6 @@ export class PersonalInfoComponent implements OnInit {
   loadAbiturient() {
     this.isAbiturientLoading = true;
     this.httpService.getAbitur().subscribe(data => {
-      console.log(this.isAbiturientLoading);
       this.personalObject = data['profileInfo'];
       if (this.personalObject == null) {
         console.log('Set inputs');
@@ -131,6 +134,19 @@ export class PersonalInfoComponent implements OnInit {
       }
       this.isAbiturientLoading = false;
     });
+  }
+
+  setSex(sex) {
+    this.personal.sex = sex === 'man' ? 1 : 2;
+  }
+
+  isRadioChecked(sex) {
+    switch (sex) {
+      case 'man':
+        return this.personal.sex === 1;
+      case 'women':
+        return this.personal.sex === 2;
+    }
   }
 
   ngOnInit() {

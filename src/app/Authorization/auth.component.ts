@@ -44,6 +44,8 @@ token: any;
   }
 
   submit() {
+    console.log(this.auth.email);
+    console.log(this.auth.password);
     this.http.get(GENERATE_TOKEN, {headers: this.addHeaders(), withCredentials: true})
       .subscribe(
         (data) => {

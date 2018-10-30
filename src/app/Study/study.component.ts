@@ -200,6 +200,8 @@ export class StudyComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.education.goldMedalist = false;
+    this.education.honours = false;
     this.isAbiturientLoading = false;
     this.isLanguageLoading = false;
     this.isEdLevelLoading = false;

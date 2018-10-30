@@ -83,6 +83,16 @@
     <input type="text" class="form-control" placeholder="Идентификационный номер" id="identification" [(ngModel)]="personal.identificationNumber" name="identificationNumber" maxlength="20"><br>
   </div>
 
+  <div class="container-fluid"><label>Пол</label></div>
+  <div class="container-fluid">
+    <div class="btn-group">
+      <label class="btn btn-primary" (click)="setSex('man')"
+            btnRadio="Left" tabindex="0" role="button" [ngClass]="{active: isRadioChecked('man')}">Мужской</label>
+      <label class="btn btn-primary" (click)="setSex('women')"
+            btnRadio="Middle" tabindex="0" role="button" [ngClass]="{active: isRadioChecked('women')}">Женский</label>
+    </div>
+  </div>
+
   <div class="container-fluid">
     <input type="button" [routerLink]="['/']" class="btn btn-danger btn-lg" value="Назад" />
     <input type="button" (click)="submit(personal)" [disabled]="myForm.invalid" [routerLink]="['/address']" class="btn btn-success btn-lg" value="Далее"
