@@ -8,7 +8,7 @@
 }
 
 .pass {
-  background-color: #28a745;
+  background-color: #007bff;
 }
 
 .not-pass {
@@ -16,7 +16,7 @@
 }
 
 .priority-pass {
-  background-color: #007bff;
+  background-color: #28a745;
 }
 
 .sum {
