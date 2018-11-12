@@ -191,7 +191,7 @@ export class CertificatesComponent implements OnInit {
     this.httpService.getAbitur().subscribe(data => {
       this.httpService.userid = data['id'];
       this.tokenInvalid = false;
-      this.competitionObject = data['competitionInfo'];
+      this.competitionObject = data['competitionInfo'] || { documents: [], specialities: [] };
       this.competitionDoc = this.competitionObject['documents'];
       if (this.competitionObject == null) {
       } else {

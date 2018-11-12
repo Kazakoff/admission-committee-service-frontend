@@ -26,7 +26,7 @@ export class HttpService {
 
     const body = {
       documents: competitionInfo.documents,
-      specialities: competitionInfo.specialities,
+      specialityIds: competitionInfo.specialities,
     };
 
     return this.http.put(PUT_ABITURIENT_COMPETITION + this.userid, body, {
