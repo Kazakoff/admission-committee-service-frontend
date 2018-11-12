@@ -47,6 +47,25 @@
           </div>
         </div>
       </div>
+      <div *ngIf="approve" class="container">
+        <table class="table table-striped table-bordered" [hidden]="!token">
+          <thead class="thead-dark">
+          <tr>
+            <th>Приоритет</th>
+            <th>Специальность</th>
+            <th>Проходной балл</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let stat of specialities; let i = index" [ngClass]="{pass: isStatusPass(stat.status), 'not-pass': isStatusNotPass(stat.status), 'priority-pass': isStatusPriorityPass(stat.status)}">
+            <td>{{i + 1}}</td>
+            <td>{{stat.speciality}}</td>
+            <td>{{stat.sum}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <span class="sum">Ваш суммарный балл: {{sum}}</span>
+      </div>
     </header>
   </div>
   <ng-progress></ng-progress>
