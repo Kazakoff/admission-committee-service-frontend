@@ -103,7 +103,6 @@ export class StatisticsComponent implements OnInit {
 
   ngOnInit() {
     this.httpService.getStats().subscribe((data) => {
-      console.log(data);
       this.statistics = data['specialities'];
       this.countWithSpeciality = data['countWithSpeciality'];
       this.countWithoutSpeciality = data['countWithoutSpeciality'];

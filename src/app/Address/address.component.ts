@@ -159,7 +159,7 @@ export class AddressComponent implements OnInit {
         this.cities = [];
         this.cities.push(city);
         this.address.cityId = this.cities[0];
-        }, error => { this.errorCity = error; console.log(this.errorCity); });
+        }, error => { this.errorCity = error; });
       this.addCityLabel.nativeElement.hidden = true;
       this.showCityAddButton.nativeElement.innerHTML = 'Добавить населённый пункт';
     }

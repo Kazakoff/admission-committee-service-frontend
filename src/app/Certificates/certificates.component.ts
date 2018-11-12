@@ -111,7 +111,6 @@ export class CertificatesComponent implements OnInit {
         if (item.name === specialityName) {
           speciality.name = item.name;
           speciality.group = item.group.name;
-          console.log(this.specialitiesGroups);
           if (!this.competitionInfo.specialities.includes(item.id) && !this.specialitiesGroups.some((v) => v.group === 'Без группы')) {
             this.competitionInfo.specialities.push(item.id);
             this.specialitiesGroups.push(speciality);
@@ -128,7 +127,6 @@ export class CertificatesComponent implements OnInit {
 
   addNewDocument(someData) {
     this.competitionInfo.documents.push(someData);
-    console.log(this.competitionInfo);
     this._bsModalRef.hide();
   }
 
