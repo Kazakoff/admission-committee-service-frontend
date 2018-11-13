@@ -48,10 +48,12 @@ export class AppComponent implements OnInit {
       this.http.get(GET_ABITURIENT, {headers: this.addHeaders(), withCredentials: true}).subscribe(data => {
         this.approve = data['profileApproved'];
         this.userId = data['id'];
-        this.http.get(GET_STATUS + this.userId + '/status', {headers: this.addHeaders(), withCredentials: true}).subscribe(response => {
-          this.specialities = response['specialities'];
-          this.sum = response['sum'];
-        });
+        if (this.approve) {
+          this.http.get(GET_STATUS + this.userId + '/status', {headers: this.addHeaders(), withCredentials: true}).subscribe(response => {
+            this.specialities = response['specialities'];
+            this.sum = response['sum'];
+          });
+        }
       });
     }
   }

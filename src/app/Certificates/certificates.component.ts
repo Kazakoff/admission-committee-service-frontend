@@ -193,13 +193,17 @@ export class CertificatesComponent implements OnInit {
       this.competitionDoc = this.competitionObject['documents'];
       if (this.competitionObject == null) {
       } else {
-        this.competitionObject['documents'].forEach((items, j) => {
-          this.competitionInfo.documents.push(this.convertDocumentObject(items));
-        });
-        this.competitionObject['specialities'].forEach((item, i) => {
-          this.competitionInfo.specialities.push(item.id);
-          this.specialitiesGroups.push({name: item.name, group: item.group.name});
-        });
+        if (this.competitionObject['documents']) {
+          this.competitionObject['documents'].forEach((items, j) => {
+            this.competitionInfo.documents.push(this.convertDocumentObject(items));
+          });
+        }
+        if (this.competitionObject['specialities']) {
+          this.competitionObject['specialities'].forEach((item, i) => {
+            this.competitionInfo.specialities.push(item.id);
+            this.specialitiesGroups.push({name: item.name, group: item.group.name});
+          });
+        }
       }
       this.isAbiturientLoading = false;
     }, (error) => {
