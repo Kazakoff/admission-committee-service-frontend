@@ -23,7 +23,7 @@
       <option *ngFor="let data of scales" [ngValue]="data.id">{{data.name}}</option>
     </select>
     <label>Серия документа</label><label style="color: red">&nbsp;*</label>
-    <input [(ngModel)]="certificate.seria" name="seria" class="form-control" required #seria/>
+    <input [(ngModel)]="certificate.seria" name="seria" class="form-control" #seria/>
     <label>Номер документа</label><label style="color: red">&nbsp;*</label>
     <input [(ngModel)]="certificate.number" name="number" class="form-control" required #number/>
     <label [hidden]="educationDocumentTypeId.selectedIndex === 5">Учреждение образования</label>

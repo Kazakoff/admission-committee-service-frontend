@@ -23,13 +23,15 @@
     <th></th>
     <th>Название специальности</th>
     <th>Группа специальности</th>
+    <th>Приоритет</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let specialitiesGroup of specialitiesGroups">
+  <tr *ngFor="let specialitiesGroup of specialitiesGroups; let i = index">
     <td><button class="btn btn-danger" (click)="removeSpeciality($event)">Удалить</button></td>
     <td>{{specialitiesGroup.name}}</td>
     <td>{{specialitiesGroup.group}}</td>
+    <td>{{i + 1}}</td>
   </tr>
   </tbody>
 </table><br>
