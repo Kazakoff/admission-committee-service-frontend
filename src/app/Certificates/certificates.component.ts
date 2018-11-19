@@ -90,14 +90,25 @@ export class CertificatesComponent implements OnInit {
   }
 
   getSpecialities() {
+    if (!this.educationTime.nativeElement.options[this.educationTime.nativeElement.selectedIndex]) { return; }
+
     const educationTimeName = this.educationTime.nativeElement.options[this.educationTime.nativeElement.selectedIndex].text;
     let educationTimeId;
+
     this.educationTimes.forEach((item) => { if (item.name === educationTimeName) { educationTimeId = item.id; }});
+
+    if (!this.educationForm.nativeElement.options[this.educationForm.nativeElement.selectedIndex]) { return; }
+
     const educationFormName = this.educationForm.nativeElement.options[this.educationForm.nativeElement.selectedIndex].text;
     let educationFormId;
+
     this.educationForms.forEach((item) => { if (item.name === educationFormName) { educationFormId = item.id; }});
+
+    if (!this.facultyId.nativeElement.options[this.facultyId.nativeElement.selectedIndex]) { return; }
+
     const facultyIdName = this.facultyId.nativeElement.options[this.facultyId.nativeElement.selectedIndex].text;
     let facultyIdId;
+
     this.faculties.forEach((item) => { if (item.name === facultyIdName) { facultyIdId = item.id; }});
 
     this.httpService.getSpeciality(educationTimeId, educationFormId, facultyIdId).subscribe(data => this.specialities = <any[]>data);
@@ -107,6 +118,7 @@ export class CertificatesComponent implements OnInit {
     if (this.speciality.nativeElement.selectedIndex !== -1) {
       const specialityName = this.speciality.nativeElement.options[this.speciality.nativeElement.selectedIndex].text;
       const speciality = {name: '', group: ''};
+
       this.specialities.forEach((item) => {
         if (item.name === specialityName) {
           speciality.name = item.name;
@@ -123,6 +135,22 @@ export class CertificatesComponent implements OnInit {
       }
       this.isAnySpeciality = true;
     }
+  }
+
+  getDocTypeName(id) {
+    const docType = this.edDocTypes.find(item => item.id === id);
+
+    if (!docType) { return; }
+
+    return docType.name;
+  }
+
+  getSubjectName(id) {
+    const subject = this.subjects.find(item => item.id === id);
+
+    if (!subject) { return; }
+
+    return subject.name;
   }
 
   addNewDocument(someData) {
@@ -324,8 +352,10 @@ export class ModalContentComponent implements OnInit {
 
   constructor(protected httpService: HttpService, public _bsModalRef: BsModalRef, private _service: NotificationsService) { }
 
-  oneEducationChange() {
-    if (this.educationDocumentTypeId.nativeElement.selectedIndex === 5) {
+  oneEducationChange(event) {
+    const docType = this.edDocTypes.find(item => item.id === +event.target.value.charAt(0));
+
+    if (docType.name === 'Экзамен' || docType.name === 'Сертификат ЦТ') {
       this.scale.nativeElement.selectedIndex = -1;
       this.oneMark.nativeElement.value = 0;
       this.twoMark.nativeElement.value = 0;
@@ -340,10 +370,18 @@ export class ModalContentComponent implements OnInit {
       this.certificate.scale = null;
     }
 
-    if (this.educationDocumentTypeId.nativeElement.selectedIndex !== 5) {
+    if (docType.name !== 'Экзамен' && docType.name !== 'Сертификат') {
       this.subjectId.nativeElement.selectedIndex = -1;
       this.certificate.subjectId = null;
     }
+  }
+
+  isNotExamOrCertificate() {
+    const docType = this.edDocTypes.find(item => item.id === this.certificate.educationDocumentTypeId);
+
+    if (!docType) { return; }
+
+    return docType.name !== 'Экзамен' && docType.name !== 'Сертификат ЦТ';
   }
 
   successEvent() {
@@ -368,7 +406,7 @@ export class ModalContentComponent implements OnInit {
     this.certificate.marks = [];
     this.certificate.marks.push(Number(this.oneMark.nativeElement.value));
 
-    if (this.educationDocumentTypeId.nativeElement.selectedIndex !== 5) {
+    if (this.isNotExamOrCertificate()) {
     this.certificate.marks.push(Number(this.twoMark.nativeElement.value));
     this.certificate.marks.push(Number(this.threeMark.nativeElement.value));
     this.certificate.marks.push(Number(this.fourMark.nativeElement.value));
@@ -387,13 +425,13 @@ export class ModalContentComponent implements OnInit {
       this.certificate.educationDocumentTypeId = null;
     }
 
-    if (this.educationDocumentTypeId.nativeElement.selectedIndex !== 5 && this.scale.nativeElement.selectedIndex === -1) {
+    if (this.isNotExamOrCertificate() && this.scale.nativeElement.selectedIndex === -1) {
       this.scaleError = true;
       this.errorEvent();
     } else if (this.educationDocumentTypeId.nativeElement.selectedIndex === -1) {
       this.educationDocumentError = true;
       this.errorEvent();
-    } else if (this.educationDocumentTypeId.nativeElement.selectedIndex === 5 && this.subjectId.nativeElement.selectedIndex === -1) {
+    } else if (!this.isNotExamOrCertificate() && this.subjectId.nativeElement.selectedIndex === -1) {
       this.subjectError = true;
       this.errorEvent();
     } else {

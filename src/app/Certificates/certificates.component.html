@@ -54,20 +54,8 @@
   <tbody>
     <tr *ngFor="let certificates of competitionInfo.documents">
       <td><button class="btn btn-danger" (click)="removeDocument($event)">Удалить</button></td>
-      <div *ngIf="certificates.educationDocumentTypeId; then thenBlockDoc else elseBlockDoc"></div>
-      <ng-template #thenBlockDoc>
-        <td *ngFor="let data of edDocTypes | myfilter:certificates.educationDocumentTypeId">{{data.name}}</td>
-      </ng-template>
-      <ng-template #elseBlockDoc>
-        <td></td>
-      </ng-template>
-      <div *ngIf="certificates.subjectId; then thenBlock else elseBlock"></div>
-      <ng-template #thenBlock>
-        <td *ngFor="let data of subjects | myfilter:certificates.subjectId">{{data.name}}</td>
-      </ng-template>
-      <ng-template #elseBlock>
-        <td></td>
-      </ng-template>
+      <td>{{getDocTypeName(certificates.educationDocumentTypeId)}}</td>
+      <td>{{getSubjectName(certificates.subjectId)}}</td>
       <div *ngIf="certificates.scale; then thenBlockScale else elseBlockScale"></div>
       <ng-template #thenBlockScale>
         <td *ngFor="let data of scales | myfilter:certificates.scale">{{data.name}}</td>

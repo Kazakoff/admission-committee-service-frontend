@@ -3,12 +3,12 @@ import {Subject} from './subject';
 
 export class Certificates {
   constructor() {
-    this.subjectId = {id: 1, name: ' '};
-    this.educationDocumentTypeId = {id: 1, name: ' '};
+    this.subjectId = 1;
+    this.educationDocumentTypeId = 1;
 }
   documentId: number;
-  subjectId: Subject;
-  educationDocumentTypeId: Eddoctype;
+  subjectId: number;
+  educationDocumentTypeId: number;
   scale: string;
   seria: string;
   number: number;
