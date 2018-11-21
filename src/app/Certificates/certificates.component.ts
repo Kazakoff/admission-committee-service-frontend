@@ -384,6 +384,14 @@ export class ModalContentComponent implements OnInit {
     return docType.name !== 'Экзамен' && docType.name !== 'Сертификат ЦТ';
   }
 
+  isExam() {
+    const docType = this.edDocTypes.find(item => item.id === this.certificate.educationDocumentTypeId);
+
+    if (!docType) { return; }
+
+    return docType.name === 'Экзамен';
+  }
+
   successEvent() {
     this._service.success('Документ добавлен успешно!', '', {
       timeOut: 4000,

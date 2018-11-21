@@ -94,13 +94,6 @@ export class AddressComponent implements OnInit {
     });
   }
 
-  onInputChange(value) {
-    this.httpService.getCityFragment(value).subscribe((response) => {
-      this.cities = response['content'];
-      this.cities.map((city) => { city.name = `${city.name}, район: ${city.district.name}, область: ${city.district.region.name}`; });
-    });
-  }
-
   submit(address: Address) {
     this.isSubmitLoading = true;
     this.httpService.postData(address)
@@ -119,52 +112,6 @@ export class AddressComponent implements OnInit {
       );
   }
 
-  showAddCity() {
-    if (this.addCityLabel.nativeElement.hidden === true) {
-      this.addCityLabel.nativeElement.hidden = false;
-      this.showCityAddButton.nativeElement.innerHTML = 'Скрыть добавление населённого пункта';
-      if (this.region.nativeElement.options[this.region.nativeElement.selectedIndex] > -1) {
-        this.getDistrict();
-      } else { this.getDistrictInitialize(); }
-    } else {
-      this.addCityLabel.nativeElement.hidden = true;
-      this.showCityAddButton.nativeElement.innerHTML = 'Добавить населённый пункт';
-    }
-  }
-
-  getDistrict() {
-    const name = this.region.nativeElement.options[this.region.nativeElement.selectedIndex].text;
-    let id;
-    this.regions.forEach((item) => { if (item.name === name) { id = item.id; }});
-    this.http.get(GET_REGION + id, {headers: this.addHeaders(), withCredentials: true})
-      .subscribe(data => this.district = data['content']);
-  }
-
-  getDistrictInitialize() {
-    this.http.get(`${GET_REGION}1`, {headers: this.addHeaders(), withCredentials: true})
-      .subscribe(data => this.district = data['content']);
-  }
-
-  saveNewCity(newCity: NewCity) {
-    if (this.nameCity.nativeElement.value.length > 0) {
-      this.address.cityId = {};
-      newCity.name = this.typeCity.nativeElement.options[this.typeCity.nativeElement.selectedIndex].text + ' ' +
-        this.nameCity.nativeElement.value;
-      const name = this.districtCity.nativeElement.options[this.districtCity.nativeElement.selectedIndex].text;
-      let id;
-      this.district.forEach((item) => { if (item.name === name) { id = item.id; }});
-      newCity.districtId = id;
-      this.httpService.saveNewCity(newCity)
-        .subscribe((city) => {
-        this.cities = [];
-        this.cities.push(city);
-        this.address.cityId = this.cities[0];
-        }, error => { this.errorCity = error; });
-      this.addCityLabel.nativeElement.hidden = true;
-      this.showCityAddButton.nativeElement.innerHTML = 'Добавить населённый пункт';
-    }
-  }
-
   loadAbiturient() {
     this.isAbiturientLoading = true;
     this.httpService.getAbitur().subscribe(data => {
@@ -175,13 +122,14 @@ export class AddressComponent implements OnInit {
         console.log('set inputs');
       } else {
         this.address.postCode = this.addressObject['postCode'];
-        this.address.cityId = this.addressObject['city'];
-        this.cities.push(this.address.cityId);
         this.address.street = this.addressObject['street'];
         this.address.house = this.addressObject['house'];
         this.address.building = this.addressObject['building'];
-        this.address.appartment = this.addressObject['appartment'];
+        this.address.apartment = this.addressObject['apartment'];
         this.address.phone = this.addressObject['phone'];
+        this.address.district = this.addressObject['district'];
+        this.address.region = this.addressObject['region'];
+        this.address.city = this.addressObject['city'];
       }
       this.isAbiturientLoading = false;
     }, (error) => {
@@ -192,24 +140,12 @@ export class AddressComponent implements OnInit {
     });
   }
 
-  loadRegion() {
-    this.isRegionLoading = true;
-    this.httpService.getRegion().subscribe(data => {
-      this.regions = data['content'];
-      this.isRegionLoading = false;
-    }, () => this.isRegionLoading = false);
-  }
-
   ngOnInit() {
     this.isAbiturientLoading = false;
-    this.isRegionLoading = false;
     this.tokenInvalid = false;
     this.isSubmitLoading = false;
-    this.addCityLabel.nativeElement.hidden = true;
-    this.address.cityId = this.cities[0];
 
     this.loadAbiturient();
-    this.loadRegion();
   }
 
 }

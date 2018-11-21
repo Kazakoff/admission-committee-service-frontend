@@ -18,10 +18,12 @@
     <select class="form-control" [(ngModel)]="certificate.scale" name="scale" [hidden]="!isNotExamOrCertificate()" #scale>
       <option *ngFor="let data of scales" [ngValue]="data.id">{{data.name}}</option>
     </select>
-    <label>Серия документа</label><label style="color: red">&nbsp;*</label>
-    <input [(ngModel)]="certificate.seria" name="seria" class="form-control" #seria/>
-    <label>Номер документа</label><label style="color: red">&nbsp;*</label>
-    <input [(ngModel)]="certificate.number" name="number" class="form-control" required #number/>
+    <div *ngIf="!isExam()">
+      <label>Серия документа</label>
+      <input [(ngModel)]="certificate.seria" name="seria" class="form-control" #seria/>
+      <label>Номер документа</label><label style="color: red">&nbsp;*</label>
+      <input [(ngModel)]="certificate.number" name="number" class="form-control" required #number/>
+    </div>
     <label [hidden]="!isNotExamOrCertificate()">Учреждение образования</label>
     <input [(ngModel)]="certificate.nameUO" name="nameUO" class="form-control" #nameUO [hidden]="!isNotExamOrCertificate()"/><br>
     <label [hidden]="!isNotExamOrCertificate()">Оценки</label>

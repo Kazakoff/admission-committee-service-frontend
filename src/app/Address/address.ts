@@ -1,11 +1,11 @@
 export class Address {
-
-postCode: string;
-cityId: any;
-street: string;
-house: string;
-building: string;
-appartment: string;
-phone: string;
-
+  postCode: string;
+  street: string;
+  house: string;
+  building: string;
+  apartment: string;
+  phone: string;
+  region: string;
+  district: string;
+  city: string;
 }

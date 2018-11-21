@@ -2,41 +2,20 @@
   <div class="container-fluid">
     <label for="postcode">Почтовый индекс</label><label style="color: red">&nbsp;*</label>
     <input type="text" class="form-control" id="postcode" placeholder="Индекс" [(ngModel)]="address.postCode" name="postcode" required maxlength="50"><br>
-    <label>Населённый пункт</label><label style="color: red">&nbsp;*</label>
-    <ngx-select [items]="cities" optionValueField="id" optionTextField="name" [(ngModel)]="address.cityId.id"
-                name="cityId" (typed)="onInputChange($event)" [allowClear]="true" #citySelect required>
-    </ngx-select>
-    <small id="emailHelp" class="form-text text-muted"> Введите населённый пункт в поле выше и выберите его</small><br>
-    <button class="btn btn-primary" (click)="showAddCity()" style="margin-bottom: 10px" #showCityAddButton>Добавить населённый пункт</button><br>
-      <div class="container-fluid" #addCityLabel>
-        <div class="row">
-          <div class="col-sm">
-            <label for="region">Область</label>
-            <select class="form-control" id="region" #region (change)="getDistrict()">
-              <option *ngFor="let data of regions">{{data.name}}</option>
-            </select>
-          </div>
-          <div class="col-sm">
-            <label for="district">Район</label>
-            <select class="form-control" id="district" name="district" #districtCity>
-              <option *ngFor="let data of district" [ngValue]="data.id">{{data.name}}</option>
-            </select>
-          </div>
-          <div class="col-sm">
-            <label for="type">Тип населённого пункта</label>
-            <select class="form-control" id="type" #typeCity>
-                <option *ngFor="let data of cityTypes">{{data}}</option>
-            </select>
-          </div>
-          <div class="col-sm">
-            <label for="cityName">Название населённого пункта</label>
-            <input id="cityName" class="form-control" #nameCity/>
-          </div>
+      <div class="row">
+        <div class="col-sm">
+          <label for="region">Область</label>
+          <input type="text" class="form-control" id="region" name="region" placeholder="Область" [(ngModel)]="address.region" required /><br>
         </div>
-        <button class="btn btn-warning" (click)="saveNewCity(newCity)" style="margin-top: 30px">Сохранить город</button>
-        <strong id="cityHelp" class="form-text text-danger"> Пожалуйста, убедитесь, что вы ввели все данные верно! </strong>
+        <div class="col-sm">
+          <label for="district">Район</label>
+          <input type="text" class="form-control" id="district" name="district" placeholder="Район" [(ngModel)]="address.district" required /><br>
+        </div>
+        <div class="col-sm">
+          <label for="city">Название населённого пункта</label>
+          <input id="city" name="city" class="form-control" placeholder="Населённый пункт" [(ngModel)]="address.city" required />
+        </div>
       </div>
-    <br>
     <label for="street">Улица/Проспект</label><label style="color: red">&nbsp;*</label>
     <input type="text" class="form-control" id="street" placeholder="Улица/Проспект" [(ngModel)]="address.street" name="street" required><br>
   </div>
@@ -52,8 +31,8 @@
         <input type="text" class="form-control" id="building" placeholder="Корпус" [(ngModel)]="address.building" name="building">
       </div>
       <div class="col-sm">
-        <label for="appartment">Квартира</label>
-        <input type="text" class="form-control" id="appartment" placeholder="Квартира" [(ngModel)]="address.appartment" name="appartment"><br>
+        <label for="apartment">Квартира</label>
+        <input type="text" class="form-control" id="apartment" placeholder="Квартира" [(ngModel)]="address.apartment" name="apartment"><br>
       </div>
     </div>
   </div>

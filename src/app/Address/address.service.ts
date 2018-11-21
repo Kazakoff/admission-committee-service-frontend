@@ -24,37 +24,17 @@ export class HttpService {
 
     const body = {
       postCode: address.postCode,
-      cityId: address.cityId.id,
       street: address.street,
       house: address.house,
       building: address.building,
-      appartment: address.appartment,
+      apartment: address.apartment,
       phone: address.phone,
-
+      region: address.region,
+      district: address.district,
+      city: address.city,
     };
 
     return this.http.put(PUT_ABITURIENT_ADDRESS + this.userid, body, {
-      headers: this.addHeaders(),
-      withCredentials: true
-    });
-  }
-
-  getCityFragment(value) {
-    return this.http.get(GET_CITY_FRAGMENT_ADDRESS + value + '&size=40',
-      {headers: this.addHeaders(), withCredentials: true});
-  }
-
-  getRegion() {
-    return this.http.get(GET_REGION_FRAGMENT, {headers: this.addHeaders(), withCredentials: true});
-  }
-
-  saveNewCity(newCity: NewCity) {
-    const body = {
-      name: newCity.name,
-      districtId: newCity.districtId,
-    };
-
-    return this.http.post(POST_CITY, body, {
       headers: this.addHeaders(),
       withCredentials: true
     });
