@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Auth} from './auth';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 
 import {NotificationsService} from 'angular2-notifications';
@@ -19,10 +19,16 @@ error: number;
 token: any;
 
   addHeaders() {
-    const myHeaders = new HttpHeaders()
-      .set('Authorization', 'Basic ' + btoa(this.auth.email + ':' + this.auth.password))
+    return new HttpHeaders()
+      .set('Authorization', 'Basic QURNSVNTSU9OX0NMSUVOVDpoMnUkTVRONVcm')
       .set('Content-Type', 'application/json');
-    return myHeaders;
+  }
+
+  addParams() {
+    return new HttpParams()
+      .set('grant_type', 'password')
+      .set('username', this.auth.email)
+      .set('password', this.auth.password);
   }
 
   successEvent() {
@@ -44,7 +50,7 @@ token: any;
   }
 
   submit() {
-    this.http.get(GENERATE_TOKEN, {headers: this.addHeaders(), withCredentials: true})
+    this.http.get(GENERATE_TOKEN, {headers: this.addHeaders(), withCredentials: true, params: this.addParams()})
       .subscribe(
         (data) => {
           this.token = data['token'];
