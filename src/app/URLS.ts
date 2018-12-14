@@ -1,8 +1,8 @@
 const GET_ABITURIENT = 'http://abitpriv.vstu.by:8080/api/adm-service/abiturient';
 
 const PUT_ABITURIENT_PROFILE = 'http://abitpriv.vstu.by:8080/api/adm-service/abiturient/profile/';
-const GET_DOC_SERIA_PROFILE = 'http://abitpriv.vstu.by:8080/api/adm-service/docseria/contains?fragment=';
-const GET_DOC_TYPE_PROFILE = 'http://abitpriv.vstu.by:8080/api/adm-service/doctype/contains?fragment=';
+const GET_DOC_SERIA_PROFILE = 'http://abitpriv.vstu.by:8080/api/adm-service/document-seria/contains?fragment=';
+const GET_DOC_TYPE_PROFILE = 'http://abitpriv.vstu.by:8080/api/adm-service/document-type/contains?fragment=';
 const GET_NATIONALITY_PROFILE = 'http://abitpriv.vstu.by:8080/api/adm-service/nationality/contains?fragment=';
 
 const PUT_ABITURIENT_ADDRESS = 'http://abitpriv.vstu.by:8080/api/adm-service/abiturient/address/';
@@ -12,17 +12,18 @@ const GET_REGION_FRAGMENT = 'http://abitpriv.vstu.by:8080/api/adm-service/region
 const POST_CITY = 'http://abitpriv.vstu.by:8080/api/adm-service/city';
 
 const PUT_ABITURIENT_EDUCATION = 'http://abitpriv.vstu.by:8080/api/adm-service/abiturient/education/';
-const GET_EDUCATIONAL_INSTITUTE_FRAGMENT_EDUCATION = 'http://abitpriv.vstu.by:8080/api/adm-service/edinst/contains?fragment=';
-const GET_EDUCATIONAL_LEVEL_EDUCATION = 'http://abitpriv.vstu.by:8080/api/adm-service/edlevel/contains?fragment=';
+const GET_EDUCATIONAL_INSTITUTE_FRAGMENT_EDUCATION
+  = 'http://abitpriv.vstu.by:8080/api/adm-service/education-institution/contains?fragment=';
+const GET_EDUCATIONAL_LEVEL_EDUCATION = 'http://abitpriv.vstu.by:8080/api/adm-service/education-level/contains?fragment=';
 const GET_LANGUAGE_EDUCATION = 'http://abitpriv.vstu.by:8080/api/adm-service/language/contains?fragment=';
-const GET_ED_TYPE = 'http://abitpriv.vstu.by:8080/api/adm-service/edtype/contains?fragment=';
-const GET_EST_CITY = 'http://abitpriv.vstu.by:8080/api/adm-service/estcity/contains?fragment=';
-const POST_NEW_EDUCATION_INSITUTE = 'http://abitpriv.vstu.by:8080/api/adm-service/edinst';
+const GET_ED_TYPE = 'http://abitpriv.vstu.by:8080/api/adm-service/education-type/contains?fragment=';
+const GET_EST_CITY = 'http://abitpriv.vstu.by:8080/api/adm-service/establishment-city/contains?fragment=';
+const POST_NEW_EDUCATION_INSITUTE = 'http://abitpriv.vstu.by:8080/api/adm-service/education-institution';
 
 const PUT_ABITURIENT_ADDITONAL_INFORMATION = 'http://abitpriv.vstu.by:8080/api/adm-service/abiturient/addinfo/';
 
 const PUT_ABITURIENT_COMPETITION = 'http://abitpriv.vstu.by:8080/api/adm-service/abiturient/competition/';
-const GET_EDUCATIONAL_DOCUMENT_TYPE_COMPETITION = 'http://abitpriv.vstu.by:8080/api/adm-service/eddoctype/contains?fragment=';
+const GET_EDUCATIONAL_DOCUMENT_TYPE_COMPETITION = 'http://abitpriv.vstu.by:8080/api/adm-service/education-document-type/contains?fragment=';
 const GET_SUBJECT_COMPETITION = 'http://abitpriv.vstu.by:8080/api/adm-service/subject/contains?fragment=';
 const GET_SPECIALITY = 'http://abitpriv.vstu.by:8080/api/adm-service/speciality';
 const GET_FACULTIES = 'http://abitpriv.vstu.by:8080/api/adm-service/faculty/contains?fragment=';

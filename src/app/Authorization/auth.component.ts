@@ -50,10 +50,10 @@ token: any;
   }
 
   submit() {
-    this.http.get(GENERATE_TOKEN, {headers: this.addHeaders(), withCredentials: true, params: this.addParams()})
+    this.http.post(GENERATE_TOKEN, {}, {headers: this.addHeaders(), withCredentials: true, params: this.addParams()})
       .subscribe(
         (data) => {
-          this.token = data['token'];
+          this.token = data['access_token'];
           localStorage.setItem('token', JSON.stringify(this.token));
           this.error = undefined;
           this.successEvent();
