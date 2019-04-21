@@ -3,7 +3,7 @@ import {Auth} from './auth';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 
-import {NotificationsService} from 'angular2-notifications';
+import { NotifierService } from 'angular-notifier';
 import {GENERATE_TOKEN} from '../URLS';
 
 @Component({
@@ -12,7 +12,7 @@ import {GENERATE_TOKEN} from '../URLS';
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
-  constructor(private http: HttpClient, private _service: NotificationsService) {
+  constructor(private http: HttpClient, private _service: NotifierService) {
   }
 auth: Auth = new Auth();
 error: number;
@@ -32,21 +32,11 @@ token: any;
   }
 
   successEvent() {
-    this._service.success('Добро пожаловать в приёмную комиссию', 'Нажмите чтобы скрыть...', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true
-    });
+    this._service.notify('success', 'Добро пожаловать в приёмную комиссию');
   }
 
   errorEvent() {
-    this._service.error('Ошибка авторизации!', 'Нажмите чтобы скрыть...', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true
-    });
+    this._service.notify('error', 'Ошибка авторизации!');
   }
 
   submit() {

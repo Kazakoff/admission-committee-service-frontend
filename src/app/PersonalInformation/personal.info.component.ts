@@ -4,7 +4,7 @@ import {HttpService} from './personal.service';
 import {Doctype} from './doctype';
 import {Nationality} from './nationality';
 import {DatePipe} from '@angular/common';
-import {NotificationsService} from 'angular2-notifications';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'personal',
@@ -48,25 +48,15 @@ export class PersonalInfoComponent implements OnInit {
   isNationalitiesLoading: boolean;
   isSubmitLoading: boolean;
 
-  constructor(private httpService: HttpService, public datepipe: DatePipe, private _service: NotificationsService) {
+  constructor(private httpService: HttpService, public datepipe: DatePipe, private _service: NotifierService) {
   }
 
   successEvent() {
-    this._service.success('Форма отправлена успешно!', 'Нажмите чтобы скрыть...', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true
-    });
+    this._service.notify('success', 'Форма отправлена успешно!');
   }
 
   errorEvent() {
-    this._service.error('Неожиданная ошибка!', 'Нажмите чтобы скрыть...', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true,
-    });
+    this._service.notify('error', 'Неожиданная ошибка!');
   }
 
   submit(personal: Personal) {

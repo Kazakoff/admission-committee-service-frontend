@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Registration} from './registration';
 import {HttpService} from './registration.service';
-import { NotificationsService } from 'angular2-notifications';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'reg',
@@ -12,28 +12,18 @@ import { NotificationsService } from 'angular2-notifications';
 export class RegistrationComponent implements OnInit {
   error: number;
   recoverError: number;
-  constructor(private httpService: HttpService, private _service: NotificationsService) {
+  constructor(private httpService: HttpService, private _service: NotifierService) {
   }
   registration: Registration = new Registration();
   roles: any = [{id: 3, name: ''}];
 
   successEvent() {
-    this._service.info('Регистрация практически завершена! Сейчас проверьте свой e-mail и подтвердите регистрацию!',
-      'Нажмите чтобы скрыть...', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true
-    });
+    this._service.notify('info',
+      'Регистрация практически завершена! Сейчас проверьте свой e-mail и подтвердите регистрацию!');
   }
 
   errorEvent() {
-    this._service.error('Ошибка регистрации! Пожалуйста, попробуйте ещё раз!', 'Нажмите чтобы скрыть...', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true
-    });
+    this._service.notify('error', 'Ошибка регистрации! Пожалуйста, попробуйте ещё раз!');
   }
 
   submit(registration: Registration) {
@@ -48,7 +38,7 @@ export class RegistrationComponent implements OnInit {
   ngOnInit() {
     this.httpService.getRoles().subscribe(data => {
       this.roles = data;
-      this.registration.roleId = this.roles.find(role => role.name === 'Абитуриент');
+      this.registration.roleId = this.roles.find(role => role.name === 'ABITURIENT');
     });
   }
 }

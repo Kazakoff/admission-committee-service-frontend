@@ -3,7 +3,7 @@ import {Address} from './address';
 import {HttpService} from './address.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-import {NotificationsService} from 'angular2-notifications';
+import { NotifierService } from 'angular-notifier';
 import {Region} from './region';
 import {District} from './district';
 import {NewCity} from './newCity';
@@ -64,7 +64,7 @@ export class AddressComponent implements OnInit {
   @ViewChild('showCityAddButton')
   showCityAddButton: ElementRef;
 
-  constructor(private httpService: HttpService, private httpClient: HttpClient, private _service: NotificationsService,
+  constructor(private httpService: HttpService, private httpClient: HttpClient, private _service: NotifierService,
               private http: HttpClient) {
 
   }
@@ -77,21 +77,11 @@ export class AddressComponent implements OnInit {
   }
 
   successEvent() {
-    this._service.success('Форма отправлена успешно!', 'Нажмите чтобы скрыть...', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true
-    });
+    this._service.notify('success', 'Форма отправлена успешно!');
   }
 
   errorEvent() {
-    this._service.error('Неожиданная ошибка!', 'Нажмите чтобы скрыть...', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true,
-    });
+    this._service.notify('error', 'Неожиданная ошибка!');
   }
 
   submit(address: Address) {

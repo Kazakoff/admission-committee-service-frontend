@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from './additional.service';
 import {Additional} from './additional';
-import {NotificationsService} from 'angular2-notifications';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'additional',
@@ -30,7 +30,7 @@ export class AdditionalComponent implements OnInit {
   isAbiturientLoading: boolean;
   isSubmitLoading: boolean;
 
-  constructor(private httpService: HttpService, private _service: NotificationsService) {
+  constructor(private httpService: HttpService, private _service: NotifierService ) {
   }
 
   submit(additional: Additional) {
@@ -51,21 +51,11 @@ export class AdditionalComponent implements OnInit {
   }
 
   successEvent() {
-    this._service.success('Форма отправлена успешно!', 'Нажмите чтобы скрыть...', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true
-    });
+    this._service.notify('success', 'Форма отправлена успешно!');
   }
 
   errorEvent() {
-    this._service.error('Неожиданная ошибка', 'Нажмите чтобы скрыть...', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true,
-    });
+    this._service.notify('error', 'Неожиданная ошибка');
   }
 
   loadAbiturient() {

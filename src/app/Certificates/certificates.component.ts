@@ -8,7 +8,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 import {Faculty} from './faculty';
-import {NotificationsService} from 'angular2-notifications';
+import { NotifierService } from 'angular-notifier';
 import {Router} from '@angular/router';
 export { Observable } from 'rxjs/Observable';
 
@@ -55,7 +55,7 @@ export class CertificatesComponent implements OnInit {
   @ViewChild('speciality')
   speciality: ElementRef;
 
-  constructor(protected httpService: HttpService, private _modalService: BsModalService, private _service: NotificationsService, private router: Router) {}
+  constructor(protected httpService: HttpService, private _modalService: BsModalService, private _service: NotifierService, private router: Router) {}
 
   openModalWithComponent() {
     const initialState = this.competitionInfo;
@@ -63,30 +63,16 @@ export class CertificatesComponent implements OnInit {
   }
 
   successEvent() {
-    this._service.success('Форма отправлена успешно!', '', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true
-    });
+    this._service.notify('success', 'Форма отправлена успешно!');
   }
 
   errorEvent() {
-    this._service.error('Нельзя добавлять специальности из разных групп специальности либо более одной специальности с группой "Без группы"!', '', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true,
-    });
+    this._service.notify('error',
+      'Нельзя добавлять специальности из разных групп специальности либо более одной специальности с группой "Без группы"!');
   }
 
   SpecialititesSameEvent() {
-    this._service.error('Нельзя добавлять несколько одинаковых специальностей!', '', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true,
-    });
+    this._service.notify('error', 'Нельзя добавлять несколько одинаковых специальностей!');
   }
 
   getSpecialities() {
@@ -350,7 +336,7 @@ export class ModalContentComponent implements OnInit {
   @ViewChild('pushButton')
   pushButton: ElementRef;
 
-  constructor(protected httpService: HttpService, public _bsModalRef: BsModalRef, private _service: NotificationsService) { }
+  constructor(protected httpService: HttpService, public _bsModalRef: BsModalRef, private _service: NotifierService) { }
 
   oneEducationChange(event) {
     const docType = this.edDocTypes.find(item => item.id === +event.target.value.charAt(0));
@@ -393,21 +379,11 @@ export class ModalContentComponent implements OnInit {
   }
 
   successEvent() {
-    this._service.success('Документ добавлен успешно!', '', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true
-    });
+    this._service.notify('success', 'Документ добавлен успешно!');
   }
 
   errorEvent() {
-    this._service.error('Неожиданная ошибка!', '', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true,
-    });
+    this._service.notify('error', 'Неожиданная ошибка!');
   }
 
   push() {
