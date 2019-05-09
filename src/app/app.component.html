@@ -3,7 +3,7 @@
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="/">Домой</a>
+    <a class="navbar-brand" routerLink="/">Домой</a>
 
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
@@ -26,7 +26,7 @@
       <div *ngIf="approve; then thenBlock else elseBlock" [hidden]="!token"></div>
       <ng-template #thenBlock>
         <div class="alert alert-success" role="alert" style="margin: auto 0" [hidden]="!token">
-          Ваши данные подтверждены приёмной комиссией.
+          Ваши данные подтверждены приёмной комиссией. Изменение данных из личного кабинета более не возможно.
         </div>
       </ng-template>
       <ng-template #elseBlock>
@@ -34,6 +34,18 @@
           Ваши данные не подтверждены приёмной комиссией.
         </div>
       </ng-template>
+      <div *ngIf="profileInfo && profileInfo.firstName && profileInfo.lastName then fioContent else emailContent"></div>
+      <ng-template #fioContent>
+        <div class="ml-2">
+          <span>{{profileInfo.firstName}} {{profileInfo.lastName}}</span>
+        </div>
+      </ng-template>
+      <ng-template #emailContent>
+        <div class="ml-2">
+          <span>{{email}}</span>
+        </div>
+      </ng-template>
+      <div></div>
     </div>
   </nav>
   <div *ngIf="router.url === '/'">
@@ -57,7 +69,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let stat of specialities; let i = index" [ngClass]="{pass: isStatusPass(stat.status), 'not-pass': isStatusNotPass(stat.status), 'priority-pass': isStatusPriorityPass(stat.status)}">
+          <tr *ngFor="let stat of specialities; let i = index">
             <td>{{i + 1}}</td>
             <td>{{stat.speciality}}</td>
             <td>{{stat.sum}}</td>
@@ -65,17 +77,6 @@
           </tbody>
         </table>
         <span class="sum">Ваш суммарный балл: {{sum}}</span>
-        <div>
-          <div class="color-container">
-            <div class="not-pass little"></div><span> - не проходите по баллам</span>
-          </div>
-          <div class="color-container">
-            <div class="priority-pass little"></div><span> - проходите по баллам, Ваш текущий приоритет</span>
-          </div>
-          <div class="color-container">
-            <div class="pass little"></div><span> - проходите по баллам</span>
-          </div>
-        </div>
       </div>
     </header>
   </div>

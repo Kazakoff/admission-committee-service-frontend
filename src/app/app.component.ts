@@ -13,6 +13,8 @@ export class AppComponent implements OnInit {
   userId: number;
   specialities: Object;
   sum: number;
+  profileInfo: null | { firstName: null | string, lastName: null | string };
+  email: string;
 
   constructor(public router: Router, private http: HttpClient) {}
 
@@ -31,23 +33,13 @@ export class AppComponent implements OnInit {
     return myHeaders;
   }
 
-  isStatusPass(type) {
-    return type === 'PASS';
-  }
-
-  isStatusNotPass(type) {
-    return type === 'NOT_PASS';
-  }
-
-  isStatusPriorityPass(type) {
-    return type === 'PRIORITY_PASS';
-  }
-
   ngOnInit() {
     if (this.token) {
       this.http.get(GET_ABITURIENT, {headers: this.addHeaders(), withCredentials: true}).subscribe(data => {
         this.approve = data['profileApproved'];
         this.userId = data['id'];
+        this.profileInfo = data['profileInfo'];
+        this.email = data['email'];
         if (this.approve) {
           this.http.get(GET_STATUS + this.userId + '/status', {headers: this.addHeaders(), withCredentials: true}).subscribe(response => {
             this.specialities = response['specialities'];
