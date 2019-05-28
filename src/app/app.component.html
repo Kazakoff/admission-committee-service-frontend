@@ -80,6 +80,26 @@
         </div>
       </div>
       <div *ngIf="approve" class="container status">
+        <div *ngIf="profileInfo && profileInfo.firstName && profileInfo.lastName then fioContent else emailContent"></div>
+        <ng-template #fioContent>
+          <div class="mt-3">
+            <h1>{{profileInfo.firstName}} {{profileInfo.lastName}}</h1>
+          </div>
+        </ng-template>
+        <ng-template #emailContent>
+          <div>
+            <h1>{{email}}</h1>
+          </div>
+        </ng-template>
+        <h5>
+          Окончательно проходной балл устанавливается после
+          завершения процедуры подачи документов и доводится до
+          абитуриентов при зачислении. Новости приёмной комиссии
+          Ссылки на сайт университета
+          <a href="http://vstu.by/index.php/incoming-ru" target="_blank" rel="noopener noreferrer">http://vstu.by/index.php/incoming-ru</a>
+          на сайт приёмной комиссии
+          <a href="http://vstu.by/index.php/incoming-ru" target="_blank" rel="noopener noreferrer">http://priem.vstu.by</a>
+        </h5>
         <table class="table table-bordered" [hidden]="!token">
           <thead class="thead-dark">
           <tr>
