@@ -88,17 +88,11 @@
         </ng-template>
         <ng-template #emailContent>
           <div>
-            <h1>{{email}}</h1>
+            <h2 class="ml-200">{{email}}</h2>
           </div>
         </ng-template>
-        <h5>
-          Окончательно проходной балл устанавливается после
-          завершения процедуры подачи документов и доводится до
-          абитуриентов при зачислении. Новости приёмной комиссии
-          Ссылки на сайт университета
-          <a href="http://vstu.by/index.php/incoming-ru" target="_blank" rel="noopener noreferrer">http://vstu.by/index.php/incoming-ru</a>
-          на сайт приёмной комиссии
-          <a href="http://vstu.by/index.php/incoming-ru" target="_blank" rel="noopener noreferrer">http://priem.vstu.by</a>
+        <h5 class="ml-200">
+          Вы подали заявление на специальности (в порядке убывания приоритета):
         </h5>
         <table class="table table-bordered" [hidden]="!token">
           <thead class="thead-dark">
@@ -117,6 +111,21 @@
           </tbody>
         </table>
         <span class="sum">Ваш суммарный балл: {{sum}}</span>
+        <p class="font-weight-bold info">Если Ваш суммарный балл превышает ориентировочный проходной по
+            специальности, то Вы участвуете в конкурсе по этой специальности. Если Ваш балл ниже
+            ориентировочных проходных по всем специальностям, то Вы не проходите по конкурсу ни по
+            одной из специальностей. Если ориентировочный проходной балл равен «0», то по данной
+            специальности на данный момент не сформировался конкурс и проходят все абитуриенты,
+            подавшие заявление на данную специальность.
+        </p>
+        <p class="font-weight-bold info">
+          Окончательно проходной балл устанавливается после завершения процедуры
+          подачи документов и доводится до абитуриентов при зачислении.
+        </p>
+        <div class="d-flex">
+        <a href="http://vstu.by/" class="ml-5" target="_blank" rel="noopener noreferrer">Сайт университета</a>
+        <a href="http://priem.vstu.by/" class="ml-auto mr-5" target="_blank" rel="noopener noreferrer">Мониторинг подачи документов</a>
+        </div>
       </div>
     </header>
   </div>
