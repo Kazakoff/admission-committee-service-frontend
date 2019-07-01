@@ -4,7 +4,7 @@ import {EducationLevel} from './educationLevel';
 import {Language} from './language';
 import {HttpService} from './study.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {NotificationsService} from 'angular2-notifications';
+import { NotifierService } from 'angular-notifier';
 import {EdType} from './edType';
 import {EstCity} from './estCity';
 import {NewEducationInstitution} from './newEducationInstitution';
@@ -67,25 +67,15 @@ export class StudyComponent implements OnInit {
   @ViewChild('addEdInstButton')
   addEdInstButton: ElementRef;
 
-  constructor(private httpService: HttpService, private httpClient: HttpClient, private _service: NotificationsService) {
+  constructor(private httpService: HttpService, private httpClient: HttpClient, private _service: NotifierService) {
   }
 
   successEvent() {
-    this._service.success('Форма отправлена успешно!', 'Нажмите чтобы скрыть...', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true,
-    });
+    this._service.notify('success', 'Форма отправлена успешно');
   }
 
   errorEvent() {
-    this._service.error('Неожиданная ошибка!', 'Нажмите чтобы скрыть...', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true,
-    });
+    this._service.notify('error', 'Неожиданная ошибка...');
   }
 
   addHeaders() {

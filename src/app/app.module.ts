@@ -15,7 +15,7 @@ import {DatePipe} from '@angular/common';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxSelectModule } from 'ngx-select-ex';
-import { SimpleNotificationsModule } from 'angular2-notifications';
+import { NotifierModule } from 'angular-notifier';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {CertificatesComponent, ModalContentComponent} from './Certificates/certificates.component';
 import {MyFilterPipe} from './Certificates/MyFilterPipe';
@@ -60,17 +60,13 @@ const appRoutes: Routes = [
     InfiniteScrollModule,
     NgSelectModule,
     NgxSelectModule,
-    SimpleNotificationsModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),
     TooltipModule.forRoot(),
-    NgProgressModule.forRoot({
-      thick: true,
-      meteor: true
-    }),
+    NotifierModule,
     NgProgressHttpModule,
     AngularFontAwesomeModule
   ],

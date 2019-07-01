@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {NotificationsService} from 'angular2-notifications';
+import { NotifierService } from 'angular-notifier';
 import {HttpService} from './statistics.service';
 
 @Component({
@@ -17,25 +17,15 @@ export class StatisticsComponent implements OnInit {
   countWithoutSpeciality: any;
   summaryCountApproved: any;
 
-  constructor(private httpService: HttpService, private _service: NotificationsService) {
+  constructor(private httpService: HttpService, private _service: NotifierService) {
   }
 
   successEvent() {
-    this._service.success('Добро пожаловать в приёмную комиссию', 'Нажмите чтобы скрыть...', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true
-    });
+    this._service.notify('success', 'Добро пожаловать в приёмную комиссию');
   }
 
   errorEvent() {
-    this._service.error('Ошибка авторизации!', 'Нажмите чтобы скрыть...', {
-      timeOut: 4000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true
-    });
+    this._service.notify('error', 'Ошибка авторизации!');
   }
 
   compareSpeciality(a, b) {
