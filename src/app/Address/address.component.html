@@ -4,15 +4,15 @@
     <input type="text" class="form-control" id="postcode" placeholder="Индекс" [(ngModel)]="address.postCode" name="postcode" required maxlength="50"><br>
       <div class="row">
         <div class="col-sm">
-          <label for="region">Область</label>
+          <label for="region">Область</label><label style="color: red">&nbsp;*</label>
           <input type="text" class="form-control" id="region" name="region" placeholder="Область" [(ngModel)]="address.region" required /><br>
         </div>
         <div class="col-sm">
-          <label for="district">Район</label>
+          <label for="district">Район</label><label style="color: red">&nbsp;*</label>
           <input type="text" class="form-control" id="district" name="district" placeholder="Район" [(ngModel)]="address.district" required /><br>
         </div>
         <div class="col-sm">
-          <label for="city">Название населённого пункта</label>
+          <label for="city">Название населённого пункта</label><label style="color: red">&nbsp;*</label>
           <input id="city" name="city" class="form-control" placeholder="Населённый пункт" [(ngModel)]="address.city" required />
         </div>
       </div>

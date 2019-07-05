@@ -5,6 +5,10 @@ import {Doctype} from './doctype';
 import {Nationality} from './nationality';
 import {DatePipe} from '@angular/common';
 import { NotifierService } from 'angular-notifier';
+import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { ruLocale } from 'ngx-bootstrap/locale';
+defineLocale('ru', ruLocale);
 
 @Component({
   selector: 'personal',
@@ -26,7 +30,7 @@ import { NotifierService } from 'angular-notifier';
 })
 
 export class PersonalInfoComponent implements OnInit {
-
+  locale = 'ru';
   personal: Personal = new Personal();
   personalObject: Personal[] = [];
   error: any;
@@ -48,7 +52,13 @@ export class PersonalInfoComponent implements OnInit {
   isNationalitiesLoading: boolean;
   isSubmitLoading: boolean;
 
-  constructor(private httpService: HttpService, public datepipe: DatePipe, private _service: NotifierService) {
+  constructor(
+    private httpService: HttpService,
+    public datepipe: DatePipe,
+    private _service: NotifierService,
+    private localeService: BsLocaleService
+  ) {
+    this.localeService.use(this.locale);
   }
 
   successEvent() {

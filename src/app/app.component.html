@@ -21,7 +21,7 @@
         </div>
       </div>
       <form class="form-inline my-2 my-lg-0">
-        <div *ngIf="token"><button class="btn btn-outline-danger my-2 my-sm-0" (click)="logOut()">LogOut</button></div>
+        <div *ngIf="token"><button class="btn btn-outline-danger my-2 my-sm-0" (click)="logOut()">Выйти</button></div>
       </form> &nbsp;&nbsp;&nbsp;
       <div *ngIf="approve; then thenBlock else elseBlock" [hidden]="!token"></div>
       <ng-template #thenBlock>

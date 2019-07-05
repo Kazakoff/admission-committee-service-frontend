@@ -19,7 +19,7 @@
     <input type="text" class="form-control" placeholder="" id="documentNumber" [(ngModel)]="personal.documentNumber" name="documentNumber" required maxlength="50">
       </div>
       <div class="col-sm">
-    <label for="docdate">Выдан когда</label>
+    <label for="docdate">Выдан когда</label><label style="color: red">&nbsp;*</label>
     <input type="text"
            class="form-control"
            bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
@@ -56,7 +56,7 @@
   </div> <br><br>
 
   <div class="container-fluid">
-    <label for="birthdate"> Дата рождения </label>
+    <label for="birthdate"> Дата рождения </label><label style="color: red">&nbsp;*</label>
     <input type="text"
            class="form-control"
            bsDatepicker

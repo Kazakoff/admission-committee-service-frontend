@@ -13,7 +13,7 @@
 </select><br>
   <label for="specialities">Выберите специальность</label>
 <select class="form-control" name="specialities" id="specialities" #speciality>
-    <option *ngFor="let data of specialities" [ngValue]="data.id">{{data.name}}</option>
+    <option *ngFor="let data of specialities" [ngValue]="data.id">{{data.name}} ({{data.group.name}})</option>
 </select><br>
 <button type="button" class="btn btn-success" (click)="addSpeciality()">Добавить специальность</button>
 </div><br [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isEdDocTypeLoading || isSubjectLoading || isFacultiesLoading">
