@@ -19,10 +19,10 @@
     <input type="text" class="form-control" placeholder="" id="documentNumber" [(ngModel)]="personal.documentNumber" name="documentNumber" required maxlength="50">
       </div>
       <div class="col-sm">
-    <label for="docdate">Выдан когда</label><label style="color: red">&nbsp;*</label>
+    <label for="docdate">Дата выдачи (ДД-ММ-ГГГГ)</label><label style="color: red">&nbsp;*</label>
     <input type="text"
            class="form-control"
-           bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+           bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
            placeholder="" id="docdate"
            [(ngModel)]="personal.documentDate"
            name="documentDate"
@@ -56,11 +56,11 @@
   </div> <br><br>
 
   <div class="container-fluid">
-    <label for="birthdate"> Дата рождения </label><label style="color: red">&nbsp;*</label>
+    <label for="birthdate"> Дата рождения (ДД-ММ-ГГГГ)</label><label style="color: red">&nbsp;*</label>
     <input type="text"
            class="form-control"
            bsDatepicker
-           [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+           [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
            placeholder="Дата рождения" id="birthdate"
            [(ngModel)]="personal.birthDate"
            name="birthDate"
