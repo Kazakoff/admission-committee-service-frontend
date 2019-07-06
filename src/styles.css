@@ -6,6 +6,7 @@
 @import '~angular-notifier/styles/types/type-error.css';
 @import '~angular-notifier/styles/types/type-info.css';
 @import '~angular-notifier/styles/types/type-warning.css';
+@import '~angular-notifier/styles/types/type-success.css';
 
 body {
   background: url(images/background.jpg);

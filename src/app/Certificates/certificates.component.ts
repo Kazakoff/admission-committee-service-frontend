@@ -106,7 +106,7 @@ export class CertificatesComponent implements OnInit {
       const speciality = {name: '', group: ''};
 
       this.specialities.forEach((item) => {
-        if (item.name === specialityName) {
+        if (item.name === specialityName.replace(/\s\(([^)]+)\)$/, '')) {
           speciality.name = item.name;
           speciality.group = item.group.name;
           if (!this.competitionInfo.specialities.includes(item.id) && !this.specialitiesGroups.some((v) => v.group === 'Без группы')) {
