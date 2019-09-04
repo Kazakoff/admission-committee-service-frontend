@@ -7,7 +7,11 @@
         <small id="emailHelp" class="form-text text-muted"> Введите ваш e-mail для регистрации!</small>
         <input type="email" id="email" placeholder="E-mail" [(ngModel)]="registration.email" name="email" required class="form" />
         <small id="passwordHelp" class="form-text text-muted"> Введите ваш пароль для регистрации!</small>
-        <input type="password" id="inputPassword" placeholder="Password" [(ngModel)]="registration.password" name="password" required class="form" />
+        <input type="password" id="inputPassword" placeholder="Password" [(ngModel)]="registration.password" name="password" required class="form mb-0" />
+      </div>
+      <div class="custom-control custom-checkbox mb-3">
+        <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+        <label class="custom-control-label" for="defaultUnchecked">Ставя отметку, я даю согласие на обработку моих персональных данных.</label>
       </div>
       <div class="relative fullwidth col-xs-12">
         <button (click)="submit(registration)" [disabled]="myForm.invalid" id="submit" name="submit" class="form-btn semibold">Зарегистрироваться</button>
