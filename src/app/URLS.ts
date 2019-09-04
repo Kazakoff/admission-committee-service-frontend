@@ -33,7 +33,7 @@ const GET_REGISTRATION_ROLE = 'http://abitpriv.vstu.by:8080/api/uaa/role';
 
 const GENERATE_TOKEN = 'http://abitpriv.vstu.by:8080/api/uaa/token';
 
-const GET_STATISTICS = 'http://abitpriv.vstu.by:8080/api/adm-service/admin/stats/speciality';
+const GET_STATISTICS = 'http://abitpriv.vstu.by:8080/api/adm-service/admin/statistics/speciality';
 
 const GET_STATUS = 'http://abitpriv.vstu.by:8080/api/adm-service/abiturient/';
 
