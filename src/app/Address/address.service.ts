@@ -35,6 +35,16 @@ export class HttpService {
       region: address.region,
       district: address.district,
       city: address.city,
+      country: address.county, // add
+
+      street_in: address.street_in,
+      house_in: address.house_in,
+      building_in: address.building_in,
+      apartment_in: address.apartment_in,
+      region_in: address.region_in,
+      district_in: address.district_in,
+      city_in: address.city_in,
+      country_in: address.county_in, // add
     };
 
     return this.http.put(PUT_ABITURIENT_ADDRESS + this.userid, body, {

@@ -48,6 +48,16 @@
     <label for="name">Имя</label><label style="color: red">&nbsp;*</label>
     <input type="text" class="form-control" placeholder="Имя" id="name" [(ngModel)]="personal.firstName" name="firstName" required>
       </div>
+<!--add field-->
+      <div class="col-sm">
+        <label for="surname_en">Фамилия по английски</label><label style="color: red">&nbsp;*</label>
+        <input type="text" class="form-control" placeholder="Фамилия" id="surname_en" [(ngModel)]="personal.lastName_en" name="lastName_en" required>
+      </div>
+      <div class="col-sm">
+    <label for="name_en">Имя</label><label style="color: red">&nbsp;*</label>
+    <input type="text" class="form-control" placeholder="Имя" id="name_en" [(ngModel)]="personal.firstName_en" name="firstName_en" required>
+      </div>
+
       <div class="col-sm">
     <label for="lastname">Отчество</label>
     <input type="text" class="form-control" placeholder="Отчество" id="lastname" [(ngModel)]="personal.middleName" name="middleName">
