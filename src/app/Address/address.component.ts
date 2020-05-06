@@ -113,7 +113,7 @@ export class AddressComponent implements OnInit {
     this.address.district = this.address.district_in;
     this.address.region = this.address.region_in;
     this.address.city = this.address.city_in;
-    this.address.county = this.address.county_in; //add
+
 
   }
   loadAbiturient() {

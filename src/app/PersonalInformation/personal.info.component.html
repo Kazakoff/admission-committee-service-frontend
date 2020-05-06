@@ -11,7 +11,7 @@
     <div class="row">
       <div class="col-sm">
     <label for="docseria">Серия документа</label><label style="color: red">&nbsp;*</label>
-    <input class="form-control" id="docseria" [(ngModel)]="personal.documentSeria" name="documentSeria" ngDefaultControl required maxlength="10"/>
+    <input class="form-control" id="docseria" [(ngModel)]="personal.documentSeria" name="documentSeria" ngDefaultControl required maxlength="10" pattern= "^[a-zA-Z0-9]+$"/>
         <small id="emailHelp" class="form-text text-danger"> Вводите серию латиницей!</small><br>
       </div>
       <div class="col-sm">
@@ -48,13 +48,15 @@
     <label for="name">Имя</label><label style="color: red">&nbsp;*</label>
     <input type="text" class="form-control" placeholder="Имя" id="name" [(ngModel)]="personal.firstName" name="firstName" required>
       </div>
+    </div>
 <!--add field-->
+<div class="row">
       <div class="col-sm">
         <label for="surname_en">Фамилия по английски</label><label style="color: red">&nbsp;*</label>
         <input type="text" class="form-control" placeholder="Фамилия" id="surname_en" [(ngModel)]="personal.lastName_en" name="lastName_en" required>
       </div>
       <div class="col-sm">
-    <label for="name_en">Имя</label><label style="color: red">&nbsp;*</label>
+    <label for="name_en">Имя по английски</label><label style="color: red">&nbsp;*</label>
     <input type="text" class="form-control" placeholder="Имя" id="name_en" [(ngModel)]="personal.firstName_en" name="firstName_en" required>
       </div>
 
