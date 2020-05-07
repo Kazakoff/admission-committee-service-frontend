@@ -104,17 +104,15 @@ export class AddressComponent implements OnInit {
       }
     );
   }
-  copyAdress(){
-    this.address.county = this.address.county_in;
+  copyAdress() {
+    this.address.country = this.address.country_in;
     this.address.street = this.address.street_in;
-    this.address.house =     this.address.house_in;
+    this.address.house = this.address.house_in;
     this.address.building = this.address.building_in;
     this.address.apartment = this.address.apartment_in;
     this.address.district = this.address.district_in;
     this.address.region = this.address.region_in;
     this.address.city = this.address.city_in;
-
-
   }
   loadAbiturient() {
     this.isAbiturientLoading = true;
@@ -135,7 +133,7 @@ export class AddressComponent implements OnInit {
           this.address.district = this.addressObject["district"];
           this.address.region = this.addressObject["region"];
           this.address.city = this.addressObject["city"];
-          this.address.county = this.addressObject["country"]; //add
+          this.address.country = this.addressObject["country"]; //add
 
           // add
           this.address.street_in = this.addressObject["street_in"];
@@ -145,7 +143,7 @@ export class AddressComponent implements OnInit {
           this.address.district_in = this.addressObject["district_in"];
           this.address.region_in = this.addressObject["region_in"];
           this.address.city_in = this.addressObject["city_in"];
-          this.address.county_in = this.addressObject["country_in"];
+          this.address.country_in = this.addressObject["country_in"];
         }
         this.isAbiturientLoading = false;
       },

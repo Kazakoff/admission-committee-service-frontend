@@ -10,7 +10,7 @@ export class Address {
   region: string;
   district: string;
   city: string;
-  county: string; // add
+  country: string; // add
 
   // проживание add
   street_in: string;
@@ -20,5 +20,5 @@ export class Address {
   region_in: string;
   district_in: string;
   city_in: string;
-  county_in: string;
+  country_in: string;
 }
