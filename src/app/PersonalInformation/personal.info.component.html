@@ -1,112 +1,249 @@
-<form #myForm="ngForm" [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isDocLoading || isNationalitiesLoading">
+<form
+  #myForm="ngForm"
+  [hidden]="
+    !token ||
+    tokenInvalid === true ||
+    isAbiturientLoading ||
+    isDocLoading ||
+    isNationalitiesLoading
+  "
+>
   <div class="container-fluid">
-    <label for="doctype">Тип документа </label><label style="color: red">&nbsp;*</label>
-    <select class="form-control" id="doctype" [(ngModel)]="personal.documentTypeId.id" [ngModelOptions]="{standalone: true}" name="documentTypeId" ngDefaultControl  #personaldocumentOrgan>
+    <label for="doctype">Тип документа </label
+    ><label style="color: red;">&nbsp;*</label>
+    <select
+      class="form-control"
+      id="doctype"
+      [(ngModel)]="personal.documentTypeId.id"
+      [ngModelOptions]="{ standalone: true }"
+      name="documentTypeId"
+      ngDefaultControl
+      #personaldocumentOrgan
+    >
       <option [ngValue]="null" disabled>Choose your document type</option>
-      <option *ngFor="let data of doctype; let i = index" [ngValue]="data.id">{{data.name}}</option>
-    </select><br>
+      <option *ngFor="let data of doctype; let i = index" [ngValue]="data.id">{{
+        data.name
+      }}</option> </select
+    ><br />
   </div>
 
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm">
-    <label for="docseria">Серия документа</label><label style="color: red">&nbsp;*</label>
-    <input class="form-control" id="docseria" [(ngModel)]="personal.documentSeria" name="documentSeria" ngDefaultControl required maxlength="10"/>
-        <small id="emailHelp" class="form-text text-danger"> Вводите серию латиницей!</small><br>
+        <label for="docseria">Серия документа</label
+        ><label style="color: red;">&nbsp;*</label>
+        <input
+          class="form-control"
+          id="docseria"
+          [(ngModel)]="personal.documentSeria"
+          name="documentSeria"
+          ngDefaultControl
+          required
+          maxlength="10"
+          pattern="^[a-zA-Z0-9]+$"
+        />
+        <small id="emailHelp" class="form-text text-danger">
+          Вводите серию латиницей!</small
+        ><br />
       </div>
       <div class="col-sm">
-    <label for="documentNumber">Номер</label><label style="color: red">&nbsp;*</label>
-    <input type="text" class="form-control" placeholder="" id="documentNumber" [(ngModel)]="personal.documentNumber" name="documentNumber" required maxlength="50">
+        <label for="documentNumber">Номер</label
+        ><label style="color: red;">&nbsp;*</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder=""
+          id="documentNumber"
+          [(ngModel)]="personal.documentNumber"
+          name="documentNumber"
+          required
+          maxlength="50"
+        />
       </div>
       <div class="col-sm">
-    <label for="docdate">Дата выдачи (ГГГГ-ММ-ДД)</label><label style="color: red">&nbsp;*</label>
-    <input type="text"
-           class="form-control"
-           bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
-           placeholder="" id="docdate"
-           [(ngModel)]="personal.documentDate"
-           name="documentDate"
-           [minDate]="minDate"
-           [maxDate]="rightNow"
-           required><br>
+        <label for="docdate">Дата выдачи (ГГГГ-ММ-ДД)</label
+        ><label style="color: red;">&nbsp;*</label>
+        <input
+          type="text"
+          class="form-control"
+          bsDatepicker
+          [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+          placeholder=""
+          id="docdate"
+          [(ngModel)]="personal.documentDate"
+          name="documentDate"
+          [minDate]="minDate"
+          [maxDate]="rightNow"
+          required
+        /><br />
       </div>
     </div>
   </div>
 
-    <div class="container-fluid">
-      <label for="issued">Кем выдан</label>
-      <input type="text" class="form-control" id="issued" placeholder="Кем выдан" [(ngModel)]="personal.documentOrgan" name="documentOrgan"><br>
-    </div> <br><br>
+  <div class="container-fluid">
+    <label for="issued">Кем выдан</label>
+    <input
+      type="text"
+      class="form-control"
+      id="issued"
+      placeholder="Кем выдан"
+      [(ngModel)]="personal.documentOrgan"
+      name="documentOrgan"
+    /><br />
+  </div>
+  <br /><br />
 
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm">
-        <label for="surname">Фамилия</label><label style="color: red">&nbsp;*</label>
-        <input type="text" class="form-control" placeholder="Фамилия" id="surname" [(ngModel)]="personal.lastName" name="lastName" required>
+        <label for="surname">Фамилия</label
+        ><label style="color: red;">&nbsp;*</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Фамилия"
+          id="surname"
+          [(ngModel)]="personal.lastName"
+          name="lastName"
+          required
+        />
       </div>
       <div class="col-sm">
-    <label for="name">Имя</label><label style="color: red">&nbsp;*</label>
-    <input type="text" class="form-control" placeholder="Имя" id="name" [(ngModel)]="personal.firstName" name="firstName" required>
+        <label for="name">Имя</label><label style="color: red;">&nbsp;*</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Имя"
+          id="name"
+          [(ngModel)]="personal.firstName"
+          name="firstName"
+          required
+        />
       </div>
       <div class="col-sm">
-    <label for="lastname">Отчество</label>
-    <input type="text" class="form-control" placeholder="Отчество" id="lastname" [(ngModel)]="personal.middleName" name="middleName">
+        <label for="lastname">Отчество</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Отчество"
+          id="lastname"
+          [(ngModel)]="personal.middleName"
+          name="middleName"
+        />
       </div>
     </div>
-  </div> <br><br>
+  </div>
+  <br /><br />
 
   <div class="container-fluid">
-    <label for="birthdate"> Дата рождения (ГГГГ-ММ-ДД)</label><label style="color: red">&nbsp;*</label>
-    <input type="text"
-           class="form-control"
-           bsDatepicker
-           [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
-           placeholder="Дата рождения" id="birthdate"
-           [(ngModel)]="personal.birthDate"
-           name="birthDate"
-           [minDate]="minDate"
-           [maxDate]="rightNow"
-           required><br>
-    <label for="birthplace">Место рождения</label><label style="color: red">&nbsp;*</label>
-    <input type="text" class="form-control" placeholder="Место рождения" id="birthplace" [(ngModel)]="personal.birthPlace" name="birthPlace" required><br>
+    <label for="birthdate"> Дата рождения (ГГГГ-ММ-ДД)</label
+    ><label style="color: red;">&nbsp;*</label>
+    <input
+      type="text"
+      class="form-control"
+      bsDatepicker
+      [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+      placeholder="Дата рождения"
+      id="birthdate"
+      [(ngModel)]="personal.birthDate"
+      name="birthDate"
+      [minDate]="minDate"
+      [maxDate]="rightNow"
+      required
+    /><br />
+    <label for="birthplace">Место рождения</label
+    ><label style="color: red;">&nbsp;*</label>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Место рождения"
+      id="birthplace"
+      [(ngModel)]="personal.birthPlace"
+      name="birthPlace"
+      required
+    /><br />
   </div>
 
   <div class="container-fluid">
     <label for="nationality">Гражданство</label>
-    <select class="form-control" id="nationality" [(ngModel)]="personal.nationalityId.id" name="nationalityId">
-      <option *ngFor="let data of nationality" [ngValue]="data.id">{{data.name}}</option>
+    <select
+      class="form-control"
+      id="nationality"
+      [(ngModel)]="personal.nationalityId.id"
+      name="nationalityId"
+    >
+      <option *ngFor="let data of nationality" [ngValue]="data.id">{{
+        data.name
+      }}</option>
     </select>
-  </div> <br><br>
+  </div>
+  <br /><br />
 
   <div class="container-fluid">
     <label for="identification">Идентификационный номер</label>
-    <input type="text" class="form-control" placeholder="Идентификационный номер" id="identification" [(ngModel)]="personal.identificationNumber" name="identificationNumber" maxlength="20"><br>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Идентификационный номер"
+      id="identification"
+      [(ngModel)]="personal.identificationNumber"
+      name="identificationNumber"
+      maxlength="20"
+    /><br />
   </div>
 
   <div class="container-fluid"><label>Пол</label></div>
   <div class="container-fluid">
     <div class="btn-group">
-      <label class="btn btn-primary" (click)="setSex('man')"
-            btnRadio="Left" tabindex="0" role="button" [ngClass]="{active: isRadioChecked('man')}">Мужской</label>
-      <label class="btn btn-primary" (click)="setSex('women')"
-            btnRadio="Middle" tabindex="0" role="button" [ngClass]="{active: isRadioChecked('women')}">Женский</label>
+      <label
+        class="btn btn-primary"
+        (click)="setSex('man')"
+        btnRadio="Left"
+        tabindex="0"
+        role="button"
+        [ngClass]="{ active: isRadioChecked('man') }"
+        >Мужской</label
+      >
+      <label
+        class="btn btn-primary"
+        (click)="setSex('women')"
+        btnRadio="Middle"
+        tabindex="0"
+        role="button"
+        [ngClass]="{ active: isRadioChecked('women') }"
+        >Женский</label
+      >
     </div>
   </div>
 
   <div class="container-fluid">
-    <input type="button" [routerLink]="['/']" class="btn btn-danger btn-lg" value="Назад" />
-    <input type="button" (click)="submit(personal)" [disabled]="myForm.invalid" [routerLink]="['/address']" class="btn btn-success btn-lg" value="Далее"
-           tooltip="Пожалуйста, перед отправкой формы тщательно проверьте все введённые Вами данные."/>
+    <input
+      type="button"
+      [routerLink]="['/']"
+      class="btn btn-danger btn-lg"
+      value="Назад"
+    />
+    <input
+      type="button"
+      (click)="submit(personal)"
+      [disabled]="myForm.invalid"
+      [routerLink]="['/address']"
+      class="btn btn-success btn-lg"
+      value="Далее"
+      tooltip="Пожалуйста, перед отправкой формы тщательно проверьте все введённые Вами данные."
+    />
   </div>
-
 </form>
 
 <div class="alert alert-danger" role="alert" [hidden]="token">
-  <strong>Запрещено! Недостаточно прав доступа! </strong>Пожалуйста <a href="/auth" class="alert-link">авторизируйтесь</a> или
-  <a href="/reg" class="alert-link">загеристрируйтесь</a> сперва! Потом попробуйте ещё раз.
+  <strong>Запрещено! Недостаточно прав доступа! </strong>Пожалуйста
+  <a href="/auth" class="alert-link">авторизируйтесь</a> или
+  <a href="/reg" class="alert-link">загеристрируйтесь</a> сперва! Потом
+  попробуйте ещё раз.
 </div>
 
 <div class="alert alert-danger" role="alert" *ngIf="tokenInvalid === true">
-  <strong>Ваш токен истёк! </strong>Пожалуйста <a href="/auth" class="alert-link">авторизируйтесь</a> сперва! Потом попробуйте ещё раз.
+  <strong>Ваш токен истёк! </strong>Пожалуйста
+  <a href="/auth" class="alert-link">авторизируйтесь</a> сперва! Потом
+  попробуйте ещё раз.
 </div>
-
