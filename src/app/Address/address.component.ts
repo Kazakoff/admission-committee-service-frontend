@@ -105,14 +105,14 @@ export class AddressComponent implements OnInit {
     );
   }
   copyAdress() {
-    this.address.country = this.address.country_in;
-    this.address.street = this.address.street_in;
-    this.address.house = this.address.house_in;
-    this.address.building = this.address.building_in;
-    this.address.apartment = this.address.apartment_in;
-    this.address.district = this.address.district_in;
-    this.address.region = this.address.region_in;
-    this.address.city = this.address.city_in;
+    this.address.country = this.address.countryIn;
+    this.address.street = this.address.streetIn;
+    this.address.house = this.address.houseIn;
+    this.address.building = this.address.buildingIn;
+    this.address.apartment = this.address.apartmentIn;
+    this.address.district = this.address.districtIn;
+    this.address.region = this.address.regionIn;
+    this.address.city = this.address.cityIn;
   }
   loadAbiturient() {
     this.isAbiturientLoading = true;
@@ -136,14 +136,14 @@ export class AddressComponent implements OnInit {
           this.address.country = this.addressObject["country"]; //add
 
           // add
-          this.address.street_in = this.addressObject["street_in"];
-          this.address.house_in = this.addressObject["house_in"];
-          this.address.building_in = this.addressObject["building_in"];
-          this.address.apartment_in = this.addressObject["apartment_in"];
-          this.address.district_in = this.addressObject["district_in"];
-          this.address.region_in = this.addressObject["region_in"];
-          this.address.city_in = this.addressObject["city_in"];
-          this.address.country_in = this.addressObject["country_in"];
+          this.address.streetIn = this.addressObject["streetIn"];
+          this.address.houseIn = this.addressObject["houseIn"];
+          this.address.buildingIn = this.addressObject["buildingIn"];
+          this.address.apartmentIn = this.addressObject["apartmentIn"];
+          this.address.districtIn = this.addressObject["districtIn"];
+          this.address.regionIn = this.addressObject["regionIn"];
+          this.address.cityIn = this.addressObject["cityIn"];
+          this.address.countryIn = this.addressObject["countryIn"];
         }
         this.isAbiturientLoading = false;
       },

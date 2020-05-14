@@ -37,14 +37,14 @@ export class HttpService {
       city: address.city,
       country: address.country, // add
 
-      street_in: address.street_in,
-      house_in: address.house_in,
-      building_in: address.building_in,
-      apartment_in: address.apartment_in,
-      region_in: address.region_in,
-      district_in: address.district_in,
-      city_in: address.city_in,
-      country_in: address.country_in, // add
+      streetIn: address.streetIn,
+      houseIn: address.houseIn,
+      buildingIn: address.buildingIn,
+      apartmentIn: address.apartmentIn,
+      regionIn: address.regionIn,
+      districtIn: address.districtIn,
+      cityIn: address.cityIn,
+      countryIn: address.countryIn, // add
     };
 
     return this.http.put(PUT_ABITURIENT_ADDRESS + this.userid, body, {

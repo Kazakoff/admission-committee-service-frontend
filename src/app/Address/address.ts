@@ -13,12 +13,12 @@ export class Address {
   country: string; // add
 
   // проживание add
-  street_in: string;
-  house_in: string;
-  building_in: string;
-  apartment_in: string;
-  region_in: string;
-  district_in: string;
-  city_in: string;
-  country_in: string;
+  streetIn: string;
+  houseIn: string;
+  buildingIn: string;
+  apartmentIn: string;
+  regionIn: string;
+  districtIn: string;
+  cityIn: string;
+  countryIn: string;
 }

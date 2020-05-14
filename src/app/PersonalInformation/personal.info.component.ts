@@ -135,8 +135,8 @@ export class PersonalInfoComponent implements OnInit {
           this.personal.firstName = this.personalObject["firstName"];
           this.personal.lastName = this.personalObject["lastName"];
           // add fields
-          this.personal.firstName_en = this.personalObject["firstName_en"];
-          this.personal.lastName_en = this.personalObject["lastName_en"];
+          this.personal.firstNameEn = this.personalObject["firstNameEn"];
+          this.personal.lastNameEn = this.personalObject["lastNameEn"];
 
           this.personal.middleName = this.personalObject["middleName"];
           this.personal.birthDate = this.datepipe.transform(

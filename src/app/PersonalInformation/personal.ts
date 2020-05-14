@@ -10,8 +10,8 @@ export class Personal {
   firstName: string;
   lastName: string;
   // !!! add field
-  firstName_en: string;
-  lastName_en: string;
+  firstNameEn: string;
+  lastNameEn: string;
   middleName: string;
   birthDate: string;
   birthPlace: string;

@@ -32,8 +32,8 @@ export class HttpService {
       firstName: personal.firstName,
       lastName: personal.lastName,
       // !!! add field
-      firstName_en: personal.firstName_en,
-      lastName_en: personal.lastName_en,
+      firstNameEn: personal.firstNameEn,
+      lastNameEn: personal.lastNameEn,
       middleName: personal.middleName,
       birthDate: personal.birthDate,
       birthPlace: personal.birthPlace,

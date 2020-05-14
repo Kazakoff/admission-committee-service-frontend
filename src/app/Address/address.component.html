@@ -1,106 +1,281 @@
-<form #myForm="ngForm" [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isRegionLoading">
-  <div  class="container-fluid" > Адрес проживания</div>
+<form
+  #myForm="ngForm"
+  [hidden]="
+    !token || tokenInvalid === true || isAbiturientLoading || isRegionLoading
+  "
+>
+  <div class="container-fluid">Адрес проживания</div>
   <div class="container-fluid">
-    <label for="postcode">Почтовый индекс</label><label style="color: red">&nbsp;*</label>
-    <input type="text" class="form-control" id="postcode" placeholder="Индекс" [(ngModel)]="address.postCode" name="postcode" required maxlength="50"><br>
-    <label for="country_in">Страна</label><label style="color: red">&nbsp;*</label>
-    <input type="text" class="form-control" id="country_in" placeholder="Страна" [(ngModel)]="address.country_in" name="country_in" required ><br>
-      <div class="row">
-        <div class="col-sm">
-          <label for="region_in">Область</label><label style="color: red">&nbsp;*</label>
-          <input type="text" class="form-control" id="region_in" name="region_in" placeholder="Область" [(ngModel)]="address.region_in" required /><br>
-        </div>
-        <div class="col-sm">
-          <label for="district_in">Район</label><label style="color: red">&nbsp;*</label>
-          <input type="text" class="form-control" id="district_in" name="district_in" placeholder="Район" [(ngModel)]="address.district_in" required /><br>
-        </div> 
-        <div class="col-sm">
-          <label for="city_in">Название населённого пункта</label><label style="color: red">&nbsp;*</label>
-          <input id="city_in" name="city_in" class="form-control" placeholder="Населённый пункт" [(ngModel)]="address.city_in" required />
-        </div>
+    <label for="postcode">Почтовый индекс</label
+    ><label style="color: red;">&nbsp;*</label>
+    <input
+      type="text"
+      class="form-control"
+      id="postcode"
+      placeholder="Индекс"
+      [(ngModel)]="address.postCode"
+      name="postcode"
+      required
+      maxlength="50"
+    /><br />
+    <label for="countryIn">Страна</label
+    ><label style="color: red;">&nbsp;*</label>
+    <input
+      type="text"
+      class="form-control"
+      id="countryIn"
+      placeholder="Страна"
+      [(ngModel)]="address.countryIn"
+      name="countryIn"
+      required
+    /><br />
+    <div class="row">
+      <div class="col-sm">
+        <label for="regionIn">Область</label
+        ><label style="color: red;">&nbsp;*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="regionIn"
+          name="regionIn"
+          placeholder="Область"
+          [(ngModel)]="address.regionIn"
+          required
+        /><br />
       </div>
-    <label for="street_in">Улица/Проспект</label><label style="color: red">&nbsp;*</label>
-    <input type="text" class="form-control" id="street_in" placeholder="Улица/Проспект" [(ngModel)]="address.street_in" name="street_in" required><br>
+      <div class="col-sm">
+        <label for="districtIn">Район</label
+        ><label style="color: red;">&nbsp;*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="districtIn"
+          name="districtIn"
+          placeholder="Район"
+          [(ngModel)]="address.districtIn"
+          required
+        /><br />
+      </div>
+      <div class="col-sm">
+        <label for="cityIn">Название населённого пункта</label
+        ><label style="color: red;">&nbsp;*</label>
+        <input
+          id="cityIn"
+          name="cityIn"
+          class="form-control"
+          placeholder="Населённый пункт"
+          [(ngModel)]="address.cityIn"
+          required
+        />
+      </div>
+    </div>
+    <label for="streetIn">Улица/Проспект</label
+    ><label style="color: red;">&nbsp;*</label>
+    <input
+      type="text"
+      class="form-control"
+      id="streetIn"
+      placeholder="Улица/Проспект"
+      [(ngModel)]="address.streetIn"
+      name="streetIn"
+      required
+    /><br />
   </div>
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm">
-        <label for="house_in">Дом</label><label style="color: red">&nbsp;*</label>
-        <input type="text" class="form-control" id="house_in" placeholder="Дом" [(ngModel)]="address.house_in" name="house_in" required>
+        <label for="houseIn">Дом</label
+        ><label style="color: red;">&nbsp;*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="houseIn"
+          placeholder="Дом"
+          [(ngModel)]="address.houseIn"
+          name="houseIn"
+          required
+        />
       </div>
       <div class="col-sm">
-        <label for="building_in">Корпус</label>
-        <input type="text" class="form-control" id="building_in" placeholder="Корпус" [(ngModel)]="address.building_in" name="building_in">
+        <label for="buildingIn">Корпус</label>
+        <input
+          type="text"
+          class="form-control"
+          id="buildingIn"
+          placeholder="Корпус"
+          [(ngModel)]="address.buildingIn"
+          name="buildingIn"
+        />
       </div>
       <div class="col-sm">
-        <label for="apartment_in">Квартира</label>
-        <input type="text" class="form-control" id="apartment_in" placeholder="Квартира" [(ngModel)]="address.apartment_in" name="apartment_in"><br>
+        <label for="apartmentIn">Квартира</label>
+        <input
+          type="text"
+          class="form-control"
+          id="apartmentIn"
+          placeholder="Квартира"
+          [(ngModel)]="address.apartmentIn"
+          name="apartmentIn"
+        /><br />
       </div>
     </div>
   </div>
 
-  <div  class="container-fluid" > Адрес прописки</div> 
+  <div class="container-fluid">Адрес прописки</div>
   <!--кнопка копирования данных проживание - > прописка-->
-  <input type="button" (click)="copyAdress()"  class="btn btn-success btn-lg" value="Такой же как адрес проживания"
-  tooltip="Заполнить адрес прописки данными из адреса проживания" />
-
+  <input
+    type="button"
+    (click)="copyAdress()"
+    class="btn btn-success btn-lg"
+    value="Такой же как адрес проживания"
+    tooltip="Заполнить адрес прописки данными из адреса проживания"
+  />
 
   <div class="container-fluid">
-    <label for="country">Страна</label><label style="color: red">&nbsp;*</label>
-    <input type="text" class="form-control" id="country" placeholder="Страна" [(ngModel)]="address.country" name="country" required ><br>
-      <div class="row">
-        <div class="col-sm">
-          <label for="region">Область</label><label style="color: red">&nbsp;*</label>
-          <input type="text" class="form-control" id="region" name="region" placeholder="Область" [(ngModel)]="address.region" required /><br>
-        </div>
-        <div class="col-sm">
-          <label for="district">Район</label><label style="color: red">&nbsp;*</label>
-          <input type="text" class="form-control" id="district" name="district" placeholder="Район" [(ngModel)]="address.district" required /><br>
-        </div> 
-        <div class="col-sm">
-          <label for="city">Название населённого пункта</label><label style="color: red">&nbsp;*</label>
-          <input id="city" name="city" class="form-control" placeholder="Населённый пункт" [(ngModel)]="address.city" required />
-        </div>
+    <label for="country">Страна</label
+    ><label style="color: red;">&nbsp;*</label>
+    <input
+      type="text"
+      class="form-control"
+      id="country"
+      placeholder="Страна"
+      [(ngModel)]="address.country"
+      name="country"
+      required
+    /><br />
+    <div class="row">
+      <div class="col-sm">
+        <label for="region">Область</label
+        ><label style="color: red;">&nbsp;*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="region"
+          name="region"
+          placeholder="Область"
+          [(ngModel)]="address.region"
+          required
+        /><br />
       </div>
-    <label for="street">Улица/Проспект</label><label style="color: red">&nbsp;*</label>
-    <input type="text" class="form-control" id="street" placeholder="Улица/Проспект" [(ngModel)]="address.street" name="street" required><br>
+      <div class="col-sm">
+        <label for="district">Район</label
+        ><label style="color: red;">&nbsp;*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="district"
+          name="district"
+          placeholder="Район"
+          [(ngModel)]="address.district"
+          required
+        /><br />
+      </div>
+      <div class="col-sm">
+        <label for="city">Название населённого пункта</label
+        ><label style="color: red;">&nbsp;*</label>
+        <input
+          id="city"
+          name="city"
+          class="form-control"
+          placeholder="Населённый пункт"
+          [(ngModel)]="address.city"
+          required
+        />
+      </div>
+    </div>
+    <label for="street">Улица/Проспект</label
+    ><label style="color: red;">&nbsp;*</label>
+    <input
+      type="text"
+      class="form-control"
+      id="street"
+      placeholder="Улица/Проспект"
+      [(ngModel)]="address.street"
+      name="street"
+      required
+    /><br />
   </div>
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm">
-        <label for="house">Дом</label><label style="color: red">&nbsp;*</label>
-        <input type="text" class="form-control" id="house" placeholder="Дом" [(ngModel)]="address.house" name="house" required>
+        <label for="house">Дом</label><label style="color: red;">&nbsp;*</label>
+        <input
+          type="text"
+          class="form-control"
+          id="house"
+          placeholder="Дом"
+          [(ngModel)]="address.house"
+          name="house"
+          required
+        />
       </div>
       <div class="col-sm">
         <label for="building">Корпус</label>
-        <input type="text" class="form-control" id="building" placeholder="Корпус" [(ngModel)]="address.building" name="building">
+        <input
+          type="text"
+          class="form-control"
+          id="building"
+          placeholder="Корпус"
+          [(ngModel)]="address.building"
+          name="building"
+        />
       </div>
       <div class="col-sm">
         <label for="apartment">Квартира</label>
-        <input type="text" class="form-control" id="apartment" placeholder="Квартира" [(ngModel)]="address.apartment" name="apartment"><br>
+        <input
+          type="text"
+          class="form-control"
+          id="apartment"
+          placeholder="Квартира"
+          [(ngModel)]="address.apartment"
+          name="apartment"
+        /><br />
       </div>
     </div>
   </div>
 
-
   <div class="container-fluid">
-    <label for="phone">Телефон</label><label style="color: red">&nbsp;*</label>
-    <input type="text" class="form-control" id="phone" placeholder="Телефон" [(ngModel)]="address.phone" name="phone" required>
-  </div> <br>
-
-  <div class="container-fluid">
-    <input type="button" [routerLink]="['/personal']" class="btn btn-danger btn-lg" value="Назад" />
-    <input type="button" (click)="submit(address)" [disabled]="myForm.invalid" [routerLink]="['/study']" class="btn btn-success btn-lg" value="Далее"
-           tooltip="Пожалуйста, перед отправкой формы тщательно проверьте все введённые Вами данные." />
+    <label for="phone">Телефон</label><label style="color: red;">&nbsp;*</label>
+    <input
+      type="text"
+      class="form-control"
+      id="phone"
+      placeholder="Телефон"
+      [(ngModel)]="address.phone"
+      name="phone"
+      required
+    />
   </div>
+  <br />
 
+  <div class="container-fluid">
+    <input
+      type="button"
+      [routerLink]="['/personal']"
+      class="btn btn-danger btn-lg"
+      value="Назад"
+    />
+    <input
+      type="button"
+      (click)="submit(address)"
+      [disabled]="myForm.invalid"
+      [routerLink]="['/study']"
+      class="btn btn-success btn-lg"
+      value="Далее"
+      tooltip="Пожалуйста, перед отправкой формы тщательно проверьте все введённые Вами данные."
+    />
+  </div>
 </form>
 
 <div class="alert alert-danger" role="alert" [hidden]="token">
-  <strong>Запрещено! Недостаточно прав доступа! </strong>Пожалуйста <a href="/auth" class="alert-link">авторизируйтесь</a> или
-  <a href="/reg" class="alert-link">загеристрируйтесь</a> сперва! Потом попробуйте ещё раз.
+  <strong>Запрещено! Недостаточно прав доступа! </strong>Пожалуйста
+  <a href="/auth" class="alert-link">авторизируйтесь</a> или
+  <a href="/reg" class="alert-link">загеристрируйтесь</a> сперва! Потом
+  попробуйте ещё раз.
 </div>
 
 <div class="alert alert-danger" role="alert" *ngIf="tokenInvalid === true">
-  <strong>Ваш токен истёк! </strong>Пожалуйста <a href="/auth" class="alert-link">авторизируйтесь</a> сперва! Потом попробуйте ещё раз.
+  <strong>Ваш токен истёк! </strong>Пожалуйста
+  <a href="/auth" class="alert-link">авторизируйтесь</a> сперва! Потом
+  попробуйте ещё раз.
 </div>
