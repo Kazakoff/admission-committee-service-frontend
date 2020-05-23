@@ -48,9 +48,12 @@
         <input
           type="checkbox"
           class="custom-control-input"
-          id="defaultUnchecked"
-        />
-        <label class="custom-control-label" for="defaultUnchecked">
+          id="agree"
+          [(ngModel)]="registration.agree"
+          name="agree"
+          required
+          />
+        <label class="custom-control-label" for="agree">
           даю согласие на обработку и использование своих персональных данных
           для подготовки и проведения централизованного тестирования, для
           участия в конкурсе в ходе приема лиц для получения высшего образования
@@ -67,6 +70,7 @@
         >
           Зарегистрироваться
         </button>
+
       </div>
       <br />
       <div class="alert alert-danger" [hidden]="error === undefined">
