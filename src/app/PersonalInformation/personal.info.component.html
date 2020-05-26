@@ -89,6 +89,7 @@
       placeholder="Кем выдан"
       [(ngModel)]="personal.documentOrgan"
       name="documentOrgan"
+      required
     /><br />
   </div>
   <br /><br />
@@ -120,6 +121,17 @@
           required
         />
       </div>
+      <div class="col-sm">
+        <label for="lastname">Отчество</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Отчество"
+          id="lastname"
+          [(ngModel)]="personal.middleName"
+          name="middleName"
+        />
+      </div>
     </div>
     <!--add field-->
     <div class="row">
@@ -133,7 +145,6 @@
           id="surname_en"
           [(ngModel)]="personal.lastNameEn"
           name="lastNameEn"
-          required
         />
       </div>
       <div class="col-sm">
@@ -146,19 +157,6 @@
           id="name_en"
           [(ngModel)]="personal.firstNameEn"
           name="firstNameEn"
-          required
-        />
-      </div>
-
-      <div class="col-sm">
-        <label for="lastname">Отчество</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Отчество"
-          id="lastname"
-          [(ngModel)]="personal.middleName"
-          name="middleName"
         />
       </div>
     </div>
@@ -219,6 +217,7 @@
       [(ngModel)]="personal.identificationNumber"
       name="identificationNumber"
       maxlength="20"
+      required
     /><br />
   </div>
 

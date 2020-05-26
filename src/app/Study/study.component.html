@@ -1,71 +1,184 @@
-<form #myForm="ngForm" [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isLanguageLoading || isEdLevelLoading || isEdTypeLoading || isEstCityLoading">
+<form
+  #myForm="ngForm"
+  [hidden]="
+    !token ||
+    tokenInvalid === true ||
+    isAbiturientLoading ||
+    isLanguageLoading ||
+    isEdLevelLoading ||
+    isEdTypeLoading ||
+    isEstCityLoading
+  "
+>
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm">
-        <label for="endYear">Год окончания обучения</label><label style="color: red">&nbsp;*</label>
-        <input type="number" class="form-control" id="endYear" placeholder="Год окончания" [(ngModel)]="education.endYear"
-          name="endYear" pattern="^(194[5-9]|19[5-9]\d|200\d|201[0-9])$" required>
+        <label for="endYear">Год окончания обучения</label
+        ><label style="color: red;">&nbsp;*</label>
+        <input
+          type="number"
+          class="form-control"
+          id="endYear"
+          placeholder="Год окончания"
+          [(ngModel)]="education.endYear"
+          name="endYear"
+          pattern="^(194[5-9]|19[5-9]\d|200\d|201[0-9])$"
+          required
+        />
       </div>
       <div class="col-sm">
-        <label for="educationLevel">Уровень образования</label><label style="color: red">&nbsp;*</label>
-        <select class="form-control" id="educationLevel" [(ngModel)]="education.educationLevelId.id" name="educationLevel" ngDefaultControl>
-          <option [ngValue]="null" disabled>Choose your level</option>
-          <option *ngFor="let data of educationLevel; let i = index" [ngValue]="data.id">{{data.name}}</option>
-        </select><br>
+        <label for="educationLevel">Уровень образования</label
+        ><label style="color: red;">&nbsp;*</label>
+        <select
+          class="form-control"
+          id="educationLevel"
+          [(ngModel)]="education.educationLevelId.id"
+          name="educationLevel"
+          ngDefaultControl
+          required
+        >
+          <option [ngValue]="null" disabled
+            >Выберете уровень образования</option
+          >
+          <option
+            *ngFor="let data of educationLevel; let i = index"
+            [ngValue]="data.id"
+            >{{ data.name }}</option
+          > </select
+        ><br />
       </div>
     </div>
   </div>
 
   <div class="container-fluid">
-    <label>Наименование учебного заведения</label><label style="color: red">&nbsp;*</label>
-    <ngx-select [items]="educationInstitutions" optionValueField="id" optionTextField="name" [(ngModel)]="education.educationInstitutionId.id"
-                name="educationInstitutionId" (typed)="onInputChange($event)" [allowClear]="true" required>
+    <label>Наименование учебного заведения</label
+    ><label style="color: red;">&nbsp;*</label>
+    <ngx-select
+      [items]="educationInstitutions"
+      optionValueField="id"
+      optionTextField="name"
+      [(ngModel)]="education.educationInstitutionId.id"
+      name="educationInstitutionId"
+      (typed)="onInputChange($event)"
+      [allowClear]="true"
+      required
+    >
     </ngx-select>
-    <small id="help" class="form-text text-muted"> Введите название учебного заведения в поле выше и выберите его!</small><br>
-    <button class="btn btn-primary" (click)="showAddEducationInstitution()" style="margin-bottom: 10px" #addEdInstButton>Добавить учреждение образования</button>
+    <small id="help" class="form-text text-muted">
+      Введите название учебного заведения в поле выше и выберите его!</small
+    ><br />
+    <button
+      class="btn btn-primary"
+      (click)="showAddEducationInstitution()"
+      style="margin-bottom: 10px;"
+      #addEdInstButton
+    >
+      Добавить учреждение образования
+    </button>
     <div class="container-fluid" #addEducationalInstitution>
       <form #newEducationInstForm="ngForm">
         <div class="row">
           <div class="col-sm">
             <label for="type">Выберите тип учреждения образования</label>
-            <select class="form-control" id="type" #educationalInstituteType [(ngModel)]="newEducationInstitution.typeId.id" name="type">
-              <option *ngFor="let data of edTypes" [ngValue]="data.id">{{data.name}}</option>
-            </select><br>
+            <select
+              class="form-control"
+              id="type"
+              #educationalInstituteType
+              [(ngModel)]="newEducationInstitution.typeId.id"
+              name="type"
+              required
+            >
+              <option *ngFor="let data of edTypes" [ngValue]="data.id">{{
+                data.name
+              }}</option> </select
+            ><br />
           </div>
           <div class="col-sm">
-            <label for="estCity">Выберите город, в котором находится ваше учреждение образования</label>
-            <select class="form-control" id="estCity" #estCity [(ngModel)]="newEducationInstitution.estCityId.id" name="estCity">
-              <option *ngFor="let data of estCities" [ngValue]="data.id">{{data.name}}</option>
-            </select><br>
+            <label for="estCity"
+              >Выберите город, в котором находится ваше учреждение
+              образования</label
+            >
+            <select
+              class="form-control"
+              id="estCity"
+              #estCity
+              [(ngModel)]="newEducationInstitution.estCityId.id"
+              name="estCity"
+              required
+            >
+              <option *ngFor="let data of estCities" [ngValue]="data.id">{{
+                data.name
+              }}</option> </select
+            ><br />
           </div>
           <div class="col-sm">
-            <label for="estName">Полное название учреждения образования (прим. ГУО "СШ №20 г. Бобруйск)</label><label style="color: red">&nbsp;*</label>
-            <input class="form-control" id="estName" #estName [(ngModel)]="newEducationInstitution.name" name="estName" required/>
+            <label for="estName"
+              >Полное название учреждения образования (прим. ГУО "СШ №20 г.
+              Бобруйск)</label
+            ><label style="color: red;">&nbsp;*</label>
+            <input
+              class="form-control"
+              id="estName"
+              #estName
+              [(ngModel)]="newEducationInstitution.name"
+              name="estName"
+              required
+            />
           </div>
         </div>
-        <button class="btn btn-warning" (click)="saveNewEducationInstitution(newEducationInstitution)"
-              [disabled]="newEducationInstForm.invalid" style="margin-top: 30px">Сохранить учреждение образования</button>
-        <strong id="institutionHelp" class="form-text text-danger"> Пожалуйста, убедитесь, что вы ввели все данные верно! </strong><br>
+        <button
+          class="btn btn-warning"
+          (click)="saveNewEducationInstitution(newEducationInstitution)"
+          [disabled]="newEducationInstForm.invalid"
+          style="margin-top: 30px;"
+        >
+          Сохранить учреждение образования
+        </button>
+        <strong id="institutionHelp" class="form-text text-danger">
+          Пожалуйста, убедитесь, что вы ввели все данные верно! </strong
+        ><br />
       </form>
     </div>
   </div>
 
   <div class="container-fluid">
-    <label for="language">Изучаемый иностранный язык</label><label style="color: red">&nbsp;*</label>
-    <select class="form-control" id="language" [(ngModel)]="education.languageId.id" name="language" ngDefaultControl>
-      <option [ngValue]="null" disabled>Choose your uo type</option>
-      <option *ngFor="let data of language; let i = index" [ngValue]="data.id">{{data.name}}</option>
-    </select><br>
-  </div><br>
+    <label for="language">Изучаемый иностранный язык</label
+    ><label style="color: red;">&nbsp;*</label>
+    <select
+      class="form-control"
+      id="language"
+      [(ngModel)]="education.languageId.id"
+      name="language"
+      ngDefaultControl
+      required
+    >
+      <option [ngValue]="null" disabled>Выберете изучаемый язык</option>
+      <option
+        *ngFor="let data of language; let i = index"
+        [ngValue]="data.id"
+        >{{ data.name }}</option
+      > </select
+    ><br />
+  </div>
+  <br />
 
   <div class="container">
     <div class="row">
       <div class="col-sm">
         <div class="pretty p-svg p-curve">
-          <input type="checkbox" id="goldMedalist" value="option1" [checked]="education.goldMedalist" (change)="education.goldMedalist = !education.goldMedalist" />
+          <input
+            type="checkbox"
+            id="goldMedalist"
+            value="option1"
+            [checked]="education.goldMedalist"
+            (change)="education.goldMedalist = !education.goldMedalist"
+          />
           <div class="state p-success">
             <svg class="svg svg-icon" viewBox="0 0 20 20">
-              <path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>
+              <path
+                d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
+                style="stroke: white; fill: white;"
+              ></path>
             </svg>
             <label>Медаль</label>
           </div>
@@ -73,30 +186,56 @@
       </div>
       <div class="col-sm">
         <div class="pretty p-svg p-curve">
-          <input type="checkbox" id="honours" value="option2" [checked]="education.honours" (change)="education.honours = !education.honours" />
+          <input
+            type="checkbox"
+            id="honours"
+            value="option2"
+            [checked]="education.honours"
+            (change)="education.honours = !education.honours"
+          />
           <div class="state p-success">
             <svg class="svg svg-icon" viewBox="0 0 20 20">
-              <path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>
+              <path
+                d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
+                style="stroke: white; fill: white;"
+              ></path>
             </svg>
             <label>Диплом с отличием</label>
           </div>
         </div>
       </div>
     </div>
-  </div><br>
+  </div>
+  <br />
 
   <div class="container-fluid">
-    <input type="button" [routerLink]="['/address']" class="btn btn-danger btn-lg" value="Назад" />
-    <input type="button" (click)="submit(education)" [disabled]="myForm.invalid" [routerLink]="['/additional']" class="btn btn-success btn-lg" value="Далее"
-           tooltip="Пожалуйста, перед отправкой формы тщательно проверьте все введённые Вами данные."/>
+    <input
+      type="button"
+      [routerLink]="['/address']"
+      class="btn btn-danger btn-lg"
+      value="Назад"
+    />
+    <input
+      type="button"
+      (click)="submit(education)"
+      [disabled]="myForm.invalid"
+      [routerLink]="['/additional']"
+      class="btn btn-success btn-lg"
+      value="Далее"
+      tooltip="Пожалуйста, перед отправкой формы тщательно проверьте все введённые Вами данные."
+    />
   </div>
 </form>
 
 <div class="alert alert-danger" role="alert" [hidden]="token">
-  <strong>Запрещено! Недостаточно прав доступа! </strong>Пожалуйста <a href="/auth" class="alert-link">авторизируйтесь</a> или
-  <a href="/reg" class="alert-link">загеристрируйтесь</a> сперва! Потом попробуйте ещё раз.
+  <strong>Запрещено! Недостаточно прав доступа! </strong>Пожалуйста
+  <a href="/auth" class="alert-link">авторизируйтесь</a> или
+  <a href="/reg" class="alert-link">загеристрируйтесь</a> сперва! Потом
+  попробуйте ещё раз.
 </div>
 
 <div class="alert alert-danger" role="alert" *ngIf="tokenInvalid === true">
-  <strong>Ваш токен истёк! </strong>Пожалуйста <a href="/auth" class="alert-link">авторизируйтесь</a> сперва! Потом попробуйте ещё раз.
+  <strong>Ваш токен истёк! </strong>Пожалуйста
+  <a href="/auth" class="alert-link">авторизируйтесь</a> сперва! Потом
+  попробуйте ещё раз.
 </div>
