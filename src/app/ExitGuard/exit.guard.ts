@@ -1,0 +1,17 @@
+import { CanDeactivate } from "@angular/router";
+import { Observable } from "rxjs";
+
+export interface ComponentCanDeactivate {
+  canDeactivate: () => boolean | Observable<boolean>;
+}
+
+export class ExitGuard implements CanDeactivate<ComponentCanDeactivate> {
+  canDeactivate(
+    component: ComponentCanDeactivate
+  ): Observable<boolean> | boolean {
+    // return component.canDeactivate ? component.canDeactivate() : true;
+    return confirm(
+      "Не сохранённые данные будут потеряны. Для сохранения данных нажмите 'Далее'. Вы хотите покинуть страницу?"
+    );
+  }
+}
