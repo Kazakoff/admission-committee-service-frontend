@@ -27,6 +27,7 @@ export class HttpService {
   postData(address: Address) {
     const body = {
       postCode: address.postCode,
+      postCodeIn: address.postCodeIn,
       street: address.street,
       house: address.house,
       building: address.building,

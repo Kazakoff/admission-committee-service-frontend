@@ -4,8 +4,8 @@
     !token || tokenInvalid === true || isAbiturientLoading || isRegionLoading
   "
 >
-  <div class="container-fluid">Адрес проживания</div>
-  <div class="container-fluid">
+  <div class="container-fluid "><h3>Адрес проживания</h3></div>
+  <div class="container-fluid border border-primary">
     <label for="postcode">Почтовый индекс</label
     ><label style="color: red;">&nbsp;*</label>
     <input
@@ -13,7 +13,7 @@
       class="form-control"
       id="postcode"
       placeholder="Индекс"
-      [(ngModel)]="address.postCode"
+      [(ngModel)]="address.postCodeIn"
       name="postcode"
       required
       maxlength="50"
@@ -121,7 +121,11 @@
     </div>
   </div>
 
-  <div class="container-fluid">Адрес прописки</div>
+
+
+  <div class="container-fluid border border-primary">
+    <div class="container-fluid "><h3>Адрес прописки</h3></div>
+
   <!--кнопка копирования данных проживание - > прописка-->
   <input
     type="button"
@@ -131,7 +135,18 @@
     tooltip="Заполнить адрес прописки данными из адреса проживания"
   />
 
-  <div class="container-fluid">
+    <label for="postcode">Почтовый индекс</label
+      ><label style="color: red;">&nbsp;*</label>
+      <input
+        type="text"
+        class="form-control"
+        id="postcode"
+        placeholder="Индекс"
+        [(ngModel)]="address.postCode"
+        name="postcode"
+        required
+        maxlength="50"
+      /><br />
     <label for="country">Страна</label
     ><label style="color: red;">&nbsp;*</label>
     <input

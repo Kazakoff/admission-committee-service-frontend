@@ -106,6 +106,7 @@ export class AddressComponent implements OnInit {
   }
   copyAdress() {
     this.address.country = this.address.countryIn;
+    this.address.postCode = this.address.postCodeIn;
     this.address.street = this.address.streetIn;
     this.address.house = this.address.houseIn;
     this.address.building = this.address.buildingIn;
@@ -125,6 +126,7 @@ export class AddressComponent implements OnInit {
           console.log("set inputs");
         } else {
           this.address.postCode = this.addressObject["postCode"];
+          this.address.postCodeIn = this.addressObject["postCodeIn"];
           this.address.street = this.addressObject["street"];
           this.address.house = this.addressObject["house"];
           this.address.building = this.addressObject["building"];

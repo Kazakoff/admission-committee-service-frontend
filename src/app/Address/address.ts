@@ -1,5 +1,6 @@
 export class Address {
   postCode: string;
+  postCodeIn: string;
   // прописка
 
   street: string;
