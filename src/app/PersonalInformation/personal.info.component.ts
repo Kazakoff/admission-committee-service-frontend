@@ -8,6 +8,7 @@ import { NotifierService } from "angular-notifier";
 import { BsDatepickerConfig, BsLocaleService } from "ngx-bootstrap/datepicker";
 import { defineLocale } from "ngx-bootstrap/chronos";
 import { ruLocale } from "ngx-bootstrap/locale";
+import { AppDataService } from "../app.data.service";
 defineLocale("ru", ruLocale);
 
 @Component({
@@ -63,7 +64,8 @@ export class PersonalInfoComponent implements OnInit {
     private httpService: HttpService,
     public datepipe: DatePipe,
     private _service: NotifierService,
-    private localeService: BsLocaleService
+    private localeService: BsLocaleService,
+    private appData: AppDataService
   ) {
     this.localeService.use(this.locale);
   }
@@ -76,7 +78,11 @@ export class PersonalInfoComponent implements OnInit {
     this._service.notify("error", "Неожиданная ошибка!");
   }
 
-  submit(personal: Personal) {
+  submit(personal: Personal, nextLink: string) {
+    if (this.appData.approve) {
+      location.replace(nextLink);
+      return;
+    }
     this.isSubmitLoading = true;
     this.httpService.postData(personal).subscribe(
       (data: Personal) => {
@@ -85,11 +91,18 @@ export class PersonalInfoComponent implements OnInit {
         this.error = undefined;
         this.successEvent();
         this.isSubmitLoading = false;
+        location.replace(nextLink);
       },
       (error) => {
         this.error = error;
         this.errorEvent();
         this.isSubmitLoading = false;
+        if (
+          confirm(
+            "Форма содержит недопустимые значени. Переход на другую страницу не сохранит данные на форме. Вы хотите покинуть страницу?"
+          )
+        )
+          location.replace(nextLink);
       }
     );
   }

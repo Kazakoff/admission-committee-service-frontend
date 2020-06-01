@@ -8,6 +8,7 @@ import { Region } from "./region";
 import { District } from "./district";
 import { NewCity } from "./newCity";
 import { GET_REGION } from "../URLS";
+import { AppDataService } from "../app.data.service";
 
 @Component({
   selector: "address",
@@ -69,7 +70,8 @@ export class AddressComponent implements OnInit {
     private httpService: HttpService,
     private httpClient: HttpClient,
     private _service: NotifierService,
-    private http: HttpClient
+    private http: HttpClient,
+    private appData: AppDataService
   ) {}
 
   addHeaders() {
@@ -87,7 +89,11 @@ export class AddressComponent implements OnInit {
     this._service.notify("error", "Неожиданная ошибка!");
   }
 
-  submit(address: Address) {
+  submit(address: Address, nextLink: string) {
+    if (this.appData.approve) {
+      location.replace(nextLink);
+      return;
+    }
     this.isSubmitLoading = true;
     this.httpService.postData(address).subscribe(
       (data: Address) => {
@@ -96,11 +102,18 @@ export class AddressComponent implements OnInit {
         this.error = undefined;
         this.successEvent();
         this.isSubmitLoading = false;
+        location.replace(nextLink);
       },
       (error) => {
         this.error = error;
         this.errorEvent();
         this.isSubmitLoading = false;
+        if (
+          confirm(
+            "Форма содержит недопустимые значени. Переход на другую страницу не сохранит данные на форме. Вы хотите покинуть страницу?"
+          )
+        )
+          location.replace(nextLink);
       }
     );
   }

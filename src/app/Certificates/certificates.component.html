@@ -1,44 +1,134 @@
-<div class="container-fluid" [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isEdDocTypeLoading || isSubjectLoading || isFacultiesLoading">
+<div
+  class="container-fluid"
+  [hidden]="
+    !token ||
+    tokenInvalid === true ||
+    isAbiturientLoading ||
+    isEdDocTypeLoading ||
+    isSubjectLoading ||
+    isFacultiesLoading
+  "
+>
   <label for="educationTime">Выберите срок получения образования</label>
-<select class="form-control" name="educationTime" id="educationTime" (change)="getSpecialities()" #educationTime>
-  <option *ngFor="let data of educationTimes" [ngValue]="data.id" [selected]="data.id === 1">{{data.name}}</option>
-</select><br>
+  <select
+    class="form-control"
+    name="educationTime"
+    id="educationTime"
+    (change)="getSpecialities()"
+    #educationTime
+  >
+    <option
+      *ngFor="let data of educationTimes"
+      [ngValue]="data.id"
+      [selected]="data.id === 1"
+      >{{ data.name }}</option
+    > </select
+  ><br />
   <label for="educationForm">Выберите форму получения образования</label>
-<select class="form-control" name="educationForm" id="educationForm" (change)="getSpecialities()" #educationForm>
-  <option *ngFor="let data of educationForms" [ngValue]="data.id" [selected]="data.id === 1">{{data.name}}</option>
-</select><br>
+  <select
+    class="form-control"
+    name="educationForm"
+    id="educationForm"
+    (change)="getSpecialities()"
+    #educationForm
+  >
+    <option
+      *ngFor="let data of educationForms"
+      [ngValue]="data.id"
+      [selected]="data.id === 1"
+      >{{ data.name }}</option
+    > </select
+  ><br />
   <label for="facultyId">Выберите факультет</label>
-<select class="form-control" name="facultyId" id="facultyId" (change)="getSpecialities()" #facultyId>
-  <option *ngFor="let data of faculties" [ngValue]="data.id">{{data.name}}</option>
-</select><br>
+  <select
+    class="form-control"
+    name="facultyId"
+    id="facultyId"
+    (change)="getSpecialities()"
+    #facultyId
+  >
+    <option *ngFor="let data of faculties" [ngValue]="data.id">{{
+      data.name
+    }}</option> </select
+  ><br />
   <label for="specialities">Выберите специальность</label>
-<select class="form-control" name="specialities" id="specialities" #speciality>
-    <option *ngFor="let data of specialities" [ngValue]="data.id">{{data.name}} ({{data.group.name}})</option>
-</select><br>
-<button type="button" class="btn btn-success" (click)="addSpeciality()">Добавить специальность</button>
-</div><br [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isEdDocTypeLoading || isSubjectLoading || isFacultiesLoading">
-<table class="table table-striped" [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isEdDocTypeLoading || isSubjectLoading || isFacultiesLoading">
+  <select
+    class="form-control"
+    name="specialities"
+    id="specialities"
+    #speciality
+  >
+    <option *ngFor="let data of specialities" [ngValue]="data.id"
+      >{{ data.name }} ({{ data.group.name }})</option
+    > </select
+  ><br />
+  <button type="button" class="btn btn-success" (click)="addSpeciality()">
+    Добавить специальность
+  </button>
+</div>
+<br
+  [hidden]="
+    !token ||
+    tokenInvalid === true ||
+    isAbiturientLoading ||
+    isEdDocTypeLoading ||
+    isSubjectLoading ||
+    isFacultiesLoading
+  "
+/>
+<table
+  class="table table-striped"
+  [hidden]="
+    !token ||
+    tokenInvalid === true ||
+    isAbiturientLoading ||
+    isEdDocTypeLoading ||
+    isSubjectLoading ||
+    isFacultiesLoading
+  "
+>
   <thead class="thead-dark">
-  <tr>
-    <th></th>
-    <th>Название специальности</th>
-    <th>Группа специальности</th>
-    <th>Приоритет</th>
-  </tr>
+    <tr>
+      <th></th>
+      <th>Название специальности</th>
+      <th>Группа специальности</th>
+      <th>Приоритет</th>
+    </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let specialitiesGroup of specialitiesGroups; let i = index">
-    <td><button class="btn btn-danger" (click)="removeSpeciality($event)">Удалить</button></td>
-    <td>{{specialitiesGroup.name}}</td>
-    <td>{{specialitiesGroup.group}}</td>
-    <td>{{i + 1}}</td>
-  </tr>
+    <tr *ngFor="let specialitiesGroup of specialitiesGroups; let i = index">
+      <td>
+        <button class="btn btn-danger" (click)="removeSpeciality($event)">
+          Удалить
+        </button>
+      </td>
+      <td>{{ specialitiesGroup.name }}</td>
+      <td>{{ specialitiesGroup.group }}</td>
+      <td>{{ i + 1 }}</td>
+    </tr>
   </tbody>
-</table><br>
-<div class="alert alert-danger" role="alert" style="margin: 0 20px 20px" [hidden]="specialitiesEquals">
-  Нельзя добавлять специальности из разных групп специальности либо более одной специальности с группой "Без группы"!
+</table>
+<br />
+<div
+  class="alert alert-danger"
+  role="alert"
+  style="margin: 0 20px 20px;"
+  [hidden]="specialitiesEquals"
+>
+  Нельзя добавлять специальности из разных групп специальности либо более одной
+  специальности с группой "Без группы"!
 </div>
-<table class="table table-striped" [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isEdDocTypeLoading || isSubjectLoading || isFacultiesLoading">
+<table
+  class="table table-striped"
+  [hidden]="
+    !token ||
+    tokenInvalid === true ||
+    isAbiturientLoading ||
+    isEdDocTypeLoading ||
+    isSubjectLoading ||
+    isFacultiesLoading
+  "
+>
   <thead class="thead-dark">
     <tr>
       <th></th>
@@ -53,52 +143,141 @@
   </thead>
   <tbody>
     <tr *ngFor="let certificates of competitionInfo.documents">
-      <td><button class="btn btn-danger" (click)="removeDocument($event)">Удалить</button></td>
-      <td>{{getDocTypeName(certificates.educationDocumentTypeId)}}</td>
-      <td>{{getSubjectName(certificates.subjectId)}}</td>
-      <div *ngIf="certificates.scale; then thenBlockScale else elseBlockScale"></div>
+      <td>
+        <button class="btn btn-danger" (click)="removeDocument($event)">
+          Удалить
+        </button>
+      </td>
+      <td>{{ getDocTypeName(certificates.educationDocumentTypeId) }}</td>
+      <td>{{ getSubjectName(certificates.subjectId) }}</td>
+      <div
+        *ngIf="certificates.scale; then thenBlockScale; else elseBlockScale"
+      ></div>
       <ng-template #thenBlockScale>
-        <td *ngFor="let data of scales | myfilter:certificates.scale">{{data.name}}</td>
+        <td *ngFor="let data of scales | myfilter: certificates.scale">
+          {{ data.name }}
+        </td>
       </ng-template>
       <ng-template #elseBlockScale>
         <td></td>
       </ng-template>
-      <td>{{certificates.seria}}</td>
-      <td>{{certificates.number}}</td>
-      <td>{{certificates.nameUO}}</td>
-      <td>{{certificates.marks[1]||certificates.marks[2]||certificates.marks[3]||certificates.marks[4]||certificates.marks[5]||certificates.marks[6]
-        ||certificates.marks[7]||certificates.marks[8]||certificates.marks[9] ?
-        'Единиц: ' + certificates.marks[0] + ' ' +
-        'Двоек: ' + certificates.marks[1] + ' ' +
-        'Троек: ' + certificates.marks[2] + ' ' +
-        'Четверок: ' + certificates.marks[3] + ' ' +
-        'Пятерок: ' + certificates.marks[4] + ' ' +
-        'Шестерок: ' + certificates.marks[5] + ' ' +
-        'Семерок: ' + certificates.marks[6] + ' ' +
-        'Восьмерок: ' + certificates.marks[7] + ' ' +
-        'Девяток: ' + certificates.marks[8] + ' ' +
-        'Десяток: ' + certificates.marks[9] : certificates.marks[0]}}</td>
+      <td>{{ certificates.seria }}</td>
+      <td>{{ certificates.number }}</td>
+      <td>{{ certificates.nameUO }}</td>
+      <td>
+        {{
+          certificates.marks[1] ||
+          certificates.marks[2] ||
+          certificates.marks[3] ||
+          certificates.marks[4] ||
+          certificates.marks[5] ||
+          certificates.marks[6] ||
+          certificates.marks[7] ||
+          certificates.marks[8] ||
+          certificates.marks[9]
+            ? "Единиц: " +
+              certificates.marks[0] +
+              " " +
+              "Двоек: " +
+              certificates.marks[1] +
+              " " +
+              "Троек: " +
+              certificates.marks[2] +
+              " " +
+              "Четверок: " +
+              certificates.marks[3] +
+              " " +
+              "Пятерок: " +
+              certificates.marks[4] +
+              " " +
+              "Шестерок: " +
+              certificates.marks[5] +
+              " " +
+              "Семерок: " +
+              certificates.marks[6] +
+              " " +
+              "Восьмерок: " +
+              certificates.marks[7] +
+              " " +
+              "Девяток: " +
+              certificates.marks[8] +
+              " " +
+              "Десяток: " +
+              certificates.marks[9]
+            : certificates.marks[0]
+        }}
+      </td>
     </tr>
   </tbody>
 </table>
-<div class="container-fluid" [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isEdDocTypeLoading || isSubjectLoading || isFacultiesLoading">
-  <button type="button" class="btn btn-success" (click)="openModalWithComponent()">Добавить документ</button>
+<div
+  class="container-fluid"
+  [hidden]="
+    !token ||
+    tokenInvalid === true ||
+    isAbiturientLoading ||
+    isEdDocTypeLoading ||
+    isSubjectLoading ||
+    isFacultiesLoading
+  "
+>
+  <button
+    type="button"
+    class="btn btn-success"
+    (click)="openModalWithComponent()"
+  >
+    Добавить документ
+  </button>
 </div>
-<br [hidden]="!token || tokenInvalid === true"><br [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isEdDocTypeLoading || isSubjectLoading || isFacultiesLoading">
+<br [hidden]="!token || tokenInvalid === true" /><br
+  [hidden]="
+    !token ||
+    tokenInvalid === true ||
+    isAbiturientLoading ||
+    isEdDocTypeLoading ||
+    isSubjectLoading ||
+    isFacultiesLoading
+  "
+/>
 <div class="alert alert-danger" role="alert" [hidden]="isAnySpeciality">
   Пожалуйста, добавьте хотя бы одну желаемую специальность!
 </div>
-<div class="container-fluid" [hidden]="!token || tokenInvalid === true || isAbiturientLoading || isEdDocTypeLoading || isSubjectLoading || isFacultiesLoading">
-  <input type="button" [routerLink]="['/additional']" class="btn btn-danger btn-lg" value="Назад" />
-  <input type="button" (click)="submit(competitionInfo)" [disabled]="!specialitiesEquals || !isAnySpeciality" class="btn btn-success btn-lg" value="Далее"
-         tooltip="Пожалуйста, перед отправкой формы тщательно проверьте все введённые Вами данные." />
+<div
+  class="container-fluid"
+  [hidden]="
+    !token ||
+    tokenInvalid === true ||
+    isAbiturientLoading ||
+    isEdDocTypeLoading ||
+    isSubjectLoading ||
+    isFacultiesLoading
+  "
+>
+  <input
+    type="button"
+    (click)="submit(competitionInfo, '/additional')"
+    class="btn btn-danger btn-lg"
+    value="Назад"
+  />
+  <input
+    type="button"
+    (click)="submit(competitionInfo, '/')"
+    [disabled]="!specialitiesEquals || !isAnySpeciality"
+    class="btn btn-success btn-lg"
+    value="Далее"
+    tooltip="Пожалуйста, перед отправкой формы тщательно проверьте все введённые Вами данные."
+  />
 </div>
 
 <div class="alert alert-danger" role="alert" [hidden]="token">
-  <strong>Запрещено! Недостаточно прав доступа! </strong>Пожалуйста <a href="/auth" class="alert-link">авторизируйтесь</a> или
-  <a href="/reg" class="alert-link">загеристрируйтесь</a> сперва! Потом попробуйте ещё раз.
+  <strong>Запрещено! Недостаточно прав доступа! </strong>Пожалуйста
+  <a href="/auth" class="alert-link">авторизируйтесь</a> или
+  <a href="/reg" class="alert-link">загеристрируйтесь</a> сперва! Потом
+  попробуйте ещё раз.
 </div>
 
 <div class="alert alert-danger" role="alert" *ngIf="tokenInvalid === true">
-  <strong>Ваш токен истёк! </strong>Пожалуйста <a href="/auth" class="alert-link">авторизируйтесь</a> сперва! Потом попробуйте ещё раз.
+  <strong>Ваш токен истёк! </strong>Пожалуйста
+  <a href="/auth" class="alert-link">авторизируйтесь</a> сперва! Потом
+  попробуйте ещё раз.
 </div>

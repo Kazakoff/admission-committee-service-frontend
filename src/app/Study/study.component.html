@@ -211,15 +211,14 @@
   <div class="container-fluid">
     <input
       type="button"
-      [routerLink]="['/address']"
+      (click)="submit(education, '/address')"
       class="btn btn-danger btn-lg"
       value="Назад"
     />
     <input
       type="button"
-      (click)="submit(education)"
+      (click)="submit(education, '/additional')"
       [disabled]="myForm.invalid"
-      [routerLink]="['/additional']"
       class="btn btn-success btn-lg"
       value="Далее"
       tooltip="Пожалуйста, перед отправкой формы тщательно проверьте все введённые Вами данные."
