@@ -33,6 +33,7 @@
         <label for="docseria">Серия документа</label
         ><label style="color: red;">&nbsp;*</label>
         <input
+          style="text-transform: uppercase;"
           class="form-control"
           id="docseria"
           [(ngModel)]="personal.documentSeria"
@@ -50,7 +51,7 @@
         <label for="documentNumber">Номер</label
         ><label style="color: red;">&nbsp;*</label>
         <input
-          type="text"
+          type="number"
           class="form-control"
           placeholder=""
           id="documentNumber"
@@ -58,6 +59,7 @@
           name="documentNumber"
           required
           maxlength="50"
+          pattern="^[a-zA-Z0-9]+$"
         />
       </div>
       <div class="col-sm">

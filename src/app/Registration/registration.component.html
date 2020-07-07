@@ -1,5 +1,5 @@
 <br /><br /><br />
-<div class="container col-md-10" >
+<div class="container col-md-10">
   <h1>Регистрация</h1>
   <br />
 
@@ -19,7 +19,7 @@
           class="form"
         />
         <small id="passwordHelp" class="form-text text-muted">
-          Введите ваш пароль для регистрации!</small
+          Введите ваш пароль для регистрации! (не менее 3-х символов)</small
         >
         <input
           type="password"
@@ -28,6 +28,7 @@
           [(ngModel)]="registration.password"
           name="password"
           required
+          minlength="3"
           class="form mb-0"
         />
       </div>
@@ -52,7 +53,7 @@
           [(ngModel)]="registration.agree"
           name="agree"
           required
-          />
+        />
         <label class="custom-control-label" for="agree">
           даю согласие на обработку и использование своих персональных данных
           для подготовки и проведения централизованного тестирования, для
@@ -70,7 +71,6 @@
         >
           Зарегистрироваться
         </button>
-
       </div>
       <br />
       <div class="alert alert-danger" [hidden]="error === undefined">
