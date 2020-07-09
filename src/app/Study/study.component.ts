@@ -9,6 +9,7 @@ import { EdType } from "./edType";
 import { EstCity } from "./estCity";
 import { NewEducationInstitution } from "./newEducationInstitution";
 import { AppDataService } from "../app.data.service";
+import { environment } from "../../environments/environment";
 
 @Component({
   selector: "study",
@@ -107,7 +108,7 @@ export class StudyComponent implements OnInit {
 
   submit(education: Education, nextLink: string) {
     if (this.appData.approve) {
-      location.replace(nextLink);
+      location.replace(environment.authRedirectURL + nextLink);
       return;
     }
     this.isSubmitLoading = true;
@@ -118,7 +119,7 @@ export class StudyComponent implements OnInit {
         this.error = undefined;
         this.successEvent();
         this.isSubmitLoading = false;
-        location.replace(nextLink);
+        location.replace(environment.authRedirectURL + nextLink);
       },
       (error) => {
         this.error = error;
@@ -129,7 +130,7 @@ export class StudyComponent implements OnInit {
             "Форма содержит недопустимые значени. Переход на другую страницу не сохранит данные на форме. Вы хотите покинуть страницу?"
           )
         )
-          location.replace(nextLink);
+          location.replace(environment.authRedirectURL + nextLink);
       }
     );
   }

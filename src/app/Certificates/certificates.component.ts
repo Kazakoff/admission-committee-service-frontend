@@ -20,6 +20,7 @@ import { NotifierService } from "angular-notifier";
 import { Router } from "@angular/router";
 export { Observable } from "rxjs/Observable";
 import { AppDataService } from "../app.data.service";
+import { environment } from "../../environments/environment";
 
 @Component({
   selector: "cer",
@@ -226,7 +227,7 @@ export class CertificatesComponent implements OnInit {
 
   submit(competitionInfo: CompetitionInfo, nextLink: string) {
     if (this.appData.approve) {
-      location.replace(nextLink);
+      location.replace(environment.authRedirectURL + nextLink);
       return;
     }
     if (competitionInfo.specialities.length > 0) {
@@ -236,7 +237,7 @@ export class CertificatesComponent implements OnInit {
           this.successEvent();
           // this.router.navigate(["/"]);
           this.isAnySpeciality = true;
-          location.replace(nextLink);
+          location.replace(environment.authRedirectURL + nextLink);
         },
         (error) => {
           this.error = error;
@@ -246,7 +247,7 @@ export class CertificatesComponent implements OnInit {
             )
           )
             this.isAnySpeciality = false;
-          location.replace(nextLink);
+          location.replace(environment.authRedirectURL + nextLink);
         }
       );
     } else {

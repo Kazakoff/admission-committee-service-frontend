@@ -9,6 +9,7 @@ import { District } from "./district";
 import { NewCity } from "./newCity";
 import { GET_REGION } from "../URLS";
 import { AppDataService } from "../app.data.service";
+import { environment } from "../../environments/environment";
 
 @Component({
   selector: "address",
@@ -91,7 +92,7 @@ export class AddressComponent implements OnInit {
 
   submit(address: Address, nextLink: string) {
     if (this.appData.approve) {
-      location.replace(nextLink);
+      location.replace(environment.authRedirectURL + nextLink);
       return;
     }
     this.isSubmitLoading = true;
@@ -102,7 +103,7 @@ export class AddressComponent implements OnInit {
         this.error = undefined;
         this.successEvent();
         this.isSubmitLoading = false;
-        location.replace(nextLink);
+        location.replace(environment.authRedirectURL + nextLink);
       },
       (error) => {
         this.error = error;
@@ -113,7 +114,7 @@ export class AddressComponent implements OnInit {
             "Форма содержит недопустимые значени. Переход на другую страницу не сохранит данные на форме. Вы хотите покинуть страницу?"
           )
         )
-          location.replace(nextLink);
+          location.replace(environment.authRedirectURL + nextLink);
       }
     );
   }

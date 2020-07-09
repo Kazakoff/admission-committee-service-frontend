@@ -9,6 +9,8 @@ import { BsDatepickerConfig, BsLocaleService } from "ngx-bootstrap/datepicker";
 import { defineLocale } from "ngx-bootstrap/chronos";
 import { ruLocale } from "ngx-bootstrap/locale";
 import { AppDataService } from "../app.data.service";
+import { environment } from "../../environments/environment";
+
 defineLocale("ru", ruLocale);
 
 @Component({
@@ -80,7 +82,7 @@ export class PersonalInfoComponent implements OnInit {
 
   submit(personal: Personal, nextLink: string) {
     if (this.appData.approve) {
-      location.replace(nextLink);
+      location.replace(environment.authRedirectURL + nextLink);
       return;
     }
     this.isSubmitLoading = true;
@@ -91,7 +93,7 @@ export class PersonalInfoComponent implements OnInit {
         this.error = undefined;
         this.successEvent();
         this.isSubmitLoading = false;
-        location.replace(nextLink);
+        location.replace(environment.authRedirectURL + nextLink);
       },
       (error) => {
         this.error = error;
@@ -102,7 +104,7 @@ export class PersonalInfoComponent implements OnInit {
             "Форма содержит недопустимые значени. Переход на другую страницу не сохранит данные на форме. Вы хотите покинуть страницу?"
           )
         )
-          location.replace(nextLink);
+          location.replace(environment.authRedirectURL + nextLink);
       }
     );
   }

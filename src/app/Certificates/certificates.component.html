@@ -255,13 +255,13 @@
 >
   <input
     type="button"
-    (click)="submit(competitionInfo, '/additional')"
+    (click)="submit(competitionInfo, 'additional')"
     class="btn btn-danger btn-lg"
     value="Назад"
   />
   <input
     type="button"
-    (click)="submit(competitionInfo, '/')"
+    (click)="submit(competitionInfo, '')"
     [disabled]="!specialitiesEquals || !isAnySpeciality"
     class="btn btn-success btn-lg"
     value="Далее"

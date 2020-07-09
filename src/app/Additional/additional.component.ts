@@ -3,6 +3,7 @@ import { HttpService } from "./additional.service";
 import { Additional } from "./additional";
 import { NotifierService } from "angular-notifier";
 import { AppDataService } from "../app.data.service";
+import { environment } from "../../environments/environment";
 
 @Component({
   selector: "additional",
@@ -39,7 +40,7 @@ export class AdditionalComponent implements OnInit {
 
   submit(additional: Additional, nextLink: string) {
     if (this.appData.approve) {
-      location.replace(nextLink);
+      location.replace(environment.authRedirectURL + nextLink);
       return;
     }
     this.isSubmitLoading = true;
@@ -50,7 +51,7 @@ export class AdditionalComponent implements OnInit {
         this.error = undefined;
         this.successEvent();
         this.isSubmitLoading = false;
-        location.replace(nextLink);
+        location.replace(environment.authRedirectURL + nextLink);
       },
       (error) => {
         this.error = error;
@@ -61,7 +62,7 @@ export class AdditionalComponent implements OnInit {
             "Форма содержит недопустимые значени. Переход на другую страницу не сохранит данные на форме. Вы хотите покинуть страницу?"
           )
         )
-          location.replace(nextLink);
+          location.replace(environment.authRedirectURL + nextLink);
       }
     );
   }
