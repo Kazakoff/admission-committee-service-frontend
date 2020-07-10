@@ -1,31 +1,82 @@
 <div class="modal-header">
   <h4 class="modal-title pull-left">Документ</h4>
-  <button type="button" class="close pull-right" aria-label="Close" (click)="_bsModalRef.hide()">
+  <button
+    type="button"
+    class="close pull-right"
+    aria-label="Close"
+    (click)="_bsModalRef.hide()"
+  >
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
   <form #addForm="ngForm" name="AddForm">
-    <label>Тип документа</label><label style="color: red">&nbsp;*</label>
-    <select class="form-control" (change)="oneEducationChange($event)" [(ngModel)]="certificate.educationDocumentTypeId" name="educationDocumentTypeId" #educationDocumentTypeId required>
-      <option *ngFor="let data of edDocTypes" [ngValue]="data.id">{{data.name}}</option>
+    <label>Тип документа</label><label style="color: red;">&nbsp;*</label>
+    <select
+      class="form-control"
+      (change)="oneEducationChange($event)"
+      [(ngModel)]="certificate.educationDocumentTypeId"
+      name="educationDocumentTypeId"
+      #educationDocumentTypeId
+      required
+    >
+      <option *ngFor="let data of edDocTypes" [ngValue]="data.id"
+        >{{data.name}}</option
+      >
     </select>
-    <label [hidden]="isNotExamOrCertificate()">Предмет</label><label style="color: red">&nbsp;*</label>
-    <select class="form-control" [(ngModel)]="certificate.subjectId" name="subjectId" #subjectId [hidden]="isNotExamOrCertificate()">
-      <option *ngFor="let data of subjects" [ngValue]="data.id">{{data.name}}</option>
+    <label [hidden]="isNotExamOrCertificate()">Предмет</label
+    ><label style="color: red;">&nbsp;*</label>
+    <select
+      class="form-control"
+      [(ngModel)]="certificate.subjectId"
+      name="subjectId"
+      #subjectId
+      [hidden]="isNotExamOrCertificate()"
+    >
+      <option *ngFor="let data of subjects" [ngValue]="data.id"
+        >{{data.name}}</option
+      >
     </select>
-    <label [hidden]="!isNotExamOrCertificate()">Шкала документа</label><label [hidden]="!isNotExamOrCertificate()" style="color: red">&nbsp;*</label>
-    <select class="form-control" [(ngModel)]="certificate.scale" name="scale" [hidden]="!isNotExamOrCertificate()" #scale>
-      <option *ngFor="let data of scales" [ngValue]="data.id">{{data.name}}</option>
+    <label [hidden]="!isNotExamOrCertificate()">Шкала документа</label
+    ><label [hidden]="!isNotExamOrCertificate()" style="color: red;"
+      >&nbsp;*</label
+    >
+    <select
+      class="form-control"
+      [(ngModel)]="certificate.scale"
+      name="scale"
+      [hidden]="!isNotExamOrCertificate()"
+      #scale
+    >
+      <option *ngFor="let data of scales" [ngValue]="data.id"
+        >{{data.name}}</option
+      >
     </select>
     <div *ngIf="!isExam()">
       <label>Серия документа</label>
-      <input [(ngModel)]="certificate.seria" name="seria" class="form-control" #seria/>
-      <label>Номер документа</label><label style="color: red">&nbsp;*</label>
-      <input [(ngModel)]="certificate.number" name="number" class="form-control" required #number/>
+      <input
+        [(ngModel)]="certificate.seria"
+        name="seria"
+        class="form-control"
+        #seria
+      />
+      <label>Номер документа</label><label style="color: red;">&nbsp;*</label>
+      <input
+        [(ngModel)]="certificate.number"
+        name="number"
+        class="form-control"
+        required
+        #number
+      />
     </div>
     <label [hidden]="!isNotExamOrCertificate()">Учреждение образования</label>
-    <input [(ngModel)]="certificate.nameUO" name="nameUO" class="form-control" #nameUO [hidden]="!isNotExamOrCertificate()"/><br>
+    <input
+      [(ngModel)]="certificate.nameUO"
+      name="nameUO"
+      class="form-control"
+      #nameUO
+      [hidden]="!isNotExamOrCertificate()"
+    /><br />
     <label [hidden]="!isNotExamOrCertificate()">Оценки</label>
     <label [hidden]="isNotExamOrCertificate()">Оценка</label>
     <table class="table table-striped text-center">
@@ -37,55 +88,170 @@
       </thead>
       <tbody>
         <tr>
-          <td><input class="form-control col-3" style="margin: 0 auto" #one value="0"/></td>
-          <td><input class="form-control col-3" style="margin: 0 auto" #two [hidden]="!isNotExamOrCertificate()" value="0"/></td>
+          <td>
+            <input
+              type="number"
+              class="form-control col-3"
+              style="margin: 0 auto;"
+              #one
+              value="0"
+              min="0"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="form-control col-3"
+              style="margin: 0 auto;"
+              #two
+              [hidden]="!isNotExamOrCertificate()"
+              value="0"
+              min="0"
+            />
+          </td>
         </tr>
         <tr class="thead-dark" [hidden]="!isNotExamOrCertificate()">
           <th>Количество троек</th>
           <th>Количество четвёрок</th>
         </tr>
         <tr [hidden]="!isNotExamOrCertificate()">
-          <td><input class="form-control col-3" style="margin: 0 auto" #three value="0"/></td>
-          <td><input class="form-control col-3" style="margin: 0 auto"#four value="0"/></td>
+          <td>
+            <input
+              type="number"
+              class="form-control col-3"
+              style="margin: 0 auto;"
+              #three
+              value="0"
+              min="0"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="form-control col-3"
+              style="margin: 0 auto;"
+              #four
+              value="0"
+              min="0"
+            />
+          </td>
         </tr>
         <tr class="thead-dark" [hidden]="!isNotExamOrCertificate()">
           <th>Количество пятёрок</th>
           <th>Количество шестёрок</th>
         </tr>
         <tr [hidden]="!isNotExamOrCertificate()">
-          <td><input class="form-control col-3" style="margin: 0 auto" #five value="0"/></td>
-          <td><input class="form-control col-3" style="margin: 0 auto" #six value="0"/></td>
+          <td>
+            <input
+              type="number"
+              class="form-control col-3"
+              style="margin: 0 auto;"
+              #five
+              value="0"
+              min="0"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="form-control col-3"
+              style="margin: 0 auto;"
+              #six
+              value="0"
+              min="0"
+            />
+          </td>
         </tr>
         <tr class="thead-dark" [hidden]="!isNotExamOrCertificate()">
           <th>Количество семёрок</th>
           <th>Количество восьмёрок</th>
         </tr>
         <tr [hidden]="!isNotExamOrCertificate()">
-          <td><input class="form-control col-3" style="margin: 0 auto" #seven value="0"/></td>
-          <td><input class="form-control col-3" style="margin: 0 auto" #eight value="0"/></td>
+          <td>
+            <input
+              type="number"
+              class="form-control col-3"
+              style="margin: 0 auto;"
+              #seven
+              value="0"
+              min="0"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="form-control col-3"
+              style="margin: 0 auto;"
+              #eight
+              value="0"
+              min="0"
+            />
+          </td>
         </tr>
         <tr class="thead-dark" [hidden]="!isNotExamOrCertificate()">
           <th>Количество девяток</th>
           <th>Количество десяток</th>
         </tr>
         <tr [hidden]="!isNotExamOrCertificate()">
-          <td><input class="form-control col-3" style="margin: 0 auto" #nine value="0"/></td>
-          <td><input class="form-control col-3" style="margin: 0 auto" #ten value="0"/></td>
+          <td>
+            <input
+              type="number"
+              class="form-control col-3"
+              style="margin: 0 auto;"
+              #nine
+              value="0"
+              min="0"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="form-control col-3"
+              style="margin: 0 auto;"
+              #ten
+              value="0"
+              min="0"
+            />
+          </td>
         </tr>
       </tbody>
     </table>
   </form>
 </div>
 <div class="modal-footer">
-  <input type="button" class="btn btn-success" (click)="push()" [disabled]="addForm.invalid" value="Добавить" #pushButton/>
-  <button type="button" class="btn btn-default" (click)="_bsModalRef.hide()">Закрыть</button>
+  <input
+    type="button"
+    class="btn btn-success"
+    (click)="push()"
+    [disabled]="addForm.invalid"
+    value="Добавить"
+    #pushButton
+  />
+  <button type="button" class="btn btn-default" (click)="_bsModalRef.hide()">
+    Закрыть
+  </button>
 </div>
-<div class="alert alert-danger" role="alert" style="margin: 0 20px 20px" [hidden]="!scaleError">
+<div
+  class="alert alert-danger"
+  role="alert"
+  style="margin: 0 20px 20px;"
+  [hidden]="!scaleError"
+>
   Ошибка! Отсутствие шкалы документа допустимо только для сертификата!
 </div>
-<div class="alert alert-danger" role="alert" style="margin: 0 20px 20px" [hidden]="!educationDocumentError">
+<div
+  class="alert alert-danger"
+  role="alert"
+  style="margin: 0 20px 20px;"
+  [hidden]="!educationDocumentError"
+>
   Ошибка! Отсутствие типа документа недопустимо!
 </div>
-<div class="alert alert-danger" role="alert" style="margin: 0 20px 20px" [hidden]="!subjectError">
+<div
+  class="alert alert-danger"
+  role="alert"
+  style="margin: 0 20px 20px;"
+  [hidden]="!subjectError"
+>
   Ошибка! Отсутствие предмета сертификата недопустимо!
 </div>
