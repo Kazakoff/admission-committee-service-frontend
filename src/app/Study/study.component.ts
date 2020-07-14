@@ -10,6 +10,7 @@ import { EstCity } from "./estCity";
 import { NewEducationInstitution } from "./newEducationInstitution";
 import { AppDataService } from "../app.data.service";
 import { environment } from "../../environments/environment";
+import { rightNow, minDate } from "../consts";
 
 @Component({
   selector: "study",
@@ -51,6 +52,7 @@ export class StudyComponent implements OnInit {
   estCities: EstCity[] = [{ id: 1, name: "" }];
   educationInstitutions: any[] = [{ id: 1, name: "" }];
   page = 0;
+  // maxYear = getFullYear(rightNow)+1;
   newEducationInstitution: NewEducationInstitution = new NewEducationInstitution();
   errorInstitution: any;
   tokenInvalid: boolean;
@@ -230,7 +232,7 @@ export class StudyComponent implements OnInit {
     this.isEdTypeLoading = true;
     this.httpService.getEdType().subscribe(
       (data) => {
-        this.edTypes = data["content"];
+        this.edTypes = data["content"].filter(item => item.name != "Не указано");
         this.isEdTypeLoading = false;
       },
       () => (this.isEdTypeLoading = false)
@@ -241,7 +243,7 @@ export class StudyComponent implements OnInit {
     this.isEstCityLoading = true;
     this.httpService.getEstCity().subscribe(
       (data) => {
-        this.estCities = data["content"];
+        this.estCities = data["content"].filter(item => item.name != "Не указано");
         this.isEstCityLoading = false;
       },
       () => (this.isEstCityLoading = false)
