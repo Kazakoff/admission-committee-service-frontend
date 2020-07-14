@@ -22,7 +22,8 @@
           placeholder="Год окончания"
           [(ngModel)]="education.endYear"
           name="endYear"
-          pattern="^(194[5-9]|19[5-9]\d|200\d|201[0-9])$"
+          min="{{minYear}}"
+          max="{{maxYear}}"
           required
         />
       </div>

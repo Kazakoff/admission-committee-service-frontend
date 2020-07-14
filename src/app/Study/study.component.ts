@@ -10,7 +10,7 @@ import { EstCity } from "./estCity";
 import { NewEducationInstitution } from "./newEducationInstitution";
 import { AppDataService } from "../app.data.service";
 import { environment } from "../../environments/environment";
-import { rightNow, minDate } from "../consts";
+import { maxYear, minYear} from "../consts";
 
 @Component({
   selector: "study",
@@ -52,7 +52,8 @@ export class StudyComponent implements OnInit {
   estCities: EstCity[] = [{ id: 1, name: "" }];
   educationInstitutions: any[] = [{ id: 1, name: "" }];
   page = 0;
-  // maxYear = getFullYear(rightNow)+1;
+  maxYear =  maxYear;
+  minYear =  minYear;
   newEducationInstitution: NewEducationInstitution = new NewEducationInstitution();
   errorInstitution: any;
   tokenInvalid: boolean;
