@@ -1,36 +1,98 @@
 <div class="item-content">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler navbar-toggler-right"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" routerLink="/">Домой</a>
 
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link active" routerLink="/personal" routerLinkActive="active"
-           [routerLinkActiveOptions]="{exact:true}">Персональные данные <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" routerLink="/address" routerLinkActive="active">Адрес</a>
-        <a class="nav-item nav-link" routerLink="/study" routerLinkActive="active">Образование</a>
-        <a class="nav-item nav-link" routerLink="/additional" routerLinkActive="active">Дополнительная информация</a>
-        <a class="nav-item nav-link" routerLink="/cer" routerLinkActive="active">Документы</a>
+        <a
+          class="nav-item nav-link active"
+          routerLink="/personal"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Персональные данные <span class="sr-only">(current)</span></a
+        >
+        <a
+          class="nav-item nav-link"
+          routerLink="/address"
+          routerLinkActive="active"
+          >Адрес</a
+        >
+        <a
+          class="nav-item nav-link"
+          routerLink="/study"
+          routerLinkActive="active"
+          >Образование</a
+        >
+        <a
+          class="nav-item nav-link"
+          routerLink="/additional"
+          routerLinkActive="active"
+          >Дополнительная информация</a
+        >
+        <a class="nav-item nav-link" routerLink="/cer" routerLinkActive="active"
+          >Документы</a
+        >
         <div *ngIf="!token">
-          <a class="nav-item nav-link" routerLink="/auth" routerLinkActive="active">Авторизация</a>
+          <a
+            class="nav-item nav-link"
+            routerLink="/auth"
+            routerLinkActive="active"
+            >Авторизация</a
+          >
         </div>
         <div *ngIf="!token">
-          <a class="nav-item nav-link" routerLink="/reg" routerLinkActive="active">Регистрация</a>
+          <a
+            class="nav-item nav-link"
+            routerLink="/reg"
+            routerLinkActive="active"
+            >Регистрация</a
+          >
         </div>
       </div>
       <form class="form-inline my-2 my-lg-0">
-        <div *ngIf="token"><button class="btn btn-outline-danger my-2 my-sm-0" (click)="logOut()">Выйти</button></div>
-      </form> &nbsp;&nbsp;&nbsp;
-      <div *ngIf="approve; then thenBlock else elseBlock" [hidden]="!token"></div>
+        <div *ngIf="token">
+          <button
+            class="btn btn-outline-danger my-2 my-sm-0"
+            (click)="logOut()"
+          >
+            Выйти
+          </button>
+        </div>
+      </form>
+      &nbsp;&nbsp;&nbsp;
+      <div
+        *ngIf="approve; then thenBlock; else elseBlock"
+        [hidden]="!token"
+      ></div>
       <ng-template #thenBlock>
-        <div class="alert alert-success" role="alert" style="margin: auto 0" [hidden]="!token">
-          Ваши данные подтверждены приёмной комиссией. Изменение данных из личного кабинета более не возможно.
+        <div
+          class="alert alert-success"
+          role="alert"
+          style="margin: auto 0;"
+          [hidden]="!token"
+        >
+          Ваши данные подтверждены приёмной комиссией. Изменение данных из
+          личного кабинета более не возможно.
         </div>
       </ng-template>
       <ng-template #elseBlock>
-        <div class="alert alert-danger" role="alert" style="margin: auto 0" [hidden]="!token">
+        <div
+          class="alert alert-danger"
+          role="alert"
+          style="margin: auto 0;"
+          [hidden]="!token"
+        >
           Ваши данные не подтверждены приёмной комиссией.
         </div>
       </ng-template>
@@ -41,19 +103,32 @@
       <div class="container" *ngIf="!approve">
         <div class="row">
           <div class="col-lg-12 text-center">
-            <div *ngIf="profileInfo && profileInfo.firstName && profileInfo.lastName then fioContent else emailContent"></div>
+            <div
+              *ngIf="
+                profileInfo && profileInfo.firstName && profileInfo.lastName;
+                then fioContent;
+                else emailContent
+              "
+            ></div>
             <ng-template #fioContent>
               <div class="mt-3">
-                <h1>{{profileInfo.firstName}} {{profileInfo.lastName}}</h1>
+                <h1>{{ profileInfo.firstName }} {{ profileInfo.lastName }}</h1>
               </div>
             </ng-template>
             <ng-template #emailContent>
               <div class="mt-3">
-                <h1>{{email}}</h1>
+                <h1>{{ email }}</h1>
               </div>
             </ng-template>
-            <h1 class="mt-2">Добро пожаловать в «Личный кабинет абитуриента УО «ВГТУ»!</h1>
-            <p class="lead">Здесь Вы можете заполнить необходимые данные, которые будут использованы Приемной комиссией университета при оформлении Вашего заявления, а также получить информацию о Вашем участии в конкурсе по специальностям университета после подачи документов.</p>
+            <h1 class="mt-2">
+              Добро пожаловать в «Личный кабинет абитуриента УО «ВГТУ»!
+            </h1>
+            <p class="lead">
+              Здесь Вы можете заполнить необходимые данные, которые будут
+              использованы Приемной комиссией университета при оформлении Вашего
+              заявления, а также получить информацию о Вашем участии в конкурсе
+              по специальностям университета после подачи документов.
+            </p>
           </div>
           <div class="d-flex flex-column mx-5">
             <p>Для этого Вам необходимо:</p>
@@ -71,24 +146,35 @@
               <span>· Документы.</span>
             </div>
             <span>
-              3. Явиться в Приемную комиссию университета (главный корпус, ауд. 225, 212) со всеми необходимыми документами с 12 по 17 июля для оформления заявления и подачи документов (после подачи заявления Ваши данные будут подтверждены Приемной комиссией, и Вы не сможете их изменить).
+              3. Явиться в Приемную комиссию университета (главный корпус, ауд.
+              225, 212) со всеми необходимыми документами 25 по 31 июля 2020
+              года для оформления заявления и подачи документов (после подачи
+              заявления Ваши данные будут подтверждены Приемной комиссией, и Вы
+              не сможете их изменить).
             </span>
             <span>
-              4. Отслеживать в Личном кабинете информацию о Вашем участии в конкурсе по специальностям университета.
+              4. Отслеживать в Личном кабинете информацию о Вашем участии в
+              конкурсе по специальностям университета.
             </span>
           </div>
         </div>
       </div>
       <div *ngIf="approve" class="container status">
-        <div *ngIf="profileInfo && profileInfo.firstName && profileInfo.lastName then fioContent else emailContent"></div>
+        <div
+          *ngIf="
+            profileInfo && profileInfo.firstName && profileInfo.lastName;
+            then fioContent;
+            else emailContent
+          "
+        ></div>
         <ng-template #fioContent>
           <div class="mt-3">
-            <h1>{{profileInfo.firstName}} {{profileInfo.lastName}}</h1>
+            <h1>{{ profileInfo.firstName }} {{ profileInfo.lastName }}</h1>
           </div>
         </ng-template>
         <ng-template #emailContent>
           <div>
-            <h2 class="ml-200">{{email}}</h2>
+            <h2 class="ml-200">{{ email }}</h2>
           </div>
         </ng-template>
         <h5 class="ml-200">
@@ -96,35 +182,49 @@
         </h5>
         <table class="table table-bordered" [hidden]="!token">
           <thead class="thead-dark">
-          <tr>
-            <th>Приоритет</th>
-            <th>Специальность</th>
-            <th>Ориентировочный проходной балл на данный момент</th>
-          </tr>
+            <tr>
+              <th>Приоритет</th>
+              <th>Специальность</th>
+              <th>Ориентировочный проходной балл на данный момент</th>
+            </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let stat of specialities; let i = index">
-            <td>{{i + 1}}</td>
-            <td>{{stat.speciality}}</td>
-            <td>{{stat.sum}}</td>
-          </tr>
+            <tr *ngFor="let stat of specialities; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ stat.speciality }}</td>
+              <td>{{ stat.sum }}</td>
+            </tr>
           </tbody>
         </table>
-        <span class="sum">Ваш суммарный балл: {{sum}}</span>
-        <p class="font-weight-bold info">Если Ваш суммарный балл превышает ориентировочный проходной по
-            специальности, то Вы участвуете в конкурсе по этой специальности. Если Ваш балл ниже
-            ориентировочных проходных по всем специальностям, то Вы не проходите по конкурсу ни по
-            одной из специальностей. Если ориентировочный проходной балл равен «0», то по данной
-            специальности на данный момент не сформировался конкурс и проходят все абитуриенты,
-            подавшие заявление на данную специальность.
+        <span class="sum">Ваш суммарный балл: {{ sum }}</span>
+        <p class="font-weight-bold info">
+          Если Ваш суммарный балл превышает ориентировочный проходной по
+          специальности, то Вы участвуете в конкурсе по этой специальности. Если
+          Ваш балл ниже ориентировочных проходных по всем специальностям, то Вы
+          не проходите по конкурсу ни по одной из специальностей. Если
+          ориентировочный проходной балл равен «0», то по данной специальности
+          на данный момент не сформировался конкурс и проходят все абитуриенты,
+          подавшие заявление на данную специальность.
         </p>
         <p class="font-weight-bold info">
           Окончательно проходной балл устанавливается после завершения процедуры
           подачи документов и доводится до абитуриентов при зачислении.
         </p>
         <div class="d-flex">
-        <a href="http://vstu.by/" class="ml-5" target="_blank" rel="noopener noreferrer">Сайт университета</a>
-        <a href="http://priem.vstu.by/" class="ml-auto mr-5" target="_blank" rel="noopener noreferrer">Мониторинг подачи документов</a>
+          <a
+            href="http://vstu.by/"
+            class="ml-5"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Сайт университета</a
+          >
+          <a
+            href="http://priem.vstu.by/"
+            class="ml-auto mr-5"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Мониторинг подачи документов</a
+          >
         </div>
       </div>
     </header>
