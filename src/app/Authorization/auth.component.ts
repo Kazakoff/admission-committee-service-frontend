@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Auth } from "./auth";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { environment } from "../../environments/environment";
+import { Router } from "@angular/router";
 
 import { NotifierService } from "angular-notifier";
 import { GENERATE_TOKEN } from "../URLS";
@@ -12,7 +13,7 @@ import { GENERATE_TOKEN } from "../URLS";
   styleUrls: ["./auth.component.css"],
 })
 export class AuthComponent implements OnInit {
-  constructor(private http: HttpClient, private _service: NotifierService) {}
+  constructor(private http: HttpClient, private _service: NotifierService , public router: Router) {}
   auth: Auth = new Auth();
   error: number;
   token: any;
@@ -55,7 +56,8 @@ export class AuthComponent implements OnInit {
           localStorage.setItem("token", JSON.stringify(this.token));
           this.error = undefined;
           this.successEvent();
-          location.replace(environment.authRedirectURL);
+         // location.replace(environment.authRedirectURL);
+         this.router.navigate([environment.authRedirectURL]);
         },
         (error) => {
           this.error = error;

@@ -227,7 +227,7 @@ export class CertificatesComponent implements OnInit {
 
   submit(competitionInfo: CompetitionInfo, nextLink: string) {
     if (this.appData.approve) {
-      location.replace(environment.authRedirectURL + nextLink);
+      this.router.navigate([nextLink]);
       return;
     }
     if (competitionInfo.specialities.length > 0) {
@@ -235,9 +235,8 @@ export class CertificatesComponent implements OnInit {
         (data: CompetitionInfo) => {
           this.error = undefined;
           this.successEvent();
-          // this.router.navigate(["/"]);
           this.isAnySpeciality = true;
-          location.replace(environment.authRedirectURL + nextLink);
+          this.router.navigate([nextLink]);
         },
         (error) => {
           this.error = error;
@@ -247,7 +246,7 @@ export class CertificatesComponent implements OnInit {
             )
           )
             this.isAnySpeciality = false;
-          location.replace(environment.authRedirectURL + nextLink);
+            this.router.navigate([nextLink]);
         }
       );
     } else {

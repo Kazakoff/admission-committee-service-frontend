@@ -10,6 +10,7 @@ import { defineLocale } from "ngx-bootstrap/chronos";
 import { ruLocale } from "ngx-bootstrap/locale";
 import { AppDataService } from "../app.data.service";
 import { environment } from "../../environments/environment";
+import { Router } from "@angular/router";
 
 defineLocale("ru", ruLocale);
 
@@ -63,6 +64,7 @@ export class PersonalInfoComponent implements OnInit {
   isSubmitLoading: boolean;
 
   constructor(
+    public router: Router,
     private httpService: HttpService,
     public datepipe: DatePipe,
     private _service: NotifierService,
@@ -82,10 +84,11 @@ export class PersonalInfoComponent implements OnInit {
 
   submit(personal: Personal, nextLink: string) {
     if (this.appData.approve) {
-      location.replace(environment.authRedirectURL + nextLink);
+      this.router.navigate([nextLink]);
       return;
     }
     this.isSubmitLoading = true;
+    personal.documentSeria = personal.documentSeria.toUpperCase();
     this.httpService.postData(personal).subscribe(
       (data: Personal) => {
         this.receivedPersonal = data;
@@ -93,7 +96,7 @@ export class PersonalInfoComponent implements OnInit {
         this.error = undefined;
         this.successEvent();
         this.isSubmitLoading = false;
-        location.replace(environment.authRedirectURL + nextLink);
+        this.router.navigate([nextLink]);
       },
       (error) => {
         this.error = error;
@@ -104,7 +107,7 @@ export class PersonalInfoComponent implements OnInit {
             "Форма содержит недопустимые значени. Переход на другую страницу не сохранит данные на форме. Вы хотите покинуть страницу?"
           )
         )
-          location.replace(environment.authRedirectURL + nextLink);
+        this.router.navigate([nextLink]);
       }
     );
   }

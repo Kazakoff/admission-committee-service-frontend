@@ -31,21 +31,15 @@ import { StatisticsComponent } from "./Statistics/statistics.component";
 import { AngularFontAwesomeModule } from "angular-font-awesome";
 
 const appRoutes: Routes = [
-  {
-    path: "personal",
-    component: PersonalInfoComponent,
-    canDeactivate: [ExitGuard],
-  },
-  { path: "address", component: AddressComponent, canDeactivate: [ExitGuard] },
-  { path: "study", component: StudyComponent, canDeactivate: [ExitGuard] },
+ // {  path: "personal", component: PersonalInfoComponent, canDeactivate: [ExitGuard] },
+ {  path: "personal", component: PersonalInfoComponent },
+  { path: "address", component: AddressComponent },
+  { path: "study", component: StudyComponent },
   { path: "auth", component: AuthComponent },
   { path: "reg", component: RegistrationComponent },
-  {
-    path: "additional",
-    component: AdditionalComponent,
-    canDeactivate: [ExitGuard],
-  },
-  { path: "cer", component: CertificatesComponent, canDeactivate: [ExitGuard] },
+  { path: "additional", component: AdditionalComponent},
+  { path: "cer", component: CertificatesComponent},
+  
   { path: "statistics", component: StatisticsComponent },
   { path: "**", redirectTo: "/" },
 ];

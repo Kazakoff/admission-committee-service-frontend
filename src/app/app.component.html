@@ -16,31 +16,33 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a
-          class="nav-item nav-link active"
-          routerLink="/personal"
+          class="nav-item nav-link active pointer"
+          (click)="submit('/personal')"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
           >Персональные данные <span class="sr-only">(current)</span></a
         >
         <a
-          class="nav-item nav-link"
-          routerLink="/address"
+          class="nav-item nav-link pointer"
+          (click)="submit('/address')"
           routerLinkActive="active"
           >Адрес</a
         >
         <a
-          class="nav-item nav-link"
-          routerLink="/study"
+          class="nav-item nav-link pointer"
+          (click)="submit('/study')"
           routerLinkActive="active"
           >Образование</a
         >
         <a
-          class="nav-item nav-link"
-          routerLink="/additional"
+          class="nav-item nav-link pointer"
+          (click)="submit('/additional')"
           routerLinkActive="active"
           >Дополнительная информация</a
         >
-        <a class="nav-item nav-link" routerLink="/cer" routerLinkActive="active"
+        <a class="nav-item nav-link pointer"
+          (click)="submit('/cer')"          
+          routerLinkActive="active"
           >Документы</a
         >
         <div *ngIf="!token">

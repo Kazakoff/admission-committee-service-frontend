@@ -25,10 +25,10 @@ export class AppComponent implements OnInit {
 
   title = "app";
   token = JSON.parse(localStorage.getItem("token"));
-
+ 
   logOut() {
     localStorage.removeItem("token");
-    location.replace("/");
+    this.router.navigate(["/"]);
   }
 
   addHeaders() {
@@ -37,7 +37,13 @@ export class AppComponent implements OnInit {
       .set("Content-Type", "application/json");
     return myHeaders;
   }
+  submit(nextLink: string) {
+    if (confirm( "Не сохранённые данные будут потеряны. Для сохранения данных нажмите 'Далее'. Вы хотите покинуть страницу?"))
+    {
+      this.router.navigate([nextLink]);
+    }
 
+  }
   ngOnInit() {
     if (this.token) {
       this.http

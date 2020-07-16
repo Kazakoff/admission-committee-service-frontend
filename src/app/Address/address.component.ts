@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { Address } from "./address";
 import { HttpService } from "./address.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Router } from "@angular/router";
 
 import { NotifierService } from "angular-notifier";
 import { Region } from "./region";
@@ -68,6 +69,7 @@ export class AddressComponent implements OnInit {
   showCityAddButton: ElementRef;
 
   constructor(
+    public router: Router,
     private httpService: HttpService,
     private httpClient: HttpClient,
     private _service: NotifierService,
@@ -92,7 +94,7 @@ export class AddressComponent implements OnInit {
 
   submit(address: Address, nextLink: string) {
     if (this.appData.approve) {
-      location.replace(environment.authRedirectURL + nextLink);
+      this.router.navigate([nextLink]);
       return;
     }
     this.isSubmitLoading = true;
@@ -103,7 +105,12 @@ export class AddressComponent implements OnInit {
         this.error = undefined;
         this.successEvent();
         this.isSubmitLoading = false;
-        location.replace(environment.authRedirectURL + nextLink);
+       // console.log(environment.authRedirectURL + nextLink);
+        // console.log(location);
+        this.router.navigate([nextLink]);
+        // this.router.navigate([environment.authRedirectURL + nextLink]);
+        // location.replace(environment.authRedirectURL + nextLink);
+
       },
       (error) => {
         this.error = error;
@@ -114,7 +121,7 @@ export class AddressComponent implements OnInit {
             "Форма содержит недопустимые значени. Переход на другую страницу не сохранит данные на форме. Вы хотите покинуть страницу?"
           )
         )
-          location.replace(environment.authRedirectURL + nextLink);
+        this.router.navigate([nextLink]);
       }
     );
   }

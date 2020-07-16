@@ -11,6 +11,7 @@ import { NewEducationInstitution } from "./newEducationInstitution";
 import { AppDataService } from "../app.data.service";
 import { environment } from "../../environments/environment";
 import { maxYear, minYear} from "../consts";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "study",
@@ -80,6 +81,7 @@ export class StudyComponent implements OnInit {
   addEdInstButton: ElementRef;
 
   constructor(
+    public router: Router,
     private httpService: HttpService,
     private httpClient: HttpClient,
     private _service: NotifierService,
@@ -111,7 +113,7 @@ export class StudyComponent implements OnInit {
 
   submit(education: Education, nextLink: string) {
     if (this.appData.approve) {
-      location.replace(environment.authRedirectURL + nextLink);
+      this.router.navigate([nextLink]);
       return;
     }
     this.isSubmitLoading = true;
@@ -122,7 +124,7 @@ export class StudyComponent implements OnInit {
         this.error = undefined;
         this.successEvent();
         this.isSubmitLoading = false;
-        location.replace(environment.authRedirectURL + nextLink);
+        this.router.navigate([nextLink]);
       },
       (error) => {
         this.error = error;
@@ -133,7 +135,7 @@ export class StudyComponent implements OnInit {
             "Форма содержит недопустимые значени. Переход на другую страницу не сохранит данные на форме. Вы хотите покинуть страницу?"
           )
         )
-          location.replace(environment.authRedirectURL + nextLink);
+        this.router.navigate([nextLink]);
       }
     );
   }
