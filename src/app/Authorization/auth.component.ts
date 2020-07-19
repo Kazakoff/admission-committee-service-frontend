@@ -56,8 +56,8 @@ export class AuthComponent implements OnInit {
           localStorage.setItem("token", JSON.stringify(this.token));
           this.error = undefined;
           this.successEvent();
-         // location.replace(environment.authRedirectURL);
-         this.router.navigate([environment.authRedirectURL]);
+         location.replace(environment.authRedirectURL);
+         // this.router.navigate([environment.authRedirectURL]);
         },
         (error) => {
           this.error = error;

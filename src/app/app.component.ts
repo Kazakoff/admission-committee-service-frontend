@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { GET_ABITURIENT, GET_STATUS } from "./URLS";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { AppDataService } from "./app.data.service";
+import { environment } from "../environments/environment";
 
 @Component({
   selector: "app-root",
@@ -28,7 +29,8 @@ export class AppComponent implements OnInit {
  
   logOut() {
     localStorage.removeItem("token");
-    this.router.navigate(["/"]);
+    //this.router.navigate(["/"]);
+    location.replace(environment.authRedirectURL);
   }
 
   addHeaders() {
