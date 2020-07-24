@@ -20,6 +20,7 @@
         </a>
         <a
           class="nav-item nav-link pointer"
+          routerLink="/personal" 
           (click)="submit('/personal')"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
@@ -27,6 +28,7 @@
         >
         <a
           class="nav-item nav-link pointer"
+          routerLink="/address" 
           (click)="submit('/address')"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
@@ -35,17 +37,21 @@
         <a
           class="nav-item nav-link pointer"
           (click)="submit('/study')"
+          routerLink="/study"
+          [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="active"
           >Образование</a
         >
         <a
           class="nav-item nav-link pointer"
+          routerLink="/additional"
           (click)="submit('/additional')"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
           >Дополнительная информация</a
         >
         <a class="nav-item nav-link pointer"
+          routerLink="/cer"
           (click)="submit('/cer')"          
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
