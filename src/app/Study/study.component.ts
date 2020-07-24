@@ -10,7 +10,7 @@ import { EstCity } from "./estCity";
 import { NewEducationInstitution } from "./newEducationInstitution";
 import { AppDataService } from "../app.data.service";
 import { environment } from "../../environments/environment";
-import { maxYear, minYear} from "../consts";
+import { maxYear, minYear } from "../consts";
 import { Router } from "@angular/router";
 
 @Component({
@@ -53,8 +53,8 @@ export class StudyComponent implements OnInit {
   estCities: EstCity[] = [{ id: 1, name: "" }];
   educationInstitutions: any[] = [{ id: 1, name: "" }];
   page = 0;
-  maxYear =  maxYear;
-  minYear =  minYear;
+  maxYear = maxYear;
+  minYear = minYear;
   newEducationInstitution: NewEducationInstitution = new NewEducationInstitution();
   errorInstitution: any;
   tokenInvalid: boolean;
@@ -93,7 +93,7 @@ export class StudyComponent implements OnInit {
   }
 
   errorEvent() {
-    this._service.notify("error", "Неожиданная ошибка...");
+    this._service.notify("error", "Данные не сохранены!");
   }
 
   addHeaders() {
@@ -135,7 +135,7 @@ export class StudyComponent implements OnInit {
             "Форма содержит недопустимые значени. Переход на другую страницу не сохранит данные на форме. Вы хотите покинуть страницу?"
           )
         )
-        this.router.navigate([nextLink]);
+          this.router.navigate([nextLink]);
       }
     );
   }
@@ -235,7 +235,9 @@ export class StudyComponent implements OnInit {
     this.isEdTypeLoading = true;
     this.httpService.getEdType().subscribe(
       (data) => {
-        this.edTypes = data["content"].filter(item => item.name != "Не указано");
+        this.edTypes = data["content"].filter(
+          (item) => item.name != "Не указано"
+        );
         this.isEdTypeLoading = false;
       },
       () => (this.isEdTypeLoading = false)
@@ -246,7 +248,9 @@ export class StudyComponent implements OnInit {
     this.isEstCityLoading = true;
     this.httpService.getEstCity().subscribe(
       (data) => {
-        this.estCities = data["content"].filter(item => item.name != "Не указано");
+        this.estCities = data["content"].filter(
+          (item) => item.name != "Не указано"
+        );
         this.isEstCityLoading = false;
       },
       () => (this.isEstCityLoading = false)

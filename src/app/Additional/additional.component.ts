@@ -64,7 +64,7 @@ export class AdditionalComponent implements OnInit {
             "Форма содержит недопустимые значени. Переход на другую страницу не сохранит данные на форме. Вы хотите покинуть страницу?"
           )
         )
-        this.router.navigate([nextLink]);
+          this.router.navigate([nextLink]);
       }
     );
   }
@@ -74,7 +74,7 @@ export class AdditionalComponent implements OnInit {
   }
 
   errorEvent() {
-    this._service.notify("error", "Неожиданная ошибка");
+    this._service.notify("error", "Данные не сохранены!");
   }
 
   loadAbiturient() {

@@ -518,7 +518,7 @@ export class ModalContentComponent implements OnInit {
   }
 
   errorEvent() {
-    this._service.notify("error", "Неожиданная ошибка!");
+    this._service.notify("error", "Данные не сохранены!");
   }
 
   push() {

@@ -89,7 +89,7 @@ export class AddressComponent implements OnInit {
   }
 
   errorEvent() {
-    this._service.notify("error", "Неожиданная ошибка!");
+    this._service.notify("error", "Данные не сохранены!");
   }
 
   submit(address: Address, nextLink: string) {
@@ -105,12 +105,11 @@ export class AddressComponent implements OnInit {
         this.error = undefined;
         this.successEvent();
         this.isSubmitLoading = false;
-       // console.log(environment.authRedirectURL + nextLink);
+        // console.log(environment.authRedirectURL + nextLink);
         // console.log(location);
         this.router.navigate([nextLink]);
         // this.router.navigate([environment.authRedirectURL + nextLink]);
         // location.replace(environment.authRedirectURL + nextLink);
-
       },
       (error) => {
         this.error = error;
@@ -121,7 +120,7 @@ export class AddressComponent implements OnInit {
             "Форма содержит недопустимые значени. Переход на другую страницу не сохранит данные на форме. Вы хотите покинуть страницу?"
           )
         )
-        this.router.navigate([nextLink]);
+          this.router.navigate([nextLink]);
       }
     );
   }
