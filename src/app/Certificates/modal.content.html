@@ -53,11 +53,12 @@
       >
     </select>
     <div *ngIf="!isExam()">
-      <label>Серия документа</label>
+      <label>Серия документа (не более 5 символов)</label>
       <input
         [(ngModel)]="certificate.seria"
         name="seria"
         class="form-control"
+        maxlength="5"
         #seria
       />
       <label>Номер документа</label><label style="color: red;">&nbsp;*</label>
@@ -91,7 +92,7 @@
           <td>
             <input
               type="number"
-              class="form-control col-3"
+              class="form-control col-4"
               style="margin: 0 auto;"
               #one
               value="0"
@@ -101,7 +102,7 @@
           <td>
             <input
               type="number"
-              class="form-control col-3"
+              class="form-control col-4"
               style="margin: 0 auto;"
               #two
               [hidden]="!isNotExamOrCertificate()"
@@ -118,7 +119,7 @@
           <td>
             <input
               type="number"
-              class="form-control col-3"
+              class="form-control col-4"
               style="margin: 0 auto;"
               #three
               value="0"
@@ -128,7 +129,7 @@
           <td>
             <input
               type="number"
-              class="form-control col-3"
+              class="form-control col-4"
               style="margin: 0 auto;"
               #four
               value="0"
@@ -144,7 +145,7 @@
           <td>
             <input
               type="number"
-              class="form-control col-3"
+              class="form-control col-4"
               style="margin: 0 auto;"
               #five
               value="0"
@@ -154,7 +155,7 @@
           <td>
             <input
               type="number"
-              class="form-control col-3"
+              class="form-control col-4"
               style="margin: 0 auto;"
               #six
               value="0"
@@ -170,7 +171,7 @@
           <td>
             <input
               type="number"
-              class="form-control col-3"
+              class="form-control col-4"
               style="margin: 0 auto;"
               #seven
               value="0"
@@ -180,7 +181,7 @@
           <td>
             <input
               type="number"
-              class="form-control col-3"
+              class="form-control col-4"
               style="margin: 0 auto;"
               #eight
               value="0"
@@ -196,7 +197,7 @@
           <td>
             <input
               type="number"
-              class="form-control col-3"
+              class="form-control col-4"
               style="margin: 0 auto;"
               #nine
               value="0"
@@ -206,7 +207,7 @@
           <td>
             <input
               type="number"
-              class="form-control col-3"
+              class="form-control col-4"
               style="margin: 0 auto;"
               #ten
               value="0"
