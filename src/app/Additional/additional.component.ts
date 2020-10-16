@@ -25,9 +25,9 @@ import { Router } from "@angular/router";
 export class AdditionalComponent implements OnInit {
   token = JSON.parse(localStorage.getItem("token"));
   additional: Additional = new Additional();
-  additionalObject: Additional[] = [];
+  additionalObject: Additional[] = []; 
   receivedAdditional: Additional;
-  done = false;
+  done = false; 
   error: any;
   tokenInvalid: boolean;
   isAbiturientLoading: boolean;
