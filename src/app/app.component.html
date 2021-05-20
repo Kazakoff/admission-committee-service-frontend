@@ -13,14 +13,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">  
-        <a class="nav-item nav-link pointer" routerLink="/" 
+        <a class="nav-item nav-link pointer" 
+        routerLink="/" 
+        (click)="submit('/')"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
         > Домой
         </a>
         <a
           class="nav-item nav-link pointer"
-          routerLink="/personal" 
+          routerLink="/personal"  
           (click)="submit('/personal')"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
