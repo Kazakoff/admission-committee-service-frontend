@@ -9,9 +9,7 @@ export interface ComponentCanDeactivate {
 
 export class ExitGuard implements CanDeactivate<ComponentCanDeactivate> {
   constructor(@Inject(AppDataService) private appData: AppDataService) {}
-  canDeactivate(
-    component: ComponentCanDeactivate
-  ): Observable<boolean> | boolean {
+  canDeactivate(   component: ComponentCanDeactivate  ): Observable<boolean> | boolean {
     // return component.canDeactivate ? component.canDeactivate() : true;
     if (this.appData.approve) return true;
     return confirm(

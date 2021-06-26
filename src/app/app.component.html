@@ -20,6 +20,7 @@
         [routerLinkActiveOptions]="{ exact: true }"
         > Домой
         </a>
+        <div *ngIf="token">
         <a
           class="nav-item nav-link pointer"
           routerLink="/personal"  
@@ -28,6 +29,8 @@
           [routerLinkActiveOptions]="{ exact: true }"
           >Персональные данные <span class="sr-only">(current)</span></a
         >
+      </div>
+        <div *ngIf="token">
         <a
           class="nav-item nav-link pointer"
           routerLink="/address" 
@@ -36,6 +39,8 @@
           [routerLinkActiveOptions]="{ exact: true }"
           >Адрес</a
         >
+      </div>
+        <div *ngIf="token">
         <a
           class="nav-item nav-link pointer"
           (click)="submit('/study')"
@@ -44,21 +49,25 @@
           routerLinkActive="active"
           >Образование</a
         >
+      </div>
+        <div *ngIf="token">
         <a
           class="nav-item nav-link pointer"
           routerLink="/additional"
           (click)="submit('/additional')"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
-          >Дополнительная информация</a
-        >
-        <a class="nav-item nav-link pointer"
+          >Дополнительная информация</a>
+        </div>
+        <div *ngIf="token">
+        <a  class="nav-item nav-link pointer"
           routerLink="/cer"
           (click)="submit('/cer')"          
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
           >Документы</a
         >
+        </div>
         <div *ngIf="!token">
           <a
             class="nav-item nav-link"

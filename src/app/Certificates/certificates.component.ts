@@ -174,30 +174,44 @@ export class CertificatesComponent implements OnInit {
       const specialityName = this.speciality.nativeElement.options[
         this.speciality.nativeElement.selectedIndex
       ].text;
+      
       const speciality = { name: "", group: "" };
-
+      let findItm;
+      // находим выбранную специальность 
       this.specialities.forEach((item) => {
         if (item.name === specialityName.replace(/\s\(([^)]+)\)$/, "")) {
           speciality.name = item.name;
           speciality.group = item.group.name;
-          if (
-            !this.competitionInfo.specialities.includes(item.id) &&
-            !this.specialitiesGroups.some((v) => v.group === "Без группы")
-          ) {
-            this.competitionInfo.specialities.push(item.id);
+          findItm =  JSON.parse(JSON.stringify(item));
+        }
+      });
+ 
+      if (this.specialitiesGroups.length == 0){
+        this.competitionInfo.specialities.push(findItm.id);
+        this.specialitiesGroups.push(speciality);
+      }
+      else {
+        if (this.specialitiesGroups[0].group == "Без группы")
+        {
+          this._service.notify(  "error",  'Может быть выбрана только одна специальность "Без группы"' );
+        }
+        else
+          if (this.competitionInfo.specialities.includes(findItm.id)) {
+              this._service.notify(  "error",  'Эта специальность уже есть в списке' );
+          } 
+          else 
+          if ( findItm.group.name !=  this.specialitiesGroups[0].group ) {
+            this._service.notify(  "error",  'Нельзя выбирать специальности из разных групп' );
+            } else
+            {
+            this.competitionInfo.specialities.push(findItm.id);
             this.specialitiesGroups.push(speciality);
           }
         }
-      });
-      this.specialitiesEquals =
-        this.specialitiesGroups.every(
-          (v, i, arr) => v.group === arr[0].group
-        ) === true;
-      if (this.specialitiesEquals === false) {
-        this.errorEvent();
       }
       this.isAnySpeciality = true;
-    }
+
+
   }
 
   getDocTypeName(id) {
