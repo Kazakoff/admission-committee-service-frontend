@@ -1,10 +1,10 @@
 :host >>> .tooltip-inner {
-  background-color: #FF8C00;
+  background-color: #ff8c00;
   color: #fff;
 }
 :host >>> .tooltip.top .tooltip-arrow:before,
 :host >>> .tooltip.top .tooltip-arrow {
-  border-top-color: #FF8C00;
+  border-top-color: #ff8c00;
 }
 
 .pass {
@@ -53,6 +53,12 @@
 .ml-200 {
   margin-left: 200px;
 }
-.pointer{
-  cursor: pointer
+.pointer {
+  cursor: pointer;
+}
+
+.important {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
 }
