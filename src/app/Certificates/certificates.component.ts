@@ -166,7 +166,7 @@ export class CertificatesComponent implements OnInit {
 
     this.httpService
       .getSpeciality(educationTimeId, educationFormId, facultyIdId)
-      .subscribe((data) => (this.specialities = <any[]>data));
+      .subscribe((data) => {(this.specialities = <any[]>data); console.log(this.specialities)});
   }
 
   addSpeciality() {
@@ -179,7 +179,12 @@ export class CertificatesComponent implements OnInit {
       let findItm;
       // находим выбранную специальность 
       this.specialities.forEach((item) => {
+        console.log(item.name)
+        console.log(specialityName.replace(/\s\(([^)]+)\)$/, ""));
+        console.log(item.name === specialityName.replace(/\s\(([^)]+)\)$/, ""));  
+        console.log("----------");
         if (item.name === specialityName.replace(/\s\(([^)]+)\)$/, "")) {
+          
           speciality.name = item.name;
           speciality.group = item.group.name;
           findItm =  JSON.parse(JSON.stringify(item));

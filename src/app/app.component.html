@@ -11,8 +11,17 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    
+
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">  
+      <div class="navbar-nav"> 
+        <div> 
+        <a class="nav-item nav-link pointer" 
+        href="https://abiturient.vstu.by/ru/" 
+        > На сайт абитуриента
+        </a>
+      </div>
         <a class="nav-item nav-link pointer" 
         routerLink="/" 
         (click)="submit('/')"
@@ -20,6 +29,7 @@
         [routerLinkActiveOptions]="{ exact: true }"
         > Домой
         </a>
+
         <div *ngIf="token">
         <a
           class="nav-item nav-link pointer"
@@ -160,7 +170,10 @@
           <div class="d-flex flex-column mx-5">
             <p>Для этого Вам необходимо:</p>
             <span>
-              1. Зарегистрироваться и авторизоваться.
+              1. <a routerLink="/reg"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              >Зарегистрироваться</a> и авторизоваться.
             </span>
             <span>
               2. Заполнить формы (в любой последовательности):
