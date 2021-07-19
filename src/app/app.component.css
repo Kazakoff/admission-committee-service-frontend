@@ -37,9 +37,9 @@
 }
 
 .copyright {
-  position: fixed;
   bottom: 10px;
   left: 40%;
+  padding-left: 15px;
 }
 
 .status {
