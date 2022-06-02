@@ -37,7 +37,7 @@ const appRoutes: Routes = [
   { path: "study", component: StudyComponent },
   { path: "auth", component: AuthComponent },
   { path: "reg", component: RegistrationComponent },
-  { path: "additional", component: AdditionalComponent},
+  //{ path: "additional", component: AdditionalComponent},
   { path: "cer", component: CertificatesComponent},
   
   { path: "statistics", component: StatisticsComponent },
