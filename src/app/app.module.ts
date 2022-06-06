@@ -29,17 +29,18 @@ import { NgProgressModule } from "@ngx-progressbar/core";
 import { NgProgressHttpModule } from "@ngx-progressbar/http";
 import { StatisticsComponent } from "./Statistics/statistics.component";
 import { AngularFontAwesomeModule } from "angular-font-awesome";
+import { AgreementComponent } from "./Registration/Agreement/agreement.component"
 
 const appRoutes: Routes = [
- // {  path: "personal", component: PersonalInfoComponent, canDeactivate: [ExitGuard] },
- {  path: "personal", component: PersonalInfoComponent },
+  // {  path: "personal", component: PersonalInfoComponent, canDeactivate: [ExitGuard] },
+  { path: "personal", component: PersonalInfoComponent },
   { path: "address", component: AddressComponent },
   { path: "study", component: StudyComponent },
   { path: "auth", component: AuthComponent },
   { path: "reg", component: RegistrationComponent },
   //{ path: "additional", component: AdditionalComponent},
-  { path: "cer", component: CertificatesComponent},
-  
+  { path: "cer", component: CertificatesComponent },
+
   { path: "statistics", component: StatisticsComponent },
   { path: "**", redirectTo: "/" },
 ];
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
     MyFilterPipe,
     ModalContentComponent,
     StatisticsComponent,
+    AgreementComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +80,6 @@ const appRoutes: Routes = [
   ],
   providers: [DatePipe, ExitGuard],
   bootstrap: [AppComponent],
-  entryComponents: [ModalContentComponent],
+  entryComponents: [ModalContentComponent, AgreementComponent],
 })
-export class AppModule {}
+export class AppModule { }

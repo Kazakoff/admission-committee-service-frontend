@@ -1,7 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {Registration} from './registration';
-import {HttpService} from './registration.service';
+import { Component, OnInit } from '@angular/core';
+import { Registration } from './registration';
+import { HttpService } from './registration.service';
 import { NotifierService } from 'angular-notifier';
+import { BsModalService } from "ngx-bootstrap/modal";
+import { BsModalRef } from "ngx-bootstrap/modal/bs-modal-ref.service";
+import { AgreementComponent } from "./Agreement/agreement.component"
 
 @Component({
   selector: 'reg',
@@ -12,10 +15,14 @@ import { NotifierService } from 'angular-notifier';
 export class RegistrationComponent implements OnInit {
   error: number;
   recoverError: number;
-  constructor(private httpService: HttpService, private _service: NotifierService) {
+  _bsModalRef: BsModalRef;
+
+  constructor(private httpService: HttpService,
+    private _service: NotifierService,
+    private _modalService: BsModalService) {
   }
   registration: Registration = new Registration();
-  roles: any = [{id: 3, name: ''}];
+  roles: any = [{ id: 3, name: '' }];
 
   successEvent() {
     this._service.notify('info',
@@ -26,10 +33,16 @@ export class RegistrationComponent implements OnInit {
     this._service.notify('error', 'Ошибка регистрации! Пожалуйста, попробуйте ещё раз!');
   }
 
+  openModalWithComponent() {
+    this._bsModalRef = this._modalService.show(
+      AgreementComponent, { class: 'modal-lg' });
+  }
+
   submit(registration: Registration) {
     this.httpService.postData(registration)
       .subscribe(
-        (data: Registration) => { this.error = undefined; this.successEvent();
+        (data: Registration) => {
+          this.error = undefined; this.successEvent();
         },
         error => { this.error = error; this.errorEvent(); }
       );

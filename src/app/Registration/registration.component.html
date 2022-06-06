@@ -4,42 +4,26 @@
   <br />
 
   <div class="contact-form">
-    По завершении регистрации Вы получите письмо на указанный электронный адрес. <br/>
-      В письме щёлкните по ссылке "Подтвердить и завершить регистрацию в системе" <br/>
-    Если Вы использовали для работы с почтой мобильное приложение, то автоматического перехода на сайт кабинета не произойдёт. <br/>
-  Необходимо с помощью браузера ещё раз войти в личный кабинет (https://priem.vstu.by/cabinet/) <br/>
- И заполнить анкету. <u> Очень важно ввести в кабинет паспортные данные </u>
- <br/> <br/>
+    По завершении регистрации Вы получите письмо на указанный электронный адрес. <br />
+    В письме щёлкните по ссылке "Подтвердить и завершить регистрацию в системе" <br />
+    Если Вы использовали для работы с почтой мобильное приложение, то автоматического перехода на сайт кабинета не
+    произойдёт. <br />
+    Необходимо с помощью браузера ещё раз войти в личный кабинет (https://priem.vstu.by/cabinet/) <br />
+    И заполнить анкету. <u> Очень важно ввести в кабинет паспортные данные </u>
+    <br /> <br />
     <form #myForm="ngForm">
       <div class="col-xs-6 wow animated slideInLeft" data-wow-delay=".5s">
         <small id="emailHelp" class="form-text text-muted">
-          Введите ваш e-mail для регистрации!</small
-        >
-        <input
-          type="email"
-          id="email"
-          placeholder="E-mail"
-          [(ngModel)]="registration.email"
-          name="email"
-          required
-          class="form"
-        />
+          Введите ваш e-mail для регистрации!</small>
+        <input type="email" id="email" placeholder="E-mail" [(ngModel)]="registration.email" name="email" required
+          class="form" />
         <small id="passwordHelp" class="form-text text-muted">
-          Введите ваш пароль для регистрации! (не менее 3-х символов)</small
-        >
-        <input
-          type="password"
-          id="inputPassword"
-          placeholder="Password"
-          [(ngModel)]="registration.password"
-          name="password"
-          required
-          minlength="3"
-          class="form mb-0"
-        />
+          Введите ваш пароль для регистрации! (не менее 3-х символов)</small>
+        <input type="password" id="inputPassword" placeholder="Password" [(ngModel)]="registration.password"
+          name="password" required minlength="3" class="form mb-0" />
       </div>
       <div class="col-xs-12">
-        <br/>
+        <br />
         Под обработкой и использованием персональных данных понимается сбор,
         систематизация и хранение персональных данных, передача персональных
         данных учреждениям образования, осуществляющим прием лиц для получения
@@ -53,29 +37,21 @@
         вступительных испытаний.
       </div>
       <div class="custom-control custom-checkbox mb-3">
-        <input
-          type="checkbox"
-          class="custom-control-input"
-          id="agree"
-          [(ngModel)]="registration.agree"
-          name="agree"
-          required
-        />
+        <input type="checkbox" class="custom-control-input" id="agree" [(ngModel)]="registration.agree" name="agree"
+          required />
         <label class="custom-control-label" for="agree">
           даю согласие на обработку и использование своих персональных данных
           для подготовки и проведения централизованного тестирования, для
           участия в конкурсе в ходе приема лиц для получения высшего образования
           I ступени
         </label>
+        <button type="button" class="btn btn-success" (click)="openModalWithComponent()">
+          Текст соглашения
+        </button>
       </div>
       <div class="relative fullwidth col-xs-12">
-        <button
-          (click)="submit(registration)"
-          [disabled]="myForm.invalid"
-          id="submit"
-          name="submit"
-          class="form-btn semibold"
-        >
+        <button (click)="submit(registration)" [disabled]="myForm.invalid" id="submit" name="submit"
+          class="form-btn semibold">
           Зарегистрироваться
         </button>
       </div>
@@ -85,5 +61,6 @@
         e-mail, попробуйте ещё раз!
       </div>
     </form>
+
   </div>
 </div>
