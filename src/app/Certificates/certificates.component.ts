@@ -166,7 +166,10 @@ export class CertificatesComponent implements OnInit {
 
     this.httpService
       .getSpeciality(educationTimeId, educationFormId, facultyIdId)
-      .subscribe((data) => {(this.specialities = <any[]>data); console.log(this.specialities)});
+      .subscribe((data) => {(
+        this.specialities = (<any[]>data).filter((speciality)=>(speciality.plan != 0))); 
+        console.log(this.specialities)
+      });
   }
 
   addSpeciality() {
@@ -487,7 +490,7 @@ export class ModalContentComponent implements OnInit {
       (item) => item.id === +event.target.value.charAt(0)
     );
 
-    if (docType.name === "Экзамен" || docType.name === "Сертификат ЦТ") {
+    if (docType.name === "Экзамен" || docType.name === "Сертификат ЦЭ или ЦТ") {
       this.scale.nativeElement.selectedIndex = -1;
       this.oneMark.nativeElement.value = 0;
       this.twoMark.nativeElement.value = 0;
@@ -502,7 +505,7 @@ export class ModalContentComponent implements OnInit {
       this.certificate.scale = null;
     }
 
-    if (docType.name !== "Экзамен" && docType.name !== "Сертификат") {
+    if (docType.name !== "Экзамен" && docType.name !== "Сертификат ЦЭ или ЦТ") {
       this.subjectId.nativeElement.selectedIndex = -1;
       this.certificate.subjectId = null;
     }
@@ -517,7 +520,7 @@ export class ModalContentComponent implements OnInit {
       return;
     }
 
-    return docType.name !== "Экзамен" && docType.name !== "Сертификат ЦТ";
+    return docType.name !== "Экзамен" && docType.name !== "Сертификат ЦЭ или ЦТ";
   }
 
   isExam() {

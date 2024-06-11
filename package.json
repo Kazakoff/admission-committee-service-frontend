@@ -6,8 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod --base-href=/cabinet/",
-    "postbuild": "cd \"..\\priem_site\" && git pull && del /Q \"static\\cabinet\" && copy \"..\\admission-committee-service-frontend\\dist\" \"static\\cabinet\" && git add . && git commit -m \"cabinet update\" && git push",
-    "test": "ng test",
+   "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
