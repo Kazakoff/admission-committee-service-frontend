@@ -183,10 +183,10 @@ export class CertificatesComponent implements OnInit {
       // находим выбранную специальность 
       this.specialities.forEach((item) => {
         console.log(item.name)
-        console.log(specialityName.replace(/\s\(([^)]+)\)$/, ""));
-        console.log(item.name === specialityName.replace(/\s\(([^)]+)\)$/, ""));  
+        console.log(specialityName.replace(/\s\(.+\)$/, ""));
+        console.log(item.name === specialityName.replace(/\s\(.+\)$/, ""));  
         console.log("----------");
-        if (item.name === specialityName.replace(/\s\(([^)]+)\)$/, "")) {
+        if (item.name === specialityName.replace(/\s\(.+\)$/, "")) {
           
           speciality.name = item.name;
           speciality.group = item.group.name;
