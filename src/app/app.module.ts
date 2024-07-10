@@ -30,6 +30,7 @@ import { NgProgressHttpModule } from "@ngx-progressbar/http";
 import { StatisticsComponent } from "./Statistics/statistics.component";
 import { AngularFontAwesomeModule } from "angular-font-awesome";
 import { AgreementComponent } from "./Registration/Agreement/agreement.component"
+import { RecaptchaModule } from 'ng-recaptcha';
 
 const appRoutes: Routes = [
   // {  path: "personal", component: PersonalInfoComponent, canDeactivate: [ExitGuard] },
@@ -77,6 +78,7 @@ const appRoutes: Routes = [
     NotifierModule,
     NgProgressHttpModule,
     AngularFontAwesomeModule,
+    RecaptchaModule,
   ],
   providers: [DatePipe, ExitGuard],
   bootstrap: [AppComponent],

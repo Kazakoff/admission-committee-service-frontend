@@ -105,3 +105,9 @@ input {
   position: relative;
   z-index: 9999;
 }
+
+.captcha {
+  justify-content: center;
+  display: flex;
+  margin: 0px 0px 10px;
+}

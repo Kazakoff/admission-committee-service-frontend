@@ -13,6 +13,7 @@ import { AgreementComponent } from "./Agreement/agreement.component"
   providers: [HttpService]
 })
 export class RegistrationComponent implements OnInit {
+  captchaResolved = false;
   error: number;
   recoverError: number;
   _bsModalRef: BsModalRef;
@@ -46,6 +47,10 @@ export class RegistrationComponent implements OnInit {
         },
         error => { this.error = error; this.errorEvent(); }
       );
+  }
+
+  onCaptchaResolved(token: string) {
+    this.captchaResolved = !!token; // Устанавливаем флаг, если токен капчи получен
   }
 
   ngOnInit() {

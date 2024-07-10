@@ -14,6 +14,7 @@ import { GENERATE_TOKEN } from "../URLS";
 })
 export class AuthComponent implements OnInit {
   constructor(private http: HttpClient, private _service: NotifierService , public router: Router) {}
+  captchaResolved = false
   auth: Auth = new Auth();
   error: number;
   token: any;
@@ -64,6 +65,10 @@ export class AuthComponent implements OnInit {
           this.errorEvent();
         }
       );
+  }
+
+  onCaptchaResolved(token: string) {
+    this.captchaResolved = !!token; // Устанавливаем флаг, если токен капчи получен
   }
 
   ngOnInit() {}

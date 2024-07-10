@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod --base-href=/cabinet/",
-   "test": "ng test",
+    "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -30,6 +30,7 @@
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
+    "ng-recaptcha": "6.1",
     "ngx-bootstrap": "^2.0.4",
     "ngx-infinite-scroll": "^0.8.3",
     "ngx-loading": "^1.0.14",

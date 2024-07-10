@@ -9,8 +9,15 @@
         <small id="passwordHelp" class="form-text text-muted"> Введите ваш пароль для авторизации!</small>
         <input type="password" id="inputPassword" placeholder="Password" [(ngModel)]="auth.password" name="password" required class="form" />
       </div>
+      <div class="captcha">
+        <re-captcha
+        formControlName="recaptcha"
+        (resolved)="onCaptchaResolved($event)"
+        siteKey="6Ld92AwqAAAAALXTOAcuHjNaimcr9CcCDyppuBrX">
+      </re-captcha>
+      </div>
       <div class="relative fullwidth col-xs-12">
-        <button (click)="submit()" [disabled]="myForm.invalid" id="submit" name="submit" class="form-btn semibold">Авторизироваться</button>
+        <button (click)="submit()" [disabled]="myForm.invalid || !captchaResolved" id="submit" name="submit" class="form-btn semibold">Авторизироваться</button>
       </div><br>
       <div class="alert alert-danger" [hidden]="error === undefined">
         Ошибка авторизации!

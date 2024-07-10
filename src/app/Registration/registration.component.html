@@ -34,8 +34,15 @@
           С правилами обработки персональных данных можно ознакомиться здесь 
         </button>
       </div>
+      <div class="captcha">
+        <re-captcha
+        formControlName="recaptcha"
+        (resolved)="onCaptchaResolved($event)"
+        siteKey="6Ld92AwqAAAAALXTOAcuHjNaimcr9CcCDyppuBrX">
+      </re-captcha>
+      </div>
       <div class="relative fullwidth col-xs-12">
-        <button (click)="submit(registration)" [disabled]="myForm.invalid" id="submit" name="submit"
+        <button (click)="submit(registration)" [disabled]="myForm.invalid || !captchaResolved" id="submit" name="submit"
           class="form-btn semibold">
           Зарегистрироваться
         </button>

@@ -106,3 +106,9 @@ center {
 input {
   position: relative;
 }
+
+.captcha {
+  justify-content: center;
+  display: flex;
+  margin: 10px;
+}
